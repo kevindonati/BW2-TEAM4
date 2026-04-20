@@ -290,25 +290,42 @@
         <!-- FINE BARRA SX LIBRERIA -->
 
         <section
-          class="col h-100 overflow-auto bg-dark rounded-4 d-flex flex-column"
+          class="col h-100 overflow-auto bg-dark rounded-4 d-flex flex-column container"
         >
           <!-- PARTE CENTRALE -->
-          <div>
+          <div class="row d-flex align-items-center">
             <!-- --------------------------------PRESENTAZIONE-->
-            <img id="albumCover" />
-            <h6>Album</h6>
-            <h1 id="albumTitle"></h1>
-            <div id="albumDescription">
-              <p id="albumRelease"></p>
-              <p id="albumNumberOfSongs"></p>
-              <p id="albumDuration"></p>
+
+            <div class="col-3">
+              <img
+                id="albumCover"
+                src="https://placecats.com/300/300"
+                class="w-100"
+              />
+            </div>
+
+            <div class="col-9">
+              <h6 class="d-sm-none">Album</h6>
+              <h1 id="albumTitle">tua mamma fa la bidella</h1>
+              <img
+                id="artistImage"
+                style="height: 1.3em"
+                src="https://placecats.com/300/300"
+                class="rounded-circle"
+              />
+              <p>
+                <span class="fw-bold" id="artistName">Ramadam Banger</span
+                ><span id="albumReleaseDate">22/03/2022</span
+                ><span id="albumNumberOfSongs">13</span>brani,
+                <span id="albumDuration">2h 30min</span>
+              </p>
             </div>
           </div>
-          <div class="d-flex justify-content-between">
+          <div class="d-flex justify-content-between align-items-center">
             <!-- --------------------------------TOOLBAR-->
-            <div class="m-3">
+            <div class="m-3 d-flex gap-3">
               <i class="fas fa-play-circle"></i>
-              <img src="#" />
+              <img id="artistStories" src="#" />
               <i class="fas fa-random"></i>
               <i class="fas fa-plus-circle"></i>
               <i class="fas fa-arrow-circle-down"></i>
@@ -328,8 +345,16 @@
               <tbody id="albumSongs"></tbody>
             </table>
           </div>
-          <div><!-- --------------------------------DIRITTI--></div>
-          <div><!-- --------------------------------ALTRO--></div>
+          <div>
+            <!-- --------------------------------DIRITTI-->
+            <p id="albumReleaseDate"></p>
+            <p id="albumDiritti"></p>
+          </div>
+          <div class="d-flex justify-content-between">
+            <!-- --------------------------------ALTRO-->
+            <h4>Altro di <span id="nomeArtista"></span></h4>
+            <h6>Guarda profilo</h6>
+          </div>
         </section>
 
         <aside class="col-3 px-1 rounded-4 px-4 h-100 overflow-auto bg-dark">
