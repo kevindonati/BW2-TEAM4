@@ -1,4 +1,37 @@
-#progress-bar {
-  width: 100%;
+#playerMain {
+  max-width: 650px;
+  width: 35%;
+}
+
+footer i:hover {
   cursor: pointer;
+}
+
+#progress-bar:hover {
+  cursor: pointer;
+}
+
+input[type="range"] {
+  appearance: none;
+  background: #4d4d4d;
+  height: 4px;
+  border-radius: 2px;
+  outline: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 12px;
+  height: 12px;
+  background: white !important;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  opacity: 0;
+}
+
+input[type="range"]:hover::-webkit-slider-thumb {
+  opacity: 1;
+  accent-color: white;
 }

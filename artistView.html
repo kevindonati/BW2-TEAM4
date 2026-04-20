@@ -1,0 +1,740 @@
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Spotify-ArtistWiew</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+      integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
+    />
+    <link rel="stylesheet" href="./style-skeit.css" />
+    <link rel="stylesheet" href="./assets/style/footer.css" />
+  </head>
+  <body class="d-flex flex-column vh-100 overflow-hidden bg-black">
+    <header>
+      <div>
+        <!-- NAVBAR -->
+        <nav class="navbar navbar-expand-lg bg-black">
+          <div class="container-fluid">
+            <div class="leftPart text-white d-flex">
+              <li class="nav-item dropdown d-flex align-items-center">
+                <i
+                  class="fas fa-ellipsis-h nav-item dropdown-toggle mx-5"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                ></i>
+
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="#">Profile</a></li>
+                  <li>
+                    <a class="dropdown-item" href="#">Edit</a>
+                  </li>
+                  <li><hr class="dropdown-divider" /></li>
+                  <li>
+                    <a class="dropdown-item" href="#">Visualize</a>
+                  </li>
+                </ul>
+              </li>
+              <i class="fas fa-chevron-left mx-4"></i>
+              <i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="centerPart text-white d-flex align-items-center">
+              <i class="fas fa-home"></i>
+              <div
+                class="bg-secondary rounded-5 text-white mx-4 d-flex align-items-center"
+              >
+                <form class="d-flex" role="search">
+                  <button class="btn" type="submit">
+                    <i class="fas fa-search text-light"></i>
+                  </button>
+                  <input
+                    class="form-control me-2 bg-secondary border-0"
+                    type="search"
+                    placeholder="Search"
+                    aria-label="Search"
+                  />
+                </form>
+                <i class="far fa-window-restore"></i>
+              </div>
+            </div>
+            <div
+              class="rightPart text-white d-flex align-items-center justify-content-end"
+            >
+              <i class="fas fa-bell mx-3"></i>
+              <i class="fas fa-users mx-3"></i>
+              <img
+                src="https://placecats.com/200/200"
+                class="rounded-circle border-5 border-secondary-subtle mx-3 navbarImage"
+                style="height: 35px"
+              />
+              <i class="fas fa-window-minimize ms-4"></i>
+              <i class="fas fa-squar mx-2e"></i>
+              <i class="fas fa-times mx-4"></i>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </header>
+    <main class="container-fluid flex-grow-1 overflow-hidden">
+      <div class="row h-100 gap-2">
+        <!-- INIZIO BARRA SX LIBRERIA -->
+        <aside
+          class="col-3 vh-100 bg-dark text-white pt-4 px-4 3 rounded-4 overflow-auto"
+        >
+          <!--PRIMO BLOCCO ASIDE-->
+          <div class="d-flex align-items-center justify-content-between">
+            <h6>La tua libreria</h6>
+            <div class="d-flex">
+              <button class="btn btn-secondary rounded-5 px-3">
+                <i class="bi bi-plus-lg me-1"></i>Crea
+              </button>
+              <button class="btn btn-dark">
+                <i class="bi bi-arrows-angle-expand ms-2"></i>
+              </button>
+            </div>
+          </div>
+          <!--FINE PRIMO BLOCCO ASIDE-->
+          <!--SECONDO BLOCCO ASIDE-->
+          <div class="d-flex mt-2">
+            <button class="btn btn-secondary rounded-5 me-1">Playlist</button>
+            <button class="btn btn-secondary rounded-5">Album</button>
+          </div>
+          <!--FINE SECONDO BLOCCO ASIDE-->
+          <!--INIZIO TERZO BLOCCO ASIDE-->
+          <div class="d-flex align-items-center justify-content-between mt-2">
+            <i class="bi bi-search"></i>
+            <div class="d-flex align-items-center">
+              <button class="btn btn-dark">Recenti</button>
+              <button class="btn btn-dark">
+                <i class="bi bi-list-ul"></i>
+              </button>
+            </div>
+          </div>
+          <!--FINE TERZO BLOCCO ASIDE-->
+          <!--INIZIO QUARTO BLOCCO ASIDE CONTENUTO-->
+          <section class="d-flex flex-column mt-2">
+            <!--INIZIO CARD1-->
+            <div class="d-flex my-2 align-items-center">
+              <img
+                src="https://placecats.com/50/50"
+                class="rounded-1 img-fluid"
+              />
+              <div class="ms-3 d-flex flex-column justify-content-center">
+                <h6 class="mb-1">Brani che ti piacciono</h6>
+                <p class="mb-0">
+                  <i class="bi bi-pin-angle-fill me-1"></i>Playlist &bull; 320
+                  brani
+                </p>
+              </div>
+            </div>
+            <!--FINE CARD1-->
+
+            <!--INIZIO CARD2-->
+            <div class="d-flex my-2 align-items-center">
+              <img
+                src="https://placecats.com/50/50"
+                class="rounded-1 img-fluid"
+              />
+              <div class="ms-3 d-flex flex-column justify-content-center">
+                <h6 class="mb-1">La mia Playlist</h6>
+                <p class="mb-0">
+                  <i class="bi bi-pin-angle-fill me-1"></i>Playlist &bull; xxxx
+                </p>
+              </div>
+            </div>
+            <!--FINE CARD2-->
+
+            <!--INIZIO CARD3-->
+            <div class="d-flex my-2 align-items-center">
+              <img
+                src="https://placecats.com/50/50"
+                class="rounded-1 img-fluid"
+              />
+              <div class="ms-3 d-flex flex-column justify-content-center">
+                <h6 class="mb-1">This is Tony Boy</h6>
+                <p class="mb-0">Playlist &bull; Spotify</p>
+              </div>
+            </div>
+            <!--FINE CARD3-->
+
+            <!--INIZIO CARD4-->
+            <div class="d-flex my-2 align-items-center">
+              <img
+                src="https://placecats.com/50/50"
+                class="rounded-1 img-fluid"
+              />
+              <div class="ms-3 d-flex flex-column justify-content-center">
+                <h6 class="mb-1">White girl music with the boys at 3 AM</h6>
+                <p class="mb-0">Playlist &bull; Thibovdk</p>
+              </div>
+            </div>
+            <!--FINE CARD4-->
+
+            <!--INIZIO CARD5-->
+            <div class="d-flex my-2 align-items-center">
+              <img
+                src="https://placecats.com/50/50"
+                class="rounded-1 img-fluid"
+              />
+              <div class="ms-3 d-flex flex-column justify-content-center">
+                <h6 class="mb-1">Anche gli eroi muoiono</h6>
+                <p class="mb-0">Album &bull; Kid Yugi</p>
+              </div>
+            </div>
+            <!--FINE CARD5-->
+
+            <!--INIZIO CARD6-->
+            <div class="d-flex my-2 align-items-center">
+              <img
+                src="https://placecats.com/50/50"
+                class="rounded-1 img-fluid"
+              />
+              <div class="ms-3 d-flex flex-column justify-content-center">
+                <h6 class="mb-1">TRAUMA</h6>
+                <p class="mb-0">Album &bull; Tony Boy</p>
+              </div>
+            </div>
+            <!--FINE CARD6-->
+
+            <!--INIZIO CARD7-->
+            <div class="d-flex my-2 align-items-center">
+              <img
+                src="https://placecats.com/50/50"
+                class="rounded-1 img-fluid"
+              />
+              <div class="ms-3 d-flex flex-column justify-content-center">
+                <h6 class="mb-1">SE DIO VUOLE</h6>
+                <p class="mb-0">EP &bull; Sayf</p>
+              </div>
+            </div>
+            <!--FINE CARD7-->
+
+            <!--INIZIO CARD8-->
+            <div class="d-flex my-2 align-items-center">
+              <img
+                src="https://placecats.com/50/50"
+                class="rounded-1 img-fluid"
+              />
+              <div class="ms-3 d-flex flex-column justify-content-center">
+                <h6 class="mb-1">I brani più ascoltati del 2025</h6>
+                <p class="mb-0">Playlist &bull; xxxx</p>
+              </div>
+            </div>
+            <!--FINE CARD8-->
+
+            <!--INIZIO CARD9-->
+            <div class="d-flex my-2 align-items-center">
+              <img
+                src="https://placecats.com/50/50"
+                class="rounded-1 img-fluid"
+              />
+              <div class="ms-3 d-flex flex-column justify-content-center">
+                <h6 class="mb-1">Remix</h6>
+                <p class="mb-0">Playlist &bull; xxxx</p>
+              </div>
+            </div>
+            <!--FINE CARD9-->
+            <!--INIZIO CARD9-->
+            <div class="d-flex my-2 align-items-center">
+              <img
+                src="https://placecats.com/50/50"
+                class="rounded-1 img-fluid"
+              />
+              <div class="ms-3 d-flex flex-column justify-content-center">
+                <h6 class="mb-1">Remix</h6>
+                <p class="mb-0">Playlist &bull; xxxx</p>
+              </div>
+            </div>
+            <!--FINE CARD9-->
+            <!--INIZIO CARD9-->
+            <div class="d-flex my-2 align-items-center">
+              <img
+                src="https://placecats.com/50/50"
+                class="rounded-1 img-fluid"
+              />
+              <div class="ms-3 d-flex flex-column justify-content-center">
+                <h6 class="mb-1">Remix</h6>
+                <p class="mb-0">Playlist &bull; xxxx</p>
+              </div>
+            </div>
+            <!--FINE CARD9-->
+            <!--INIZIO CARD9-->
+            <div class="d-flex my-2 align-items-center">
+              <img
+                src="https://placecats.com/50/50"
+                class="rounded-1 img-fluid"
+              />
+              <div class="ms-3 d-flex flex-column justify-content-center">
+                <h6 class="mb-1">Remix</h6>
+                <p class="mb-0">Playlist &bull; xxxx</p>
+              </div>
+            </div>
+            <!--FINE CARD9-->
+          </section>
+        </aside>
+        <!-- FINE BARRA SX LIBRERIA -->
+
+        <section class="col h-100 overflow-auto bg-dark rounded-4">
+          <!-- PARTE CENTRALE -->
+          <!-- Sezione Hero con banner artista -->
+          <div id="artist-banner" class="h-75 position-relative bg-success">
+            <div class="align-items-baseline position-absolute bottom-0 p-2">
+              <h1>Nome Artista</h1>
+              <div><span>Numero ascoltatori 121</span> mensili</div>
+            </div>
+          </div>
+          <!-- ---TOOLBAR-->
+          <div class="d-flex justify-content-between align-items-center">
+            <div
+              class="m-3 d-flex gap-3 justify-content-center align-items-center"
+            >
+              <a
+                href="#"
+                class="btn btn-success flex rounded rounded-circle text-black shadow shadow-lg px-1 py-0 d-flex"
+                ><i
+                  class="bi bi-play-fill justify-content-center align-items-center"
+                ></i
+              ></a>
+              <img id="artistStories" src="#" />
+              <i class="fas fa-random"></i>
+              <i class="fas fa-plus-circle"></i>
+              <i class="fas fa-arrow-circle-down"></i>
+              <i class="far fa-ellipsis-h"></i>
+            </div>
+            <div class="justify-content-center align-items-center">
+              <h6 class="m-0">Elenco <i class="fas fa-list-ul"></i></h6>
+            </div>
+          </div>
+          <!-- Canzoni Popolari -->
+          <div class="px-3">
+            <h3 class="mb-3">Popolari</h3>
+
+            <div
+              class="row align-items-center py-2 text-secondary-emphasis hover-bg-grey"
+            >
+              <div class="col-auto" style="width: 30px">
+                <span class="text-secondary">1</span>
+              </div>
+
+              <div class="col-auto p-0">
+                <img
+                  src="https://placecats.com/40/40"
+                  class="rounded"
+                  alt="cover"
+                />
+              </div>
+
+              <div class="col ps-3">
+                <div class="text-white fw-bold d-block">TU MI PIACI TANTO</div>
+                <small class="text-secondary"
+                  ><i class="bi bi-play-btn me-1"></i>Video musicale</small
+                >
+              </div>
+
+              <div class="col-auto d-none d-md-block text-secondary">
+                25.356.200
+              </div>
+
+              <div class="col-auto text-secondary ps-5">3:29</div>
+            </div>
+            <div class="row align-items-center py-2">
+              <div class="col-auto" style="width: 30px">
+                <span class="text-secondary">2</span>
+              </div>
+              <div class="col-auto p-0">
+                <img
+                  src="https://placecats.com/40/40"
+                  class="rounded"
+                  alt="cover"
+                />
+              </div>
+              <div class="col ps-3">
+                <div class="text-white fw-bold">BUONA DOMENICA</div>
+                <small class="text-secondary"
+                  ><i class="bi bi-play-btn me-1"></i>Video musicale</small
+                >
+              </div>
+              <div class="col-auto d-none d-md-block text-secondary">
+                1.942.772
+              </div>
+              <div class="col-auto text-secondary ps-5">3:07</div>
+            </div>
+            <div class="row align-items-center py-2">
+              <div class="col-auto" style="width: 30px">
+                <span class="text-secondary">3</span>
+              </div>
+              <div class="col-auto p-0">
+                <img
+                  src="https://placecats.com/40/40"
+                  class="rounded"
+                  alt="cover"
+                />
+              </div>
+              <div class="col ps-3">
+                <div class="text-white fw-bold">BUONA DOMENICA</div>
+                <small class="text-secondary"
+                  ><i class="bi bi-play-btn me-1"></i>Video musicale</small
+                >
+              </div>
+              <div class="col-auto d-none d-md-block text-secondary">
+                1.942.772
+              </div>
+              <div class="col-auto text-secondary ps-5">3:07</div>
+            </div>
+            <div class="row align-items-center py-2">
+              <div class="col-auto" style="width: 30px">
+                <span class="text-secondary">4</span>
+              </div>
+              <div class="col-auto p-0">
+                <img
+                  src="https://placecats.com/40/40"
+                  class="rounded"
+                  alt="cover"
+                />
+              </div>
+              <div class="col ps-3">
+                <div class="text-white fw-bold">BUONA DOMENICA</div>
+                <small class="text-secondary"
+                  ><i class="bi bi-play-btn me-1"></i>Video musicale</small
+                >
+              </div>
+              <div class="col-auto d-none d-md-block text-secondary">
+                1.942.772
+              </div>
+              <div class="col-auto text-secondary ps-5">3:07</div>
+            </div>
+            <div class="row align-items-center py-2">
+              <div class="col-auto" style="width: 30px">
+                <span class="text-secondary">5</span>
+              </div>
+              <div class="col-auto p-0">
+                <img
+                  src="https://placecats.com/40/40"
+                  class="rounded"
+                  alt="cover"
+                />
+              </div>
+              <div class="col ps-3">
+                <div class="text-white fw-bold">BUONA DOMENICA</div>
+                <small class="text-secondary"
+                  ><i class="bi bi-play-btn me-1"></i>Video musicale</small
+                >
+              </div>
+              <div class="col-auto d-none d-md-block text-secondary">
+                1.942.772
+              </div>
+              <div class="col-auto text-secondary ps-5">3:07</div>
+            </div>
+            <div class="row align-items-center py-2">
+              <div class="col-auto" style="width: 30px">
+                <span class="text-secondary">6</span>
+              </div>
+              <div class="col-auto p-0">
+                <img
+                  src="https://placecats.com/40/40"
+                  class="rounded"
+                  alt="cover"
+                />
+              </div>
+              <div class="col ps-3">
+                <div class="text-white fw-bold">BUONA DOMENICA</div>
+                <small class="text-secondary"
+                  ><i class="bi bi-play-btn me-1"></i>Video musicale</small
+                >
+              </div>
+              <div class="col-auto d-none d-md-block text-secondary">
+                1.942.772
+              </div>
+              <div class="col-auto text-secondary ps-5">3:07</div>
+            </div>
+            <div class="row align-items-center py-2">
+              <div class="col-auto" style="width: 30px">
+                <span class="text-secondary">7</span>
+              </div>
+              <div class="col-auto p-0">
+                <img
+                  src="https://placecats.com/40/40"
+                  class="rounded"
+                  alt="cover"
+                />
+              </div>
+              <div class="col ps-3">
+                <div class="text-white fw-bold">BUONA DOMENICA</div>
+                <small class="text-secondary"
+                  ><i class="bi bi-play-btn me-1"></i>Video musicale</small
+                >
+              </div>
+              <div class="col-auto d-none d-md-block text-secondary">
+                1.942.772
+              </div>
+              <div class="col-auto text-secondary ps-5">3:07</div>
+            </div>
+          </div>
+        </section>
+        <aside class="col-3 px-1 rounded-4 px-4 h-100 overflow-auto bg-dark">
+          <!-- BARRA DX ARTISTA -->
+          <!-- TITOLO CANZONE IN ASCOLTO -->
+          <h6 class="fw-bold my-3">NULLA DI</h6>
+          <!-- IMMAGINE CANZONE IN ASCOLTO -->
+          <img
+            class="rounded-3"
+            width="100%"
+            src="https://www.bohmagazine.it/wp-content/uploads/lazza-sirio-cover-album.jpg"
+            alt="foto album"
+          />
+
+          <!-- CONTENITORE CREDITI ARTISTA + BOTTONE AGGIUNGI -->
+          <div class="d-flex justify-content-between align-items-center mt-3">
+            <!-- CREDITI ARTISTA -->
+            <div>
+              <!-- TITOLO CANZONE IN ASCOLTO -->
+              <h4 class="fw-bold m-0">NULLA DI</h4>
+              <!-- ARTISTA -->
+              <p class="text-secondary m-0">Lazza</p>
+            </div>
+            <!-- BOTTONE AGGIUNGI -->
+            <i class="fs-4 bi bi-plus-circle"></i>
+          </div>
+
+          <!-- VIDEO CORRELATI -->
+          <h6 class="mt-4">Video musicali correlati</h6>
+
+          <!-- CAROSELLO VIDEO CORRELLATI -->
+          <div id="carouselExample" class="carousel slide">
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <!-- PRIMA SLIDE CAROSELLO -->
+                <div class="container-fluid">
+                  <div class="row">
+                    <div class="col-6 ps-0">
+                      <img
+                        width="100%"
+                        src="https://wallpaperaccess.com/full/10824067.jpg"
+                        alt="foto album"
+                      />
+                      <!-- TITOLO CANZONE IN ASCOLTO -->
+                      <h6 class="fw-bold m-0">Titolo canzone</h6>
+                      <!-- ARTISTA -->
+                      <p class="text-secondary m-0">Artista</p>
+                    </div>
+                    <div class="col-6 pe-0">
+                      <img
+                        width="100%"
+                        src="https://wallpaperaccess.com/full/2754333.jpg"
+                        alt="foto album"
+                      />
+                      <!-- TITOLO CANZONE IN ASCOLTO -->
+                      <h6 class="fw-bold m-0">Titolo canzone</h6>
+                      <!-- ARTISTA -->
+                      <p class="text-secondary m-0">Artista</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <!-- SECONDA SLIDE CAROSELLO -->
+                <div class="container-fluid">
+                  <div class="row">
+                    <div class="col-6 ps-0">
+                      <img
+                        width="100%"
+                        src="https://wallpaperaccess.com/full/10824067.jpg"
+                        alt="foto album"
+                      />
+                      <!-- TITOLO CANZONE IN ASCOLTO -->
+                      <h6 class="fw-bold m-0">Titolo canzone</h6>
+                      <!-- ARTISTA -->
+                      <p class="text-secondary m-0">Artista</p>
+                    </div>
+                    <div class="col-6 pe-0">
+                      <img
+                        width="100%"
+                        src="https://wallpaperaccess.com/full/2754333.jpg"
+                        alt="foto album"
+                      />
+                      <!-- TITOLO CANZONE IN ASCOLTO -->
+                      <h6 class="fw-bold m-0">Titolo canzone</h6>
+                      <!-- ARTISTA -->
+                      <p class="text-secondary m-0">Artista</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <!-- TERZA SLIDE CAROSELLO -->
+                <div class="container-fluid">
+                  <div class="row">
+                    <div class="col-6 ps-0">
+                      <img
+                        width="100%"
+                        src="https://wallpaperaccess.com/full/10824067.jpg"
+                        alt="foto album"
+                      />
+                      <!-- TITOLO CANZONE IN ASCOLTO -->
+                      <h6 class="fw-bold m-0">Titolo canzone</h6>
+                      <!-- ARTISTA -->
+                      <p class="text-secondary m-0">Artista</p>
+                    </div>
+                    <div class="col-6 pe-0">
+                      <img
+                        width="100%"
+                        src="https://wallpaperaccess.com/full/2754333.jpg"
+                        alt="foto album"
+                      />
+                      <!-- TITOLO CANZONE IN ASCOLTO -->
+                      <h6 class="fw-bold m-0">Titolo canzone</h6>
+                      <!-- ARTISTA -->
+                      <p class="text-secondary m-0">Artista</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <button
+              class="carousel-control-prev"
+              type="button"
+              data-bs-target="#carouselExample"
+              data-bs-slide="prev"
+            >
+              <span
+                class="carousel-control-prev-icon"
+                aria-hidden="true"
+              ></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button
+              class="carousel-control-next"
+              type="button"
+              data-bs-target="#carouselExample"
+              data-bs-slide="next"
+            >
+              <span
+                class="carousel-control-next-icon"
+                aria-hidden="true"
+              ></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
+
+          <!-- INFORMAZIONI ARTISTA -->
+          <div class="card mt-3 mb-3 position-relative">
+            <img
+              width="100%"
+              src="https://wallpaperaccess.com/full/9873555.jpg"
+              class="card-img-top"
+              alt="foto artista"
+            />
+            <h6 class="card-title position-absolute p-3">
+              Informazioni sull'artista
+            </h6>
+            <div
+              class="card-body d-flex justify-content-between align-items-center"
+            >
+              <div class="bg-dark">
+                <p class="card-text">Lazza</p>
+                <p class="card-text">Numero Ascoltatori mensili</p>
+              </div>
+              <a
+                href="#"
+                class="btn btn-dark rounded-5 border-1 border-secondary"
+                >Segui</a
+              >
+            </div>
+          </div>
+
+          <!-- RICONOSCIMENTI -->
+        </aside>
+      </div>
+    </main>
+
+    <footer
+      class="d-flex align-items-center justify-content-between bg-black p-2"
+    >
+      <!-- BARRA SOTTO -->
+      <article class="d-flex align-items-center">
+        <div class="d-flex align-items-center gap-2">
+          <span id="player-img" class="d-flex align-items-center"
+            ><img
+              src="https://placecats.com/30/30"
+              alt="immagine canzone"
+              class="rounded-1"
+          /></span>
+          <div class="d-flex flex-column small">
+            <h6 id="song-name">Nome canzone</h6>
+            <span id="artist-name">Nome artista</span>
+          </div>
+          <i class="bi bi-plus-circle"></i>
+        </div>
+      </article>
+      <article class="d-flex flex-column align-items-center" id="playerMain">
+        <div class="d-flex gap-3 align-items-center">
+          <i class="bi bi-shuffle"></i>
+          <i class="bi bi-skip-backward-fill"></i>
+          <i class="bi bi-play-circle-fill fs-3" id="playPauseBtn"></i>
+          <i class="bi bi-skip-forward-fill"></i>
+          <i class="bi bi-rewind-btn-fill"></i>
+        </div>
+        <div class="w-100">
+          <audio src="./assets/Voicy_Rickroll.mp3" id="audio"></audio>
+          <div
+            id="progress-bar-container"
+            class="d-flex align-items-center gap-2 w-100"
+          >
+            <span id="time-now">0:00</span>
+            <input
+              type="range"
+              class="w-100"
+              value="0"
+              max="100"
+              id="progress-bar"
+            />
+            <span id="time-max">1:00</span>
+          </div>
+        </div>
+      </article>
+      <article class="d-flex align-items-center gap-2">
+        <i class="bi bi-mic"></i>
+        <i class="bi bi-text-center"></i>
+        <i class="bi bi-pc-display"></i>
+
+        <div class="d-flex align-items-center">
+          <label for="volumeSlider">
+            <i class="bi bi-volume-mute"></i>
+          </label>
+          <input
+            type="range"
+            class="form-range"
+            min="0"
+            max="100"
+            value="80"
+            id="volumeSlider"
+          />
+        </div>
+        <i class="bi bi-back"></i>
+        <i class="bi bi-fullscreen"></i>
+      </article>
+    </footer>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+      crossorigin="anonymous"
+    ></script>
+    <script src="./assets/script/script.js"></script>
+    <script src="./assets/script/player.js"></script>
+  </body>
+</html>
