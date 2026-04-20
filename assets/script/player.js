@@ -6,7 +6,7 @@ const durationEl = document.getElementById("time-max");
 audio.addEventListener("timeupdate", () => {
   const percentage = (audio.currentTime / audio.duration) * 100;
   progressBar.value = percentage;
-  currentTime.innerText = formatTime(audio.currentTime);
+  currentTimeEl.innerText = formatTime(audio.currentTime);
 });
 
 progressBar.addEventListener("input", () => {
@@ -23,3 +23,17 @@ const formatTime = (time) => {
 audio.addEventListener("loadedmetadata", () => {
   durationEl.innerText = formatTime(audio.duration);
 });
+
+const playBtn = document.querySelector(".bi-play-circle-fill");
+
+const playPause = () => {
+  if (audio.paused) {
+    audio.play();
+    playBtn.classList.replace("bi-play-circle-fill", "bi-pause-circle-fill");
+  } else {
+    audio.pause();
+    playBtn.classList.replace("bi-pause-circle-fill", "bi-play-circle-fill");
+  }
+};
+
+playBtn.addEventListener("click", playPause);
