@@ -19,12 +19,12 @@
     />
     <link
       rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
     />
     <link rel="stylesheet" href="./style-skeit.css" />
     <link rel="stylesheet" href="./assets/style/footer.css" />
   </head>
-  <body class="d-flex flex-column vh-100 overflow-hidden">
+  <body class="d-flex flex-column vh-100 overflow-hidden bg-black">
     <header>
       <div>
         <!-- NAVBAR -->
@@ -91,9 +91,11 @@
       </div>
     </header>
     <main class="container-fluid flex-grow-1 overflow-hidden">
-      <div class="row h-100">
+      <div class="row h-100 gap-2">
         <!-- INIZIO BARRA SX LIBRERIA -->
-        <aside class="col-3 vh-100 bg-dark rounded-1 text-white pt-4 px-4">
+        <aside
+          class="col-3 vh-100 bg-dark text-white pt-4 px-4 3 rounded-4 overflow-auto"
+        >
           <!--PRIMO BLOCCO ASIDE-->
           <div class="d-flex align-items-center justify-content-between">
             <h6>La tua libreria</h6>
@@ -247,10 +249,47 @@
               </div>
             </div>
             <!--FINE CARD9-->
+            <!--INIZIO CARD9-->
+            <div class="d-flex my-2 align-items-center">
+              <img
+                src="https://placecats.com/50/50"
+                class="rounded-1 img-fluid"
+              />
+              <div class="ms-3 d-flex flex-column justify-content-center">
+                <h6 class="mb-1">Remix</h6>
+                <p class="mb-0">Playlist &bull; xxxx</p>
+              </div>
+            </div>
+            <!--FINE CARD9-->
+            <!--INIZIO CARD9-->
+            <div class="d-flex my-2 align-items-center">
+              <img
+                src="https://placecats.com/50/50"
+                class="rounded-1 img-fluid"
+              />
+              <div class="ms-3 d-flex flex-column justify-content-center">
+                <h6 class="mb-1">Remix</h6>
+                <p class="mb-0">Playlist &bull; xxxx</p>
+              </div>
+            </div>
+            <!--FINE CARD9-->
+            <!--INIZIO CARD9-->
+            <div class="d-flex my-2 align-items-center">
+              <img
+                src="https://placecats.com/50/50"
+                class="rounded-1 img-fluid"
+              />
+              <div class="ms-3 d-flex flex-column justify-content-center">
+                <h6 class="mb-1">Remix</h6>
+                <p class="mb-0">Playlist &bull; xxxx</p>
+              </div>
+            </div>
+            <!--FINE CARD9-->
           </section>
         </aside>
         <!-- FINE BARRA SX LIBRERIA -->
-        <section class="col-6 h-100 overflow-auto">
+
+        <section class="col h-100 overflow-auto bg-dark rounded-4">
           <!-- PARTE CENTRALE -->
           <!-- Primo blocco btn+6 piÃ¹ ascoltati -->
           <div>
@@ -264,7 +303,7 @@
               Podcast
             </button>
           </div>
-          <div class="row my-3">
+          <div class="row my-3 px-2">
             <div class="col-6 col-lg-3 g-1">
               <div
                 class="d-flex align-items-center gap-1 bg-secondary rounded justify-content-between contenitore-card position-relative"
@@ -350,7 +389,7 @@
               </div>
             </div>
           </div>
-          <div class="row my-3">
+          <div class="row my-3 px-2">
             <div class="col-6 col-lg-3 g-1">
               <div
                 class="d-flex align-items-center gap-1 bg-secondary rounded justify-content-between contenitore-card position-relative"
@@ -448,7 +487,7 @@
           >
             <div class="carousel-inner">
               <div class="carousel-item active" data-bs-interval="10000">
-                <div class="container-fluid">
+                <div class="container-fluid px-0">
                   <div class="row">
                     <div class="col-3 contenitore-card">
                       <div class="position-relative">
@@ -522,7 +561,7 @@
                 </div>
               </div>
               <div class="carousel-item" data-bs-interval="2000">
-                <div class="container-fluid">
+                <div class="container-fluid px-0">
                   <div class="row">
                     <div class="col-3 contenitore-card">
                       <div class="position-relative">
@@ -596,7 +635,7 @@
                 </div>
               </div>
               <div class="carousel-item">
-                <div class="container-fluid">
+                <div class="container-fluid px-0">
                   <div class="row">
                     <div class="col-3 contenitore-card">
                       <div class="position-relative">
@@ -707,7 +746,7 @@
           >
             <div class="carousel-inner">
               <div class="carousel-item active" data-bs-interval="10000">
-                <div class="container-fluid">
+                <div class="container-fluid px-0">
                   <div class="row">
                     <div class="col-3 contenitore-card">
                       <div class="position-relative">
@@ -781,7 +820,7 @@
                 </div>
               </div>
               <div class="carousel-item" data-bs-interval="2000">
-                <div class="container-fluid">
+                <div class="container-fluid px-0">
                   <div class="row">
                     <div class="col-3 contenitore-card">
                       <div class="position-relative">
@@ -855,7 +894,7 @@
                 </div>
               </div>
               <div class="carousel-item">
-                <div class="container-fluid">
+                <div class="container-fluid px-0">
                   <div class="row">
                     <div class="col-3 contenitore-card">
                       <div class="position-relative">
@@ -966,7 +1005,7 @@
           >
             <div class="carousel-inner">
               <div class="carousel-item active" data-bs-interval="10000">
-                <div class="container-fluid">
+                <div class="container-fluid px-0">
                   <div class="row">
                     <div class="col-3 contenitore-card">
                       <div class="position-relative">
@@ -1040,7 +1079,7 @@
                 </div>
               </div>
               <div class="carousel-item" data-bs-interval="2000">
-                <div class="container-fluid">
+                <div class="container-fluid px-0">
                   <div class="row">
                     <div class="col-3 contenitore-card">
                       <div class="position-relative">
@@ -1114,7 +1153,7 @@
                 </div>
               </div>
               <div class="carousel-item">
-                <div class="container-fluid">
+                <div class="container-fluid px-0">
                   <div class="row">
                     <div class="col-3 contenitore-card">
                       <div class="position-relative">
@@ -1214,7 +1253,8 @@
             </button>
           </div>
         </section>
-        <aside class="col-3 px-1 bg-black rounded-2 px-3 h-100 overflow-auto">
+
+        <aside class="col-3 px-1 rounded-4 px-4 h-100 overflow-auto bg-dark">
           <!-- BARRA DX ARTISTA -->
           <!-- TITOLO CANZONE IN ASCOLTO -->
           <h6 class="fw-bold my-3">NULLA DI</h6>
