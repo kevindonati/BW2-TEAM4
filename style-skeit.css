@@ -19,3 +19,19 @@ aside:hover::-webkit-scrollbar-thumb,
 section:hover::-webkit-scrollbar-thumb {
   background: rgba(255, 255, 255, 0.3);
 }
+
+.mostra-al-passaggio {
+  opacity: 0;
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
+  transform: scale(1);
+}
+
+.contenitore-card:hover .mostra-al-passaggio {
+  opacity: 1;
+}
+
+.mostra-al-passaggio:hover {
+  transform: scale(1.1);
+}
