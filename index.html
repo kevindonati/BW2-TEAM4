@@ -10,32 +10,756 @@
       integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="./assets/style/footer.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
+    />
+    <link rel="stylesheet" href="./style-skeit.css" />
   </head>
-  <body>
-    <div>
-      <header>
-        <div>
-          <!-- NAVBAR -->
-        </div>
-      </header>
-      <main class="container-fluid">
-        <div class="row">
-          <aside class="col-3">
-            <!-- BARRA SX LIBRERIA -->
-          </aside>
-          <section class="col-6">
-            <!-- PARTE CENTRALE -->
-          </section>
-          <aside class="col-3">
-            <!-- BARRA DX ARTISTA -->
-          </aside>
-        </div>
-      </main>
-    </div>
-    <footer
-      class="col-12 bg-black d-flex justify-content-between z-3 fixed-bottom p-2"
-    >
+  <body class="d-flex flex-column vh-100 overflow-hidden">
+    <header class="flex0"></header>
+    <main class="container-fluid flex-grow-1 overflow-hidden">
+      <div class="row h-100">
+        <aside class="col-3 h-100 overflow-auto">
+          <!-- BARRA SX LIBRERIA -->
+        </aside>
+        <section class="col-6 h-100 overflow-auto">
+          <!-- PARTE CENTRALE -->
+          <!-- Primo blocco btn+6 piÃ¹ ascoltati -->
+          <div>
+            <button type="button" class="btn btn-outline-secondary text-white">
+              Tutto
+            </button>
+            <button type="button" class="btn btn-outline-secondary text-white">
+              Musica
+            </button>
+            <button type="button" class="btn btn-outline-secondary text-white">
+              Podcast
+            </button>
+          </div>
+          <div class="row my-3">
+            <div class="col-6 col-lg-3">
+              <div class="d-flex align-items-center gap-1 bg-secondary rounded">
+                <img
+                  src="https://placecats.com/50/50"
+                  alt=""
+                  class="img-fluid rounded-start"
+                />
+                <small class="">Titolo di prova</small>
+                <button class="btn btn-success">P</button>
+              </div>
+            </div>
+            <div class="col-6 col-lg-3">
+              <div class="d-flex align-items-center gap-1 bg-secondary rounded">
+                <img
+                  src="https://placecats.com/50/50"
+                  alt=""
+                  class="img-fluid rounded-start"
+                />
+                <small class="">Titolo di prova</small>
+                <button class="btn btn-success">P</button>
+              </div>
+            </div>
+            <div class="col-6 col-lg-3">
+              <div class="d-flex align-items-center gap-1 bg-secondary rounded">
+                <img
+                  src="https://placecats.com/50/50"
+                  alt=""
+                  class="img-fluid rounded-start"
+                />
+                <small class="">Titolo di prova</small>
+                <button class="btn btn-success">P</button>
+              </div>
+            </div>
+            <div class="col-6 col-lg-3">
+              <div class="d-flex align-items-center gap-1 bg-secondary rounded">
+                <img
+                  src="https://placecats.com/50/50"
+                  alt=""
+                  class="img-fluid rounded-start"
+                />
+                <small class="">Titolo di prova</small>
+                <button class="btn btn-success">P</button>
+              </div>
+            </div>
+          </div>
+          <div class="row my-3">
+            <div class="col-6 col-lg-3">
+              <div class="d-flex align-items-center gap-1 bg-secondary rounded">
+                <img
+                  src="https://placecats.com/50/50"
+                  alt=""
+                  class="img-fluid rounded-start"
+                />
+                <small class="">Titolo di prova</small>
+                <button class="btn btn-success">P</button>
+              </div>
+            </div>
+            <div class="col-6 col-lg-3">
+              <div class="d-flex align-items-center gap-1 bg-secondary rounded">
+                <img
+                  src="https://placecats.com/50/50"
+                  alt=""
+                  class="img-fluid rounded-start"
+                />
+                <small class="">Titolo di prova</small>
+                <button class="btn btn-success">P</button>
+              </div>
+            </div>
+            <div class="col-6 col-lg-3">
+              <div class="d-flex align-items-center gap-1 bg-secondary rounded">
+                <img
+                  src="https://placecats.com/50/50"
+                  alt=""
+                  class="img-fluid rounded-start"
+                />
+                <small class="">Titolo di prova</small>
+                <button class="btn btn-success">P</button>
+              </div>
+            </div>
+            <div class="col-6 col-lg-3">
+              <div class="d-flex align-items-center gap-1 bg-secondary rounded">
+                <img
+                  src="https://placecats.com/50/50"
+                  alt=""
+                  class="img-fluid rounded-start"
+                />
+                <small class="">Titolo di prova</small>
+                <button class="btn btn-success">P</button>
+              </div>
+            </div>
+          </div>
+          <!-- Secondo blocco consigliati per te-->
+          <div class="d-flex justify-content-between">
+            <p class="fw-bold">Realizzata per te</p>
+            <p>Mostra tutto</p>
+          </div>
+          <div
+            id="carouselExampleInterval"
+            class="carousel slide"
+            data-bs-ride="carousel"
+          >
+            <div class="carousel-inner">
+              <div class="carousel-item active" data-bs-interval="10000">
+                <div class="container-fluid">
+                  <div class="row">
+                    <div class="col-3">
+                      <img
+                        src="https://placecats.com/100/100"
+                        class="d-block w-100"
+                        alt="..."
+                      />
+                      <p>testo di prova</p>
+                    </div>
+                    <div class="col-3">
+                      <img
+                        src="https://placecats.com/100/100"
+                        class="d-block w-100"
+                        alt="..."
+                      />
+                      <p>testo di prova</p>
+                    </div>
+                    <div class="col-3">
+                      <img
+                        src="https://placecats.com/100/100"
+                        class="d-block w-100"
+                        alt="..."
+                      />
+                      <p>testo di prova</p>
+                    </div>
+                    <div class="col-3">
+                      <img
+                        src="https://placecats.com/100/100"
+                        class="d-block w-100"
+                        alt="..."
+                      />
+                      <p>testo di prova</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-item" data-bs-interval="2000">
+                <div class="container-fluid">
+                  <div class="row">
+                    <div class="col-3">
+                      <img
+                        src="https://placecats.com/100/100"
+                        class="d-block w-100"
+                        alt="..."
+                      />
+                      <p>testo di prova</p>
+                    </div>
+                    <div class="col-3">
+                      <img
+                        src="https://placecats.com/100/100"
+                        class="d-block w-100"
+                        alt="..."
+                      />
+                      <p>testo di prova</p>
+                    </div>
+                    <div class="col-3">
+                      <img
+                        src="https://placecats.com/100/100"
+                        class="d-block w-100"
+                        alt="..."
+                      />
+                      <p>testo di prova</p>
+                    </div>
+                    <div class="col-3">
+                      <img
+                        src="https://placecats.com/100/100"
+                        class="d-block w-100"
+                        alt="..."
+                      />
+                      <p>testo di prova</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <div class="container-fluid">
+                  <div class="row">
+                    <div class="col-3">
+                      <img
+                        src="https://placecats.com/100/100"
+                        class="d-block w-100"
+                        alt="..."
+                      />
+                      <p>testo di prova</p>
+                    </div>
+                    <div class="col-3">
+                      <img
+                        src="https://placecats.com/100/100"
+                        class="d-block w-100"
+                        alt="..."
+                      />
+                      <p>testo di prova</p>
+                    </div>
+                    <div class="col-3">
+                      <img
+                        src="https://placecats.com/100/100"
+                        class="d-block w-100"
+                        alt="..."
+                      />
+                      <p>testo di prova</p>
+                    </div>
+                    <div class="col-3">
+                      <img
+                        src="https://placecats.com/100/100"
+                        class="d-block w-100"
+                        alt="..."
+                      />
+                      <p>testo di prova</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <button
+              class="carousel-control-prev"
+              type="button"
+              data-bs-target="#carouselExampleInterval"
+              data-bs-slide="prev"
+            >
+              <span
+                class="carousel-control-prev-icon"
+                aria-hidden="true"
+              ></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button
+              class="carousel-control-next"
+              type="button"
+              data-bs-target="#carouselExampleInterval"
+              data-bs-slide="next"
+            >
+              <span
+                class="carousel-control-next-icon"
+                aria-hidden="true"
+              ></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
+          <!-- Terzo blocco continua per te-->
+          <div class="d-flex justify-content-between">
+            <p class="fw-bold">Recenti</p>
+            <p>Mostra tutto</p>
+          </div>
+          <div
+            id="carouselExampleInterval1"
+            class="carousel slide"
+            data-bs-ride="carousel"
+          >
+            <div class="carousel-inner">
+              <div class="carousel-item active" data-bs-interval="10000">
+                <div class="container-fluid">
+                  <div class="row">
+                    <div class="col-3">
+                      <img
+                        src="https://placecats.com/100/100"
+                        class="d-block w-100"
+                        alt="..."
+                      />
+                      <p>testo di prova</p>
+                    </div>
+                    <div class="col-3">
+                      <img
+                        src="https://placecats.com/100/100"
+                        class="d-block w-100"
+                        alt="..."
+                      />
+                      <p>testo di prova</p>
+                    </div>
+                    <div class="col-3">
+                      <img
+                        src="https://placecats.com/100/100"
+                        class="d-block w-100"
+                        alt="..."
+                      />
+                      <p>testo di prova</p>
+                    </div>
+                    <div class="col-3">
+                      <img
+                        src="https://placecats.com/100/100"
+                        class="d-block w-100"
+                        alt="..."
+                      />
+                      <p>testo di prova</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-item" data-bs-interval="2000">
+                <div class="container-fluid">
+                  <div class="row">
+                    <div class="col-3">
+                      <img
+                        src="https://placecats.com/100/100"
+                        class="d-block w-100"
+                        alt="..."
+                      />
+                      <p>testo di prova</p>
+                    </div>
+                    <div class="col-3">
+                      <img
+                        src="https://placecats.com/100/100"
+                        class="d-block w-100"
+                        alt="..."
+                      />
+                      <p>testo di prova</p>
+                    </div>
+                    <div class="col-3">
+                      <img
+                        src="https://placecats.com/100/100"
+                        class="d-block w-100"
+                        alt="..."
+                      />
+                      <p>testo di prova</p>
+                    </div>
+                    <div class="col-3">
+                      <img
+                        src="https://placecats.com/100/100"
+                        class="d-block w-100"
+                        alt="..."
+                      />
+                      <p>testo di prova</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <div class="container-fluid">
+                  <div class="row">
+                    <div class="col-3">
+                      <img
+                        src="https://placecats.com/100/100"
+                        class="d-block w-100"
+                        alt="..."
+                      />
+                      <p>testo di prova</p>
+                    </div>
+                    <div class="col-3">
+                      <img
+                        src="https://placecats.com/100/100"
+                        class="d-block w-100"
+                        alt="..."
+                      />
+                      <p>testo di prova</p>
+                    </div>
+                    <div class="col-3">
+                      <img
+                        src="https://placecats.com/100/100"
+                        class="d-block w-100"
+                        alt="..."
+                      />
+                      <p>testo di prova</p>
+                    </div>
+                    <div class="col-3">
+                      <img
+                        src="https://placecats.com/100/100"
+                        class="d-block w-100"
+                        alt="..."
+                      />
+                      <p>testo di prova</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <button
+              class="carousel-control-prev"
+              type="button"
+              data-bs-target="#carouselExampleInterval1"
+              data-bs-slide="prev"
+            >
+              <span
+                class="carousel-control-prev-icon"
+                aria-hidden="true"
+              ></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button
+              class="carousel-control-next"
+              type="button"
+              data-bs-target="#carouselExampleInterval1"
+              data-bs-slide="next"
+            >
+              <span
+                class="carousel-control-next-icon"
+                aria-hidden="true"
+              ></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
+          <!-- Quarto blocco continua ad ascoltare-->
+          <div class="d-flex justify-content-between">
+            <p class="fw-bold">Continua ad ascoltare</p>
+            <p>Mostra tutto</p>
+          </div>
+          <div
+            id="carouselExampleInterval2"
+            class="carousel slide"
+            data-bs-ride="carousel"
+          >
+            <div class="carousel-inner">
+              <div class="carousel-item active" data-bs-interval="10000">
+                <div class="container-fluid">
+                  <div class="row">
+                    <div class="col-3">
+                      <img
+                        src="https://placecats.com/100/100"
+                        class="d-block w-100"
+                        alt="..."
+                      />
+                      <p>testo di prova</p>
+                    </div>
+                    <div class="col-3">
+                      <img
+                        src="https://placecats.com/100/100"
+                        class="d-block w-100"
+                        alt="..."
+                      />
+                      <p>testo di prova</p>
+                    </div>
+                    <div class="col-3">
+                      <img
+                        src="https://placecats.com/100/100"
+                        class="d-block w-100"
+                        alt="..."
+                      />
+                      <p>testo di prova</p>
+                    </div>
+                    <div class="col-3">
+                      <img
+                        src="https://placecats.com/100/100"
+                        class="d-block w-100"
+                        alt="..."
+                      />
+                      <p>testo di prova</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-item" data-bs-interval="2000">
+                <div class="container-fluid">
+                  <div class="row">
+                    <div class="col-3">
+                      <img
+                        src="https://placecats.com/100/100"
+                        class="d-block w-100"
+                        alt="..."
+                      />
+                      <p>testo di prova</p>
+                    </div>
+                    <div class="col-3">
+                      <img
+                        src="https://placecats.com/100/100"
+                        class="d-block w-100"
+                        alt="..."
+                      />
+                      <p>testo di prova</p>
+                    </div>
+                    <div class="col-3">
+                      <img
+                        src="https://placecats.com/100/100"
+                        class="d-block w-100"
+                        alt="..."
+                      />
+                      <p>testo di prova</p>
+                    </div>
+                    <div class="col-3">
+                      <img
+                        src="https://placecats.com/100/100"
+                        class="d-block w-100"
+                        alt="..."
+                      />
+                      <p>testo di prova</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <div class="container-fluid">
+                  <div class="row">
+                    <div class="col-3">
+                      <img
+                        src="https://placecats.com/100/100"
+                        class="d-block w-100"
+                        alt="..."
+                      />
+                      <p>testo di prova</p>
+                    </div>
+                    <div class="col-3">
+                      <img
+                        src="https://placecats.com/100/100"
+                        class="d-block w-100"
+                        alt="..."
+                      />
+                      <p>testo di prova</p>
+                    </div>
+                    <div class="col-3">
+                      <img
+                        src="https://placecats.com/100/100"
+                        class="d-block w-100"
+                        alt="..."
+                      />
+                      <p>testo di prova</p>
+                    </div>
+                    <div class="col-3">
+                      <img
+                        src="https://placecats.com/100/100"
+                        class="d-block w-100"
+                        alt="..."
+                      />
+                      <p>testo di prova</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <button
+              class="carousel-control-prev"
+              type="button"
+              data-bs-target="#carouselExampleInterval2"
+              data-bs-slide="prev"
+            >
+              <span
+                class="carousel-control-prev-icon"
+                aria-hidden="true"
+              ></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button
+              class="carousel-control-next"
+              type="button"
+              data-bs-target="#carouselExampleInterval2"
+              data-bs-slide="next"
+            >
+              <span
+                class="carousel-control-next-icon"
+                aria-hidden="true"
+              ></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
+        </section>
+        <aside class="col-3 px-1 bg-black rounded-2 px-3 h-100 overflow-auto">
+          <!-- BARRA DX ARTISTA -->
+          <!-- TITOLO CANZONE IN ASCOLTO -->
+          <h6 class="fw-bold my-3">NULLA DI</h6>
+          <!-- IMMAGINE CANZONE IN ASCOLTO -->
+          <img
+            class="rounded-3"
+            width="100%"
+            src="https://www.bohmagazine.it/wp-content/uploads/lazza-sirio-cover-album.jpg"
+            alt="foto album"
+          />
+
+          <!-- CONTENITORE CREDITI ARTISTA + BOTTONE AGGIUNGI -->
+          <div class="d-flex justify-content-between align-items-center mt-3">
+            <!-- CREDITI ARTISTA -->
+            <div>
+              <!-- TITOLO CANZONE IN ASCOLTO -->
+              <h4 class="fw-bold m-0">NULLA DI</h4>
+              <!-- ARTISTA -->
+              <p class="text-secondary m-0">Lazza</p>
+            </div>
+            <!-- BOTTONE AGGIUNGI -->
+            <i class="fs-4 bi bi-plus-circle"></i>
+          </div>
+
+          <!-- VIDEO CORRELATI -->
+          <h6 class="mt-4">Video musicali correlati</h6>
+
+          <!-- CAROSELLO VIDEO CORRELLATI -->
+          <div id="carouselExample" class="carousel slide">
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <!-- PRIMA SLIDE CAROSELLO -->
+                <div class="container-fluid">
+                  <div class="row">
+                    <div class="col-6 ps-0">
+                      <img
+                        width="100%"
+                        src="https://wallpaperaccess.com/full/10824067.jpg"
+                        alt="foto album"
+                      />
+                      <!-- TITOLO CANZONE IN ASCOLTO -->
+                      <h6 class="fw-bold m-0">Titolo canzone</h6>
+                      <!-- ARTISTA -->
+                      <p class="text-secondary m-0">Artista</p>
+                    </div>
+                    <div class="col-6 pe-0">
+                      <img
+                        width="100%"
+                        src="https://wallpaperaccess.com/full/2754333.jpg"
+                        alt="foto album"
+                      />
+                      <!-- TITOLO CANZONE IN ASCOLTO -->
+                      <h6 class="fw-bold m-0">Titolo canzone</h6>
+                      <!-- ARTISTA -->
+                      <p class="text-secondary m-0">Artista</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <!-- SECONDA SLIDE CAROSELLO -->
+                <div class="container-fluid">
+                  <div class="row">
+                    <div class="col-6 ps-0">
+                      <img
+                        width="100%"
+                        src="https://wallpaperaccess.com/full/10824067.jpg"
+                        alt="foto album"
+                      />
+                      <!-- TITOLO CANZONE IN ASCOLTO -->
+                      <h6 class="fw-bold m-0">Titolo canzone</h6>
+                      <!-- ARTISTA -->
+                      <p class="text-secondary m-0">Artista</p>
+                    </div>
+                    <div class="col-6 pe-0">
+                      <img
+                        width="100%"
+                        src="https://wallpaperaccess.com/full/2754333.jpg"
+                        alt="foto album"
+                      />
+                      <!-- TITOLO CANZONE IN ASCOLTO -->
+                      <h6 class="fw-bold m-0">Titolo canzone</h6>
+                      <!-- ARTISTA -->
+                      <p class="text-secondary m-0">Artista</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <!-- TERZA SLIDE CAROSELLO -->
+                <div class="container-fluid">
+                  <div class="row">
+                    <div class="col-6 ps-0">
+                      <img
+                        width="100%"
+                        src="https://wallpaperaccess.com/full/10824067.jpg"
+                        alt="foto album"
+                      />
+                      <!-- TITOLO CANZONE IN ASCOLTO -->
+                      <h6 class="fw-bold m-0">Titolo canzone</h6>
+                      <!-- ARTISTA -->
+                      <p class="text-secondary m-0">Artista</p>
+                    </div>
+                    <div class="col-6 pe-0">
+                      <img
+                        width="100%"
+                        src="https://wallpaperaccess.com/full/2754333.jpg"
+                        alt="foto album"
+                      />
+                      <!-- TITOLO CANZONE IN ASCOLTO -->
+                      <h6 class="fw-bold m-0">Titolo canzone</h6>
+                      <!-- ARTISTA -->
+                      <p class="text-secondary m-0">Artista</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <button
+              class="carousel-control-prev"
+              type="button"
+              data-bs-target="#carouselExample"
+              data-bs-slide="prev"
+            >
+              <span
+                class="carousel-control-prev-icon"
+                aria-hidden="true"
+              ></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button
+              class="carousel-control-next"
+              type="button"
+              data-bs-target="#carouselExample"
+              data-bs-slide="next"
+            >
+              <span
+                class="carousel-control-next-icon"
+                aria-hidden="true"
+              ></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
+
+          <!-- INFORMAZIONI ARTISTA -->
+          <div class="card mt-3 mb-3 position-relative">
+            <img
+              width="100%"
+              src="https://wallpaperaccess.com/full/9873555.jpg"
+              class="card-img-top"
+              alt="foto artista"
+            />
+            <h6 class="card-title position-absolute p-3">
+              Informazioni sull'artista
+            </h6>
+            <div
+              class="card-body d-flex justify-content-between align-items-center"
+            >
+              <div class="bg-dark">
+                <p class="card-text">Lazza</p>
+                <p class="card-text">Numero Ascoltatori mensili</p>
+              </div>
+              <a
+                href="#"
+                class="btn btn-dark rounded-5 border-1 border-secondary"
+                >Segui</a
+              >
+            </div>
+          </div>
+
+          <!-- RICONOSCIMENTI -->
+        </aside>
+      </div>
+    </main>
+
+    <footer>
       <!-- BARRA SOTTO -->
       <article class="d-flex align-items-center">
         <div class="d-flex align-items-center gap-2">
