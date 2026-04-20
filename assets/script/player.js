@@ -42,11 +42,38 @@ const playPause = () => {
 
 playBtn.addEventListener("click", playPause);
 
+// Slider musica------------------------------------------------------------------------------------------------
+
+let barColore = "#ffffff";
+
+const updateBar = () => {
+  const percentage = (audio.currentTime / audio.duration) * 100;
+  progressBar.style.background = `linear-gradient(to right, ${barColore} ${percentage}%, #4d4d4d ${percentage}%)`;
+};
+
+progressBar.addEventListener("mouseenter", () => {
+  barColore = "#1db954";
+  updateBar();
+});
+
+progressBar.addEventListener("mouseleave", () => {
+  barColore = "#ffffff";
+  updateBar();
+});
+
+audio.addEventListener("timeupdate", () => {
+  if (!isNaN(audio.duration)) {
+    const percentage = (audio.currentTime / audio.duration) * 100;
+    progressBar.value = percentage;
+    currentTimeEl.innerText = formatTime(audio.currentTime);
+    updateBar();
+  }
+});
+
 // Slider volume------------------------------------------------------------------------------------------------
 
-const volumeSlider = document.getElementById("volumeSlider");
-audio.volume = volumeSlider.value / 100;
 volumeSlider.addEventListener("input", (e) => {
   const value = e.target.value;
   audio.volume = value / 100;
+  volumeSlider.style.background = `linear-gradient(to right, #1db954 ${value}%, #4d4d4d ${value}%)`;
 });
