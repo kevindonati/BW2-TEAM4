@@ -1,8 +1,39 @@
-#progress-bar {
-  width: 100%;
+#playerMain {
+  max-width: 650px;
+  width: 35%;
+}
+
+footer i:hover {
   cursor: pointer;
 }
 
-.bi-play-circle-fill {
+#progress-bar:hover {
   cursor: pointer;
+}
+
+input[type="range"] {
+  accent-color: white;
+  height: 4px;
+  cursor: pointer;
+  border: none;
+}
+
+input[type="range"]:hover {
+  accent-color: #1db954;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 12px;
+  height: 12px;
+  background: white;
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+input[type="range"]:hover::-webkit-slider-thumb {
+  opacity: 1;
+  accent-color: white;
 }

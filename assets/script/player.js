@@ -1,3 +1,5 @@
+// Progress bar traccia audio----------------------------------------------------------------------------------
+
 const audio = document.getElementById("audio");
 const progressBar = document.getElementById("progress-bar");
 const currentTimeEl = document.getElementById("time-now");
@@ -24,7 +26,9 @@ audio.addEventListener("loadedmetadata", () => {
   durationEl.innerText = formatTime(audio.duration);
 });
 
-const playBtn = document.querySelector(".bi-play-circle-fill");
+// Play e pausa------------------------------------------------------------------------------------------------
+
+const playBtn = document.getElementById("playPauseBtn");
 
 const playPause = () => {
   if (audio.paused) {
@@ -37,3 +41,12 @@ const playPause = () => {
 };
 
 playBtn.addEventListener("click", playPause);
+
+// Slider volume------------------------------------------------------------------------------------------------
+
+const volumeSlider = document.getElementById("volumeSlider");
+audio.volume = volumeSlider.value / 100;
+volumeSlider.addEventListener("input", (e) => {
+  const value = e.target.value;
+  audio.volume = value / 100;
+});

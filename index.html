@@ -1443,21 +1443,21 @@
               class="rounded-1"
           /></span>
           <div class="d-flex flex-column small">
-            <span id="song-name">Nome canzone</span>
+            <h6 id="song-name">Nome canzone</h6>
             <span id="artist-name">Nome artista</span>
           </div>
           <i class="bi bi-plus-circle"></i>
         </div>
       </article>
-      <article class="d-flex flex-column align-items-center w-50k">
+      <article class="d-flex flex-column align-items-center" id="playerMain">
         <div class="d-flex gap-3 align-items-center">
           <i class="bi bi-shuffle"></i>
           <i class="bi bi-skip-backward-fill"></i>
-          <i class="bi bi-play-circle-fill fs-3"></i>
+          <i class="bi bi-play-circle-fill fs-3" id="playPauseBtn"></i>
           <i class="bi bi-skip-forward-fill"></i>
           <i class="bi bi-rewind-btn-fill"></i>
         </div>
-        <div>
+        <div class="w-100">
           <audio src="./assets/Voicy_Rickroll.mp3" id="audio"></audio>
           <div
             id="progress-bar-container"
@@ -1466,7 +1466,7 @@
             <span id="time-now">0:00</span>
             <input
               type="range"
-              class=""
+              class="w-100"
               value="0"
               max="100"
               id="progress-bar"
@@ -1480,17 +1480,17 @@
         <i class="bi bi-text-center"></i>
         <i class="bi bi-pc-display"></i>
 
-        <div class="d-flex">
-          <label for="volume-slider">
+        <div class="d-flex align-items-center">
+          <label for="volumeSlider">
             <i class="bi bi-volume-mute"></i>
           </label>
           <input
             type="range"
-            class=""
+            class="form-range"
             min="0"
-            max="1"
-            step="0.01"
-            id="volume-slider"
+            max="100"
+            value="80"
+            id="volumeSlider"
           />
         </div>
         <i class="bi bi-back"></i>
