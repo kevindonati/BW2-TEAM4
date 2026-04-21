@@ -293,6 +293,13 @@ const riproduciCanzone = (
     .then((data) => {
       console.log(data)
       const caroselloCorrelati = document.querySelector(".carosello-correlati")
+      const placeholder = document.querySelectorAll(".placeholder")
+      console.log(placeholder)
+      for (let i = 0; i < placeholder.length; i++) {
+        placeholder[i].classList.remove("placeholder")
+        console.log(placeholder[i])
+      }
+
       caroselloCorrelati.innerHTML = `
       <div class="carousel-inner">
               <div class="carousel-item active">
@@ -302,24 +309,24 @@ const riproduciCanzone = (
                     <div class="col-6 ps-0">
                       <img
                         width="100%"
-                        src="${data.data[1].album.cover_medium}"
+                        src="${data.data[10].album.cover_medium}"
                         alt="foto album"
                       />
                       <!-- TITOLO CANZONE IN ASCOLTO -->
-                      <h6 class="fw-bold m-0">${data.data[1].title}</h6>
+                      <h6 class="fw-bold m-0">${data.data[10].title}</h6>
                       <!-- ARTISTA -->
-                      <p class="text-secondary m-0">${data.data[1].artist.name}</p>
+                      <p class="text-secondary m-0">${data.data[10].artist.name}</p>
                     </div>
                     <div class="col-6 pe-0">
                       <img
                         width="100%"
-                        src="${data.data[2].album.cover_medium}"
+                        src="${data.data[11].album.cover_medium}"
                         alt="foto album"
                       />
                       <!-- TITOLO CANZONE IN ASCOLTO -->
-                      <h6 class="fw-bold m-0">${data.data[2].title}</h6>
+                      <h6 class="fw-bold m-0">${data.data[11].title}</h6>
                       <!-- ARTISTA -->
-                      <p class="text-secondary m-0">${data.data[2].artist.name}</p>
+                      <p class="text-secondary m-0">${data.data[11].artist.name}</p>
                     </div>
                   </div>
                 </div>
@@ -331,24 +338,24 @@ const riproduciCanzone = (
                     <div class="col-6 ps-0">
                       <img
                         width="100%"
-                        src="${data.data[3].album.cover_medium}"
+                        src="${data.data[14].album.cover_medium}"
                         alt="foto album"
                       />
                       <!-- TITOLO CANZONE IN ASCOLTO -->
-                      <h6 class="fw-bold m-0">${data.data[3].title}</h6>
+                      <h6 class="fw-bold m-0">${data.data[14].title}</h6>
                       <!-- ARTISTA -->
-                      <p class="text-secondary m-0">${data.data[3].artist.name}</p>
+                      <p class="text-secondary m-0">${data.data[14].artist.name}</p>
                     </div>
                     <div class="col-6 pe-0">
                       <img
                         width="100%"
-                        src="${data.data[4].album.cover_medium}"
+                        src="${data.data[17].album.cover_medium}"
                         alt="foto album"
                       />
                       <!-- TITOLO CANZONE IN ASCOLTO -->
-                      <h6 class="fw-bold m-0">${data.data[4].title}</h6>
+                      <h6 class="fw-bold m-0">${data.data[17].title}</h6>
                       <!-- ARTISTA -->
-                      <p class="text-secondary m-0">${data.data[4].artist.name}</p>
+                      <p class="text-secondary m-0">${data.data[17].artist.name}</p>
                     </div>
                   </div>
                 </div>
@@ -360,24 +367,24 @@ const riproduciCanzone = (
                     <div class="col-6 ps-0">
                       <img
                         width="100%"
-                        src="${data.data[5].album.cover_medium}"
+                        src="${data.data[15].album.cover_medium}"
                         alt="foto album"
                       />
                       <!-- TITOLO CANZONE IN ASCOLTO -->
-                      <h6 class="fw-bold m-0">${data.data[5].title}</h6>
+                      <h6 class="fw-bold m-0">${data.data[15].title}</h6>
                       <!-- ARTISTA -->
-                      <p class="text-secondary m-0">${data.data[5].artist.name}</p>
+                      <p class="text-secondary m-0">${data.data[15].artist.name}</p>
                     </div>
                     <div class="col-6 pe-0">
                       <img
                         width="100%"
-                        src="${data.data[6].album.cover_medium}"
+                        src="${data.data[9].album.cover_medium}"
                         alt="foto album"
                       />
                       <!-- TITOLO CANZONE IN ASCOLTO -->
-                      <h6 class="fw-bold m-0">${data.data[6].title}</h6>
+                      <h6 class="fw-bold m-0">${data.data[9].title}</h6>
                       <!-- ARTISTA -->
-                      <p class="text-secondary m-0">${data.data[6].artist.name}</p>
+                      <p class="text-secondary m-0">${data.data[9].artist.name}</p>
                     </div>
                   </div>
                 </div>
