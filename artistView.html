@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Spotify-ArtistWiew</title>
+    <title>Spotify-ArtistView</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -54,7 +54,9 @@
               <i class="fas fa-chevron-right"></i>
             </div>
             <div class="centerPart text-white d-flex align-items-center">
-              <i class="fas fa-home"></i>
+              <a class="text-light" href="./index.html">
+                <i class="fas fa-home"></i
+              ></a>
               <div
                 class="bg-secondary rounded-5 text-white mx-4 d-flex align-items-center"
               >
@@ -94,7 +96,7 @@
       <div class="row h-100 gap-2">
         <!-- INIZIO BARRA SX LIBRERIA -->
         <aside
-          class="col-3 vh-100 bg-dark text-white pt-4 px-4 3 rounded-4 overflow-auto"
+          class="col-3 h-100 bg-dark text-white pt-4 px-4 3 rounded-4 overflow-auto"
         >
           <!--PRIMO BLOCCO ASIDE-->
           <div class="d-flex align-items-center justify-content-between">
@@ -128,176 +130,28 @@
             </div>
           </div>
           <!--FINE TERZO BLOCCO ASIDE-->
+
+          <div class="d-flex justify-content-center contenitore-spinner">
+            <div class="spinner-border text-success text-center" role="status">
+              <span class="visually-hidden d-block">Loading...</span>
+            </div>
+          </div>
+
           <!--INIZIO QUARTO BLOCCO ASIDE CONTENUTO-->
-          <section class="d-flex flex-column mt-2">
+          <section id="appendi-album-libreria" class="d-flex flex-column mt-2">
             <!--INIZIO CARD1-->
-            <div class="d-flex my-2 align-items-center">
-              <img
-                src="https://placecats.com/50/50"
-                class="rounded-1 img-fluid"
-              />
-              <div class="ms-3 d-flex flex-column justify-content-center">
-                <h6 class="mb-1">Brani che ti piacciono</h6>
-                <p class="mb-0">
-                  <i class="bi bi-pin-angle-fill me-1"></i>Playlist &bull; 320
-                  brani
-                </p>
-              </div>
-            </div>
-            <!--FINE CARD1-->
-
-            <!--INIZIO CARD2-->
-            <div class="d-flex my-2 align-items-center">
-              <img
-                src="https://placecats.com/50/50"
-                class="rounded-1 img-fluid"
-              />
-              <div class="ms-3 d-flex flex-column justify-content-center">
-                <h6 class="mb-1">La mia Playlist</h6>
-                <p class="mb-0">
-                  <i class="bi bi-pin-angle-fill me-1"></i>Playlist &bull; xxxx
-                </p>
-              </div>
-            </div>
-            <!--FINE CARD2-->
-
-            <!--INIZIO CARD3-->
-            <div class="d-flex my-2 align-items-center">
-              <img
-                src="https://placecats.com/50/50"
-                class="rounded-1 img-fluid"
-              />
-              <div class="ms-3 d-flex flex-column justify-content-center">
-                <h6 class="mb-1">This is Tony Boy</h6>
-                <p class="mb-0">Playlist &bull; Spotify</p>
-              </div>
-            </div>
-            <!--FINE CARD3-->
-
-            <!--INIZIO CARD4-->
-            <div class="d-flex my-2 align-items-center">
-              <img
-                src="https://placecats.com/50/50"
-                class="rounded-1 img-fluid"
-              />
-              <div class="ms-3 d-flex flex-column justify-content-center">
-                <h6 class="mb-1">White girl music with the boys at 3 AM</h6>
-                <p class="mb-0">Playlist &bull; Thibovdk</p>
-              </div>
-            </div>
-            <!--FINE CARD4-->
-
-            <!--INIZIO CARD5-->
-            <div class="d-flex my-2 align-items-center">
-              <img
-                src="https://placecats.com/50/50"
-                class="rounded-1 img-fluid"
-              />
-              <div class="ms-3 d-flex flex-column justify-content-center">
-                <h6 class="mb-1">Anche gli eroi muoiono</h6>
-                <p class="mb-0">Album &bull; Kid Yugi</p>
-              </div>
-            </div>
-            <!--FINE CARD5-->
-
-            <!--INIZIO CARD6-->
-            <div class="d-flex my-2 align-items-center">
-              <img
-                src="https://placecats.com/50/50"
-                class="rounded-1 img-fluid"
-              />
-              <div class="ms-3 d-flex flex-column justify-content-center">
-                <h6 class="mb-1">TRAUMA</h6>
-                <p class="mb-0">Album &bull; Tony Boy</p>
-              </div>
-            </div>
-            <!--FINE CARD6-->
-
-            <!--INIZIO CARD7-->
-            <div class="d-flex my-2 align-items-center">
-              <img
-                src="https://placecats.com/50/50"
-                class="rounded-1 img-fluid"
-              />
-              <div class="ms-3 d-flex flex-column justify-content-center">
-                <h6 class="mb-1">SE DIO VUOLE</h6>
-                <p class="mb-0">EP &bull; Sayf</p>
-              </div>
-            </div>
-            <!--FINE CARD7-->
-
-            <!--INIZIO CARD8-->
-            <div class="d-flex my-2 align-items-center">
-              <img
-                src="https://placecats.com/50/50"
-                class="rounded-1 img-fluid"
-              />
-              <div class="ms-3 d-flex flex-column justify-content-center">
-                <h6 class="mb-1">I brani più ascoltati del 2025</h6>
-                <p class="mb-0">Playlist &bull; xxxx</p>
-              </div>
-            </div>
-            <!--FINE CARD8-->
-
-            <!--INIZIO CARD9-->
-            <div class="d-flex my-2 align-items-center">
-              <img
-                src="https://placecats.com/50/50"
-                class="rounded-1 img-fluid"
-              />
-              <div class="ms-3 d-flex flex-column justify-content-center">
-                <h6 class="mb-1">Remix</h6>
-                <p class="mb-0">Playlist &bull; xxxx</p>
-              </div>
-            </div>
-            <!--FINE CARD9-->
-            <!--INIZIO CARD9-->
-            <div class="d-flex my-2 align-items-center">
-              <img
-                src="https://placecats.com/50/50"
-                class="rounded-1 img-fluid"
-              />
-              <div class="ms-3 d-flex flex-column justify-content-center">
-                <h6 class="mb-1">Remix</h6>
-                <p class="mb-0">Playlist &bull; xxxx</p>
-              </div>
-            </div>
-            <!--FINE CARD9-->
-            <!--INIZIO CARD9-->
-            <div class="d-flex my-2 align-items-center">
-              <img
-                src="https://placecats.com/50/50"
-                class="rounded-1 img-fluid"
-              />
-              <div class="ms-3 d-flex flex-column justify-content-center">
-                <h6 class="mb-1">Remix</h6>
-                <p class="mb-0">Playlist &bull; xxxx</p>
-              </div>
-            </div>
-            <!--FINE CARD9-->
-            <!--INIZIO CARD9-->
-            <div class="d-flex my-2 align-items-center">
-              <img
-                src="https://placecats.com/50/50"
-                class="rounded-1 img-fluid"
-              />
-              <div class="ms-3 d-flex flex-column justify-content-center">
-                <h6 class="mb-1">Remix</h6>
-                <p class="mb-0">Playlist &bull; xxxx</p>
-              </div>
-            </div>
-            <!--FINE CARD9-->
+            <!--  -->
           </section>
         </aside>
         <!-- FINE BARRA SX LIBRERIA -->
 
-        <section class="col h-100 overflow-auto bg-dark rounded-4">
+        <section class="col h-100 overflow-auto bg-dark rounded-4 p-0">
           <!-- PARTE CENTRALE -->
           <!-- Sezione Hero con banner artista -->
           <div id="artist-banner" class="h-75 position-relative bg-success">
             <div class="align-items-baseline position-absolute bottom-0 p-2">
-              <h1>Nome Artista</h1>
-              <div><span>Numero ascoltatori 121</span> mensili</div>
+              <h1 id="nome-artista">Nome Artista</h1>
+              <div><span id="fan-artista"></span> ascoltatori mensili</div>
             </div>
           </div>
           <!-- ---TOOLBAR-->
@@ -327,165 +181,9 @@
             <h3 class="mb-3">Popolari</h3>
 
             <div
+              id="lista-canzoni"
               class="row align-items-center py-2 text-secondary-emphasis hover-bg-grey"
-            >
-              <div class="col-auto" style="width: 30px">
-                <span class="text-secondary">1</span>
-              </div>
-
-              <div class="col-auto p-0">
-                <img
-                  src="https://placecats.com/40/40"
-                  class="rounded"
-                  alt="cover"
-                />
-              </div>
-
-              <div class="col ps-3">
-                <div class="text-white fw-bold d-block">TU MI PIACI TANTO</div>
-                <small class="text-secondary"
-                  ><i class="bi bi-play-btn me-1"></i>Video musicale</small
-                >
-              </div>
-
-              <div class="col-auto d-none d-md-block text-secondary">
-                25.356.200
-              </div>
-
-              <div class="col-auto text-secondary ps-5">3:29</div>
-            </div>
-            <div class="row align-items-center py-2">
-              <div class="col-auto" style="width: 30px">
-                <span class="text-secondary">2</span>
-              </div>
-              <div class="col-auto p-0">
-                <img
-                  src="https://placecats.com/40/40"
-                  class="rounded"
-                  alt="cover"
-                />
-              </div>
-              <div class="col ps-3">
-                <div class="text-white fw-bold">BUONA DOMENICA</div>
-                <small class="text-secondary"
-                  ><i class="bi bi-play-btn me-1"></i>Video musicale</small
-                >
-              </div>
-              <div class="col-auto d-none d-md-block text-secondary">
-                1.942.772
-              </div>
-              <div class="col-auto text-secondary ps-5">3:07</div>
-            </div>
-            <div class="row align-items-center py-2">
-              <div class="col-auto" style="width: 30px">
-                <span class="text-secondary">3</span>
-              </div>
-              <div class="col-auto p-0">
-                <img
-                  src="https://placecats.com/40/40"
-                  class="rounded"
-                  alt="cover"
-                />
-              </div>
-              <div class="col ps-3">
-                <div class="text-white fw-bold">BUONA DOMENICA</div>
-                <small class="text-secondary"
-                  ><i class="bi bi-play-btn me-1"></i>Video musicale</small
-                >
-              </div>
-              <div class="col-auto d-none d-md-block text-secondary">
-                1.942.772
-              </div>
-              <div class="col-auto text-secondary ps-5">3:07</div>
-            </div>
-            <div class="row align-items-center py-2">
-              <div class="col-auto" style="width: 30px">
-                <span class="text-secondary">4</span>
-              </div>
-              <div class="col-auto p-0">
-                <img
-                  src="https://placecats.com/40/40"
-                  class="rounded"
-                  alt="cover"
-                />
-              </div>
-              <div class="col ps-3">
-                <div class="text-white fw-bold">BUONA DOMENICA</div>
-                <small class="text-secondary"
-                  ><i class="bi bi-play-btn me-1"></i>Video musicale</small
-                >
-              </div>
-              <div class="col-auto d-none d-md-block text-secondary">
-                1.942.772
-              </div>
-              <div class="col-auto text-secondary ps-5">3:07</div>
-            </div>
-            <div class="row align-items-center py-2">
-              <div class="col-auto" style="width: 30px">
-                <span class="text-secondary">5</span>
-              </div>
-              <div class="col-auto p-0">
-                <img
-                  src="https://placecats.com/40/40"
-                  class="rounded"
-                  alt="cover"
-                />
-              </div>
-              <div class="col ps-3">
-                <div class="text-white fw-bold">BUONA DOMENICA</div>
-                <small class="text-secondary"
-                  ><i class="bi bi-play-btn me-1"></i>Video musicale</small
-                >
-              </div>
-              <div class="col-auto d-none d-md-block text-secondary">
-                1.942.772
-              </div>
-              <div class="col-auto text-secondary ps-5">3:07</div>
-            </div>
-            <div class="row align-items-center py-2">
-              <div class="col-auto" style="width: 30px">
-                <span class="text-secondary">6</span>
-              </div>
-              <div class="col-auto p-0">
-                <img
-                  src="https://placecats.com/40/40"
-                  class="rounded"
-                  alt="cover"
-                />
-              </div>
-              <div class="col ps-3">
-                <div class="text-white fw-bold">BUONA DOMENICA</div>
-                <small class="text-secondary"
-                  ><i class="bi bi-play-btn me-1"></i>Video musicale</small
-                >
-              </div>
-              <div class="col-auto d-none d-md-block text-secondary">
-                1.942.772
-              </div>
-              <div class="col-auto text-secondary ps-5">3:07</div>
-            </div>
-            <div class="row align-items-center py-2">
-              <div class="col-auto" style="width: 30px">
-                <span class="text-secondary">7</span>
-              </div>
-              <div class="col-auto p-0">
-                <img
-                  src="https://placecats.com/40/40"
-                  class="rounded"
-                  alt="cover"
-                />
-              </div>
-              <div class="col ps-3">
-                <div class="text-white fw-bold">BUONA DOMENICA</div>
-                <small class="text-secondary"
-                  ><i class="bi bi-play-btn me-1"></i>Video musicale</small
-                >
-              </div>
-              <div class="col-auto d-none d-md-block text-secondary">
-                1.942.772
-              </div>
-              <div class="col-auto text-secondary ps-5">3:07</div>
-            </div>
+            ></div>
           </div>
         </section>
         <aside class="col-3 px-1 rounded-4 px-4 h-100 overflow-auto bg-dark">
@@ -738,5 +436,6 @@
     ></script>
     <script src="./assets/script/script.js"></script>
     <script src="./assets/script/player.js"></script>
+    <script src="./assets/script/artistView.js"></script>
   </body>
 </html>
