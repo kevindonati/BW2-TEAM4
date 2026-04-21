@@ -28,6 +28,8 @@
     />
     <link rel="stylesheet" href="./style.css" />
     <link rel="stylesheet" href="./assets/style/footer.css" />
+    <!-- Libreria esterna per cambiare il colore della section centrale -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.0/color-thief.umd.js"></script>
   </head>
   <body class="d-flex flex-column vh-100 overflow-hidden bg-black">
     <header>
@@ -201,7 +203,10 @@
         </aside>
         <!-- FINE BARRA SX LIBRERIA -->
 
-        <section class="col h-100 overflow-auto bg-linear rounded-4">
+        <section
+          id="main-section"
+          class="col h-100 overflow-auto bg-linear rounded-4"
+        >
           <!-- PARTE CENTRALE -->
           <!-- Primo blocco btn+6 piÃ¹ ascoltati -->
           <div class="my-3">
