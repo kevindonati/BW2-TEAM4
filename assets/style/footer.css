@@ -1,10 +1,30 @@
 #playerMain {
   max-width: 650px;
-  width: 35%;
+  margin: 0 auto;
+}
+
+footer > article {
+  flex: 1 1 0;
+}
+
+footer i {
+  color: #b3b3b3;
+  transition: color 0.2s ease;
 }
 
 footer i:hover {
   cursor: pointer;
+  color: #ffffff;
+}
+
+footer i,
+footer i:focus,
+footer i:active,
+footer i:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+  border: none !important;
+  -webkit-tap-highlight-color: transparent;
 }
 
 /* SLIDERS MUSICA E VOLUME */
