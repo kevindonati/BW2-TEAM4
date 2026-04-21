@@ -18,6 +18,7 @@ const libreria = () => {
       }
     })
     .then((data) => {
+      console.log(data)
       const spinner = document.querySelectorAll(".contenitore-spinner")
       spinner[0].classList.add("d-none")
       for (let i = 0; i < data.data.length; i++) {
@@ -79,7 +80,9 @@ const main8 = () => {
                 </div>
                 </a>
                 <a
-                  class="btn btn-success flex mostra-al-passaggio rounded rounded-circle text-black shadow shadow-lg position-absolute end-0 m-1 px-1 py-0 d-flex"
+                  class="btn btn-success flex mostra-al-passaggio rounded rounded-circle text-black shadow shadow-lg position-absolute end-0 m-1 px-1 py-0 d-flex" 
+                  id="bottone-play-${[i]}"
+                  onclick="riproduciCanzone(\`${data.data[i].preview}\`, \`${data.data[i].title}\`, \`${data.data[i].artist.name}\`, \`${data.data[i].album.cover_small}\`, \`${data.data[i].album.cover_big}\`, \`${data.data[i].artist.picture_big}\`, \`${data.data[i].artist.id}\`)"
                 >
                   <i
                     class="bi bi-play-fill justify-content-center align-items-center"
@@ -214,3 +217,65 @@ const terzoCarosello = () => {
     })
 }
 terzoCarosello()
+
+// FACCIO PARTIRE LA CANZONE SELEZIONATA
+
+const riproduciCanzone = (
+  audioCanzone,
+  titolo,
+  nomeArtista,
+  copertinaSmall,
+  copertinaBig,
+  fotoArtista,
+  linkArtista,
+) => {
+  const inputAudio = document.getElementById("audio")
+  inputAudio.setAttribute("src", audioCanzone)
+  if (audio.paused) {
+    audio.play()
+    playBtn.classList.replace("bi-play-circle-fill", "bi-pause-circle-fill")
+  } else {
+    audio.pause()
+    playBtn.classList.replace("bi-pause-circle-fill", "bi-play-circle-fill")
+  }
+
+  // RIEMPO BARRA FOOTER CON CNZONE IN RIPRODUZIONE
+  const titoloCanzone = document.querySelectorAll(".titolo-barra-dx")
+  const copertinaPiccola = document.querySelectorAll(
+    ".copertina-small-barra-dx",
+  )
+  const copertinaGrande = document.querySelectorAll(".copertina-big-barra-dx")
+  const nome = document.querySelectorAll(".autore-barra-dx")
+  const fotoProfiloArtista = document.getElementById("foto-artista")
+  const ascoltatoriMensili = document.querySelector(".ascoltatori")
+
+  for (let i = 0; i < nome.length; i++) {
+    nome[i].innerHTML = `${nomeArtista}`
+  }
+  for (let i = 0; i < titoloCanzone.length; i++) {
+    titoloCanzone[i].innerHTML = `${titolo}`
+  }
+  for (let i = 0; i < copertinaPiccola.length; i++) {
+    copertinaPiccola[i].setAttribute("src", copertinaSmall)
+  }
+  for (let i = 0; i < copertinaGrande.length; i++) {
+    copertinaGrande[i].setAttribute("src", copertinaBig)
+  }
+  fotoProfiloArtista.setAttribute("src", fotoArtista)
+
+  fetch(urlArtista + linkArtista)
+    .then((response) => {
+      if (response.ok) {
+        return response.json()
+      } else {
+        throw new Error("errore nella response")
+      }
+    })
+    .then((data) => {
+      console.log(data)
+      ascoltatoriMensili.innerHTML = `${data.nb_fan}`
+    })
+    .catch((err) => {
+      console.log("errore nella fetch", err)
+    })
+}
