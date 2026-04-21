@@ -25,7 +25,11 @@ section:hover::-webkit-scrollbar-thumb {
   transition:
     opacity 0.3s ease,
     transform 0.3s ease;
-  transform: scale(1);
+  background-color: #1db954;
+  border: none;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
 }
 
 .contenitore-card:hover .mostra-al-passaggio {
@@ -47,8 +51,29 @@ section:hover::-webkit-scrollbar-thumb {
   background-color: rgba(255, 255, 255, 0.2);
 }
 
-.bg-customized-hover:hover {
-  background-color: rgba(255, 255, 255, 0.2) !important;
+.song-card-container {
+  position: relative;
+  transition: backgroun-color 0.3s ease;
+  border-radius: 8px;
+}
+
+.song-card-container:hover {
+  background-color: #282828 !important;
+}
+
+.song-card-container:hover .mostra-al-passaggio {
+  opacity: 1;
+  transform: translateY(0);
+  .bg-customized-hover:hover {
+    background-color: rgba(255, 255, 255, 0.2) !important;
+  }
+}
+
+.scale {
+  transition: transform 0s ease-in;
+}
+.scale:hover {
+  transform: scale(1.1);
 }
 
 /*BACKGROUND ASIDE*/

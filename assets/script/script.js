@@ -18,7 +18,6 @@ const libreria = () => {
       }
     })
     .then((data) => {
-      console.log(data)
       const spinner = document.querySelectorAll(".contenitore-spinner")
       spinner[0].classList.add("d-none")
       for (let i = 0; i < data.data.length; i++) {

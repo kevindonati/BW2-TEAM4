@@ -59,32 +59,53 @@
               <i class="fas fa-chevron-right"></i>
             </div>
             <div class="centerPart text-white d-flex align-items-center">
-              <i class="fas fa-home text-dark bg-white p-2 rounded-circle"></i>
+              <i
+                class="fas fa-home text-dark bg-white p-2 rounded-circle scale"
+              ></i>
+              <!--SCALE ALLA HOME-->
               <div
-                class="bg-dark rounded-5 text-white mx-4 d-flex align-items-center pe-3"
+                class="bg-dark rounded-5 text-white mx-4 d-flex align-items-center pe-3 position-relative"
               >
-                <form class="d-flex" role="search">
+                <form class="d-flex" role="search" id="seachForm">
                   <button class="btn" type="submit">
                     <i class="fas fa-search text-light"></i>
                   </button>
                   <input
+                    id="searchInput"
                     class="form-control me-2 bg-dark border-0"
                     type="search"
-                    placeholder="Search"
+                    placeholder="Cerca la tua musica"
                     aria-label="Search"
+                    autocomplete="off"
                   />
                 </form>
-                <i class="far fa-window-restore"></i>
+                <i class="far fa-window-restore scale"></i>
+                <!-- CONTENITORE RISULTATI "Menu a tendina" -->
+                <div
+                  id="searchResults"
+                  class="dropdown-menu bg-dark p-2 w-100 shadow-lg border border-secondary"
+                  style="
+                    display: none;
+                    position: absolute;
+                    top: 100%;
+                    left: 0;
+                    max-height: 400px;
+                    overflow-y: auto;
+                    z-index: 1000;
+                  "
+                >
+                  <!-- Qui verranno appese le canzoni -->
+                </div>
               </div>
             </div>
             <div
               class="rightPart text-white d-flex align-items-center justify-content-end"
             >
-              <i class="fas fa-bell mx-3"></i>
-              <i class="fas fa-users mx-3"></i>
+              <i class="fas fa-bell mx-3 scale"></i>
+              <i class="fas fa-users mx-3 scale"></i>
               <img
                 src="https://placecats.com/200/200"
-                class="rounded-circle border-5 border-secondary-subtle mx-3 navbarImage"
+                class="rounded-circle border-5 border-secondary-subtle mx-3 navbarImage scale"
                 style="height: 35px"
               />
               <i class="fas fa-window-minimize ms-4"></i>
@@ -129,11 +150,10 @@
             >
               <i class="bi bi-search"></i>
             </button>
-            <div class="d-flex align-items-center">
-              <button class="btn bg-trasparent">
-                Recenti <i class="ms-2bi bi-list-ul"></i>
-              </button>
-            </div>
+
+            <button class="btn bg-trasparent scale d-flex">
+              Recenti<i class="ms-2 bi bi-list-ul"></i>
+            </button>
           </div>
           <!--FINE TERZO BLOCCO ASIDE-->
 
@@ -481,7 +501,10 @@
         <div class="d-flex gap-3 align-items-center">
           <i class="bi bi-shuffle"></i>
           <i class="fas fa-backward"></i>
-          <i class="bi bi-play-circle-fill fs-3" id="playPauseBtn"></i>
+          <i
+            class="bi bi-play-circle-fill fs-3 text-white"
+            id="playPauseBtn"
+          ></i>
           <i class="fas fa-forward"></i>
           <i class="fas fa-redo-alt"></i>
         </div>
@@ -505,7 +528,7 @@
       </article>
       <article class="d-flex align-items-center gap-2 justify-content-end">
         <i class="bi bi-mic"></i>
-        <i class="bi bi-text-center"></i>
+        <i class="fas fa-align-justify"></i>
         <i class="bi bi-pc-display"></i>
 
         <div class="d-flex align-items-center">
@@ -532,5 +555,6 @@
     ></script>
     <script src="./assets/script/script.js"></script>
     <script src="./assets/script/player.js"></script>
+    <script src="./assets/script/search.js"></script>
   </body>
 </html>
