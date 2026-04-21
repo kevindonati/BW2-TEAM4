@@ -293,45 +293,69 @@
           class="col h-100 overflow-auto bg-dark rounded-4 d-flex flex-column container"
         >
           <!-- PARTE CENTRALE -->
-          <div class="row d-flex align-items-center">
+          <div
+            class="row d-flex align-items-center bg-secondary"
+            style="
+              /*
+              background-color: linear-gradient(
+                90deg,
+                rgb(0, 0, 0),
+                rgb(190, 190, 190)
+              );
+             */
+            "
+          >
             <!-- --------------------------------PRESENTAZIONE-->
 
             <div class="col-3">
               <img
                 id="albumCover"
                 src="https://placecats.com/300/300"
-                class="w-100"
+                class="w-100 rounded-2 shadow-sm"
               />
             </div>
 
             <div class="col-9">
               <h6 class="d-sm-none">Album</h6>
               <h1 id="albumTitle">tua mamma fa la bidella</h1>
-              <img
-                id="artistImage"
-                style="height: 1.3em"
-                src="https://placecats.com/300/300"
-                class="rounded-circle"
-              />
-              <p>
-                <span class="fw-bold" id="artistName">Ramadam Banger</span
-                ><span id="albumReleaseDate">22/03/2022</span
-                ><span id="albumNumberOfSongs">13</span>brani,
-                <span id="albumDuration">2h 30min</span>
-              </p>
+              <div class="col-12">
+                <p class="d-inline-block">
+                  <img
+                    id="artistImage"
+                    style="height: 1.3em"
+                    src="https://placecats.com/300/300"
+                    class="rounded-circle"
+                  />
+                  <span class="fw-bold" id="artistName">Ramadam Banger</span> ‧
+                  <span id="albumReleaseDate">22/03/2022</span> ‧
+                  <span id="albumNumberOfSongs">13</span>brani,
+                  <span id="albumDuration">2h 30min</span>.
+                </p>
+              </div>
             </div>
           </div>
           <div class="d-flex justify-content-between align-items-center">
             <!-- --------------------------------TOOLBAR-->
-            <div class="m-3 d-flex gap-3">
-              <i class="fas fa-play-circle"></i>
-              <img id="artistStories" src="#" />
-              <i class="fas fa-random"></i>
-              <i class="fas fa-plus-circle"></i>
-              <i class="fas fa-arrow-circle-down"></i>
-              <i class="far fa-ellipsis-h"></i>
+            <div class="m-3 d-flex gap-3 align-items-center">
+              <i class="fas fa-play-circle fa-3x text-success"></i>
+              <div
+                class="rounded-2 bg-secondary border border-3 border-secondary"
+              >
+                <img
+                  id="artistStories"
+                  src="https://placecats.com/300/300"
+                  class="rounded-2 border border-2 border-dark object-fit-cover"
+                  style="height: 40px; width: 30px"
+                />
+              </div>
+              <i class="fas fa-random fa-lg text-secondary"></i>
+              <i class="fas fa-plus-circle fa-lg text-secondary"></i>
+              <i class="fas fa-arrow-circle-down fa-lg text-secondary"></i>
+              <i class="fas fa-ellipsis-h fa-lg text-secondary"></i>
             </div>
-            <h6>Elenco<i class="fas fa-list-ul"></i></h6>
+            <p class="text-secondary d-flex align-items-center mt-3">
+              Elenco<i class="fas fa-list-ul mx-1"></i>
+            </p>
           </div>
           <div>
             <!-- --------------------------------ALBUM-->
@@ -342,17 +366,31 @@
                 <th>Riproduzioni</th>
                 <th><i class="fas fa-clock"></i></th>
               </thead>
-              <tbody id="albumSongs"></tbody>
+              <tbody id="albumSongs">
+                <tr>
+                  <td>1</td>
+                  <td>Titolo</td>
+                  <td>Riproduzione</td>
+                  <td>8 anni</td>
+                </tr>
+              </tbody>
             </table>
           </div>
           <div>
             <!-- --------------------------------DIRITTI-->
-            <p id="albumReleaseDate"></p>
-            <p id="albumDiritti"></p>
+            <p
+              id="albumReleaseDate"
+              class="fw-normal text-secondary-emphasis m-0"
+            >
+              album di pincopoallino
+            </p>
+            <p id="albumDiritti" class="fw-normal text-secondary-emphasis">
+              diritti riservati alla casa discografica universal music
+            </p>
           </div>
           <div class="d-flex justify-content-between">
             <!-- --------------------------------ALTRO-->
-            <h4>Altro di <span id="nomeArtista"></span></h4>
+            <h4>Altro di <span id="nomeArtista">heroSoma</span></h4>
             <h6>Guarda profilo</h6>
           </div>
         </section>
@@ -607,5 +645,7 @@
     ></script>
     <script src="./assets/script/script.js"></script>
     <script src="./assets/script/player.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.0/color-thief.umd.js"></script>
+    "
   </body>
 </html>
