@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Spotify</title>
     <link
+      rel="icon"
+      type="image/png"
+      href="./assets/imgs/Spotify_Primary_Logo_RGB_Green_favicon.png"
+    />
+    <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
       rel="stylesheet"
       integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
@@ -21,7 +26,7 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
     />
-    <link rel="stylesheet" href="./style-skeit.css" />
+    <link rel="stylesheet" href="./style.css" />
     <link rel="stylesheet" href="./assets/style/footer.css" />
   </head>
   <body class="d-flex flex-column vh-100 overflow-hidden bg-black">
@@ -54,32 +59,53 @@
               <i class="fas fa-chevron-right"></i>
             </div>
             <div class="centerPart text-white d-flex align-items-center">
-              <i class="fas fa-home text-dark bg-white p-2 rounded-circle"></i>
+              <i
+                class="fas fa-home text-dark bg-white p-2 rounded-circle scale"
+              ></i>
+              <!--SCALE ALLA HOME-->
               <div
-                class="bg-dark rounded-5 text-white mx-4 d-flex align-items-center pe-3"
+                class="bg-dark rounded-5 text-white mx-4 d-flex align-items-center pe-3 position-relative"
               >
-                <form class="d-flex" role="search">
+                <form class="d-flex" role="search" id="seachForm">
                   <button class="btn" type="submit">
                     <i class="fas fa-search text-light"></i>
                   </button>
                   <input
+                    id="searchInput"
                     class="form-control me-2 bg-dark border-0"
                     type="search"
-                    placeholder="Search"
+                    placeholder="Cerca la tua musica"
                     aria-label="Search"
+                    autocomplete="off"
                   />
                 </form>
-                <i class="far fa-window-restore"></i>
+                <i class="far fa-window-restore scale"></i>
+                <!-- CONTENITORE RISULTATI "Menu a tendina" -->
+                <div
+                  id="searchResults"
+                  class="dropdown-menu bg-dark p-2 w-100 shadow-lg border border-secondary"
+                  style="
+                    display: none;
+                    position: absolute;
+                    top: 100%;
+                    left: 0;
+                    max-height: 400px;
+                    overflow-y: auto;
+                    z-index: 1000;
+                  "
+                >
+                  <!-- Qui verranno appese le canzoni -->
+                </div>
               </div>
             </div>
             <div
               class="rightPart text-white d-flex align-items-center justify-content-end"
             >
-              <i class="fas fa-bell mx-3"></i>
-              <i class="fas fa-users mx-3"></i>
+              <i class="fas fa-bell mx-3 scale"></i>
+              <i class="fas fa-users mx-3 scale"></i>
               <img
                 src="https://placecats.com/200/200"
-                class="rounded-circle border-5 border-secondary-subtle mx-3 navbarImage"
+                class="rounded-circle border-5 border-secondary-subtle mx-3 navbarImage scale"
                 style="height: 35px"
               />
               <i class="fas fa-window-minimize ms-4"></i>
@@ -94,7 +120,7 @@
       <div class="row h-100 gap-2">
         <!-- INIZIO BARRA SX LIBRERIA -->
         <aside
-          class="col-3 h-100 bg-dark text-white pt-4 px-4 3 rounded-4 overflow-auto"
+          class="col-3 h-100 text-white pt-4 px-4 3 rounded-4 overflow-auto bg-aside"
         >
           <!--PRIMO BLOCCO ASIDE-->
           <div class="d-flex align-items-center justify-content-between">
@@ -103,8 +129,10 @@
               <button class="btn bg-button rounded-5 px-3">
                 <i class="bi bi-plus-lg me-1"></i>Crea
               </button>
-              <button class="btn btn-dark">
-                <i class="bi bi-arrows-angle-expand ms-2"></i>
+              <button
+                class="btn bg-trasparent bg-customized-hover rounded-circle ms-2"
+              >
+                <i class="bi bi-arrows-angle-expand"></i>
               </button>
             </div>
           </div>
@@ -117,13 +145,15 @@
           <!--FINE SECONDO BLOCCO ASIDE-->
           <!--INIZIO TERZO BLOCCO ASIDE-->
           <div class="d-flex align-items-center justify-content-between mt-2">
-            <i class="bi bi-search"></i>
-            <div class="d-flex align-items-center">
-              <button class="btn btn-dark">Recenti</button>
-              <button class="btn btn-dark">
-                <i class="bi bi-list-ul"></i>
-              </button>
-            </div>
+            <button
+              class="btn bg-trasparent rounded-circle ms-2 bg-customized-hover"
+            >
+              <i class="bi bi-search"></i>
+            </button>
+
+            <button class="btn bg-trasparent scale d-flex">
+              Recenti<i class="ms-2 bi bi-list-ul"></i>
+            </button>
           </div>
           <!--FINE TERZO BLOCCO ASIDE-->
 
@@ -364,157 +394,54 @@
           </div>
         </section>
 
-        <aside class="col-3 px-1 rounded-4 px-4 h-100 overflow-auto bg-dark">
+        <aside class="col-3 px-1 rounded-4 px-4 h-100 overflow-auto bg-aside">
           <!-- BARRA DX ARTISTA -->
           <!-- TITOLO CANZONE IN ASCOLTO -->
-          <h6 class="fw-bold my-3">NULLA DI</h6>
-          <!-- IMMAGINE CANZONE IN ASCOLTO -->
-          <img
-            class="rounded-3"
-            width="100%"
-            src="https://www.bohmagazine.it/wp-content/uploads/lazza-sirio-cover-album.jpg"
-            alt="foto album"
-          />
+          <div class="placeholder-glow">
+            <h6 class="placeholder fw-bold my-3 titolo-barra-dx">NULLA DI</h6>
 
-          <!-- CONTENITORE CREDITI ARTISTA + BOTTONE AGGIUNGI -->
-          <div class="d-flex justify-content-between align-items-center mt-3">
-            <!-- CREDITI ARTISTA -->
-            <div>
-              <!-- TITOLO CANZONE IN ASCOLTO -->
-              <h4 class="fw-bold m-0">NULLA DI</h4>
-              <!-- ARTISTA -->
-              <p class="text-secondary m-0">Lazza</p>
+            <!-- IMMAGINE CANZONE IN ASCOLTO -->
+            <img
+              class="placeholder rounded-3 copertina-big-barra-dx"
+              width="100%"
+              src="https://thumbs.dreamstime.com/b/sfondo-quadrato-grigio-e-bianco-con-testo-graffiato-astratto-molti-piccoli-graffi-bianchi-sparsi-casualmente-sullo-chiaro-161530236.jpg?w=768"
+              alt="foto album"
+            />
+
+            <!-- CONTENITORE CREDITI ARTISTA + BOTTONE AGGIUNGI -->
+            <div class="d-flex justify-content-between align-items-center mt-3">
+              <!-- CREDITI ARTISTA -->
+              <div>
+                <!-- TITOLO CANZONE IN ASCOLTO -->
+                <h4 class="placeholder titolo-barra-dx fw-bold m-0">
+                  NULLA DI
+                </h4>
+                <!-- ARTISTA -->
+                <p class="placeholder text-secondary m-0 autore-barra-dx">
+                  Lazza
+                </p>
+              </div>
+              <!-- BOTTONE AGGIUNGI -->
+              <i class="fs-4 bi bi-plus-circle"></i>
             </div>
-            <!-- BOTTONE AGGIUNGI -->
-            <i class="fs-4 bi bi-plus-circle"></i>
           </div>
 
           <!-- VIDEO CORRELATI -->
           <h6 class="mt-4">Video musicali correlati</h6>
 
           <!-- CAROSELLO VIDEO CORRELLATI -->
-          <div id="carouselExample" class="carousel slide">
-            <div class="carousel-inner">
-              <div class="carousel-item active">
-                <!-- PRIMA SLIDE CAROSELLO -->
-                <div class="container-fluid">
-                  <div class="row">
-                    <div class="col-6 ps-0">
-                      <img
-                        width="100%"
-                        src="https://wallpaperaccess.com/full/10824067.jpg"
-                        alt="foto album"
-                      />
-                      <!-- TITOLO CANZONE IN ASCOLTO -->
-                      <h6 class="fw-bold m-0">Titolo canzone</h6>
-                      <!-- ARTISTA -->
-                      <p class="text-secondary m-0">Artista</p>
-                    </div>
-                    <div class="col-6 pe-0">
-                      <img
-                        width="100%"
-                        src="https://wallpaperaccess.com/full/2754333.jpg"
-                        alt="foto album"
-                      />
-                      <!-- TITOLO CANZONE IN ASCOLTO -->
-                      <h6 class="fw-bold m-0">Titolo canzone</h6>
-                      <!-- ARTISTA -->
-                      <p class="text-secondary m-0">Artista</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="carousel-item">
-                <!-- SECONDA SLIDE CAROSELLO -->
-                <div class="container-fluid">
-                  <div class="row">
-                    <div class="col-6 ps-0">
-                      <img
-                        width="100%"
-                        src="https://wallpaperaccess.com/full/10824067.jpg"
-                        alt="foto album"
-                      />
-                      <!-- TITOLO CANZONE IN ASCOLTO -->
-                      <h6 class="fw-bold m-0">Titolo canzone</h6>
-                      <!-- ARTISTA -->
-                      <p class="text-secondary m-0">Artista</p>
-                    </div>
-                    <div class="col-6 pe-0">
-                      <img
-                        width="100%"
-                        src="https://wallpaperaccess.com/full/2754333.jpg"
-                        alt="foto album"
-                      />
-                      <!-- TITOLO CANZONE IN ASCOLTO -->
-                      <h6 class="fw-bold m-0">Titolo canzone</h6>
-                      <!-- ARTISTA -->
-                      <p class="text-secondary m-0">Artista</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="carousel-item">
-                <!-- TERZA SLIDE CAROSELLO -->
-                <div class="container-fluid">
-                  <div class="row">
-                    <div class="col-6 ps-0">
-                      <img
-                        width="100%"
-                        src="https://wallpaperaccess.com/full/10824067.jpg"
-                        alt="foto album"
-                      />
-                      <!-- TITOLO CANZONE IN ASCOLTO -->
-                      <h6 class="fw-bold m-0">Titolo canzone</h6>
-                      <!-- ARTISTA -->
-                      <p class="text-secondary m-0">Artista</p>
-                    </div>
-                    <div class="col-6 pe-0">
-                      <img
-                        width="100%"
-                        src="https://wallpaperaccess.com/full/2754333.jpg"
-                        alt="foto album"
-                      />
-                      <!-- TITOLO CANZONE IN ASCOLTO -->
-                      <h6 class="fw-bold m-0">Titolo canzone</h6>
-                      <!-- ARTISTA -->
-                      <p class="text-secondary m-0">Artista</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <button
-              class="carousel-control-prev"
-              type="button"
-              data-bs-target="#carouselExample"
-              data-bs-slide="prev"
-            >
-              <span
-                class="carousel-control-prev-icon"
-                aria-hidden="true"
-              ></span>
-              <span class="visually-hidden">Previous</span>
-            </button>
-            <button
-              class="carousel-control-next"
-              type="button"
-              data-bs-target="#carouselExample"
-              data-bs-slide="next"
-            >
-              <span
-                class="carousel-control-next-icon"
-                aria-hidden="true"
-              ></span>
-              <span class="visually-hidden">Next</span>
-            </button>
-          </div>
+          <div
+            id="carouselExample"
+            class="carousel slide carosello-correlati"
+          ></div>
 
           <!-- INFORMAZIONI ARTISTA -->
-          <div class="card mt-3 mb-3 position-relative">
+          <div class="card mt-3 mb-3 position-relative placeholder-glow">
             <img
+              id="foto-artista"
               width="100%"
-              src="https://wallpaperaccess.com/full/9873555.jpg"
-              class="card-img-top"
+              src="https://thumbs.dreamstime.com/b/sfondo-quadrato-grigio-e-bianco-con-testo-graffiato-astratto-molti-piccoli-graffi-bianchi-sparsi-casualmente-sullo-chiaro-161530236.jpg?w=768"
+              class="placeholder card-img-top"
               alt="foto artista"
             />
             <h6 class="card-title position-absolute p-3">
@@ -524,12 +451,15 @@
               class="card-body d-flex justify-content-between align-items-center"
             >
               <div class="bg-dark">
-                <p class="card-text">Lazza</p>
-                <p class="card-text">Numero Ascoltatori mensili</p>
+                <p class="autore-barra-dx card-text placeholder">Lazza</p>
+                <p class="card-text">
+                  Numero Ascoltatori mensili:
+                  <span class="placeholder ascoltatori">1515151</span>
+                </p>
               </div>
               <a
                 href="#"
-                class="btn btn-dark rounded-5 border-1 border-secondary"
+                class="placeholder btn btn-dark rounded-5 border-1 border-secondary"
                 >Segui</a
               >
             </div>
@@ -541,34 +471,45 @@
     </main>
 
     <footer
-      class="d-flex align-items-center justify-content-between bg-black p-2"
+      class="d-flex align-items-center justify-content-between bg-black p-2 w-100"
     >
       <!-- BARRA SOTTO -->
-      <article class="d-flex align-items-center">
+      <article class="d-flex align-items-center justify-content-start">
         <div class="d-flex align-items-center gap-2">
-          <span id="player-img" class="d-flex align-items-center"
+          <span
+            id="player-img"
+            class="d-flex align-items-center placeholder-glow"
             ><img
-              src="https://placecats.com/30/30"
+              src="https://thumbs.dreamstime.com/b/sfondo-quadrato-grigio-e-bianco-con-testo-graffiato-astratto-molti-piccoli-graffi-bianchi-sparsi-casualmente-sullo-chiaro-161530236.jpg"
+              width="50px"
               alt="immagine canzone"
-              class="rounded-1"
+              class="rounded-1 copertina-small-barra-dx placeholder"
           /></span>
-          <div class="d-flex flex-column small">
-            <h6 id="song-name">Nome canzone</h6>
-            <span id="artist-name">Nome artista</span>
+          <div class="d-flex flex-column small placeholder-glow">
+            <h6 class="titolo-barra-dx placeholder" id="song-name">
+              Nome canzone
+            </h6>
+            <span class="autore-barra-dx placeholder">Nome artista</span>
           </div>
           <i class="bi bi-plus-circle"></i>
         </div>
       </article>
-      <article class="d-flex flex-column align-items-center" id="playerMain">
+      <article
+        id="playerMain"
+        class="d-flex flex-column align-items-center justify-content-center"
+      >
         <div class="d-flex gap-3 align-items-center">
           <i class="bi bi-shuffle"></i>
-          <i class="bi bi-skip-backward-fill"></i>
-          <i class="bi bi-play-circle-fill fs-3" id="playPauseBtn"></i>
-          <i class="bi bi-skip-forward-fill"></i>
-          <i class="bi bi-rewind-btn-fill"></i>
+          <i class="fas fa-backward"></i>
+          <i
+            class="bi bi-play-circle-fill fs-3 text-white"
+            id="playPauseBtn"
+          ></i>
+          <i class="fas fa-forward"></i>
+          <i class="fas fa-redo-alt"></i>
         </div>
         <div class="w-100">
-          <audio src="./assets/Voicy_Rickroll.mp3" id="audio"></audio>
+          <audio src="" id="audio"></audio>
           <div
             id="progress-bar-container"
             class="d-flex align-items-center gap-2 w-100"
@@ -585,9 +526,9 @@
           </div>
         </div>
       </article>
-      <article class="d-flex align-items-center gap-2">
+      <article class="d-flex align-items-center gap-2 justify-content-end">
         <i class="bi bi-mic"></i>
-        <i class="bi bi-text-center"></i>
+        <i class="fas fa-align-justify"></i>
         <i class="bi bi-pc-display"></i>
 
         <div class="d-flex align-items-center">
@@ -604,7 +545,7 @@
           />
         </div>
         <i class="bi bi-back"></i>
-        <i class="bi bi-fullscreen"></i>
+        <i id="screenMode" class="bi bi-fullscreen"></i>
       </article>
     </footer>
     <script
@@ -614,5 +555,6 @@
     ></script>
     <script src="./assets/script/script.js"></script>
     <script src="./assets/script/player.js"></script>
+    <script src="./assets/script/search.js"></script>
   </body>
 </html>

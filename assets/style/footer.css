@@ -1,21 +1,47 @@
 #playerMain {
   max-width: 650px;
-  width: 35%;
+  margin: 0 auto;
+}
+
+footer > article {
+  flex: 1 1 0;
+}
+
+footer i {
+  color: #b3b3b3;
+  transition: color 0.2s ease;
 }
 
 footer i:hover {
   cursor: pointer;
+  color: #ffffff;
 }
 
+/* footer i,
+footer i:focus,
+footer i:active,
+footer i:focus-visible {
+  outline: none !important;     Non sembra funzionare al momento, la riprendo un'altra volta
+  box-shadow: none !important;
+  border: none !important;
+  -webkit-tap-highlight-color: transparent;
+} */
+
 /* SLIDERS MUSICA E VOLUME */
+
+#volumeSlider,
+#progress-bar {
+  background: #4d4d4d;
+}
 
 #progress-bar:hover {
   cursor: pointer;
 }
 
 input[type="range"] {
+  -webkit-appearance: none;
   appearance: none;
-  background: #4d4d4d;
+  width: 100%;
   height: 4px;
   border-radius: 2px;
   outline: none;
@@ -36,4 +62,16 @@ input[type="range"]::-webkit-slider-thumb {
 input[type="range"]:hover::-webkit-slider-thumb {
   opacity: 1;
   accent-color: white;
+}
+
+/* ROBA NON DEL FOOTER */
+i {
+  cursor: pointer;
+  color: #b3b3b3;
+  transition: color 0.2s ease;
+}
+
+i:hover,
+i:active {
+  color: #ffffff;
 }
