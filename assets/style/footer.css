@@ -7,26 +7,6 @@ footer > article {
   flex: 1 1 0;
 }
 
-footer i {
-  color: #b3b3b3;
-  transition: color 0.2s ease;
-}
-
-footer i:hover {
-  cursor: pointer;
-  color: #ffffff;
-}
-
-/* footer i,
-footer i:focus,
-footer i:active,
-footer i:focus-visible {
-  outline: none !important;     Non sembra funzionare al momento, la riprendo un'altra volta
-  box-shadow: none !important;
-  border: none !important;
-  -webkit-tap-highlight-color: transparent;
-} */
-
 /* SLIDERS MUSICA E VOLUME */
 
 #volumeSlider,
@@ -65,13 +45,45 @@ input[type="range"]:hover::-webkit-slider-thumb {
 }
 
 /* ROBA NON DEL FOOTER */
-i {
+i,
+.text-inattivo {
   cursor: pointer;
   color: #b3b3b3;
   transition: color 0.2s ease;
 }
 
 i:hover,
+button:hover i {
+  color: #ffffff;
+}
+
+i,
+i:focus,
+i:active,
+button,
+button:focus,
+.btn:focus {
+  outline: none !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
 i:active {
   color: #ffffff;
+}
+
+#recenti i {
+  transform: translateY(1px);
+}
+
+/* CSS per la search */
+
+.centerPart {
+  width: 40vw;
+  max-width: 700px;
+}
+
+#search-input {
+  width: 100%;
+  justify-content: space-between;
 }

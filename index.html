@@ -63,9 +63,10 @@
               ></i>
               <!--SCALE ALLA HOME-->
               <div
-                class="bg-dark rounded-5 text-white mx-4 d-flex align-items-center pe-3 position-relative w-100"
+                id="search-input"
+                class="bg-dark rounded-5 text-white mx-4 d-flex align-items-center pe-3 position-relative"
               >
-                <form class="d-flex" role="search" id="seachForm">
+                <form class="d-flex w-100" role="search" id="seachForm">
                   <button class="btn" type="submit">
                     <i class="fas fa-search text-light"></i>
                   </button>
@@ -78,7 +79,7 @@
                     autocomplete="off"
                   />
                 </form>
-                <i class="far fa-window-restore scale"></i>
+                <i id="naviga" class="far fa-window-restore scale"></i>
                 <!-- CONTENITORE RISULTATI "Menu a tendina" -->
                 <div
                   id="searchResults"
@@ -149,10 +150,40 @@
             >
               <i class="bi bi-search"></i>
             </button>
+            <div class="dropdown">
+              <button
+                id="recenti"
+                class="btn bg-transparent text-inattivo scale d-flex align-items-center border-0 p-0"
+                type="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                <span class="d-flex align-items-center">
+                  Recenti
+                  <i class="ms-2 bi bi-list-ul"></i>
+                </span>
+              </button>
 
-            <button class="btn bg-trasparent scale d-flex">
-              Recenti<i class="ms-2 bi bi-list-ul"></i>
-            </button>
+              <ul class="dropdown-menu dropdown-menu-dark shadow">
+                <li>
+                  <button class="dropdown-item" type="button">Recenti</button>
+                </li>
+                <li>
+                  <button class="dropdown-item" type="button">
+                    Alfabetico
+                  </button>
+                </li>
+                <li>
+                  <button class="dropdown-item" type="button">
+                    Aggiunti di recente
+                  </button>
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li>
+                  <button class="dropdown-item" type="button">Creatore</button>
+                </li>
+              </ul>
+            </div>
           </div>
           <!--FINE TERZO BLOCCO ASIDE-->
 
