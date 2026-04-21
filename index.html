@@ -551,9 +551,7 @@
       class="d-flex align-items-center justify-content-between bg-black p-2 w-100"
     >
       <!-- BARRA SOTTO -->
-      <article
-        class="d-flex align-items-center flex-grow-1 justify-content-start"
-      >
+      <article class="d-flex align-items-center justify-content-start">
         <div class="d-flex align-items-center gap-2">
           <span id="player-img" class="d-flex align-items-center"
             ><img
@@ -570,14 +568,14 @@
       </article>
       <article
         id="playerMain"
-        class="d-flex flex-column align-items-center justify-content-center flex-grow-1"
+        class="d-flex flex-column align-items-center justify-content-center"
       >
         <div class="d-flex gap-3 align-items-center">
           <i class="bi bi-shuffle"></i>
-          <i class="bi bi-skip-backward-fill"></i>
+          <i class="fas fa-backward"></i>
           <i class="bi bi-play-circle-fill fs-3" id="playPauseBtn"></i>
-          <i class="bi bi-skip-forward-fill"></i>
-          <i class="bi bi-rewind-btn-fill"></i>
+          <i class="fas fa-forward"></i>
+          <i class="fas fa-redo-alt"></i>
         </div>
         <div class="w-100">
           <audio src="./assets/Voicy_Rickroll.mp3" id="audio"></audio>
@@ -597,9 +595,7 @@
           </div>
         </div>
       </article>
-      <article
-        class="d-flex align-items-center gap-2 flex-grow-1 justify-content-end"
-      >
+      <article class="d-flex align-items-center gap-2 justify-content-end">
         <i class="bi bi-mic"></i>
         <i class="bi bi-text-center"></i>
         <i class="bi bi-pc-display"></i>
@@ -618,7 +614,7 @@
           />
         </div>
         <i class="bi bi-back"></i>
-        <i class="bi bi-fullscreen"></i>
+        <i id="screenMode" class="bi bi-fullscreen"></i>
       </article>
     </footer>
     <script
