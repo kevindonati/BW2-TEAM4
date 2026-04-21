@@ -1,9 +1,1 @@
-i {
-  color: #b3b3b3;
-  transition: color 0.2s ease;
-}
 
-i:hover {
-  cursor: pointer;
-  color: #ffffff;
-}
