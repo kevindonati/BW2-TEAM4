@@ -31,7 +31,7 @@ const libreria = () => {
                 class="rounded-1 img-fluid"
               />
               <div class="ms-3 d-flex flex-column justify-content-center">
-                <h6 class="mb-1">${data.data[i].album.title}</h6>
+                <h6 class="mb-1 ">${data.data[i].album.title}</h6>
                 <p class="mb-0">
                   ${data.data[i].album.type} &bull; <a class="text-decoration-none text-light" href="artistView.html?id=${data.data[i].artist.id}"> ${data.data[i].artist.name}</a>
                 </p>
@@ -81,10 +81,10 @@ const main8 = () => {
                 </a>
                 <a
                   class="btn btn-success flex mostra-al-passaggio rounded rounded-circle text-black shadow shadow-lg position-absolute end-0 m-1 px-1 py-0 d-flex" 
-                  id="bottone-play-${[i]}"
-                  onclick="riproduciCanzone(\`${data.data[i].preview}\`, \`${data.data[i].title}\`, \`${data.data[i].artist.name}\`, \`${data.data[i].album.cover_small}\`, \`${data.data[i].album.cover_big}\`, \`${data.data[i].artist.picture_big}\`, \`${data.data[i].artist.id}\`)"
+                  
+                  onclick="riproduciCanzone(\`${data.data[i].preview}\`, \`${data.data[i].title}\`, \`${data.data[i].artist.name}\`, \`${data.data[i].album.cover_small}\`, \`${data.data[i].album.cover_big}\`, \`${data.data[i].artist.picture_big}\`, \`${data.data[i].artist.id}\`, \`${data.data[i].artist.tracklist}\`)"
                 >
-                  <i
+                  <i id="btn-play-canzone"
                     class="bi bi-play-fill justify-content-center align-items-center"
                   ></i>
                 </a>
@@ -228,15 +228,18 @@ const riproduciCanzone = (
   copertinaBig,
   fotoArtista,
   linkArtista,
+  tracklist,
 ) => {
+  const bottonePlay = document.getElementById("btn-play-canzone")
   const inputAudio = document.getElementById("audio")
-  inputAudio.setAttribute("src", audioCanzone)
+
   if (audio.paused) {
+    inputAudio.setAttribute("src", audioCanzone)
     audio.play()
-    playBtn.classList.replace("bi-play-circle-fill", "bi-pause-circle-fill")
+    bottonePlay.classList.replace("bi-play-fill", "bi-pause-fill")
   } else {
     audio.pause()
-    playBtn.classList.replace("bi-pause-circle-fill", "bi-play-circle-fill")
+    bottonePlay.classList.replace("bi-pause-fill", "bi-play-fill")
   }
 
   // RIEMPO BARRA FOOTER CON CNZONE IN RIPRODUZIONE
@@ -274,6 +277,137 @@ const riproduciCanzone = (
     .then((data) => {
       console.log(data)
       ascoltatoriMensili.innerHTML = `${data.nb_fan}`
+    })
+    .catch((err) => {
+      console.log("errore nella fetch", err)
+    })
+
+  fetch(tracklist)
+    .then((response) => {
+      if (response.ok) {
+        return response.json()
+      } else {
+        throw new Error("errore nella response")
+      }
+    })
+    .then((data) => {
+      console.log(data)
+      const caroselloCorrelati = document.querySelector(".carosello-correlati")
+      caroselloCorrelati.innerHTML = `
+      <div class="carousel-inner">
+              <div class="carousel-item active">
+                <!-- PRIMA SLIDE CAROSELLO -->
+                <div class="container-fluid">
+                  <div class="row">
+                    <div class="col-6 ps-0">
+                      <img
+                        width="100%"
+                        src="${data.data[1].album.cover_medium}"
+                        alt="foto album"
+                      />
+                      <!-- TITOLO CANZONE IN ASCOLTO -->
+                      <h6 class="fw-bold m-0">${data.data[1].title}</h6>
+                      <!-- ARTISTA -->
+                      <p class="text-secondary m-0">${data.data[1].artist.name}</p>
+                    </div>
+                    <div class="col-6 pe-0">
+                      <img
+                        width="100%"
+                        src="${data.data[2].album.cover_medium}"
+                        alt="foto album"
+                      />
+                      <!-- TITOLO CANZONE IN ASCOLTO -->
+                      <h6 class="fw-bold m-0">${data.data[2].title}</h6>
+                      <!-- ARTISTA -->
+                      <p class="text-secondary m-0">${data.data[2].artist.name}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <!-- SECONDA SLIDE CAROSELLO -->
+                <div class="container-fluid">
+                  <div class="row">
+                    <div class="col-6 ps-0">
+                      <img
+                        width="100%"
+                        src="${data.data[3].album.cover_medium}"
+                        alt="foto album"
+                      />
+                      <!-- TITOLO CANZONE IN ASCOLTO -->
+                      <h6 class="fw-bold m-0">${data.data[3].title}</h6>
+                      <!-- ARTISTA -->
+                      <p class="text-secondary m-0">${data.data[3].artist.name}</p>
+                    </div>
+                    <div class="col-6 pe-0">
+                      <img
+                        width="100%"
+                        src="${data.data[4].album.cover_medium}"
+                        alt="foto album"
+                      />
+                      <!-- TITOLO CANZONE IN ASCOLTO -->
+                      <h6 class="fw-bold m-0">${data.data[4].title}</h6>
+                      <!-- ARTISTA -->
+                      <p class="text-secondary m-0">${data.data[4].artist.name}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <!-- TERZA SLIDE CAROSELLO -->
+                <div class="container-fluid">
+                  <div class="row">
+                    <div class="col-6 ps-0">
+                      <img
+                        width="100%"
+                        src="${data.data[5].album.cover_medium}"
+                        alt="foto album"
+                      />
+                      <!-- TITOLO CANZONE IN ASCOLTO -->
+                      <h6 class="fw-bold m-0">${data.data[5].title}</h6>
+                      <!-- ARTISTA -->
+                      <p class="text-secondary m-0">${data.data[5].artist.name}</p>
+                    </div>
+                    <div class="col-6 pe-0">
+                      <img
+                        width="100%"
+                        src="${data.data[6].album.cover_medium}"
+                        alt="foto album"
+                      />
+                      <!-- TITOLO CANZONE IN ASCOLTO -->
+                      <h6 class="fw-bold m-0">${data.data[6].title}</h6>
+                      <!-- ARTISTA -->
+                      <p class="text-secondary m-0">${data.data[6].artist.name}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <button
+              class="carousel-control-prev"
+              type="button"
+              data-bs-target="#carouselExample"
+              data-bs-slide="prev"
+            >
+              <span
+                class="carousel-control-prev-icon"
+                aria-hidden="true"
+              ></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button
+              class="carousel-control-next"
+              type="button"
+              data-bs-target="#carouselExample"
+              data-bs-slide="next"
+            >
+              <span
+                class="carousel-control-next-icon"
+                aria-hidden="true"
+              ></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+      `
     })
     .catch((err) => {
       console.log("errore nella fetch", err)
