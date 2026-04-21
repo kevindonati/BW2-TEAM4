@@ -72,8 +72,24 @@ audio.addEventListener("timeupdate", () => {
 
 // Slider volume------------------------------------------------------------------------------------------------
 
+const mute = document.getElementById("mute");
+let lastVolume;
+
 volumeSlider.addEventListener("input", (e) => {
   const value = e.target.value;
   audio.volume = value / 100;
+  volumeSlider.style.background = `linear-gradient(to right, #1db954 ${value}%, #4d4d4d ${value}%)`;
+});
+
+mute.addEventListener("click", () => {
+  if (audio.volume > 0) {
+    lastVolume = audio.volume;
+    audio.volume = 0;
+    volumeSlider.value = 0;
+  } else {
+    audio.volume = lastVolume;
+    volumeSlider = lastVolume * 100;
+  }
+  const value = volumeSlider.value;
   volumeSlider.style.background = `linear-gradient(to right, #1db954 ${value}%, #4d4d4d ${value}%)`;
 });
