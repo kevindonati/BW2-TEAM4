@@ -37,6 +37,7 @@ section:hover::-webkit-scrollbar-thumb {
 }
 
 /*COLORI*/
+
 /*BOTTONI*/
 .bg-button {
   background-color: rgba(255, 255, 255, 0.1);
@@ -44,4 +45,13 @@ section:hover::-webkit-scrollbar-thumb {
 
 .bg-button:hover {
   background-color: rgba(255, 255, 255, 0.2);
+}
+
+.bg-customized-hover:hover {
+  background-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+/*BACKGROUND ASIDE*/
+.bg-aside {
+  background-color: #121212;
 }
