@@ -152,4 +152,24 @@ muteIcon(false)
 audio.volume = 0.8
 volumeSlider.value = 80
 
-// AGGIUNGERE AUDIO AL PLAY
+// Funzione full-screen
+
+const fsBtn = document.querySelector("#screenMode")
+
+fsBtn.addEventListener("click", () => {
+  if (!document.fullscreenElement) {
+    document.documentElement.requestFullscreen().catch((err) => {
+      console.error(`Errore: ${err.message}`)
+    })
+  } else {
+    document.exitFullscreen()
+  }
+})
+
+document.addEventListener("fullscreenchange", () => {
+  if (document.fullscreenElement) {
+    fsBtn.classList.replace("bi-fullscreen", "bi-fullscreen-exit")
+  } else {
+    fsBtn.classList.replace("bi-fullscreen-exit", "bi-fullscreen")
+  }
+})
