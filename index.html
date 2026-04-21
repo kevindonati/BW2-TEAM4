@@ -61,20 +61,38 @@
             <div class="centerPart text-white d-flex align-items-center">
               <i class="fas fa-home text-dark bg-white p-2 rounded-circle"></i>
               <div
-                class="bg-dark rounded-5 text-white mx-4 d-flex align-items-center pe-3"
+                class="bg-dark rounded-5 text-white mx-4 d-flex align-items-center pe-3 position-relative"
               >
-                <form class="d-flex" role="search">
+                <form class="d-flex" role="search" id="seachForm">
                   <button class="btn" type="submit">
                     <i class="fas fa-search text-light"></i>
                   </button>
                   <input
+                    id="searchInput"
                     class="form-control me-2 bg-dark border-0"
                     type="search"
-                    placeholder="Search"
+                    placeholder="Cerca la tua musica"
                     aria-label="Search"
+                    autocomplete="off"
                   />
                 </form>
                 <i class="far fa-window-restore"></i>
+                <!-- CONTENITORE RISULTATI "Menu a tendina" -->
+                <div
+                  id="searchResults"
+                  class="dropdown-menu bg-dark p-2 w-100 shadow-lg border border-secondary"
+                  style="
+                    display: none;
+                    position: absolute;
+                    top: 100%;
+                    left: 0;
+                    max-height: 400px;
+                    overflow-y: auto;
+                    z-index: 1000;
+                  "
+                >
+                  <!-- Qui verranno appese le canzoni -->
+                </div>
               </div>
             </div>
             <div
@@ -628,5 +646,6 @@
     ></script>
     <script src="./assets/script/script.js"></script>
     <script src="./assets/script/player.js"></script>
+    <script src="./assets/script/search.js"></script>
   </body>
 </html>
