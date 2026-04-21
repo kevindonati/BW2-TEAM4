@@ -25,7 +25,7 @@ const libreria = () => {
       for (let i = 0; i < data.data.length; i++) {
         const appendiAlbum = document.getElementById("appendi-album-libreria")
         appendiAlbum.innerHTML += `
-        <a class="text-decoration-none text-light" href="albumView.html?id=${data.data[i].id}">
+        <a class="text-decoration-none text-light" href="albumView.html?id=${data.data[i].album.id}">
             <div class="d-flex my-2 align-items-center">
               <img
                 src="${data.data[i].album.cover_small}"
