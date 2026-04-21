@@ -17,15 +17,15 @@ footer i:hover {
   color: #ffffff;
 }
 
-footer i,
+/* footer i,
 footer i:focus,
 footer i:active,
 footer i:focus-visible {
-  outline: none !important;
+  outline: none !important;     Non sembra funzionare al momento, la riprendo un'altra volta
   box-shadow: none !important;
   border: none !important;
   -webkit-tap-highlight-color: transparent;
-}
+} */
 
 /* SLIDERS MUSICA E VOLUME */
 
@@ -62,4 +62,16 @@ input[type="range"]::-webkit-slider-thumb {
 input[type="range"]:hover::-webkit-slider-thumb {
   opacity: 1;
   accent-color: white;
+}
+
+/* ROBA NON DEL FOOTER */
+i {
+  cursor: pointer;
+  color: #b3b3b3;
+  transition: color 0.2s ease;
+}
+
+i:hover,
+i:active {
+  color: #ffffff;
 }
