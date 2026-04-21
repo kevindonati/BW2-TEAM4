@@ -67,7 +67,7 @@ const main8 = () => {
         <div class="col-6 col-xl-3 g-1">
         <a class="text-decoration-none text-light" href="albumView.html?id=${data.data[i].id}">
               <div
-                class="d-flex align-items-center gap-1 bg-secondary rounded justify-content-between contenitore-card position-relative"
+                class="d-flex align-items-center gap-1 bg-button rounded justify-content-between contenitore-card position-relative"
               >
                 <div class="d-flex align-items-center gap-2">
                   <img
