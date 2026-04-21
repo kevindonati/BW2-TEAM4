@@ -6,7 +6,7 @@ const urlSearch2 =
 // Funzione di ricerca
 const performSearch = (query) => {
   if (query.length < 2) {
-    searchResults.style.display = "none";
+    searchResults.style.display = "none"; // se il risultato ricerca è minore di 2 elementi avrà display none
     return;
   }
 
