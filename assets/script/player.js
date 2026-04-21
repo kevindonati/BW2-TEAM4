@@ -8,7 +8,7 @@ const playBtn = document.getElementById("playPauseBtn");
 const mute = document.getElementById("mute");
 const volumeSlider = document.getElementById("volumeSlider");
 
-let lastVolume = 0.8;
+let lastVolume = 0.2;
 let barColore = "#ffffff";
 let volumeBarColor = "#ffffff";
 

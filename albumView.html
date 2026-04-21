@@ -314,15 +314,11 @@
             <!-- --------------------------------PRESENTAZIONE-->
 
             <div class="col-3">
-              <img
-                id="albumCover"
-                src="https://placecats.com/300/300"
-                class="w-100 rounded-2 shadow-sm"
-              />
+              <img id="albumCover" class="w-100 rounded-2 shadow-sm my-3" />
             </div>
 
             <div class="col-9">
-              <h6 class="d-sm-none">Album</h6>
+              <h6 class="d-sm-none d-md-inline">Album</h6>
               <h1 id="albumTitle">tua mamma fa la bidella</h1>
               <div class="col-12">
                 <p class="d-inline-block">
@@ -332,10 +328,10 @@
                     src="https://placecats.com/300/300"
                     class="rounded-circle"
                   />
-                  <span class="fw-bold" id="artistName">Ramadam Banger</span> ‧
-                  <span id="albumReleaseDate">22/03/2022</span> ‧
+                  <span class="fw-bold artistName">Ramadam Banger</span>
+                  ‧ <span class="albumReleaseDate">22/03/2022</span> ‧
                   <span id="albumNumberOfSongs">13</span>brani,
-                  <span id="albumDuration">2h 30min</span>.
+                  <span id="albumDuration">2h 30min</span>min.
                 </p>
               </div>
             </div>
@@ -372,23 +368,15 @@
                 <th>Riproduzioni</th>
                 <th><i class="fas fa-clock"></i></th>
               </thead>
-              <tbody id="albumSongs">
-                <tr>
-                  <td>1</td>
-                  <td>Titolo</td>
-                  <td>Riproduzione</td>
-                  <td>8 anni</td>
-                </tr>
+              <tbody>
+                <!--CONTENUTO TABELLA-->
               </tbody>
             </table>
           </div>
           <div>
             <!-- --------------------------------DIRITTI-->
-            <p
-              id="albumReleaseDate"
-              class="fw-normal text-secondary-emphasis m-0"
-            >
-              album di pincopoallino
+            <p class="fw-normal text-secondary-emphasis m-0 albumReleaseDate">
+              data
             </p>
             <p id="albumDiritti" class="fw-normal text-secondary-emphasis">
               diritti riservati alla casa discografica universal music
@@ -396,7 +384,7 @@
           </div>
           <div class="d-flex justify-content-between">
             <!-- --------------------------------ALTRO-->
-            <h4>Altro di <span id="nomeArtista">heroSoma</span></h4>
+            <h4>Altro di <span class="artistName">ramadam banger</span></h4>
             <h6>Guarda profilo</h6>
           </div>
         </section>
@@ -651,7 +639,7 @@
     ></script>
     <script src="./assets/script/script.js"></script>
     <script src="./assets/script/player.js"></script>
+    <script src="/assets/script/album.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.0/color-thief.umd.js"></script>
-    "
   </body>
 </html>
