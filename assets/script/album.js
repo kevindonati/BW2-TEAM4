@@ -41,33 +41,33 @@ const estrazioneArtista = () => {
         const numeroCanzone = x + 1;
         const titoloCanzone = response.tracks.data[x].title;
         //   ------------------------------------------------------------------------LINK ALTRI ARTISTI
-        if (titoloCanzone.includes("feat.")) {
-          const ausiliare = titoloCanzone.split("feat.");
-          let altriArtisti = ausiliare[1].replace(")", "").trim();
-          const singoloArtista = altriArtisti.split(",");
-          for (x = 0; x < singoloArtista.length; x++) {
-            (fetch(
-              "https://striveschool-api.herokuapp.com/api/deezer/search?q=" +
-                singoloArtista[x],
-            ),
-              {}
-                .then((response) => {
-                  return response.json();
-                })
-                .then((response) => {
-                  console.log(response);
-                })
-                .catch());
-            const a = document.createElement("a");
-            a.setAttribute("class", "fw-lighter text-secondary d-inline-block");
-          }
+        // if (titoloCanzone.includes("feat.")) {
+        //   const ausiliare = titoloCanzone.split("feat.");
+        //   let altriArtisti = ausiliare[1].replace(")", "").trim();
+        //   const singoloArtista = altriArtisti.split(",");
+        //   for (x = 0; x < singoloArtista.length; x++) {
+        //     (fetch(
+        //       "https://striveschool-api.herokuapp.com/api/deezer/search?q=" +
+        //         singoloArtista[x],
+        //     ),
+        //       {}
+        //         .then((response) => {
+        //           return response.json();
+        //         })
+        //         .then((response) => {
+        //           console.log(response);
+        //         })
+        //         .catch());
+        //     const a = document.createElement("a");
+        //     a.setAttribute("class", "fw-lighter text-secondary d-inline-block");
+        //   }
 
-          a.setAttribute(
-            "href",
-            `artistView.html?id=${data.data[i].artist.id}`,
-          );
-          titoloCanzone[1];
-        }
+        //   a.setAttribute(
+        //     "href",
+        //     `artistView.html?id=${data.data[i].artist.id}`,
+        //   );
+        //   titoloCanzone[1];
+        // }
         //   ------------------------------------------------------------------------fine LINK ALTRI ARTISTI
         const riproduzioniCanzone = response.tracks.data[x].rank;
         const durataCanzone = response.tracks.data[x].duration;
