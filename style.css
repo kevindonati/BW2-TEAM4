@@ -41,6 +41,7 @@ section:hover::-webkit-scrollbar-thumb {
 }
 
 /*COLORI*/
+
 /*BOTTONI*/
 .bg-button {
   background-color: rgba(255, 255, 255, 0.1);
@@ -63,4 +64,12 @@ section:hover::-webkit-scrollbar-thumb {
 .song-card-container:hover .mostra-al-passaggio {
   opacity: 1;
   transform: translateY(0);
+  .bg-customized-hover:hover {
+    background-color: rgba(255, 255, 255, 0.2) !important;
+  }
+}
+
+/*BACKGROUND ASIDE*/
+.bg-aside {
+  background-color: #121212;
 }
