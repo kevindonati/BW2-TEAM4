@@ -51,6 +51,13 @@ section:hover::-webkit-scrollbar-thumb {
   background-color: rgba(255, 255, 255, 0.2) !important;
 }
 
+.scale {
+  transition: transform 0s ease-in;
+}
+.scale:hover {
+  transform: scale(1.1);
+}
+
 /*BACKGROUND ASIDE*/
 .bg-aside {
   background-color: #121212;
