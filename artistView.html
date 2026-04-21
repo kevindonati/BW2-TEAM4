@@ -33,7 +33,7 @@
             <div class="leftPart text-white d-flex">
               <li class="nav-item dropdown d-flex align-items-center">
                 <i
-                  class="fas fa-ellipsis-h nav-item dropdown-toggle mx-5"
+                  class="fas fa-ellipsis-h nav-item dropdown ms-4"
                   role="button"
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
@@ -54,18 +54,20 @@
               <i class="fas fa-chevron-right"></i>
             </div>
             <div class="centerPart text-white d-flex align-items-center">
-              <a class="text-light" href="./index.html">
-                <i class="fas fa-home"></i
+              <a href="./index.html"
+                ><i
+                  class="fas fa-home text-dark bg-white p-2 rounded-circle"
+                ></i
               ></a>
               <div
-                class="bg-secondary rounded-5 text-white mx-4 d-flex align-items-center"
+                class="bg-dark rounded-5 text-white mx-4 d-flex align-items-center pe-3"
               >
                 <form class="d-flex" role="search">
                   <button class="btn" type="submit">
                     <i class="fas fa-search text-light"></i>
                   </button>
                   <input
-                    class="form-control me-2 bg-secondary border-0"
+                    class="form-control me-2 bg-dark border-0"
                     type="search"
                     placeholder="Search"
                     aria-label="Search"
@@ -96,7 +98,7 @@
       <div class="row h-100 gap-2">
         <!-- INIZIO BARRA SX LIBRERIA -->
         <aside
-          class="col-3 h-100 bg-dark text-white pt-4 px-4 3 rounded-4 overflow-auto"
+          class="col-2 h-100 bg-dark text-white pt-4 px-4 3 rounded-4 overflow-auto"
         >
           <!--PRIMO BLOCCO ASIDE-->
           <div class="d-flex align-items-center justify-content-between">
@@ -146,9 +148,9 @@
         <section class="col h-100 overflow-auto bg-dark rounded-4 p-0">
           <!-- PARTE CENTRALE -->
           <!-- Sezione Hero con banner artista -->
-          <div id="artist-banner" class="h-75 position-relative bg-success">
+          <div id="artist-banner" class="h-50 position-relative bg-success">
             <div class="align-items-baseline position-absolute bottom-0 p-2">
-              <h1 id="nome-artista">Nome Artista</h1>
+              <h1 class="fs-1" id="nome-artista">Nome Artista</h1>
               <div><span id="fan-artista"></span> ascoltatori mensili</div>
             </div>
           </div>
@@ -184,7 +186,7 @@
             ></div>
           </div>
         </section>
-        <aside class="col-3 px-1 rounded-4 px-4 h-100 overflow-auto bg-dark">
+        <aside class="col-2 px-1 rounded-4 px-4 h-100 overflow-auto bg-dark">
           <!-- BARRA DX ARTISTA -->
           <!-- TITOLO CANZONE IN ASCOLTO -->
           <h6 class="fw-bold my-3">NULLA DI</h6>

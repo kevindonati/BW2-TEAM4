@@ -9,7 +9,7 @@ const urlPlaylistTheWeeknd =
 
 // RIEMPO LA LIBRERIA
 const libreria = () => {
-  fetch(urlSearch + "lazza")
+  fetch(urlSearch + "italia")
     .then((response) => {
       if (response.ok) {
         return response.json()
