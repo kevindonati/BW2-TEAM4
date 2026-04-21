@@ -231,14 +231,17 @@ const riproduciCanzone = (
 ) => {
   const bottonePlay = document.getElementById("btn-play-canzone")
   const inputAudio = document.getElementById("audio")
+  const playBtn = document.getElementById("playPauseBtn")
 
   if (audio.paused) {
     inputAudio.setAttribute("src", audioCanzone)
     audio.play()
     bottonePlay.classList.replace("bi-play-fill", "bi-pause-fill")
+    playBtn.classList.replace("bi-play-circle-fill", "bi-pause-circle-fill")
   } else {
     audio.pause()
     bottonePlay.classList.replace("bi-pause-fill", "bi-play-fill")
+    playBtn.classList.replace("bi-pause-circle-fill", "bi-play-circle-fill")
   }
 
   // RIEMPO BARRA FOOTER CON CNZONE IN RIPRODUZIONE
