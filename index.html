@@ -548,10 +548,12 @@
     </main>
 
     <footer
-      class="d-flex align-items-center justify-content-between bg-black p-2"
+      class="d-flex align-items-center justify-content-between bg-black p-2 w-100"
     >
       <!-- BARRA SOTTO -->
-      <article class="d-flex align-items-center">
+      <article
+        class="d-flex align-items-center flex-grow-1 justify-content-start"
+      >
         <div class="d-flex align-items-center gap-2">
           <span id="player-img" class="d-flex align-items-center"
             ><img
@@ -566,7 +568,10 @@
           <i class="bi bi-plus-circle"></i>
         </div>
       </article>
-      <article class="d-flex flex-column align-items-center" id="playerMain">
+      <article
+        id="playerMain"
+        class="d-flex flex-column align-items-center justify-content-center flex-grow-1"
+      >
         <div class="d-flex gap-3 align-items-center">
           <i class="bi bi-shuffle"></i>
           <i class="bi bi-skip-backward-fill"></i>
@@ -592,7 +597,9 @@
           </div>
         </div>
       </article>
-      <article class="d-flex align-items-center gap-2">
+      <article
+        class="d-flex align-items-center gap-2 flex-grow-1 justify-content-end"
+      >
         <i class="bi bi-mic"></i>
         <i class="bi bi-text-center"></i>
         <i class="bi bi-pc-display"></i>

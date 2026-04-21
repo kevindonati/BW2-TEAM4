@@ -1,6 +1,10 @@
 #playerMain {
   max-width: 650px;
-  width: 35%;
+  margin: 0 auto;
+}
+
+footer > article {
+  flex: 1 1 0;
 }
 
 footer i:hover {
