@@ -1,29 +1,29 @@
-const urlGenerale = "https://striveschool-api.herokuapp.com/api/deezer/"
-const urlAlbum = "https://striveschool-api.herokuapp.com/api/deezer/album/"
-const urlArtista = "https://striveschool-api.herokuapp.com/api/deezer/artist/"
-const urlSearch = "https://striveschool-api.herokuapp.com/api/deezer/search?q="
+const urlGenerale = "https://striveschool-api.herokuapp.com/api/deezer/";
+const urlAlbum = "https://striveschool-api.herokuapp.com/api/deezer/album/";
+const urlArtista = "https://striveschool-api.herokuapp.com/api/deezer/artist/";
+const urlSearch = "https://striveschool-api.herokuapp.com/api/deezer/search?q=";
 const urlPlaylistLazza =
-  "https://striveschool-api.herokuapp.com/api/deezer/artist/1288678/top?limit=50"
+  "https://striveschool-api.herokuapp.com/api/deezer/artist/1288678/top?limit=50";
 const urlPlaylistTheWeeknd =
-  "https://striveschool-api.herokuapp.com/api/deezer/artist/4050205/top?limit=50"
+  "https://striveschool-api.herokuapp.com/api/deezer/artist/4050205/top?limit=50";
 
 // RIEMPO LA LIBRERIA
 const libreria = () => {
   fetch(urlSearch + "lazza")
     .then((response) => {
       if (response.ok) {
-        return response.json()
+        return response.json();
       } else {
-        throw new Error("problema nella response")
+        throw new Error("problema nella response");
       }
     })
     .then((data) => {
-      const spinner = document.querySelectorAll(".contenitore-spinner")
-      spinner[0].classList.add("d-none")
+      const spinner = document.querySelectorAll(".contenitore-spinner");
+      spinner[0].classList.add("d-none");
       for (let i = 0; i < data.data.length; i++) {
-        const appendiAlbum = document.getElementById("appendi-album-libreria")
+        const appendiAlbum = document.getElementById("appendi-album-libreria");
         appendiAlbum.innerHTML += `
-        <a class="text-decoration-none text-light" href="albumView.html?id=${data.data[i].id}">
+        <a class="text-decoration-none text-light" href="albumView.html?id=${data.data[i].album.id}">
             <div class="d-flex my-2 align-items-center">
               <img
                 src="${data.data[i].album.cover_small}"
@@ -37,32 +37,34 @@ const libreria = () => {
               </div>
             </div>
         </a>
-      `
+      `;
       }
     })
     .catch((err) => {
-      console.log("errore durante la fetch", err)
-    })
-}
-libreria()
+      console.log("errore durante la fetch", err);
+    });
+};
+libreria();
 
 // RIEMPO IL MAIN
 const main8 = () => {
   fetch(urlSearch + "The weeknd")
     .then((response) => {
       if (response.ok) {
-        return response.json()
+        return response.json();
       } else {
-        throw new Error("problema nella response")
+        throw new Error("problema nella response");
       }
     })
     .then((data) => {
-      console.log(data)
-      const spinner = document.querySelectorAll(".contenitore-spinner")
-      spinner[1].classList.add("d-none")
+      console.log(data);
+      const spinner = document.querySelectorAll(".contenitore-spinner");
+      spinner[1].classList.add("d-none");
 
       for (let i = 0; i < 8; i++) {
-        const appendiAlbum = document.getElementById("contenitore-main-prime-4")
+        const appendiAlbum = document.getElementById(
+          "contenitore-main-prime-4",
+        );
         appendiAlbum.innerHTML += `
         <div class="col-6 col-xl-3 g-1">
         <a class="text-decoration-none text-light" href="albumView.html?id=${data.data[i].id}">
@@ -87,30 +89,30 @@ const main8 = () => {
                 </a>
               </div>
             </div>
-      `
+      `;
       }
     })
     .catch((err) => {
-      console.log("errore durante la fetch", err)
-    })
-}
-main8()
+      console.log("errore durante la fetch", err);
+    });
+};
+main8();
 
 // RIEMPO PRIMO CAROSELLO
 const primoCarosello = () => {
   fetch(urlSearch + "american rap")
     .then((response) => {
       if (response.ok) {
-        return response.json()
+        return response.json();
       } else {
-        throw new Error("errore nella response")
+        throw new Error("errore nella response");
       }
     })
     .then((data) => {
-      console.log(data)
+      console.log(data);
 
       for (let i = 0; i < 12; i++) {
-        const primoCarosello = document.querySelectorAll(".carosello-1")
+        const primoCarosello = document.querySelectorAll(".carosello-1");
         primoCarosello[i].innerHTML = `
         <a class="text-decoration-none text-light" href="albumView.html?id=${data.data[i].id}">
         <div class="position-relative">
@@ -128,28 +130,28 @@ const primoCarosello = () => {
                         </a>
                       </div>
                       <p class="text-center">${data.data[i].title}</p>
-        `
+        `;
       }
     })
     .catch((err) => {
-      console.log("errore nella fetch", err)
-    })
-}
-primoCarosello()
+      console.log("errore nella fetch", err);
+    });
+};
+primoCarosello();
 
 // RIEMPO SECONDO CAROSELLO
 const secondoCarosello = () => {
   fetch(urlSearch + "italian trap")
     .then((response) => {
       if (response.ok) {
-        return response.json()
+        return response.json();
       } else {
-        throw new Error("errore nella response")
+        throw new Error("errore nella response");
       }
     })
     .then((data) => {
       for (let i = 0; i < 12; i++) {
-        const secondoCarosello = document.querySelectorAll(".carosello-2")
+        const secondoCarosello = document.querySelectorAll(".carosello-2");
         secondoCarosello[i].innerHTML = `
         <a class="text-decoration-none text-light" href="albumView.html?id=${data.data[i].id}">
         <div class="position-relative">
@@ -167,28 +169,28 @@ const secondoCarosello = () => {
                         </a>
                       </div>
                       <p class="text-center">${data.data[i].title}</p>
-        `
+        `;
       }
     })
     .catch((err) => {
-      console.log("errore nella fetch", err)
-    })
-}
-secondoCarosello()
+      console.log("errore nella fetch", err);
+    });
+};
+secondoCarosello();
 
 // RIEMPO TERZO CAROSELLO
 const terzoCarosello = () => {
   fetch(urlSearch + "party")
     .then((response) => {
       if (response.ok) {
-        return response.json()
+        return response.json();
       } else {
-        throw new Error("errore nella response")
+        throw new Error("errore nella response");
       }
     })
     .then((data) => {
       for (let i = 0; i < 12; i++) {
-        const terzoCarosello = document.querySelectorAll(".carosello-3")
+        const terzoCarosello = document.querySelectorAll(".carosello-3");
         terzoCarosello[i].innerHTML = `
         <a class="text-decoration-none text-light" href="albumView.html?id=${data.data[i].id}">
         <div class="position-relative">
@@ -206,11 +208,11 @@ const terzoCarosello = () => {
                         </a>
                       </div>
                       <p class="text-center">${data.data[i].title}</p>
-        `
+        `;
       }
     })
     .catch((err) => {
-      console.log("errore nella fetch", err)
-    })
-}
-terzoCarosello()
+      console.log("errore nella fetch", err);
+    });
+};
+terzoCarosello();
