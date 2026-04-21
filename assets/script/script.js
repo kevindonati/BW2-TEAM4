@@ -1,27 +1,27 @@
-const urlGenerale = "https://striveschool-api.herokuapp.com/api/deezer/"
-const urlAlbum = "https://striveschool-api.herokuapp.com/api/deezer/album/"
-const urlArtista = "https://striveschool-api.herokuapp.com/api/deezer/artist/"
-const urlSearch = "https://striveschool-api.herokuapp.com/api/deezer/search?q="
+const urlGenerale = "https://striveschool-api.herokuapp.com/api/deezer/";
+const urlAlbum = "https://striveschool-api.herokuapp.com/api/deezer/album/";
+const urlArtista = "https://striveschool-api.herokuapp.com/api/deezer/artist/";
+const urlSearch = "https://striveschool-api.herokuapp.com/api/deezer/search?q=";
 const urlPlaylistLazza =
-  "https://striveschool-api.herokuapp.com/api/deezer/artist/1288678/top?limit=50"
+  "https://striveschool-api.herokuapp.com/api/deezer/artist/1288678/top?limit=50";
 const urlPlaylistTheWeeknd =
-  "https://striveschool-api.herokuapp.com/api/deezer/artist/4050205/top?limit=50"
+  "https://striveschool-api.herokuapp.com/api/deezer/artist/4050205/top?limit=50";
 
 // RIEMPO LA LIBRERIA
 const libreria = () => {
   fetch(urlSearch + "drake")
     .then((response) => {
       if (response.ok) {
-        return response.json()
+        return response.json();
       } else {
-        throw new Error("problema nella response")
+        throw new Error("problema nella response");
       }
     })
     .then((data) => {
-      const spinner = document.querySelectorAll(".contenitore-spinner")
-      spinner[0].classList.add("d-none")
+      const spinner = document.querySelectorAll(".contenitore-spinner");
+      spinner[0].classList.add("d-none");
       for (let i = 0; i < data.data.length; i++) {
-        const appendiAlbum = document.getElementById("appendi-album-libreria")
+        const appendiAlbum = document.getElementById("appendi-album-libreria");
         appendiAlbum.innerHTML += `
         <a class="text-decoration-none text-light" href="albumView.html?id=${data.data[i].id}">
             <div class="d-flex my-2 align-items-center">
@@ -37,32 +37,34 @@ const libreria = () => {
               </div>
             </div>
         </a>
-      `
+      `;
       }
     })
     .catch((err) => {
-      console.log("errore durante la fetch", err)
-    })
-}
-libreria()
+      console.log("errore durante la fetch", err);
+    });
+};
+libreria();
 
 // RIEMPO IL MAIN
 const main8 = () => {
   fetch(urlSearch + "The weeknd")
     .then((response) => {
       if (response.ok) {
-        return response.json()
+        return response.json();
       } else {
-        throw new Error("problema nella response")
+        throw new Error("problema nella response");
       }
     })
     .then((data) => {
-      console.log(data)
-      const spinner = document.querySelectorAll(".contenitore-spinner")
-      spinner[1].classList.add("d-none")
+      console.log(data);
+      const spinner = document.querySelectorAll(".contenitore-spinner");
+      spinner[1].classList.add("d-none");
 
       for (let i = 0; i < 8; i++) {
-        const appendiAlbum = document.getElementById("contenitore-main-prime-4")
+        const appendiAlbum = document.getElementById(
+          "contenitore-main-prime-4",
+        );
         appendiAlbum.innerHTML += `
         <div class="col-6 col-xl-3 g-1">
         <a class="text-decoration-none text-light" href="albumView.html?id=${data.data[i].id}">
@@ -79,7 +81,9 @@ const main8 = () => {
                 </div>
                 </a>
                 <a
-                  class="btn btn-success flex mostra-al-passaggio rounded rounded-circle text-black shadow shadow-lg position-absolute end-0 m-1 px-1 py-0 d-flex"
+                  class="btn btn-success flex mostra-al-passaggio rounded rounded-circle text-black shadow shadow-lg position-absolute end-0 m-1 px-1 py-0 d-flex" 
+                  id="bottone-play-${[i]}"
+                  onclick="riproduciCanzone(\`${data.data[i].preview}\`, \`${data.data[i].title}\`, \`${data.data[i].artist.name}\`, \`${data.data[i].album.cover_small}\`, \`${data.data[i].album.cover_big}\`, \`${data.data[i].artist.picture_big}\`, \`${data.data[i].artist.id}\`)"
                 >
                   <i
                     class="bi bi-play-fill justify-content-center align-items-center"
@@ -87,30 +91,30 @@ const main8 = () => {
                 </a>
               </div>
             </div>
-      `
+      `;
       }
     })
     .catch((err) => {
-      console.log("errore durante la fetch", err)
-    })
-}
-main8()
+      console.log("errore durante la fetch", err);
+    });
+};
+main8();
 
 // RIEMPO PRIMO CAROSELLO
 const primoCarosello = () => {
   fetch(urlSearch + "american rap")
     .then((response) => {
       if (response.ok) {
-        return response.json()
+        return response.json();
       } else {
-        throw new Error("errore nella response")
+        throw new Error("errore nella response");
       }
     })
     .then((data) => {
-      console.log(data)
+      console.log(data);
 
       for (let i = 0; i < 12; i++) {
-        const primoCarosello = document.querySelectorAll(".carosello-1")
+        const primoCarosello = document.querySelectorAll(".carosello-1");
         primoCarosello[i].innerHTML = `
         <a class="text-decoration-none text-light" href="albumView.html?id=${data.data[i].id}">
         <div class="position-relative">
@@ -128,28 +132,28 @@ const primoCarosello = () => {
                         </a>
                       </div>
                       <p class="text-center">${data.data[i].title}</p>
-        `
+        `;
       }
     })
     .catch((err) => {
-      console.log("errore nella fetch", err)
-    })
-}
-primoCarosello()
+      console.log("errore nella fetch", err);
+    });
+};
+primoCarosello();
 
 // RIEMPO SECONDO CAROSELLO
 const secondoCarosello = () => {
   fetch(urlSearch + "italian trap")
     .then((response) => {
       if (response.ok) {
-        return response.json()
+        return response.json();
       } else {
-        throw new Error("errore nella response")
+        throw new Error("errore nella response");
       }
     })
     .then((data) => {
       for (let i = 0; i < 12; i++) {
-        const secondoCarosello = document.querySelectorAll(".carosello-2")
+        const secondoCarosello = document.querySelectorAll(".carosello-2");
         secondoCarosello[i].innerHTML = `
         <a class="text-decoration-none text-light" href="albumView.html?id=${data.data[i].id}">
         <div class="position-relative">
@@ -167,28 +171,28 @@ const secondoCarosello = () => {
                         </a>
                       </div>
                       <p class="text-center">${data.data[i].title}</p>
-        `
+        `;
       }
     })
     .catch((err) => {
-      console.log("errore nella fetch", err)
-    })
-}
-secondoCarosello()
+      console.log("errore nella fetch", err);
+    });
+};
+secondoCarosello();
 
 // RIEMPO TERZO CAROSELLO
 const terzoCarosello = () => {
   fetch(urlSearch + "party")
     .then((response) => {
       if (response.ok) {
-        return response.json()
+        return response.json();
       } else {
-        throw new Error("errore nella response")
+        throw new Error("errore nella response");
       }
     })
     .then((data) => {
       for (let i = 0; i < 12; i++) {
-        const terzoCarosello = document.querySelectorAll(".carosello-3")
+        const terzoCarosello = document.querySelectorAll(".carosello-3");
         terzoCarosello[i].innerHTML = `
         <a class="text-decoration-none text-light" href="albumView.html?id=${data.data[i].id}">
         <div class="position-relative">
@@ -206,11 +210,73 @@ const terzoCarosello = () => {
                         </a>
                       </div>
                       <p class="text-center">${data.data[i].title}</p>
-        `
+        `;
       }
     })
     .catch((err) => {
-      console.log("errore nella fetch", err)
+      console.log("errore nella fetch", err);
+    });
+};
+terzoCarosello();
+
+// FACCIO PARTIRE LA CANZONE SELEZIONATA
+
+const riproduciCanzone = (
+  audioCanzone,
+  titolo,
+  nomeArtista,
+  copertinaSmall,
+  copertinaBig,
+  fotoArtista,
+  linkArtista,
+) => {
+  const inputAudio = document.getElementById("audio");
+  inputAudio.setAttribute("src", audioCanzone);
+  if (audio.paused) {
+    audio.play();
+    playBtn.classList.replace("bi-play-circle-fill", "bi-pause-circle-fill");
+  } else {
+    audio.pause();
+    playBtn.classList.replace("bi-pause-circle-fill", "bi-play-circle-fill");
+  }
+
+  // RIEMPO BARRA FOOTER CON CNZONE IN RIPRODUZIONE
+  const titoloCanzone = document.querySelectorAll(".titolo-barra-dx");
+  const copertinaPiccola = document.querySelectorAll(
+    ".copertina-small-barra-dx",
+  );
+  const copertinaGrande = document.querySelectorAll(".copertina-big-barra-dx");
+  const nome = document.querySelectorAll(".autore-barra-dx");
+  const fotoProfiloArtista = document.getElementById("foto-artista");
+  const ascoltatoriMensili = document.querySelector(".ascoltatori");
+
+  for (let i = 0; i < nome.length; i++) {
+    nome[i].innerHTML = `${nomeArtista}`;
+  }
+  for (let i = 0; i < titoloCanzone.length; i++) {
+    titoloCanzone[i].innerHTML = `${titolo}`;
+  }
+  for (let i = 0; i < copertinaPiccola.length; i++) {
+    copertinaPiccola[i].setAttribute("src", copertinaSmall);
+  }
+  for (let i = 0; i < copertinaGrande.length; i++) {
+    copertinaGrande[i].setAttribute("src", copertinaBig);
+  }
+  fotoProfiloArtista.setAttribute("src", fotoArtista);
+
+  fetch(urlArtista + linkArtista)
+    .then((response) => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        throw new Error("errore nella response");
+      }
     })
-}
-terzoCarosello()
+    .then((data) => {
+      console.log(data);
+      ascoltatoriMensili.innerHTML = `${data.nb_fan}`;
+    })
+    .catch((err) => {
+      console.log("errore nella fetch", err);
+    });
+};
