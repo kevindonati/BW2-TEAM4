@@ -80,3 +80,7 @@ section:hover::-webkit-scrollbar-thumb {
 .bg-aside {
   background-color: #121212;
 }
+
+.bg-linear {
+  background: linear-gradient(rgba(255, 255, 255, 0.301), black 50%);
+}

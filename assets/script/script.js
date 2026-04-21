@@ -77,7 +77,7 @@ const main8 = () => {
                     alt=""
                     class="img-fluid rounded-start"
                   />
-                  <small class="">${data.data[i].title}</small>
+                  <small >${data.data[i].title}</small>
                 </div>
                 </a>
                 <a
