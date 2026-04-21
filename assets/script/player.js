@@ -147,8 +147,8 @@ mute.addEventListener("mouseleave", () => {
 coloredBars(volumeSlider, "#ffffff");
 coloredBars(progressBar, "#ffffff");
 muteIcon(false);
-audio.volume = 0.8;
-volumeSlider.value = 80;
+audio.volume = 0.2;
+volumeSlider.value = 20;
 
 // Funzione full-screen
 
