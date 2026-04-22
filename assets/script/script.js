@@ -74,7 +74,6 @@ const main8 = () => {
       }
     })
     .then((data) => {
-      console.log(data)
       const spinner = document.querySelectorAll(".contenitore-spinner")
       spinner[1].classList.add("d-none")
 
@@ -144,8 +143,6 @@ const primoCarosello = () => {
       }
     })
     .then((data) => {
-      console.log(data)
-
       for (let i = 0; i < 12; i++) {
         const primoCarosello = document.querySelectorAll(".carosello-1")
         primoCarosello[i].innerHTML = `
@@ -269,15 +266,19 @@ const riproduciCanzone = (
   const inputAudio = document.getElementById("audio")
   const playBtn = document.getElementById("playPauseBtn")
 
-  if (audio.paused) {
-    inputAudio.setAttribute("src", audioCanzone)
-    audio.play()
-    bottonePlay.classList.replace("bi-play-fill", "bi-pause-fill")
-    playBtn.classList.replace("bi-play-circle-fill", "bi-pause-circle-fill")
+  if (inputAudio.src === audioCanzone) {
+    if (inputAudio.paused) {
+      inputAudio.play()
+      bottonePlay.classList.replace("bi-play-fill", "bi-pause-fill")
+      playBtn.classList.replace("bi-play-fill", "bi-pause-fill")
+    } else {
+      inputAudio.pause()
+      bottonePlay.classList.replace("bi-pause-fill", "bi-play-fill")
+      playBtn.classList.replace("bi-pause-fill", "bi-play-fill")
+    }
   } else {
-    audio.pause()
-    bottonePlay.classList.replace("bi-pause-fill", "bi-play-fill")
-    playBtn.classList.replace("bi-pause-circle-fill", "bi-play-circle-fill")
+    inputAudio.src = audioCanzone
+    inputAudio.play()
   }
 
   // RIEMPO BARRA FOOTER CON CNZONE IN RIPRODUZIONE
@@ -313,8 +314,7 @@ const riproduciCanzone = (
       }
     })
     .then((data) => {
-      console.log(data)
-      ascoltatoriMensili.innerHTML = `${data.nb_fan}`
+      ascoltatoriMensili.innerHTML = `${data.nb_fan.toLocaleString()}`
     })
     .catch((err) => {
       console.log("errore nella fetch", err)
@@ -329,13 +329,11 @@ const riproduciCanzone = (
       }
     })
     .then((data) => {
-      console.log(data)
       const caroselloCorrelati = document.querySelector(".carosello-correlati")
       const placeholder = document.querySelectorAll(".placeholder")
-      console.log(placeholder)
+
       for (let i = 0; i < placeholder.length; i++) {
         placeholder[i].classList.remove("placeholder")
-        console.log(placeholder[i])
       }
 
       caroselloCorrelati.innerHTML = `
@@ -504,7 +502,7 @@ const renderDropdownResult = (songs) => {
       <img src="${song.album.cover_small}" class="img-fluid rounded shadow-sm" alt="${song.title}">
       <div class="mostra-al-passaggio position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center rounded" 
            style="background: rgba(0,0,0,0.5)" 
-           onclick="musicaAlClick(this, \`${song.preview}\`, \`${song.title}\`, \`${song.artist.name}\`, \`${song.album.cover_small}\`, \`${song.album.cover_big}\`, \`${song.artist.picture_big}\`, \`${song.artist.id}\`, \`${song.artist.tracklist}\`)">
+           onclick="riproduciCanzone(\`${song.preview}\`, \`${song.title}\`, \`${song.artist.name}\`, \`${song.album.cover_small}\`, \`${song.album.cover_big}\`, \`${song.artist.picture_big}\`, \`${song.artist.id}\`, \`${song.artist.tracklist}\`)">
           <i class="fas fa-play text-white fs-6"></i>
       </div>
     </div>
@@ -523,7 +521,7 @@ const renderDropdownResult = (songs) => {
     `
 
     item.addEventListener("click", () => {
-      loadSong(song)
+      // loadSong(song)
       searchResults.style.display = "none"
       searchInput.value = ""
     })
@@ -534,76 +532,76 @@ const renderDropdownResult = (songs) => {
   searchResults.appendChild(listContainer)
 }
 
-const musicaAlClick = function (
-  elementoCliccato,
-  preview,
-  titolo,
-  artista,
-  copertinaSmall,
-  copertinaBig,
-  fotoArtista,
-  linkArtista,
-  tracklist,
-) {
-  const audio = document.getElementById("audio")
-  const rigaCanzone = elementoCliccato.closest(".item-canzone")
-  const icona = elementoCliccato.querySelector("i")
+// const musicaAlClick = function (
+//   elementoCliccato,
+//   preview,
+//   titolo,
+//   artista,
+//   copertinaSmall,
+//   copertinaBig,
+//   fotoArtista,
+//   linkArtista,
+//   tracklist,
+// ) {
+//   const audio = document.getElementById("audio")
+//   const rigaCanzone = elementoCliccato.closest(".item-canzone")
+//   const icona = elementoCliccato.querySelector("i")
 
-  // SE LA CANZONE È LA STESSA CHE STA GIÀ SUONANDO
-  if (audio.src === preview) {
-    if (!audio.paused) {
-      audio.pause()
-      rigaCanzone.classList.remove("suonando")
-      icona.classList.replace("fa-pause", "fa-play") // Torna Play
-      aggiornaBottoniFooter(false)
-    } else {
-      audio.play()
-      rigaCanzone.classList.add("suonando")
-      icona.classList.replace("fa-play", "fa-pause") // Diventa Pausa
-      aggiornaBottoniFooter(true)
-    }
-  } else {
-    // SE È UNA CANZONE NUOVA
-    // Togliamo "suonando" e mettiamo l'icona Play a tutte le altre righe
-    document.querySelectorAll(".item-canzone").forEach((riga) => {
-      riga.classList.remove("suonando")
-      const i = riga.querySelector("i")
-      if (i) i.classList.replace("fa-pause", "fa-play")
-    })
+//   // SE LA CANZONE È LA STESSA CHE STA GIÀ SUONANDO
+//   if (audio.src === preview) {
+//     if (!audio.paused) {
+//       audio.pause()
+//       rigaCanzone.classList.remove("suonando")
+//       icona.classList.replace("fa-pause", "fa-play") // Torna Play
+//       aggiornaBottoniFooter(false)
+//     } else {
+//       audio.play()
+//       rigaCanzone.classList.add("suonando")
+//       icona.classList.replace("fa-play", "fa-pause") // Diventa Pausa
+//       aggiornaBottoniFooter(true)
+//     }
+//   } else {
+//     // SE È UNA CANZONE NUOVA
+//     // Togliamo "suonando" e mettiamo l'icona Play a tutte le altre righe
+//     document.querySelectorAll(".item-canzone").forEach((riga) => {
+//       riga.classList.remove("suonando")
+//       const i = riga.querySelector("i")
+//       if (i) i.classList.replace("fa-pause", "fa-play")
+//     })
 
-    // Mettiamo Pausa alla canzone appena cliccata
-    rigaCanzone.classList.add("suonando")
-    icona.classList.replace("fa-play", "fa-pause")
+//     // Mettiamo Pausa alla canzone appena cliccata
+//     rigaCanzone.classList.add("suonando")
+//     icona.classList.replace("fa-play", "fa-pause")
 
-    // Facciamo partire la musica
-    riproduciCanzone(
-      preview,
-      titolo,
-      artista,
-      copertinaSmall,
-      copertinaBig,
-      fotoArtista,
-      linkArtista,
-      tracklist,
-    )
-  }
-}
+//     // Facciamo partire la musica
+//     riproduciCanzone(
+//       preview,
+//       titolo,
+//       artista,
+//       copertinaSmall,
+//       copertinaBig,
+//       fotoArtista,
+//       linkArtista,
+//       tracklist,
+//     )
+//   }
+// }
 
-const aggiornaBottoniFooter = (isPlaying) => {
-  const playBtnFooter = document.getElementById("playPauseBtn") // Il bottone tondo al centro
+// const aggiornaBottoniFooter = (isPlaying) => {
+//   const playBtnFooter = document.getElementById("playPauseBtn") // Il bottone tondo al centro
 
-  if (isPlaying) {
-    playBtnFooter.classList.replace(
-      "bi-play-circle-fill",
-      "bi-pause-circle-fill",
-    )
-  } else {
-    playBtnFooter.classList.replace(
-      "bi-pause-circle-fill",
-      "bi-play-circle-fill",
-    )
-  }
-}
+//   if (isPlaying) {
+//     playBtnFooter.classList.replace(
+//       "bi-play-circle-fill",
+//       "bi-pause-circle-fill",
+//     )
+//   } else {
+//     playBtnFooter.classList.replace(
+//       "bi-pause-circle-fill",
+//       "bi-play-circle-fill",
+//     )
+//   }
+// }
 
 // AGGIUNGI QUESTO IN FONDO AL FILE JS
 function attivaSensoreSfondo() {
@@ -630,3 +628,178 @@ function attivaSensoreSfondo() {
     })
   }
 }
+
+// PARTE audio
+// Progress bar traccia audio----------------------------------------------------------------------------------
+
+const audio = document.getElementById("audio")
+const progressBar = document.getElementById("progress-bar")
+const currentTimeEl = document.getElementById("time-now")
+const durationEl = document.getElementById("time-max")
+const playBtn = document.getElementById("playPauseBtn")
+const mute = document.getElementById("mute")
+const volumeSlider = document.getElementById("volumeSlider")
+
+let lastVolume = 0.2
+let barColore = "#ffffff"
+let volumeBarColor = "#ffffff"
+
+const coloredBars = (bar, color = "#1db954") => {
+  const value = Number(bar.value)
+  bar.style.background = `linear-gradient(to right, ${color} ${value}%, #4d4d4d ${value}%)`
+}
+
+// Calcolo tempo traccia
+
+audio.addEventListener("timeupdate", () => {
+  if (!isNaN(audio.duration)) {
+    const percentage = (audio.currentTime / audio.duration) * 100
+    progressBar.value = percentage
+    currentTimeEl.innerText = formatTime(audio.currentTime)
+    coloredBars(progressBar, barColore)
+  }
+})
+
+progressBar.addEventListener("input", () => {
+  audio.currentTime = (progressBar.value / 100) * audio.duration
+  coloredBars(progressBar, barColore)
+})
+
+// Hover traccia
+
+progressBar.addEventListener("mouseenter", () => {
+  barColore = "#1db954"
+  coloredBars(progressBar, barColore)
+})
+
+progressBar.addEventListener("mouseleave", () => {
+  barColore = "#ffffff"
+  coloredBars(progressBar, barColore)
+})
+
+const formatTime = (time) => {
+  const min = Math.floor(time / 60)
+  const sec = Math.floor(time % 60)
+  return `${min}:${sec < 10 ? "0" : ""}${sec}`
+}
+
+audio.addEventListener("loadedmetadata", () => {
+  durationEl.innerText = formatTime(audio.duration)
+})
+
+// Play e pausa------------------------------------------------------------------------------------------------
+
+const playPause = () => {
+  if (audio.paused) {
+    audio.play()
+    playBtn.classList.replace("bi-play-circle-fill", "bi-pause-circle-fill")
+  } else {
+    audio.pause()
+    playBtn.classList.replace("bi-pause-circle-fill", "bi-play-circle-fill")
+  }
+}
+
+playBtn.addEventListener("click", playPause)
+
+// Slider musica------------------------------------------------------------------------------------------------
+
+const updateBar = () => {
+  const percentage = (audio.currentTime / audio.duration) * 100
+  progressBar.style.background = `linear-gradient(to right, ${barColore} ${percentage}%, #4d4d4d ${percentage}%)`
+}
+
+audio.addEventListener("timeupdate", () => {
+  if (!isNaN(audio.duration)) {
+    const percentage = (audio.currentTime / audio.duration) * 100
+    progressBar.value = percentage
+    currentTimeEl.innerText = formatTime(audio.currentTime)
+    updateBar()
+  }
+})
+
+// Mute function volume-----------------------------------------------------------------------------------------
+
+const muteIcon = (muted) => {
+  const iconMute = document.getElementById("mute")
+  if (muted) {
+    iconMute.classList.replace("bi-volume-up", "bi-volume-mute")
+  } else {
+    iconMute.classList.replace("bi-volume-mute", "bi-volume-up")
+  }
+}
+
+mute.addEventListener("click", () => {
+  //funzione per mutare e smutare l'audio tenendo in memoria l'ultimo valore dell'audio
+  if (audio.volume > 0) {
+    lastVolume = audio.volume
+    audio.volume = 0
+    volumeSlider.value = 0
+    muteIcon(true)
+  } else {
+    if (!lastVolume || lastVolume === 0) lastVolume = 0.5
+    audio.volume = lastVolume
+    volumeSlider.value = lastVolume * 100
+    muteIcon(false)
+  }
+  coloredBars(volumeSlider, volumeBarColor)
+})
+
+// Slider volume------------------------------------------------------------------------------------------------
+
+volumeSlider.addEventListener("input", (e) => {
+  const value = e.target.value
+  audio.volume = value / 100
+  coloredBars(volumeSlider, volumeBarColor)
+  muteIcon(audio.volume === 0)
+})
+
+// Hover slider volume
+
+volumeSlider.addEventListener("mouseenter", () => {
+  volumeBarColor = "#1db954"
+  coloredBars(volumeSlider, volumeBarColor)
+})
+
+volumeSlider.addEventListener("mouseleave", () => {
+  volumeBarColor = "#ffffff"
+  coloredBars(volumeSlider, volumeBarColor)
+})
+
+mute.addEventListener("mouseenter", () => {
+  volumeBarColor = "#1db954"
+  coloredBars(volumeSlider, volumeBarColor)
+})
+
+mute.addEventListener("mouseleave", () => {
+  volumeBarColor = "#ffffff"
+  coloredBars(volumeSlider, volumeBarColor)
+})
+
+// Caricamenti iniziali
+coloredBars(volumeSlider, "#ffffff")
+coloredBars(progressBar, "#ffffff")
+muteIcon(false)
+audio.volume = 0.2
+volumeSlider.value = 20
+
+// Funzione full-screen
+
+const fsBtn = document.querySelector("#screenMode")
+
+fsBtn.addEventListener("click", () => {
+  if (!document.fullscreenElement) {
+    document.documentElement.requestFullscreen().catch((err) => {
+      console.error(`Errore: ${err.message}`)
+    })
+  } else {
+    document.exitFullscreen()
+  }
+})
+
+document.addEventListener("fullscreenchange", () => {
+  if (document.fullscreenElement) {
+    fsBtn.classList.replace("bi-fullscreen", "bi-fullscreen-exit")
+  } else {
+    fsBtn.classList.replace("bi-fullscreen-exit", "bi-fullscreen")
+  }
+})

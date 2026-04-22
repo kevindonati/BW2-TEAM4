@@ -29,6 +29,7 @@
     />
     <link rel="stylesheet" href="./style.css" />
     <link rel="stylesheet" href="./assets/style/footer.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.0/color-thief.umd.js"></script>
   </head>
   <body class="d-flex flex-column vh-100 overflow-hidden bg-black">
     <header>
@@ -64,13 +65,15 @@
               <a href="./index.html"
                 ><i
                   class="fas fa-home text-dark bg-white p-2 rounded-circle scale"
-                ></i
-              ></a>
+                ></i>
+              </a>
               <!--SCALE ALLA HOME-->
+
               <div
-                class="bg-dark rounded-5 text-white mx-4 d-flex align-items-center pe-3 position-relative w-100"
+                id="search-input"
+                class="bg-dark rounded-5 justify-content-between text-white mx-4 d-flex align-items-center pe-3 position-relative"
               >
-                <form class="d-flex" role="search" id="seachForm">
+                <form class="d-flex w-100" role="search" id="seachForm">
                   <button class="btn" type="submit">
                     <i class="fas fa-search text-light"></i>
                   </button>
@@ -83,7 +86,7 @@
                     autocomplete="off"
                   />
                 </form>
-                <i class="far fa-window-restore scale"></i>
+                <i id="naviga" class="far fa-window-restore scale"></i>
                 <!-- CONTENITORE RISULTATI "Menu a tendina" -->
                 <div
                   id="searchResults"
@@ -174,48 +177,50 @@
         </aside>
         <!-- FINE BARRA SX LIBRERIA -->
 
-        <section class="col h-100 overflow-auto bg-dark rounded-4 p-0">
+        <section class="col h-100 overflow-auto rounded-4 p-0">
           <!-- PARTE CENTRALE -->
           <!-- Sezione Hero con banner artista -->
           <div id="artist-banner" class="h-50 position-relative bg-success">
             <div class="align-items-baseline position-absolute bottom-0 p-2">
-              <h1 class="fs-1" id="nome-artista">Nome Artista</h1>
+              <h1 class="font-enorme" id="nome-artista">Nome Artista</h1>
               <div><span id="fan-artista"></span> ascoltatori mensili</div>
             </div>
           </div>
           <!-- ---TOOLBAR-->
-          <div class="d-flex justify-content-between align-items-center">
-            <div
-              class="m-3 d-flex gap-3 justify-content-center align-items-center"
-            >
-              <a
-                href="#"
-                class="btn btn-success flex rounded rounded-circle text-black shadow shadow-lg px-1 py-0 d-flex"
-                ><i
-                  class="bi bi-play-fill justify-content-center align-items-center"
-                ></i
-              ></a>
-              <img id="artistStories" src="#" />
-              <i class="fas fa-random"></i>
-              <i class="fas fa-plus-circle"></i>
-              <i class="fas fa-arrow-circle-down"></i>
-              <i class="far fa-ellipsis-h"></i>
+          <div class="bg-linear">
+            <div class="d-flex justify-content-between align-items-center">
+              <div
+                class="m-3 d-flex gap-3 justify-content-center align-items-center"
+              >
+                <a
+                  href="#"
+                  class="btn btn-success flex rounded rounded-circle text-black shadow shadow-lg px-1 py-0 d-flex"
+                  ><i
+                    class="bi bi-play-fill justify-content-center align-items-center"
+                  ></i
+                ></a>
+                <img id="artistStories" src="#" />
+                <i class="fas fa-random"></i>
+                <i class="fas fa-plus-circle"></i>
+                <i class="fas fa-arrow-circle-down"></i>
+                <i class="far fa-ellipsis-h"></i>
+              </div>
+              <div class="justify-content-center align-items-center">
+                <h6 class="m-0">Elenco <i class="fas fa-list-ul"></i></h6>
+              </div>
             </div>
-            <div class="justify-content-center align-items-center">
-              <h6 class="m-0">Elenco <i class="fas fa-list-ul"></i></h6>
-            </div>
-          </div>
-          <!-- Canzoni Popolari -->
-          <div class="px-3">
-            <h3 class="mb-3">Popolari</h3>
+            <!-- Canzoni Popolari -->
+            <div class="px-3">
+              <h3 class="mb-3">Popolari</h3>
 
-            <div
-              id="lista-canzoni"
-              class="row align-items-center py-2 text-secondary-emphasis hover-bg-grey"
-            ></div>
+              <div
+                id="lista-canzoni"
+                class="row align-items-center py-2 text-secondary-emphasis hover-bg-grey"
+              ></div>
+            </div>
           </div>
         </section>
-        <aside class="col-3 px-1 rounded-4 px-4 h-100 overflow-auto bg-aside">
+        <aside class="col-2 px-1 rounded-4 px-4 h-100 overflow-auto bg-aside">
           <!-- BARRA DX ARTISTA -->
           <!-- TITOLO CANZONE IN ASCOLTO -->
           <div class="placeholder-glow">
@@ -374,8 +379,6 @@
       integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
       crossorigin="anonymous"
     ></script>
-    <script src="./assets/script/script.js"></script>
-    <script src="./assets/script/player.js"></script>
     <script src="./assets/script/artistView.js"></script>
   </body>
 </html>
