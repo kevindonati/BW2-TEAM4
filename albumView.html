@@ -208,26 +208,15 @@
         <!-- FINE BARRA SX LIBRERIA -->
 
         <section
-          class="col h-100 overflow-auto bg-black rounded-4 d-flex flex-column container"
+          class="col h-100 overflow-auto bg-black rounded-4 d-flex flex-column p-0 container"
         >
-          <!-- PARTE CENTRALE -->
-          <div
-            class="row d-flex align-items-center bg-secondary"
-            style="
-              background-color: linear-gradient(
-                90deg,
-                rgb(0, 0, 0),
-                rgb(190, 190, 190)
-              );
-            "
-          >
-            <!-- --------------------------------PRESENTAZIONE-->
-
-            <div class="col-3">
+          <!-- PARTE SUPERIORE -->
+          <div class="row d-flex align-items-center bg-secondary">
+            <div class="col-3 ms-2">
               <img id="albumCover" class="w-100 rounded-2 shadow-sm my-3" />
             </div>
 
-            <div class="col-9">
+            <div class="col">
               <h6 class="d-sm-none d-md-inline">Album</h6>
               <h1 id="albumTitle">tua mamma fa la bidella</h1>
               <div class="col-12">
@@ -246,45 +235,56 @@
               </div>
             </div>
           </div>
-          <div class="d-flex justify-content-between align-items-center">
-            <!-- --------------------------------TOOLBAR-->
-            <div class="m-3 d-flex gap-3 align-items-center">
-              <i class="fas fa-play-circle fa-3x text-success"></i>
-              <div
-                class="rounded-2 bg-secondary border border-3 border-secondary"
-              >
-                <img
-                  id="artistStories"
-                  src="https://placecats.com/300/300"
-                  class="rounded-2 border border-2 border-dark object-fit-cover"
-                  style="height: 40px; width: 30px"
-                />
+
+          <!-- PARTE INFERIORE -->
+          <div class="bg-linear">
+            <!-- PARTE TASTI -->
+            <div
+              class="d-flex flex-row justify-content-between align-items-center"
+            >
+              <div class="m-3 d-flex gap-3 align-items-center">
+                <i class="fas fa-play-circle fa-3x text-success"></i>
+                <div
+                  class="rounded-2 bg-secondary border border-3 border-secondary"
+                >
+                  <img
+                    id="artistStories"
+                    src="https://placecats.com/300/300"
+                    class="rounded-2 border border-2 border-dark object-fit-cover"
+                    style="height: 40px; width: 30px"
+                  />
+                </div>
+                <i class="fas fa-random fa-lg text-secondary"></i>
+                <i class="fas fa-plus-circle fa-lg text-secondary"></i>
+                <i class="fas fa-arrow-circle-down fa-lg text-secondary"></i>
+                <i class="fas fa-ellipsis-h fa-lg text-secondary"></i>
               </div>
-              <i class="fas fa-random fa-lg text-secondary"></i>
-              <i class="fas fa-plus-circle fa-lg text-secondary"></i>
-              <i class="fas fa-arrow-circle-down fa-lg text-secondary"></i>
-              <i class="fas fa-ellipsis-h fa-lg text-secondary"></i>
+              <p class="text-secondary d-flex align-items-center mt-3">
+                Elenco<i class="fas fa-list-ul mx-1"></i>
+              </p>
             </div>
-            <p class="text-secondary d-flex align-items-center mt-3">
-              Elenco<i class="fas fa-list-ul mx-1"></i>
-            </p>
+
+            <!-- ALBUM -->
+            <div
+              class="row border-bottom border-1 border-secondary align-items-center mb-2 px-4"
+            >
+              <div class="col-1">
+                <p class="m-0">#</p>
+              </div>
+              <div class="col-9">
+                <p class="m-0">Titolo</p>
+              </div>
+              <div class="col-1"></div>
+              <div class="col-1">
+                <i class="fas fa-clock"></i>
+              </div>
+            </div>
+            <div id="contenitore-album">
+              <!-- INSERISCO TRAMITE JS LE CANZONI DELL'ALBUM -->
+            </div>
           </div>
-          <div>
-            <!-- --------------------------------ALBUM-->
-            <table class="table w-100">
-              <thead>
-                <th>#</th>
-                <th>Titolo</th>
-                <th>Riproduzioni</th>
-                <th><i class="fas fa-clock"></i></th>
-              </thead>
-              <tbody>
-                <!--CONTENUTO TABELLA-->
-              </tbody>
-            </table>
-          </div>
-          <div class="mt-4">
-            <!-- --------------------------------DIRITTI-->
+
+          <div class="mt-4 px-4">
             <p class="fw-normal text-secondary-emphasis m-0 albumReleaseDate">
               data
             </p>
@@ -292,8 +292,7 @@
               diritti riservati alla casa discografica universal music
             </p>
           </div>
-          <div class="d-flex justify-content-between">
-            <!-- --------------------------------ALTRO-->
+          <div class="d-flex justify-content-between px-4">
             <h4>Altro di <span class="artistName">ramadam banger</span></h4>
             <h6>Guarda profilo</h6>
           </div>
