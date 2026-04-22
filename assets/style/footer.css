@@ -1,31 +1,11 @@
 #playerMain {
-  max-width: 650px;
+  max-width: 700px;
   margin: 0 auto;
 }
 
 footer > article {
   flex: 1 1 0;
 }
-
-footer i {
-  color: #b3b3b3;
-  transition: color 0.2s ease;
-}
-
-footer i:hover {
-  cursor: pointer;
-  color: #ffffff;
-}
-
-/* footer i,
-footer i:focus,
-footer i:active,
-footer i:focus-visible {
-  outline: none !important;     Non sembra funzionare al momento, la riprendo un'altra volta
-  box-shadow: none !important;
-  border: none !important;
-  -webkit-tap-highlight-color: transparent;
-} */
 
 /* SLIDERS MUSICA E VOLUME */
 
@@ -65,13 +45,70 @@ input[type="range"]:hover::-webkit-slider-thumb {
 }
 
 /* ROBA NON DEL FOOTER */
-i {
+i,
+.text-inattivo {
   cursor: pointer;
   color: #b3b3b3;
   transition: color 0.2s ease;
 }
 
 i:hover,
+button:hover i,
+.text-inattivo:hover {
+  color: #ffffff;
+}
+
+i,
+i:focus,
+i:active,
+button,
+button:focus,
+.btn:focus {
+  outline: none !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
 i:active {
   color: #ffffff;
+}
+
+#recenti i {
+  transform: translateY(1px);
+}
+
+/* CSS per la search */
+
+nav .fa-home {
+  height: 45px;
+  width: 45px;
+}
+
+.centerPart {
+  width: 40vw;
+  max-width: 700px;
+  justify-self: center;
+}
+
+#search-input {
+  width: 100%;
+  height: 45px;
+  justify-content: space-between;
+}
+
+.leftPart,
+.rightPart {
+  max-width: 200px;
+  width: 10%;
+}
+
+/* CSS bottoni bottom in mobile */
+
+#mobile-player {
+  height: 60px;
+}
+
+#mobile-nav a {
+  width: 33.33%;
+  height: 100px;
 }
