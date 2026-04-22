@@ -171,3 +171,20 @@ document.addEventListener("fullscreenchange", () => {
     fsBtn.classList.replace("bi-fullscreen-exit", "bi-fullscreen");
   }
 });
+
+// JS NON DEL FOOTER-------------------------------------------------------------------------------------------
+
+// JS Window size SX
+
+const expandSx = document.getElementById("expandSx");
+const asideSx = document.getElementById("asideSx");
+
+expandSx.addEventListener("click", () => {
+  if (asideSx.classList.contains("col-3")) {
+    asideSx.classList.replace("col-3", "col-9");
+    expandSx.classList.replace("bi-arrow-right", "bi-arrow-left");
+  } else {
+    asideSx.classList.replace("col-9", "col-3");
+    expandSx.classList.replace("bi-arrow-left", "bi-arrow-right");
+  }
+});
