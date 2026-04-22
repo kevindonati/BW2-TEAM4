@@ -9,7 +9,7 @@ const urlPlaylistTheWeeknd =
 const searchInput = document.getElementById("searchInput")
 const searchResults = document.getElementById("searchResults")
 
-function applicaColore(img, thief) {
+const applicaColore = function (img, thief) {
   try {
     const rgb = thief.getColor(img)
     const card = img.closest(".contenitore-card")

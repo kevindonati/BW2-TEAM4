@@ -504,7 +504,7 @@ const riproduciCanzone = (
 // }
 
 // Funzione per attivare gli sfondi dinamici
-function attivaSensoreSfondo() {
+const attivaSensoreSfondo = function () {
   const mainSection = document.getElementById("main-section")
   const contenitoreCards = document.getElementById("contenitore-main-prime-4")
 
@@ -530,7 +530,7 @@ function attivaSensoreSfondo() {
 }
 
 //Parte per sfondo dinamico in artistpage
-function coloraSfondoDinamico(urlImmagine, selettoreTarget) {
+const coloraSfondoDinamico = function (urlImmagine, selettoreTarget) {
   const thief = new ColorThief()
   const img = new Image()
 

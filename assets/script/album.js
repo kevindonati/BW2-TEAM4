@@ -11,6 +11,38 @@ const searchResults = document.getElementById("searchResults")
 const parametri = new URLSearchParams(location.search)
 const IDalbum = parametri.get("id")
 
+// Inserisco la funzione per applicare i colori di sfondo
+const applicaColoriAlbum = function (urlImmagine) {
+  const thief = new ColorThief()
+  const img = new Image()
+  img.crossOrigin = "Anonymous"
+  img.src = urlImmagine + "?not-from-cache" // Trucco per il CORS
+
+  img.addEventListener("load", function () {
+    try {
+      const rgb = thief.getColor(img)
+      const coloreBase = `rgba(${rgb[0]}, ${rgb[1]}, ${rgb[2]}, 0.8)`
+      const coloreSfumato = `rgba(${rgb[0]}, ${rgb[1]}, ${rgb[2]}, 0.4)`
+
+      // 1. Coloriamo la parte superiore (solida)
+      const parteAlta = document.querySelector(".bg-secondary")
+      if (parteAlta) {
+        // Rimuoviamo la classe di Bootstrap per non andare in conflitto
+        parteAlta.classList.remove("bg-secondary")
+        parteAlta.style.backgroundColor = coloreBase
+      }
+
+      // 2. Coloriamo la parte inferiore (sfumata)
+      const parteBassa = document.querySelector(".bg-linear")
+      if (parteBassa) {
+        parteBassa.style.background = `linear-gradient(to bottom, ${coloreSfumato} 0%, #121212 20%)`
+      }
+    } catch (e) {
+      console.error("Errore ColorThief:", e)
+    }
+  })
+}
+
 const estrazioneArtista = () => {
   fetch("https://striveschool-api.herokuapp.com/api/deezer/album/" + IDalbum)
     .then((response) => {
@@ -45,6 +77,7 @@ const estrazioneArtista = () => {
       }
 
       fotoAlbum.setAttribute("src", `${response.cover_big}`)
+      applicaColoriAlbum(response.cover_big) // lancio la funzione per il color thief
       titoloAlbum.innerHTML = `${response.title}`
       fotoArtista.setAttribute("src", `${response.artist.picture}`)
       numBraniAlbum.innerText = `${response.nb_tracks}`
@@ -454,7 +487,7 @@ const riproduciCanzone = (
 }
 
 // AGGIUNGI QUESTO IN FONDO AL FILE JS
-function attivaSensoreSfondo() {
+const attivaSensoreSfondo = function () {
   const mainSection = document.getElementById("main-section")
   const contenitoreCards = document.getElementById("contenitore-main-prime-4")
 
