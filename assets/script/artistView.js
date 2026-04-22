@@ -10,7 +10,6 @@ const searchInput = document.getElementById("searchInput");
 const searchResults = document.getElementById("searchResults");
 
 // trovo l'id dall'indirizzo web
-
 const parametri = new URLSearchParams(location.search);
 const idArtista = parametri.get("id");
 
@@ -25,6 +24,11 @@ fetch(urlApiArtista)
     } else throw new Error("errore nella fetch");
   })
   .then((artista) => {
+    // cambiamo l'immagine del placeholder
+    const stories = document.querySelector("#artistStories");
+    if (stories) {
+      stories.setAttribute("src", artista.picture_small);
+    }
     // cambiamo il testo delle sezioni artista e numero ascoltatori
     document.getElementById("nome-artista").innerText = artista.name;
     document.getElementById("fan-artista").innerText =
