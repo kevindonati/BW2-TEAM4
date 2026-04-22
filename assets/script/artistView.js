@@ -504,7 +504,7 @@ const riproduciCanzone = (
 // }
 
 // Funzione per attivare gli sfondi dinamici
-function attivaSensoreSfondo() {
+const attivaSensoreSfondo = function () {
   const mainSection = document.getElementById("main-section");
   const contenitoreCards = document.getElementById("contenitore-main-prime-4");
 
@@ -527,10 +527,10 @@ function attivaSensoreSfondo() {
         "linear-gradient(rgba(255, 255, 255, 0.1), #121212 50%)";
     });
   }
-}
+};
 
 //Parte per sfondo dinamico in artistpage
-function coloraSfondoDinamico(urlImmagine, selettoreTarget) {
+const coloraSfondoDinamico = function (urlImmagine, selettoreTarget) {
   const thief = new ColorThief();
   const img = new Image();
 
@@ -557,7 +557,7 @@ function coloraSfondoDinamico(urlImmagine, selettoreTarget) {
       document.querySelector(selettoreTarget).style.background = "#222";
     }
   });
-}
+};
 
 // PARTE audio
 // Progress bar traccia audio----------------------------------------------------------------------------------

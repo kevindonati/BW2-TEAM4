@@ -34,7 +34,7 @@
     <header>
       <div>
         <!-- NAVBAR -->
-        <nav class="navbar navbar-expand-lg bg-black">
+        <nav class="d-none d-lg-block navbar navbar-expand-lg bg-black py-1">
           <div class="container-fluid">
             <div class="leftPart text-white d-flex">
               <!-- <li class="nav-item dropdown d-flex align-items-center">
@@ -61,16 +61,16 @@
               ></a>
             </div>
             <div class="centerPart text-white d-flex align-items-center">
-              <a href="./index.html"
+              <a href="./index.html" class="text-decoration-none"
                 ><i
-                  class="fas fa-home text-dark bg-white p-2 rounded-circle scale"
-                ></i>
-              </a>
+                  class="fas fa-home bg-aside p-2 rounded-circle scale d-flex justify-content-center align-items-center fs-4 text-inattivo shadow-none"
+                ></i
+              ></a>
               <!--SCALE ALLA HOME-->
 
               <div
                 id="search-input"
-                class="bg-dark rounded-5 justify-content-between text-white mx-4 d-flex align-items-center pe-3 position-relative"
+                class="bg-aside rounded-5 justify-content-between text-white mx-4 d-flex align-items-center pe-3 position-relative"
               >
                 <form class="d-flex w-100" role="search" id="seachForm">
                   <button class="btn" type="submit">
@@ -78,7 +78,7 @@
                   </button>
                   <input
                     id="searchInput"
-                    class="form-control me-2 bg-dark border-0 shadow-none"
+                    class="form-control me-2 bg-transparent border-0 shadow-none"
                     type="search"
                     placeholder="Cerca la tua musica"
                     aria-label="Search"
@@ -113,6 +113,7 @@
                 src="https://placecats.com/200/200"
                 class="rounded-circle border-5 border-secondary-subtle mx-3 navbarImage scale"
                 style="height: 35px"
+                alt="foto-profilo"
               />
               <!-- <i class="fas fa-window-minimize ms-4"></i> -->
               <!-- <i class="fas fa-squar mx-2e"></i>
@@ -213,12 +214,16 @@
           <!-- PARTE SUPERIORE -->
           <div class="row d-flex align-items-center bg-secondary">
             <div class="col-3 ms-2">
-              <img id="albumCover" class="w-100 rounded-2 shadow-sm my-3" />
+              <img
+                id="albumCover"
+                class="w-100 rounded-2 shadow-sm my-3"
+                alt="album-cover"
+              />
             </div>
 
             <div class="col">
-              <h6 class="d-sm-none d-md-inline">Album</h6>
-              <h1 id="albumTitle">tua mamma fa la bidella</h1>
+              <h6 class="d-sm-none d-md-inline"></h6>
+              <h1 id="albumTitle"></h1>
               <div class="col-12">
                 <p class="d-inline-block">
                   <img
@@ -226,6 +231,7 @@
                     style="height: 1.3em"
                     src="https://placecats.com/300/300"
                     class="rounded-circle"
+                    alt="artist-image"
                   />
                   <span class="fw-bold artistName"></span>
                   ‧ <span class="albumReleaseDate"></span> ‧
@@ -252,6 +258,7 @@
                     src="https://placecats.com/300/300"
                     class="rounded-2 border border-2 border-dark object-fit-cover"
                     style="height: 40px; width: 30px"
+                    alt="artist-stories"
                   />
                 </div>
                 <i class="fas fa-random fa-lg text-secondary"></i>
