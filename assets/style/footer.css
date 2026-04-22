@@ -53,7 +53,8 @@ i,
 }
 
 i:hover,
-button:hover i {
+button:hover i,
+.text-inattivo:hover {
   color: #ffffff;
 }
 
@@ -78,7 +79,7 @@ i:active {
 
 /* CSS per la search */
 
-.fa-home {
+nav .fa-home {
   height: 45px;
   width: 45px;
 }
@@ -99,4 +100,15 @@ i:active {
 .rightPart {
   max-width: 200px;
   width: 10%;
+}
+
+/* CSS bottoni bottom in mobile */
+
+#mobile-player {
+  height: 60px;
+}
+
+#mobile-nav a {
+  width: 33.33%;
+  height: 100px;
 }
