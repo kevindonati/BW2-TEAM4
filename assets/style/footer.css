@@ -78,6 +78,11 @@ i:active {
 
 /* CSS per la search */
 
+.fa-home {
+  height: 45px;
+  width: 45px;
+}
+
 .centerPart {
   width: 40vw;
   max-width: 700px;
@@ -86,6 +91,7 @@ i:active {
 
 #search-input {
   width: 100%;
+  height: 45px;
   justify-content: space-between;
 }
 
