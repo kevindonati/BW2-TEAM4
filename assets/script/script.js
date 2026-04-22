@@ -122,7 +122,7 @@ const main8 = () => {
         }
       })
 
-      // --- AGGIUNTA FONDAMENTALE QUI ---
+      // --- lancio la funzione ---
       attivaSensoreSfondo()
       // --------------------------------
     })
@@ -603,13 +603,13 @@ const renderDropdownResult = (songs) => {
 //   }
 // }
 
-// AGGIUNGI QUESTO IN FONDO AL FILE JS
+// funzione per il colorthief
 function attivaSensoreSfondo() {
   const mainSection = document.getElementById("main-section")
   const contenitoreCards = document.getElementById("contenitore-main-prime-4")
 
   if (contenitoreCards && mainSection) {
-    // Rimuoviamo eventuali vecchi ascoltatori per non duplicarli
+    // Rimuovo eventuali vecchi ascoltatori per non duplicarli
     contenitoreCards.onclick = null
 
     contenitoreCards.addEventListener("mouseover", (e) => {
