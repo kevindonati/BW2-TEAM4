@@ -1,0 +1,20 @@
+.bg-grigio {
+  background-color: #242424;
+}
+
+.bg-grigio-scuro {
+  background-color: #121212;
+}
+
+#search::placeholder {
+  color: #b3b3b3;
+  font-weight: bold;
+}
+
+#search:focus {
+  outline: none;
+}
+
+.card-spotify {
+  cursor: pointer;
+}

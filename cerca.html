@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
+  <head>
+    <title>Cerca</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+      integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="./assets/style/cerca.css" />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+
+  <body class="p-3 text-white bg-grigio-scuro">
+    <header>
+      <h1 class="my-4 fw-bold">Cerca</h1>
+      <div class="bg-grigio m-1 p-2 rounded-2 d-flex align-items-center my-4">
+        <i class="fas fa-search text-white"></i>
+        <input
+          type="search"
+          name=""
+          id="search"
+          class="bg-transparent text-decoration-none border-0 shadow-none w-100"
+          placeholder="Cosa vuoi ascoltare?"
+        />
+      </div>
+    </header>
+    <main>
+      <section class="text-center">
+        <h3>Sfoglia tutto</h3>
+        <div id="grid-container" class="row row-cols-2 row-cols-md-3 g-4"></div>
+      </section>
+    </main>
+    <footer></footer>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+      crossorigin="anonymous"
+    ></script>
+    <script src="./assets/script/searchMobile.js"></script>
+  </body>
+</html>
