@@ -161,7 +161,7 @@ const primoCarosello = () => {
                           ></i>
                         </a>
                       </div>
-                      <p class="text-center">${data.data[i].title}</p>
+                      <p class="text-center text-truncate-2">${data.data[i].title}</p>
         `
       }
     })
@@ -200,7 +200,7 @@ const secondoCarosello = () => {
                           ></i>
                         </a>
                       </div>
-                      <p class="text-center">${data.data[i].title}</p>
+                      <p class="text-center text-truncate-2">${data.data[i].title}</p>
         `
       }
     })
@@ -239,7 +239,7 @@ const terzoCarosello = () => {
                           ></i>
                         </a>
                       </div>
-                      <p class="text-center">${data.data[i].title}</p>
+                      <p class="text-center text-truncate-2">${data.data[i].title}</p>
         `
       }
     })
