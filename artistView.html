@@ -127,7 +127,8 @@
       <div class="row h-100 gap-2">
         <!-- INIZIO BARRA SX LIBRERIA -->
         <aside
-          class="col-2 h-100 text-white pt-4 px-4 3 rounded-4 overflow-auto bg-aside"
+          id="asideSx"
+          class="d-none d-lg-block col-lg-3 h-100 text-white pt-4 px-4 3 rounded-4 overflow-auto bg-aside"
         >
           <!--PRIMO BLOCCO ASIDE-->
           <div class="d-flex align-items-center justify-content-between">
@@ -139,7 +140,7 @@
               <button
                 class="btn bg-trasparent bg-customized-hover rounded-circle ms-2"
               >
-                <i class="bi bi-arrows-angle-expand"></i>
+                <i id="expandSx" class="bi bi-arrows-angle-expand"></i>
               </button>
             </div>
           </div>
@@ -153,13 +154,44 @@
           <!--INIZIO TERZO BLOCCO ASIDE-->
           <div class="d-flex align-items-center justify-content-between mt-2">
             <button
-              class="btn bg-trasparent bg-customized-hover rounded-circle ms-2"
+              class="btn bg-trasparent rounded-circle ms-2 bg-customized-hover"
             >
               <i class="bi bi-search"></i>
             </button>
-            <button class="btn bg-trasparent scale d-flex">
-              Recenti<i class="ms-2 bi bi-list-ul"></i>
-            </button>
+            <div class="dropdown">
+              <button
+                id="recenti"
+                class="btn bg-transparent text-inattivo scale d-flex align-items-center border-0 p-0"
+                type="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                <span class="d-flex align-items-center">
+                  Recenti
+                  <i class="ms-2 bi bi-list-ul"></i>
+                </span>
+              </button>
+
+              <ul class="dropdown-menu dropdown-menu-dark shadow">
+                <li>
+                  <button class="dropdown-item" type="button">Recenti</button>
+                </li>
+                <li>
+                  <button class="dropdown-item" type="button">
+                    Alfabetico
+                  </button>
+                </li>
+                <li>
+                  <button class="dropdown-item" type="button">
+                    Aggiunti di recente
+                  </button>
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li>
+                  <button class="dropdown-item" type="button">Creatore</button>
+                </li>
+              </ul>
+            </div>
           </div>
           <!--FINE TERZO BLOCCO ASIDE-->
 
@@ -171,8 +203,21 @@
 
           <!--INIZIO QUARTO BLOCCO ASIDE CONTENUTO-->
           <section id="appendi-album-libreria" class="d-flex flex-column mt-2">
-            <!--INIZIO CARD1-->
-            <!--  -->
+            <a class="text-decoration-none text-light" href="preferiti.html">
+              <div class="d-flex my-2 align-items-center">
+                <img
+                  src="./assets/imgs/main/liked-songs-300.jpg"
+                  class="rounded-1 img-fluid"
+                  width="55px"
+                />
+                <div class="ms-3 d-flex flex-column justify-content-center">
+                  <h6 class="mb-1">Brani che ti piacciono</h6>
+                  <p class="mb-0">
+                    Playlist &bull; <span id="contatore-brani"> </span>
+                  </p>
+                </div>
+              </div>
+            </a>
           </section>
         </aside>
         <!-- FINE BARRA SX LIBRERIA -->

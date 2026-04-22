@@ -70,24 +70,28 @@ const estrazioneArtista = () => {
         const secondi = (durataCanzone % 60).toString().padStart(2, "0")
 
         const numeroCanzone = x
+        const explicit = response.tracks.data[x].explicit_lyrics ? "" : "d-none"
+
         const contenitore = document.getElementById("contenitore-album")
         contenitore.innerHTML += `
-              <div class="row mt-3 align-items-center px-4">
-                <div class="col-1">
+              <div class="row mt-3 align-items-center px-4 riga">
+                <div class="col-1 cella">
                   <span class="numero-cella">${numeroCanzone}</span>
                     <i 
                      onclick="riproduciCanzone(\`${response.tracks.data[x].preview}\`, \`${response.tracks.data[x].title}\`, \`${response.tracks.data[x].artist.name}\`, \`${response.cover_small}\`, \`${response.cover_big}\`, \`${response.artist.picture_big}\`, \`${response.artist.id}\`, \`${response.artist.tracklist}\`)"
-                     class="fas fa-play-circle text-success icona-play fs-4"></i>
+                     class="fas fa-play text-light icona fs-4"></i>
                 </div>
                 <div class="col-9">
                   <p class="m-0">${titoloCanzone}</p>
-                  <i class="bi bi-explicit-fill"></i>
+                  <i class="bi bi-explicit-fill ${explicit}"></i>
                   <span class="text-secondary small">${artista}</span>
                 </div>
-                <div class="col-1">
-                  <i class="bi bi-plus-circle"></i>
+                <div class="col-1 text-end">
+                  <i class="bi bi-plus-circle icona fs-4"
+                  onclick="salvaCanzone(this, \`${response.tracks.data[x].preview}\`, \`${response.tracks.data[x].title}\`, \`${response.tracks.data[x].artist.name}\`, \`${response.cover_small}\`, \`${response.cover_big}\`, \`${response.artist.picture_big}\`, \`${response.artist.id}\`, \`${response.artist.tracklist}\`, \`${response.tracks.data[x].explicit_lyrics}\`, \`${response.tracks.data[x].duration}\`, \`${response.id}\`)"
+                  ></i>
                 </div>
-                <div class="col-1">
+                <div class="col-1 text-center">
                   <p class="m-0">${minuti}:${secondi}</p>
                 </div>
               </div>
@@ -236,12 +240,12 @@ const riproduciCanzone = (
   if (inputAudio.src === audioCanzone) {
     if (inputAudio.paused) {
       inputAudio.play()
-      bottonePlay.classList.replace("bi-play-fill", "bi-pause-fill")
-      playBtn.classList.replace("bi-play-fill", "bi-pause-fill")
+      // bottonePlay.classList.replace("bi-play-fill", "bi-pause-fill")
+      // playBtn.classList.replace("bi-play-fill", "bi-pause-fill")
     } else {
       inputAudio.pause()
-      bottonePlay.classList.replace("bi-pause-fill", "bi-play-fill")
-      playBtn.classList.replace("bi-pause-fill", "bi-play-fill")
+      // bottonePlay.classList.replace("bi-pause-fill", "bi-play-fill")
+      // playBtn.classList.replace("bi-pause-fill", "bi-play-fill")
     }
   } else {
     inputAudio.src = audioCanzone
@@ -649,3 +653,50 @@ document.addEventListener("fullscreenchange", () => {
     fsBtn.classList.replace("bi-fullscreen-exit", "bi-fullscreen")
   }
 })
+
+// FUNZIONE AGGIUNGI AI PREFERITI
+let braniPreferiti = JSON.parse(localStorage.getItem("brano-preferito")) || []
+
+const salvaCanzone = (
+  icona,
+  audioCanzone,
+  titolo,
+  nomeArtista,
+  copertinaSmall,
+  copertinaBig,
+  fotoArtista,
+  linkArtista,
+  tracklist,
+  explicit,
+  durata,
+  idAlbum,
+) => {
+  const datiCanzone = {
+    audio: audioCanzone,
+    titolo: titolo,
+    artista: nomeArtista,
+    coverSmall: copertinaSmall,
+    coverBig: copertinaBig,
+    fotoArtista: fotoArtista,
+    idArtista: linkArtista,
+    tracklist: tracklist,
+    explicit: explicit,
+    durata: durata,
+    idAlbum: idAlbum,
+  }
+
+  braniPreferiti.push(datiCanzone)
+  localStorage.setItem("brano-preferito", JSON.stringify(braniPreferiti))
+
+  icona.classList.replace("bi-plus-circle", "bi-check-circle-fill")
+  icona.classList.add("text-success")
+}
+
+const contatoreBraniPreferiti = () => {
+  const contenitore = document.getElementById("contatore-brani")
+  const braniPreferiti =
+    JSON.parse(localStorage.getItem("brano-preferito")) || []
+  console.log(braniPreferiti)
+  contenitore.innerText += braniPreferiti.length
+}
+contatoreBraniPreferiti()

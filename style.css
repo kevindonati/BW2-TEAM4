@@ -214,7 +214,7 @@ section:hover::-webkit-scrollbar-thumb {
   display: none;
 }
 
-.riga:hover .icona-play {
+.riga:hover .icona {
   display: inline-block;
 }
 
@@ -222,7 +222,7 @@ section:hover::-webkit-scrollbar-thumb {
   display: inline-block;
 }
 
-.icona-play {
+.icona {
   display: none;
 }
 
