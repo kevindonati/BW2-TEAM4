@@ -81,9 +81,16 @@ i:active {
 .centerPart {
   width: 40vw;
   max-width: 700px;
+  justify-self: center;
 }
 
 #search-input {
   width: 100%;
   justify-content: space-between;
+}
+
+.leftPart,
+.rightPart {
+  max-width: 200px;
+  width: 10%;
 }
