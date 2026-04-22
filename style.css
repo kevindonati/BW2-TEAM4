@@ -82,7 +82,7 @@ section:hover::-webkit-scrollbar-thumb {
 }
 
 .bg-linear {
-  background: linear-gradient(rgba(255, 255, 255, 0.301), black 50%);
+  background: linear-gradient(rgba(255, 255, 255, 0.301), black 30%);
 }
 
 /* Stile per il contenitore delle barrette */
@@ -131,4 +131,29 @@ section:hover::-webkit-scrollbar-thumb {
 /* Style per il background della section centrale */
 .bg-linear {
   transition: background 0.5s ease;
+}
+
+.font-enorme {
+  font-size: 6em;
+  font-weight: bold;
+}
+
+.cella {
+  position: relative;
+}
+
+.riga:hover .numero-cella {
+  display: none;
+}
+
+.riga:hover .icona-play {
+  display: inline-block;
+}
+
+.numero-cella {
+  display: inline-block;
+}
+
+.icona-play {
+  display: none;
 }
