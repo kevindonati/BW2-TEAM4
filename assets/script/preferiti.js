@@ -93,7 +93,7 @@ const riempiPreferiti = () => {
                 </div>
                 <div class="col-1 text-end">
                   <img
-                        width="100%"
+                        width="70%"
                         src="${braniPreferiti[i].coverSmall}"
                         alt="foto album"
                         crossorigin="anonymous"
@@ -153,16 +153,7 @@ const riproduciCanzone = (
   linkArtista,
   tracklist,
 ) => {
-  console.log(
-    audioCanzone,
-    titolo,
-    nomeArtista,
-    copertinaSmall,
-    copertinaBig,
-    fotoArtista,
-    linkArtista,
-    tracklist,
-  )
+  console.log(audioCanzone)
   const bottonePlay = document.getElementById("btn-play-canzone")
   // if (!bottonePlay) return // Se il bottone non esiste, non provare a cambiargli classe
   const inputAudio = document.getElementById("audio")
