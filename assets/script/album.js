@@ -134,6 +134,38 @@ const estrazioneArtista = () => {
 
         const diritti = response.tracks.data[x].title;
       }
+      const inputAudio = document.querySelector("audio");
+
+      // Prendiamo la prima canzone dell'album
+      const primaCanzone = response.tracks.data[1];
+      const iconaPlayGrande = document.querySelector(".bi-play-circle-fill");
+
+      // Gestiamo il click sul tasto Play
+      iconaPlayGrande.onclick = function () {
+        // Lanciamo funzione per far partire l'audio
+        riproduciCanzone(
+          this,
+          primaCanzone.preview,
+          primaCanzone.title,
+          primaCanzone.artist.name,
+          response.cover_small,
+          response.cover_big,
+          response.artist.picture_big,
+          response.artist.id,
+          response.artist.tracklist,
+        );
+
+        // Cambiamo l'icona in base a se l'audio è partito o no
+        setTimeout(() => {
+          if (inputAudio.paused) {
+            this.classList.remove("bi-pause-circle-fill");
+            this.classList.add("bi-play-circle-fill");
+          } else {
+            this.classList.remove("bi-play-circle-fill");
+            this.classList.add("bi-pause-circle-fill");
+          }
+        }, 100);
+      };
     })
     .catch((err) => {
       console.log("errore nella fetch", err);
