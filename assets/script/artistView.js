@@ -60,24 +60,106 @@ fetch(urlApiArtista)
           // Calcolo minuti e secondi (es. 200 secondi -> 3:20)
           const minuti = Math.floor(traccia.duration / 60)
           const secondi = (traccia.duration % 60).toString().padStart(2, "0")
+          const explicit = traccia.explicit_lyrics ? "" : "d-none"
+
+          const featuring =
+            traccia.contributors.length > 1
+              ? traccia.contributors
+                  .slice(1)
+                  .map((c) => c.name)
+                  .join(", ")
+              : ""
+
+          const feat = traccia.contributors.slice(1)
+          const dropdown =
+            feat.length > 0
+              ? `
+                <li class="dropdown-submenu position-relative">
+                  <a class="dropdown-item d-flex justify-content-between align-items-center" href="#">
+                    <span>
+                      <i class="bi bi-person-lines-fill text-secondary me-2"></i>
+                      Vai all'artista
+                    </span>
+                    <i class="bi bi-caret-right-fill small"></i>
+                  </a>
+
+                  <ul class="dropdown-menu">
+                    ${feat
+                      .map(
+                        (c) => `
+                      <li>
+                        <a class="dropdown-item" href="./artistView.html?id=${c.id}">
+                          ${c.name}
+                        </a>
+                      </li>
+                    `,
+                      )
+                      .join("")}
+                  </ul>
+                </li>
+              `
+              : ``
+
           const rigaHTML = `
-            <div class="row align-items-center py-2 text-secondary-emphasis hover-bg-grey"
-            onclick="riproduciCanzone(\`${datiCanzoni.data[i].preview}\`, \`${datiCanzoni.data[i].title}\`, \`${datiCanzoni.data[i].artist.name}\`, \`${datiCanzoni.data[i].album.cover_small}\`, \`${datiCanzoni.data[i].album.cover_big}\`, \`${datiCanzoni.data[i].artist.picture_big}\`, \`${datiCanzoni.data[i].artist.id}\`, \`${datiCanzoni.data[i].artist.tracklist}\`)">
-              <div class="col-auto" style="width: 30px">
-                <span class="text-secondary">${i + 1}</span>
+
+              <div class="row mt-3 align-items-center px-4 riga">
+                <div class="col-1 cella">
+                  <span class="numero-cella">${i + 1}</span>
+                    <i 
+                     onclick="riproduciCanzone(\`${datiCanzoni.data[i].preview}\`, \`${datiCanzoni.data[i].title}\`, \`${datiCanzoni.data[i].artist.name}\`, \`${datiCanzoni.data[i].album.cover_small}\`, \`${datiCanzoni.data[i].album.cover_big}\`, \`${datiCanzoni.data[i].artist.picture_big}\`, \`${datiCanzoni.data[i].artist.id}\`, \`${datiCanzoni.data[i].artist.tracklist}\`)"
+                     class="fas fa-play text-light icona fs-4"></i>
+                </div>
+                <div class="col-1">
+                  <img
+                        class="w-100"
+                        src="${datiCanzoni.data[i].album.cover_big}"
+                        alt="foto album"
+                        crossorigin="anonymous"
+                      />
+                </div>
+                <div class="col">
+                  <p class="m-0">
+                    ${traccia.title}
+                    ${featuring ? `<span>(feat. ${featuring})</span>` : ""}
+                  </p>
+                  <div class="d-flex align-items-center">
+                    <i class="bi bi-explicit-fill me-1 ${explicit}"></i>
+                    <span class="small ">
+                      <i class="bi bi-play-btn"></i>
+                      Video musicale
+                    </span>
+                  </div>
+                </div>
+                <div class="col-2">
+                  <div class="col-auto d-none d-md-block text-secondary">
+                    ${traccia.rank.toLocaleString()}
+                  </div>
+                </div>
+                <div class="col-1 text-end">
+                  <i class="bi bi-plus-circle icona fs-4"
+                  onclick="salvaCanzone(this, \`${traccia.preview}\`, \`${traccia.title}\`, \`${traccia.artist.name}\`, \`${datiCanzoni.data[i].album.cover_small}\`, \`${datiCanzoni.data[i].album.cover_big}\`, \`${traccia.artist.picture_big}\`, \`${traccia.artist.id}\`, \`${traccia.artist.tracklist}\`, \`${traccia.explicit_lyrics}\`, \`${traccia.duration}\`, \`${traccia.album.id}\`)"
+                  ></i>
+                </div>
+                <div class="col-1 text-center">
+                  <p class="m-0">${minuti}:${secondi}</p>
+                </div>
+                <div class="col-1 text-end dropdown">
+                  <a class="btn bg-transparent" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="bi bi-three-dots text-ligth icona fs-4"></i>
+                  </a>
+
+                  <ul class="dropdown-menu">
+
+                    <li><a class="dropdown-item" href="#"><i class="bi bi-check-circle-fill text-success  me-2"></i> Rimuovi dai brani che ti piacciono</a></li>
+
+                    
+
+                    ${dropdown}
+
+                    <li><a class="dropdown-item" href="./albumView.html?id=${traccia.album.id}"><i class="bi bi-vinyl-fill text-secondary  me-2"></i> Vai all'album</a></li>
+                  </ul>
+                </div>
               </div>
-              <div class="col-auto p-0">
-                <img src="${traccia.album.cover_small}" class="rounded" alt="cover" />
-              </div>
-              <div class="col ps-3">
-                <div class="text-white fw-bold d-block">${traccia.title}</div>
-                <small class="text-secondary"><i class="bi bi-play-btn me-1"></i>Video musicale</small>
-              </div>
-              <div class="col-auto d-none d-md-block text-secondary">
-                ${traccia.rank.toLocaleString()}
-              </div>
-              <div class="col-auto text-secondary ps-5">${minuti}:${secondi}</div>
-            </div>
           `
           // Aggiungiamo la riga al contenitore
           contenitore.innerHTML += rigaHTML
@@ -735,6 +817,9 @@ document.addEventListener("fullscreenchange", () => {
 })
 
 // FUNZIONE AGGIUNGI AI PREFERITI
+let braniPreferiti = JSON.parse(localStorage.getItem("brano-preferito")) || []
+
+// FUNZIONE AGGIUNGI AI PREFERITI
 const salvaCanzone = (
   icona,
   audioCanzone,
@@ -778,3 +863,26 @@ const contatoreBraniPreferiti = () => {
   contenitore.innerText += braniPreferiti.length
 }
 contatoreBraniPreferiti()
+
+/* Funzione per togliere rounded da lg in giù */
+
+const mobileView = window.matchMedia("(max-width: 991px)")
+
+const togliRounded = (e) => {
+  const mainSection = document.getElementById("main-section")
+  if (e.matches) {
+    console.log(
+      "Dimensione schermo inferiore a 991px tolgo i rounded sul main-section",
+    )
+    mainSection.classList.remove("rounded-4")
+  } else {
+    console.log(
+      "Dimensione schermo maggiore a 991px metto i rounded sul main-section",
+    )
+    mainSection.classList.add("rounded-4")
+  }
+}
+document.addEventListener("DOMContentLoaded", () => {
+  togliRounded(mobileView)
+  mobileView.addEventListener("change", togliRounded)
+})

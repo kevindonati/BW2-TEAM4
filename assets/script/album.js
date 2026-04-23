@@ -103,6 +103,10 @@ const estrazioneArtista = () => {
         const secondi = (durataCanzone % 60).toString().padStart(2, "0");
 
         const numeroCanzone = x;
+        const explicit = response.tracks.data[x].explicit_lyrics
+          ? ""
+          : "d-none";
+
         const contenitore = document.getElementById("contenitore-album");
         contenitore.innerHTML += `
               <div class="row mt-3 align-items-center px-4">
@@ -269,12 +273,12 @@ const riproduciCanzone = (
   if (inputAudio.src === audioCanzone) {
     if (inputAudio.paused) {
       inputAudio.play();
-      bottonePlay.classList.replace("bi-play-fill", "bi-pause-fill");
-      playBtn.classList.replace("bi-play-fill", "bi-pause-fill");
+      // bottonePlay.classList.replace("bi-play-fill", "bi-pause-fill")
+      // playBtn.classList.replace("bi-play-fill", "bi-pause-fill")
     } else {
       inputAudio.pause();
-      bottonePlay.classList.replace("bi-pause-fill", "bi-play-fill");
-      playBtn.classList.replace("bi-pause-fill", "bi-play-fill");
+      // bottonePlay.classList.replace("bi-pause-fill", "bi-play-fill")
+      // playBtn.classList.replace("bi-pause-fill", "bi-play-fill")
     }
   } else {
     inputAudio.src = audioCanzone;
@@ -681,4 +685,74 @@ document.addEventListener("fullscreenchange", () => {
   } else {
     fsBtn.classList.replace("bi-fullscreen-exit", "bi-fullscreen");
   }
+});
+
+// FUNZIONE AGGIUNGI AI PREFERITI
+let braniPreferiti = JSON.parse(localStorage.getItem("brano-preferito")) || [];
+
+const salvaCanzone = (
+  icona,
+  audioCanzone,
+  titolo,
+  nomeArtista,
+  copertinaSmall,
+  copertinaBig,
+  fotoArtista,
+  linkArtista,
+  tracklist,
+  explicit,
+  durata,
+  idAlbum,
+) => {
+  const datiCanzone = {
+    audio: audioCanzone,
+    titolo: titolo,
+    artista: nomeArtista,
+    coverSmall: copertinaSmall,
+    coverBig: copertinaBig,
+    fotoArtista: fotoArtista,
+    idArtista: linkArtista,
+    tracklist: tracklist,
+    explicit: explicit,
+    durata: durata,
+    idAlbum: idAlbum,
+  };
+
+  braniPreferiti.push(datiCanzone);
+  localStorage.setItem("brano-preferito", JSON.stringify(braniPreferiti));
+
+  icona.classList.replace("bi-plus-circle", "bi-check-circle-fill");
+  icona.classList.add("text-success");
+};
+
+const contatoreBraniPreferiti = () => {
+  const contenitore = document.getElementById("contatore-brani");
+  const braniPreferiti =
+    JSON.parse(localStorage.getItem("brano-preferito")) || [];
+  console.log(braniPreferiti);
+  contenitore.innerText += braniPreferiti.length;
+};
+contatoreBraniPreferiti();
+
+/* Funzione per togliere rounded da lg in giù */
+
+const mobileView = window.matchMedia("(max-width: 991px)");
+
+const togliRounded = (e) => {
+  const mainSection = document.getElementById("main-section");
+  if (e.matches) {
+    console.log(
+      "Dimensione schermo inferiore a 991px tolgo i rounded sul main-section",
+    );
+    mainSection.classList.remove("rounded-4");
+  } else {
+    console.log(
+      "Dimensione schermo maggiore a 991px metto i rounded sul main-section",
+    );
+    mainSection.classList.add("rounded-4");
+  }
+};
+document.addEventListener("DOMContentLoaded", () => {
+  togliRounded(mobileView);
+  mobileView.addEventListener("change", togliRounded);
 });
