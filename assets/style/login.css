@@ -1,0 +1,38 @@
+body {
+  background: linear-gradient(to bottom, #1f1f1f, #000000);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.login-card {
+  background-color: #121212;
+  border-radius: 8px;
+  padding: 40px;
+  width: 100%;
+  max-width: 450px;
+}
+.btn-spotify {
+  background-color: #1ed760;
+  color: black;
+  font-weight: bold;
+  border-radius: 50px;
+  padding: 12px;
+  border: none;
+}
+.btn-spotify:hover {
+  background-color: #1fdf64;
+  transform: scale(1.04);
+  color: black;
+}
+.form-control {
+  background-color: #242424;
+  border: 1px solid #727272;
+  color: white;
+}
+.form-control:focus {
+  background-color: #2a2a2a;
+  border-color: white;
+  box-shadow: none;
+  color: white;
+}
