@@ -30,14 +30,18 @@ fetch(urlApiArtista)
       stories.setAttribute("src", artista.picture_small)
     }
     // cambiamo il testo delle sezioni artista e numero ascoltatori
-    document.getElementById("nome-artista").innerText = artista.name
-    document.getElementById("fan-artista").innerText =
-      artista.nb_fan.toLocaleString() // toLocaleString aggiunge i puntini ai numeri grandi
+    const nomeArtista = document.getElementById("nome-artista")
+    nomeArtista.innerText = artista.name
+    nomeArtista.classList.add("text-shadow")
+
+    const nFan = document.getElementById("fan-artista")
+    nFan.innerText = artista.nb_fan.toLocaleString()
+
     // cambiamo l'immagine del banner
     const banner = document.getElementById("artist-banner")
     banner.style.backgroundImage = "url('" + artista.picture_xl + "')"
     banner.style.backgroundSize = "cover"
-    banner.style.backgroundPosition = "top"
+    banner.style.backgroundPosition = "center"
     banner.style.backgroundRepeat = "no-repeat"
     //Inserisco la parte per il colore dinamico
     coloraSfondoDinamico(artista.picture_xl, ".bg-linear")
@@ -111,7 +115,7 @@ fetch(urlApiArtista)
                 </div>
                 <div class="col-1">
                   <img
-                        class="w-100"
+                        class="w-75"
                         src="${datiCanzoni.data[i].album.cover_big}"
                         alt="foto album"
                         crossorigin="anonymous"
