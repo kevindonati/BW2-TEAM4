@@ -121,7 +121,8 @@ const estrazioneArtista = () => {
                 </div>
                 <div class="col-1 text-end">
                   <i class="bi bi-plus-circle icona fs-4"
-                  onclick="salvaCanzone(this, \`${response.tracks.data[x].preview}\`, \`${response.tracks.data[x].title}\`, \`${response.tracks.data[x].artist.name}\`, \`${response.cover_small}\`, \`${response.cover_big}\`, \`${response.artist.picture_big}\`, \`${response.artist.id}\`, \`${response.artist.tracklist}\`, \`${response.tracks.data[x].explicit_lyrics}\`, \`${response.tracks.data[x].duration}\`, \`${response.id}\`)"
+                  onclick="salvaCanzone(this, \`${response.tracks.data[x].preview}\`, \`${response.tracks.data[x].title}\`, \`${response.tracks.data[x].artist.name}\`, \`${response.cover_small}\`, \`${response.cover_big}\`, \`${response.artist.picture_big}\`, \`${response.artist.id}\`, \`${response.artist.tracklist}\`, \`${response.tracks.data[x].explicit_lyrics}\`, \`${response.tracks.data[x].duration}\`, \`${response.id}\`, \`${response.tracks.data[x].id}\`)"
+                  data-id="${response.tracks.data[x].id}"
                   ></i>
                 </div>
                 <div class="col-1 text-center">
@@ -132,6 +133,7 @@ const estrazioneArtista = () => {
 
         const diritti = response.tracks.data[x].title
       }
+      preferitiEsistenti()
     })
     .catch((err) => {
       console.log("errore nella fetch", err)
@@ -705,6 +707,7 @@ const salvaCanzone = (
   explicit,
   durata,
   idAlbum,
+  idBrano,
 ) => {
   const datiCanzone = {
     audio: audioCanzone,
@@ -718,13 +721,23 @@ const salvaCanzone = (
     explicit: explicit,
     durata: durata,
     idAlbum: idAlbum,
+    idBrano: idBrano,
   }
-
-  braniPreferiti.push(datiCanzone)
+  // CONTROLLO SE GIà ESISTE NEI PREFERITI TRAMITE IL SUO IDalbum
+  const esiste = braniPreferiti.findIndex((b) => b.idBrano === idBrano)
+  // SE NON ESISTE:
+  if (esiste === -1) {
+    braniPreferiti.push(datiCanzone)
+    icona.classList.replace("bi-plus-circle", "bi-check-circle-fill")
+    icona.classList.add("text-success")
+  }
+  // SE ESISTE
+  else {
+    braniPreferiti.splice(esiste, 1)
+    icona.classList.replace("bi-check-circle-fill", "bi-plus-circle")
+    icona.classList.remove("text-success")
+  }
   localStorage.setItem("brano-preferito", JSON.stringify(braniPreferiti))
-
-  icona.classList.replace("bi-plus-circle", "bi-check-circle-fill")
-  icona.classList.add("text-success")
 }
 
 const contatoreBraniPreferiti = () => {
@@ -732,9 +745,26 @@ const contatoreBraniPreferiti = () => {
   const braniPreferiti =
     JSON.parse(localStorage.getItem("brano-preferito")) || []
   console.log(braniPreferiti)
-  contenitore.innerText += braniPreferiti.length
+  contenitore.innerText = braniPreferiti.length
 }
 contatoreBraniPreferiti()
+
+// ASSEGNO ICONA GIà AGGIUNTO A CANZONI GIà SALVATE
+function preferitiEsistenti() {
+  const braniPreferiti =
+    JSON.parse(localStorage.getItem("brano-preferito")) || []
+
+  document.querySelectorAll(".icona[data-id]").forEach((icon) => {
+    const id = Number(icon.dataset.id)
+
+    const trovato = braniPreferiti.some((b) => Number(b.idBrano) === id)
+
+    if (trovato) {
+      icon.classList.replace("bi-plus-circle", "bi-check-circle-fill")
+      icon.classList.add("text-success")
+    }
+  })
+}
 
 /* Funzione per togliere rounded da lg in giù */
 

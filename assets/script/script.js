@@ -74,6 +74,7 @@ const main8 = () => {
       }
     })
     .then((data) => {
+      console.log("data", data)
       const spinner = document.querySelectorAll(".contenitore-spinner")
       spinner[1].classList.add("d-none")
 
@@ -100,7 +101,7 @@ const main8 = () => {
                 <a
                   class="btn btn-success flex mostra-al-passaggio rounded rounded-circle text-black shadow shadow-lg position-absolute end-0 m-1 px-1 py-0 d-flex" 
                   
-                  onclick="riproduciCanzone(this, \`${data.data[i].preview}\`, \`${data.data[i].title}\`, \`${data.data[i].artist.name}\`, \`${data.data[i].album.cover_small}\`, \`${data.data[i].album.cover_big}\`, \`${data.data[i].artist.picture_big}\`, \`${data.data[i].artist.id}\`, \`${data.data[i].artist.tracklist}\`)"
+                  onclick="riproduciCanzone(this, \`${data.data[i].preview}\`, \`${data.data[i].title}\`, \`${data.data[i].artist.name}\`, \`${data.data[i].album.cover_small}\`, \`${data.data[i].album.cover_big}\`, \`${data.data[i].artist.picture_big}\`, \`${data.data[i].artist.id}\`, \`${data.data[i].artist.tracklist}\`, \`${data.data[i].explicit_lyrics}\`, \`${data.data[i].duration}\`, \`${data.data[i].id}\`, \`${data.data[i].album.id}\`)"
                 >
                   <i
                     class="bi bi-play-fill justify-content-center align-items-center"
@@ -261,6 +262,10 @@ const riproduciCanzone = (
   fotoArtista,
   linkArtista,
   tracklist,
+  explicit,
+  durata,
+  idTraccia,
+  idAlbum,
 ) => {
   console.log(tracklist)
   const bottonePlay = document.getElementById("btn-play-canzone")
@@ -300,6 +305,27 @@ const riproduciCanzone = (
   const nome = document.querySelectorAll(".autore-barra-dx")
   const fotoProfiloArtista = document.getElementById("foto-artista")
   const ascoltatoriMensili = document.querySelector(".ascoltatori")
+  const btnAggiungi = document.getElementById("btn-aggiungi")
+  btnAggiungi.setAttribute("data-id", idTraccia)
+
+  btnAggiungi.addEventListener("click", () => {
+    salvaCanzone(
+      btnAggiungi,
+      audioCanzone,
+      titolo,
+      nomeArtista,
+      copertinaSmall,
+      copertinaBig,
+      fotoArtista,
+      linkArtista,
+      tracklist,
+      explicit,
+      durata,
+      idAlbum,
+      idTraccia,
+    )
+  })
+  preferitiEsistenti()
 
   for (let i = 0; i < nome.length; i++) {
     nome[i].innerHTML = `${nomeArtista}`
@@ -926,6 +952,8 @@ mostratutto3.addEventListener("click", (e) => {
   }
 })
 // FUNZIONE AGGIUNGI AI PREFERITI
+let braniPreferiti = JSON.parse(localStorage.getItem("brano-preferito")) || []
+
 const salvaCanzone = (
   icona,
   audioCanzone,
@@ -939,6 +967,7 @@ const salvaCanzone = (
   explicit,
   durata,
   idAlbum,
+  idBrano,
 ) => {
   const datiCanzone = {
     audio: audioCanzone,
@@ -952,13 +981,23 @@ const salvaCanzone = (
     explicit: explicit,
     durata: durata,
     idAlbum: idAlbum,
+    idBrano: idBrano,
   }
-
-  braniPreferiti.push(datiCanzone)
+  // CONTROLLO SE GIà ESISTE NEI PREFERITI TRAMITE IL SUO IDalbum
+  const esiste = braniPreferiti.findIndex((b) => b.idBrano === idBrano)
+  // SE NON ESISTE:
+  if (esiste === -1) {
+    braniPreferiti.push(datiCanzone)
+    icona.classList.replace("bi-plus-circle", "bi-check-circle-fill")
+    icona.classList.add("text-success")
+  }
+  // SE ESISTE
+  else {
+    braniPreferiti.splice(esiste, 1)
+    icona.classList.replace("bi-check-circle-fill", "bi-plus-circle")
+    icona.classList.remove("text-success")
+  }
   localStorage.setItem("brano-preferito", JSON.stringify(braniPreferiti))
-
-  icona.classList.replace("bi-plus-circle", "bi-check-circle-fill")
-  icona.classList.add("text-success")
 }
 
 const contatoreBraniPreferiti = () => {
@@ -966,9 +1005,26 @@ const contatoreBraniPreferiti = () => {
   const braniPreferiti =
     JSON.parse(localStorage.getItem("brano-preferito")) || []
   console.log(braniPreferiti)
-  contenitore.innerText += braniPreferiti.length
+  contenitore.innerText = braniPreferiti.length
 }
 contatoreBraniPreferiti()
+
+// ASSEGNO ICONA GIà AGGIUNTO A CANZONI GIà SALVATE
+function preferitiEsistenti() {
+  const braniPreferiti =
+    JSON.parse(localStorage.getItem("brano-preferito")) || []
+
+  document.querySelectorAll(".icona-2[data-id]").forEach((icon) => {
+    const id = Number(icon.dataset.id)
+
+    const trovato = braniPreferiti.some((b) => Number(b.idBrano) === id)
+
+    if (trovato) {
+      icon.classList.replace("bi-plus-circle", "bi-check-circle-fill")
+      icon.classList.add("text-success")
+    }
+  })
+}
 
 /* Funzione per togliere rounded da lg in giù */
 
