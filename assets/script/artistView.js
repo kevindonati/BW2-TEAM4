@@ -168,22 +168,38 @@ fetch(urlApiArtista)
           // Aggiungiamo la riga al contenitore
           contenitore.innerHTML += rigaHTML;
         }
+        // Attivo all'icona Play la riproduzione della prima canzone
+        // RECUPERIAMO IL PLAYER AUDIO
+        const inputAudio = document.querySelector("audio");
+        // Attivo all'icona Play la riproduzione della prima canzone
         const primaCanzone = canzoni[0];
         const iconaPlay = document.querySelector(".bi-play-circle-fill");
-        iconaPlay.setAttribute(
-          "onclick",
-          `riproduciCanzone(
-    this, 
-    '${primaCanzone.preview}', 
-    '${primaCanzone.title}', 
-    '${primaCanzone.artist.name}', 
-    '${primaCanzone.album.cover_small}', 
-    '${primaCanzone.album.cover_big}', 
-    '${primaCanzone.artist.picture_big}', 
-    '${primaCanzone.artist.id}', 
-    '${primaCanzone.artist.tracklist}'
-)`,
-        );
+
+        iconaPlay.onclick = function () {
+          // Eseguiamo la tua funzione originale
+          riproduciCanzone(
+            this,
+            primaCanzone.preview,
+            primaCanzone.title,
+            primaCanzone.artist.name,
+            primaCanzone.album.cover_small,
+            primaCanzone.album.cover_big,
+            primaCanzone.artist.picture_big,
+            primaCanzone.artist.id,
+            primaCanzone.artist.tracklist,
+          );
+
+          // Gestiamo il cambio icona dopo un piccolissimo attesa
+          setTimeout(() => {
+            if (inputAudio.paused) {
+              this.classList.remove("bi-pause-circle-fill");
+              this.classList.add("bi-play-circle-fill");
+            } else {
+              this.classList.remove("bi-play-circle-fill");
+              this.classList.add("bi-pause-circle-fill");
+            }
+          }, 100);
+        };
       })
       .catch((error) => console.log("Errore connessione server", error));
   });
