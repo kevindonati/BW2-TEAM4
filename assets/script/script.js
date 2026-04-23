@@ -93,6 +93,7 @@ const main8 = () => {
                     alt=""
                     crossorigin="anonymous"
                     class="img-fluid rounded-start img-per-colore"
+                    class="img-fluid rounded-4 img-per-colore"
                   />
                   <small >${data.data[i].title}</small>
                 </div>
