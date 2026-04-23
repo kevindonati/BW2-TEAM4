@@ -9,19 +9,6 @@ footer {
   );
 }
 
-#mobile-bottom {
-}
-
-/* #mobile-nav {
-  background: linear-gradient(
-    to top,
-    #000000 0%,
-    #121212 50%,
-    #222222 100%
-  ) !important;
-  background-attachment: fixed;
-} */
-
 .bg-grigio {
   background-color: #242424;
 }
