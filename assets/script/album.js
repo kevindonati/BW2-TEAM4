@@ -10,6 +10,7 @@ const searchInput = document.getElementById("searchInput")
 const searchResults = document.getElementById("searchResults")
 const parametri = new URLSearchParams(location.search)
 const IDalbum = parametri.get("id")
+const btnAggiungi = document.querySelectorAll(".btn-aggiungi")
 
 // Inserisco la funzione per applicare i colori di sfondo
 const applicaColoriAlbum = function (urlImmagine) {
@@ -111,7 +112,21 @@ const estrazioneArtista = () => {
                 <div class="col-1 cella">
                   <span class="numero-cella">${numeroCanzone}</span>
                     <i 
-                     onclick="riproduciCanzone(this, \`${response.tracks.data[x].preview}\`, \`${response.tracks.data[x].title}\`, \`${response.tracks.data[x].artist.name}\`, \`${response.cover_small}\`, \`${response.cover_big}\`, \`${response.artist.picture_big}\`, \`${response.artist.id}\`, \`${response.artist.tracklist}\`)"
+                     onclick="riproduciCanzone(
+                      this,
+                      \`${response.tracks.data[x].preview}\`,
+                      \`${response.tracks.data[x].title}\`,
+                      \`${response.tracks.data[x].artist.name}\`,
+                      \`${response.cover_small}\`,
+                      \`${response.cover_big}\`,
+                      \`${response.artist.picture_big}\`,
+                      \`${response.artist.id}\`,
+                      \`${response.artist.tracklist}\`,
+                      \`${response.tracks.data[x].explicit_lyrics}\`,
+                      \`${response.tracks.data[x].duration}\`,
+                      \`${response.tracks.data[x].id}\`,
+                      \`${response.id}\`
+                    )"
                      class="fas fa-play text-light icona fs-4"></i>
                 </div>
                 <div class="col-9">
@@ -120,7 +135,7 @@ const estrazioneArtista = () => {
                   <span class="text-secondary small">${artista}</span>
                 </div>
                 <div class="col-1 text-end">
-                  <i class="bi bi-plus-circle icona fs-4"
+                  <i class="bi bi-plus-circle icona fs-4 btn-aggiungi"
                   onclick="salvaCanzone(this, \`${response.tracks.data[x].preview}\`, \`${response.tracks.data[x].title}\`, \`${response.tracks.data[x].artist.name}\`, \`${response.cover_small}\`, \`${response.cover_big}\`, \`${response.artist.picture_big}\`, \`${response.artist.id}\`, \`${response.artist.tracklist}\`, \`${response.tracks.data[x].explicit_lyrics}\`, \`${response.tracks.data[x].duration}\`, \`${response.id}\`, \`${response.tracks.data[x].id}\`)"
                   data-id="${response.tracks.data[x].id}"
                   ></i>
@@ -258,7 +273,8 @@ const renderDropdownResult = (songs) => {
       <img src="${song.album.cover_small}" class="img-fluid rounded shadow-sm" alt="${song.title}">
       <div class="mostra-al-passaggio position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center rounded" 
            style="background: rgba(0,0,0,0.5)" 
-           onclick="riproduciCanzone(this, \`${song.preview}\`, \`${song.title}\`, \`${song.artist.name}\`, \`${song.album.cover_small}\`, \`${song.album.cover_big}\`, \`${song.artist.picture_big}\`, \`${song.artist.id}\`, \`${song.artist.tracklist}\`)">
+           onclick="riproduciCanzone(this, \`${song.preview}\`, \`${song.title}\`, \`${song.artist.name}\`, \`${song.album.cover_small}\`, \`${song.album.cover_big}\`, \`${song.artist.picture_big}\`, \`${song.artist.id}\`, \`${song.artist.tracklist}\`, \`${song.explicit_lyrics}\`), \`${song.duration}\`, \`${song.id}\`, \`${song.album.id}\`"
+           data-id="${song.id}">
           <i class="fas fa-play text-white fs-6"></i>
       </div>
     </div>
@@ -286,6 +302,7 @@ const renderDropdownResult = (songs) => {
   })
 
   searchResults.appendChild(listContainer)
+  preferitiEsistenti()
 }
 
 const riproduciCanzone = (
@@ -298,7 +315,18 @@ const riproduciCanzone = (
   fotoArtista,
   linkArtista,
   tracklist,
+  explicit,
+  durata,
+  idTraccia,
+  idAlbum,
 ) => {
+  const icona = document.querySelectorAll(".btn-aggiungi")
+  for (let i = 0; i < icona.length; i++) {
+    icona[i].classList.remove("bi-check-circle-fill")
+    icona[i].classList.add("bi-plus-circle")
+    icona[i].classList.remove("text-success")
+  }
+
   const bottonePlay = document.getElementById("btn-play-canzone")
   // if (!bottonePlay) return; // Se il bottone non esiste, non provare a cambiargli classe
   const inputAudio = document.getElementById("audio")
@@ -320,6 +348,29 @@ const riproduciCanzone = (
     iconaPlay.classList.replace("fa-play", "fa-pause")
     playBtn.classList.replace("bi-play-circle-fill", "bi-pause-circle-fill")
   }
+
+  for (let i = 0; i < btnAggiungi.length; i++) {
+    btnAggiungi[i].setAttribute("data-id", idTraccia)
+
+    btnAggiungi[i].addEventListener("click", () => {
+      salvaCanzone(
+        btnAggiungi,
+        audioCanzone,
+        titolo,
+        nomeArtista,
+        copertinaSmall,
+        copertinaBig,
+        fotoArtista,
+        linkArtista,
+        tracklist,
+        explicit,
+        durata,
+        idAlbum,
+        idTraccia,
+      )
+    })
+  }
+  preferitiEsistenti()
 
   const placeholder = document.querySelectorAll(".placeholder")
   console.log(placeholder)
@@ -757,17 +808,22 @@ const salvaCanzone = (
   }
   // CONTROLLO SE GIà ESISTE NEI PREFERITI TRAMITE IL SUO IDalbum
   const esiste = braniPreferiti.findIndex((b) => b.idBrano === idBrano)
+
+  for (let i = 0; i < btnAggiungi.length; i++) {
+    btnAggiungi[i].classList.replace("bi-plus-circle", "bi-check-circle-fill")
+    btnAggiungi[i].classList.add("text-success")
+  }
   // SE NON ESISTE:
   if (esiste === -1) {
     braniPreferiti.push(datiCanzone)
-    icona.classList.replace("bi-plus-circle", "bi-check-circle-fill")
-    icona.classList.add("text-success")
   }
   // SE ESISTE
   else {
     braniPreferiti.splice(esiste, 1)
-    icona.classList.replace("bi-check-circle-fill", "bi-plus-circle")
-    icona.classList.remove("text-success")
+    for (let i = 0; i < btnAggiungi.length; i++) {
+      btnAggiungi[i].classList.replace("bi-check-circle-fill", "bi-plus-circle")
+      btnAggiungi[i].classList.remove("text-success")
+    }
   }
   localStorage.setItem("brano-preferito", JSON.stringify(braniPreferiti))
 }
@@ -786,7 +842,7 @@ function preferitiEsistenti() {
   const braniPreferiti =
     JSON.parse(localStorage.getItem("brano-preferito")) || []
 
-  document.querySelectorAll(".icona[data-id]").forEach((icon) => {
+  document.querySelectorAll("[data-id]").forEach((icon) => {
     const id = Number(icon.dataset.id)
 
     const trovato = braniPreferiti.some((b) => Number(b.idBrano) === id)
@@ -794,6 +850,9 @@ function preferitiEsistenti() {
     if (trovato) {
       icon.classList.replace("bi-plus-circle", "bi-check-circle-fill")
       icon.classList.add("text-success")
+    } else {
+      icon.classList.replace("bi-check-circle-fill", "bi-plus-circle")
+      icon.classList.remove("text-success")
     }
   })
 }

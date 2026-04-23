@@ -8,6 +8,7 @@ const urlPlaylistTheWeeknd =
   "https://striveschool-api.herokuapp.com/api/deezer/artist/4050205/top?limit=50"
 const searchInput = document.getElementById("searchInput")
 const searchResults = document.getElementById("searchResults")
+const btnAggiungi = document.querySelectorAll(".btn-aggiungi")
 
 const applicaColore = function (img, thief) {
   try {
@@ -65,7 +66,7 @@ libreria()
 
 // RIEMPO IL MAIN
 const main8 = () => {
-  fetch(urlSearch + "Pink")
+  fetch(urlSearch + "lazza")
     .then((response) => {
       if (response.ok) {
         return response.json()
@@ -135,7 +136,7 @@ main8()
 
 // RIEMPO PRIMO CAROSELLO
 const primoCarosello = () => {
-  fetch(urlSearch + "american rap")
+  fetch(urlSearch + "tony boy")
     .then((response) => {
       if (response.ok) {
         return response.json()
@@ -175,7 +176,7 @@ primoCarosello()
 
 // RIEMPO SECONDO CAROSELLO
 const secondoCarosello = () => {
-  fetch(urlSearch + "italian trap")
+  fetch(urlSearch + "bts")
     .then((response) => {
       if (response.ok) {
         return response.json()
@@ -215,7 +216,7 @@ secondoCarosello()
 
 // RIEMPO TERZO CAROSELLO
 const terzoCarosello = () => {
-  fetch(urlSearch + "party")
+  fetch(urlSearch + "glocky")
     .then((response) => {
       if (response.ok) {
         return response.json()
@@ -270,24 +271,39 @@ const riproduciCanzone = (
   idTraccia,
   idAlbum,
 ) => {
+  const icona = document.querySelectorAll(".btn-aggiungi")
+  for (let i = 0; i < icona.length; i++) {
+    icona[i].classList.remove("bi-check-circle-fill")
+    icona[i].classList.add("bi-plus-circle")
+    icona[i].classList.remove("text-success")
+  }
+
   const bottonePlay = document.getElementById("btn-play-canzone")
-  if (!bottonePlay) return // Se il bottone non esiste, non provare a cambiargli classe
+  // if (!bottonePlay) return // Se il bottone non esiste, non provare a cambiargli classe
   const inputAudio = document.getElementById("audio")
   const playBtn = document.getElementById("playPauseBtn")
 
   if (inputAudio.src === audioCanzone) {
     if (inputAudio.paused) {
       inputAudio.play()
-      bottonePlay.classList.replace("bi-play-fill", "bi-pause-fill")
-      playBtn.classList.replace("bi-play-fill", "bi-pause-fill")
+      iconaPlay.innerHTML = `<i
+                              class="bi bi-pause-fill justify-content-center align-items-center"
+                            ></i>`
+      playBtn.classList.replace("bi-play-circle-fill", "bi-pause-circle-fill")
     } else {
       inputAudio.pause()
-      bottonePlay.classList.replace("bi-pause-fill", "bi-play-fill")
-      playBtn.classList.replace("bi-pause-fill", "bi-play-fill")
+      iconaPlay.innerHTML = `<i
+                              class="bi bi-play-fill justify-content-center align-items-center"
+                            ></i>`
+      playBtn.classList.replace("bi-pause-circle-fill", "bi-play-circle-fill")
     }
   } else {
     inputAudio.src = audioCanzone
     inputAudio.play()
+    iconaPlay.innerHTML = `<i
+                              class="bi bi-pause-fill justify-content-center align-items-center"
+                            ></i>`
+    playBtn.classList.replace("bi-play-circle-fill", "bi-pause-circle-fill")
   }
 
   // RIEMPO BARRA FOOTER CON CNZONE IN RIPRODUZIONE
@@ -299,26 +315,28 @@ const riproduciCanzone = (
   const nome = document.querySelectorAll(".autore-barra-dx")
   const fotoProfiloArtista = document.getElementById("foto-artista")
   const ascoltatoriMensili = document.querySelector(".ascoltatori")
-  const btnAggiungi = document.getElementById("btn-aggiungi")
-  btnAggiungi.setAttribute("data-id", idTraccia)
 
-  btnAggiungi.addEventListener("click", () => {
-    salvaCanzone(
-      btnAggiungi,
-      audioCanzone,
-      titolo,
-      nomeArtista,
-      copertinaSmall,
-      copertinaBig,
-      fotoArtista,
-      linkArtista,
-      tracklist,
-      explicit,
-      durata,
-      idAlbum,
-      idTraccia,
-    )
-  })
+  for (let i = 0; i < btnAggiungi.length; i++) {
+    btnAggiungi[i].setAttribute("data-id", idTraccia)
+
+    btnAggiungi[i].addEventListener("click", () => {
+      salvaCanzone(
+        btnAggiungi,
+        audioCanzone,
+        titolo,
+        nomeArtista,
+        copertinaSmall,
+        copertinaBig,
+        fotoArtista,
+        linkArtista,
+        tracklist,
+        explicit,
+        durata,
+        idAlbum,
+        idTraccia,
+      )
+    })
+  }
   preferitiEsistenti()
 
   for (let i = 0; i < nome.length; i++) {
@@ -532,7 +550,7 @@ const renderDropdownResult = (songs) => {
       <img src="${song.album.cover_small}" class="img-fluid rounded shadow-sm" alt="${song.title}">
       <div class="mostra-al-passaggio position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center rounded" 
            style="background: rgba(0,0,0,0.5)" 
-           onclick="riproduciCanzone(\`${song.preview}\`, \`${song.title}\`, \`${song.artist.name}\`, \`${song.album.cover_small}\`, \`${song.album.cover_big}\`, \`${song.artist.picture_big}\`, \`${song.artist.id}\`, \`${song.artist.tracklist}\`)">
+                        onclick="riproduciCanzone(this, \`${song.preview}\`, \`${song.title}\`, \`${song.artist.name}\`, \`${song.album.cover_small}\`, \`${song.album.cover_big}\`, \`${song.artist.picture_big}\`, \`${song.artist.id}\`, \`${song.artist.tracklist}\`, \`${song.explicit_lyrics}\`), \`${song.duration}\`, \`${song.id}\`, \`${song.album.id}\`">
           <i class="fas fa-play text-white fs-6"></i>
       </div>
     </div>
@@ -994,14 +1012,18 @@ const salvaCanzone = (
   // SE NON ESISTE:
   if (esiste === -1) {
     braniPreferiti.push(datiCanzone)
-    icona.classList.replace("bi-plus-circle", "bi-check-circle-fill")
-    icona.classList.add("text-success")
+    for (let i = 0; i < btnAggiungi.length; i++) {
+      btnAggiungi[i].classList.replace("bi-plus-circle", "bi-check-circle-fill")
+      btnAggiungi[i].classList.add("text-success")
+    }
   }
   // SE ESISTE
   else {
     braniPreferiti.splice(esiste, 1)
-    icona.classList.replace("bi-check-circle-fill", "bi-plus-circle")
-    icona.classList.remove("text-success")
+    for (let i = 0; i < btnAggiungi.length; i++) {
+      btnAggiungi[i].classList.replace("bi-check-circle-fill", "bi-plus-circle")
+      btnAggiungi[i].classList.remove("text-success")
+    }
   }
   localStorage.setItem("brano-preferito", JSON.stringify(braniPreferiti))
 }
@@ -1026,8 +1048,13 @@ function preferitiEsistenti() {
     const trovato = braniPreferiti.some((b) => Number(b.idBrano) === id)
 
     if (trovato) {
-      icon.classList.replace("bi-plus-circle", "bi-check-circle-fill")
-      icon.classList.add("text-success")
+      for (let i = 0; i < btnAggiungi.length; i++) {
+        btnAggiungi[i].classList.replace(
+          "bi-plus-circle",
+          "bi-check-circle-fill",
+        )
+        btnAggiungi[i].classList.add("text-success")
+      }
     }
   })
 }
