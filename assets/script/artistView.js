@@ -110,7 +110,7 @@ fetch(urlApiArtista)
                 <div class="col-1 cella">
                   <span class="numero-cella">${i + 1}</span>
                     <i 
-                     onclick="riproduciCanzone(\`${datiCanzoni.data[i].preview}\`, \`${datiCanzoni.data[i].title}\`, \`${datiCanzoni.data[i].artist.name}\`, \`${datiCanzoni.data[i].album.cover_small}\`, \`${datiCanzoni.data[i].album.cover_big}\`, \`${datiCanzoni.data[i].artist.picture_big}\`, \`${datiCanzoni.data[i].artist.id}\`, \`${datiCanzoni.data[i].artist.tracklist}\`)"
+                     onclick="riproduciCanzone(this, \`${datiCanzoni.data[i].preview}\`, \`${datiCanzoni.data[i].title}\`, \`${datiCanzoni.data[i].artist.name}\`, \`${datiCanzoni.data[i].album.cover_small}\`, \`${datiCanzoni.data[i].album.cover_big}\`, \`${datiCanzoni.data[i].artist.picture_big}\`, \`${datiCanzoni.data[i].artist.id}\`, \`${datiCanzoni.data[i].artist.tracklist}\`)"
                      class="fas fa-play text-light icona fs-4"></i>
                 </div>
                 <div class="col-1">
@@ -288,6 +288,7 @@ const renderDropdownResult = (songs) => {
 }
 
 const riproduciCanzone = (
+  iconaPlay,
   audioCanzone,
   titolo,
   nomeArtista,
@@ -297,25 +298,26 @@ const riproduciCanzone = (
   linkArtista,
   tracklist,
 ) => {
-  console.log("prova")
   const bottonePlay = document.getElementById("btn-play-canzone")
-  // if (!bottonePlay) return // Se il bottone non esiste, non provare a cambiargli classe
+  // if (!bottonePlay) return; // Se il bottone non esiste, non provare a cambiargli classe
   const inputAudio = document.getElementById("audio")
   const playBtn = document.getElementById("playPauseBtn")
 
   if (inputAudio.src === audioCanzone) {
     if (inputAudio.paused) {
       inputAudio.play()
-      bottonePlay.classList.replace("bi-play-fill", "bi-pause-fill")
-      playBtn.classList.replace("bi-play-fill", "bi-pause-fill")
+      iconaPlay.classList.replace("fa-play", "fa-pause")
+      playBtn.classList.replace("bi-play-circle-fill", "bi-pause-circle-fill")
     } else {
       inputAudio.pause()
-      bottonePlay.classList.replace("bi-pause-fill", "bi-play-fill")
-      playBtn.classList.replace("bi-pause-fill", "bi-play-fill")
+      iconaPlay.classList.replace("fa-pause", "fa-play")
+      playBtn.classList.replace("bi-pause-circle-fill", "bi-play-circle-fill")
     }
   } else {
     inputAudio.src = audioCanzone
     inputAudio.play()
+    iconaPlay.classList.replace("fa-play", "fa-pause")
+    playBtn.classList.replace("bi-play-circle-fill", "bi-pause-circle-fill")
   }
 
   const placeholder = document.querySelectorAll(".placeholder")
