@@ -819,11 +819,19 @@ const albumSelezionatiPerTe = document.getElementById("selezionati");
 const recenti = document.getElementById("recenti2");
 const continuaAdAscoltare = document.getElementById("continua");
 //BOTTONI PREVIUS
-const prevButton = document.getElementById("prev-button");
-const prevSpan = document.getElementById("prev-span");
+const prevButton1 = document.getElementById("prev-button-1");
+const prevSpan1 = document.getElementById("prev-span-1");
+const prevButton2 = document.getElementById("prev-button-2");
+const prevSpan2 = document.getElementById("prev-span-2");
+const prevButton3 = document.getElementById("prev-button-3");
+const prevSpan3 = document.getElementById("prev-span-3");
 //BOTTONI NEXT
-const nextButton = document.getElementById("next-button");
-const nextSpan = document.getElementById("next-span");
+const nextButton1 = document.getElementById("next-button-1");
+const nextSpan1 = document.getElementById("next-span-1");
+const nextButton2 = document.getElementById("next-button-2");
+const nextSpan2 = document.getElementById("next-span-2");
+const nextButton3 = document.getElementById("next-button-3");
+const nextSpan3 = document.getElementById("next-span-3");
 
 mostraTutto1.addEventListener("click", (e) => {
   e.preventDefault();
@@ -838,10 +846,8 @@ mostraTutto1.addEventListener("click", (e) => {
     mostratutto3.classList.add("d-none");
     recenti.classList.add("d-none");
     continuaAdAscoltare.classList.add("d-none");
-    prevButton.classList.add("d-none");
-    prevSpan.classList.add("d-none");
-    nextButton.classList.add("d-none");
-    nextSpan.classList.add("d-none");
+    prevButton1.classList.add("d-none");
+    nextButton1.classList.add("d-none");
   } else {
     mostraTutto1.innerText = "Mostra tutto";
     carosello1.classList.remove("d-none");
@@ -850,14 +856,12 @@ mostraTutto1.addEventListener("click", (e) => {
     mostratutto3.classList.remove("d-none");
     recenti.classList.remove("d-none");
     continuaAdAscoltare.classList.remove("d-none");
-    prevButton.classList.remove("d-none");
-    prevSpan.classList.remove("d-none");
-    nextButton.classList.remove("d-none");
-    nextSpan.classList.remove("d-none");
+    prevButton1.classList.remove("d-none");
+    nextButton1.classList.remove("d-none");
   }
 });
 
-mostraTutto2.addEventListener("click", (e) => {
+mostratutto2.addEventListener("click", (e) => {
   e.preventDefault();
 
   const GrigliaAttiva2 = carosello1.classList.toggle("griglia-attiva");
@@ -870,10 +874,8 @@ mostraTutto2.addEventListener("click", (e) => {
     carosello2.classList.add("d-none");
     continuaAdAscoltare.classList.add("d-none");
     albumSelezionatiPerTe.classList.add("d-none");
-    prevButton.classList.add("d-none");
-    prevSpan.classList.add("d-none");
-    nextButton.classList.add("d-none");
-    nextSpan.classList.add("d-none");
+    prevButton2.classList.add("d-none");
+    nextButton2.classList.add("d-none");
   } else {
     mostratutto2.innerText = "Mostra tutto";
     mostraTutto1.classList.remove("d-none");
@@ -882,10 +884,8 @@ mostraTutto2.addEventListener("click", (e) => {
     carosello2.classList.remove("d-none");
     continuaAdAscoltare.classList.remove("d-none");
     albumSelezionatiPerTe.classList.remove("d-none");
-    prevButton.classList.remove("d-none");
-    prevSpan.classList.remove("d-none");
-    nextButton.classList.remove("d-none");
-    nextSpan.classList.remove("d-none");
+    prevButton2.classList.remove("d-none");
+    nextButton2.classList.remove("d-none");
   }
 });
 
@@ -901,10 +901,8 @@ mostratutto3.addEventListener("click", (e) => {
     carosello1.classList.add("d-none");
     albumSelezionatiPerTe.classList.add("d-none");
     recenti.classList.add("d-none");
-    prevButton.classList.add("d-none");
-    prevSpan.classList.add("d-none");
-    nextButton.classList.add("d-none");
-    nextSpan.classList.add("d-none");
+    prevButton3.classList.add("d-none");
+    nextButton3.classList.add("d-none");
   } else {
     mostratutto3.innerText = "Mostra tutto";
     mostraTutto1.classList.remove("d-none");
@@ -913,10 +911,8 @@ mostratutto3.addEventListener("click", (e) => {
     carosello1.classList.remove("d-none");
     albumSelezionatiPerTe.classList.remove("d-none");
     recenti.classList.remove("d-none");
-    prevButton.classList.remove("d-none");
-    prevSpan.classList.remove("d-none");
-    nextButton.classList.remove("d-none");
-    nextSpan.classList.remove("d-none");
+    prevButton3.classList.remove("d-none");
+    nextButton3.classList.remove("d-none");
   }
 });
 // FUNZIONE AGGIUNGI AI PREFERITI
