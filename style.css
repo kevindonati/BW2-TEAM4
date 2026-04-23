@@ -284,3 +284,7 @@ section:hover::-webkit-scrollbar-thumb {
 .dropdown-submenu:hover .dropdown-menu {
   display: block;
 }
+
+.text-shadow {
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
