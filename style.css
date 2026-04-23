@@ -104,8 +104,7 @@ section:hover::-webkit-scrollbar-thumb {
   text-align: center;
   background: none !important;
   border: 0;
-  opacity: 0.5;
-  transition: opacity 0.15s ease;
+  transition: opacity 0.2s ease;
 }
 
 .carousel-custom-prev,
@@ -225,4 +224,13 @@ section:hover::-webkit-scrollbar-thumb {
 
 .icona-play {
   display: none;
+}
+
+/*TRUNCATE*/
+.text-truncate-2 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
 }

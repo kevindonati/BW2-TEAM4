@@ -62,6 +62,7 @@ const estrazioneArtista = () => {
       //   ------------------------------------------------------------------------DISPONGO BRANI
       for (x = 1; x < response.tracks.data.length; x++) {
         const titoloCanzone = response.tracks.data[x].title
+        const artista = response.tracks.data[x].artist.name
         const riproduzioniCanzone = response.tracks.data[x].rank
         const durataCanzone = response.tracks.data[x].duration
 
@@ -69,21 +70,29 @@ const estrazioneArtista = () => {
         const secondi = (durataCanzone % 60).toString().padStart(2, "0")
 
         const numeroCanzone = x
-        const tr = document.createElement("tr")
-        tr.classList.add("riga")
-        tr.innerHTML = `
-                  <td class="cella">
-                    <span class="numero-cella">${numeroCanzone}</span>
+        const contenitore = document.getElementById("contenitore-album")
+        contenitore.innerHTML += `
+              <div class="row mt-3 align-items-center px-4">
+                <div class="col-1">
+                  <span class="numero-cella">${numeroCanzone}</span>
                     <i 
                      onclick="riproduciCanzone(\`${response.tracks.data[x].preview}\`, \`${response.tracks.data[x].title}\`, \`${response.tracks.data[x].artist.name}\`, \`${response.cover_small}\`, \`${response.cover_big}\`, \`${response.artist.picture_big}\`, \`${response.artist.id}\`, \`${response.artist.tracklist}\`)"
                      class="fas fa-play-circle text-success icona-play fs-4"></i>
-                  </td>
-                  <td>${titoloCanzone}</td>
-                  <td>${riproduzioniCanzone.toLocaleString()}</td>
-                  <td>${minuti}:${secondi}</td>
+                </div>
+                <div class="col-9">
+                  <p class="m-0">${titoloCanzone}</p>
+                  <i class="bi bi-explicit-fill"></i>
+                  <span class="text-secondary small">${artista}</span>
+                </div>
+                <div class="col-1">
+                  <i class="bi bi-plus-circle"></i>
+                </div>
+                <div class="col-1">
+                  <p class="m-0">${minuti}:${secondi}</p>
+                </div>
+              </div>
                   `
-        const appendilo = document.querySelector("tbody")
-        appendilo.appendChild(tr)
+
         const diritti = response.tracks.data[x].title
       }
     })

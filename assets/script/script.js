@@ -122,7 +122,7 @@ const main8 = () => {
         }
       });
 
-      // --- AGGIUNTA FONDAMENTALE QUI ---
+      // --- lancio la funzione ---
       attivaSensoreSfondo();
       // --------------------------------
     })
@@ -161,7 +161,7 @@ const primoCarosello = () => {
                           ></i>
                         </a>
                       </div>
-                      <p class="text-center">${data.data[i].title}</p>
+                      <p class="text-center text-truncate-2">${data.data[i].title}</p>
         `;
       }
     })
@@ -200,7 +200,7 @@ const secondoCarosello = () => {
                           ></i>
                         </a>
                       </div>
-                      <p class="text-center">${data.data[i].title}</p>
+                      <p class="text-center text-truncate-2">${data.data[i].title}</p>
         `;
       }
     })
@@ -239,7 +239,7 @@ const terzoCarosello = () => {
                           ></i>
                         </a>
                       </div>
-                      <p class="text-center">${data.data[i].title}</p>
+                      <p class="text-center text-truncate-2">${data.data[i].title}</p>
         `;
       }
     })
@@ -427,25 +427,25 @@ const riproduciCanzone = (
               </div>
             </div>
             <button
-              class="carousel-control-prev"
+              class="carousel-custom-prev"
               type="button"
               data-bs-target="#carouselExample"
               data-bs-slide="prev"
             >
               <span
-                class="carousel-control-prev-icon"
+                class="carousel-custom-prev-icon"
                 aria-hidden="true"
               ></span>
               <span class="visually-hidden">Previous</span>
             </button>
             <button
-              class="carousel-control-next"
+              class="carousel-custom-next"
               type="button"
               data-bs-target="#carouselExample"
               data-bs-slide="next"
             >
               <span
-                class="carousel-control-next-icon"
+                class="carousel-custom-next-icon"
                 aria-hidden="true"
               ></span>
               <span class="visually-hidden">Next</span>
@@ -603,13 +603,13 @@ const renderDropdownResult = (songs) => {
 //   }
 // }
 
-// AGGIUNGI QUESTO IN FONDO AL FILE JS
+// funzione per il colorthief
 function attivaSensoreSfondo() {
   const mainSection = document.getElementById("main-section");
   const contenitoreCards = document.getElementById("contenitore-main-prime-4");
 
   if (contenitoreCards && mainSection) {
-    // Rimuoviamo eventuali vecchi ascoltatori per non duplicarli
+    // Rimuovo eventuali vecchi ascoltatori per non duplicarli
     contenitoreCards.onclick = null;
 
     contenitoreCards.addEventListener("mouseover", (e) => {
