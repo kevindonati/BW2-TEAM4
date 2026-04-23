@@ -82,7 +82,7 @@ const main8 = () => {
 
       for (let i = 0; i < 8; i++) {
         appendiAlbum.innerHTML += `
-        <div class="col-6 col-xl-3 g-1">
+        <div class="col-6 col-xl-3 g-2 g-lg-1">
         <a class="text-decoration-none text-light" href="albumView.html?id=${data.data[i].id}">
               <div
                 class="d-flex align-items-center gap-1 bg-button rounded justify-content-between contenitore-card position-relative"
