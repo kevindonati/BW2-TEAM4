@@ -532,6 +532,18 @@ const renderDropdownResult = (songs) => {
   searchResults.appendChild(listContainer);
 };
 
+let searchTimeout;
+
+searchInput.addEventListener("input", (e) => {
+  const query = e.target.value;
+
+  clearTimeout(searchTimeout);
+
+  searchTimeout = setTimeout(() => {
+    performSearch(query);
+  }, 200);
+});
+
 // const musicaAlClick = function (
 //   elementoCliccato,
 //   preview,
@@ -1010,3 +1022,13 @@ expandSx.addEventListener("click", () => {
     );
   }
 });
+
+// Funzione grid asideSx
+
+const gridAside = () => {
+  const containerLibreria = document.getElementById("appendi-album-libreria");
+  containerLibreria.classList.remove("flex-column");
+  containerLibreria.classList.add("overflow-auto");
+};
+
+gridAside();
