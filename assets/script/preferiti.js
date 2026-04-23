@@ -9,85 +9,22 @@ const urlPlaylistTheWeeknd =
 const searchInput = document.getElementById("searchInput")
 const searchResults = document.getElementById("searchResults")
 
-// trovo l'id dall'indirizzo web
-const parametri = new URLSearchParams(location.search)
-const idArtista = parametri.get("id")
-
-// assegno all'api la chiamata utilizzando dinamicamente l'id dell indirizzo
-let urlApiArtista =
-  "https://striveschool-api.herokuapp.com/api/deezer/artist/" + idArtista
-
-fetch(urlApiArtista)
-  .then((response) => {
-    if (response.ok) {
-      return response.json()
-    } else throw new Error("errore nella fetch")
-  })
-  .then((artista) => {
-    // cambiamo l'immagine del placeholder
-    const stories = document.querySelector("#artistStories")
-    if (stories) {
-      stories.setAttribute("src", artista.picture_small)
+function applicaColore(img, thief) {
+  try {
+    const rgb = thief.getColor(img)
+    const card = img.closest(".contenitore-card")
+    if (card) {
+      card.setAttribute(
+        "data-color",
+        `rgba(${rgb[0]}, ${rgb[1]}, ${rgb[2]}, 0.4)`,
+      )
     }
-    // cambiamo il testo delle sezioni artista e numero ascoltatori
-    document.getElementById("nome-artista").innerText = artista.name
-    document.getElementById("fan-artista").innerText =
-      artista.nb_fan.toLocaleString() // toLocaleString aggiunge i puntini ai numeri grandi
-    // cambiamo l'immagine del banner
-    const banner = document.getElementById("artist-banner")
-    banner.style.backgroundImage = "url('" + artista.picture_xl + "')"
-    banner.style.backgroundSize = "cover"
-    banner.style.backgroundPosition = "top"
-    banner.style.backgroundRepeat = "no-repeat"
-    //Inserisco la parte per il colore dinamico
-    coloraSfondoDinamico(artista.picture_xl, ".bg-linear")
-    // cambiamo le canzoni (tracklist)
-    fetch(artista.tracklist)
-      .then((response) => {
-        if (response.ok) {
-          return response.json()
-        } else throw new Error("errore nella fetch")
-      })
-      .then((datiCanzoni) => {
-        console.log("dddd", datiCanzoni)
-        const canzoni = datiCanzoni.data
-        const contenitore = document.getElementById("lista-canzoni")
-        // Puliamo il contenitore prima di iniziare il ciclo
-        contenitore.innerHTML = ""
-        // Inizio un ciclo for per inserire le prime canzoni
-        for (let i = 0; i < 10 && i < canzoni.length; i++) {
-          const traccia = canzoni[i]
-          // Calcolo minuti e secondi (es. 200 secondi -> 3:20)
-          const minuti = Math.floor(traccia.duration / 60)
-          const secondi = (traccia.duration % 60).toString().padStart(2, "0")
-          const rigaHTML = `
-            <div class="row align-items-center py-2 text-secondary-emphasis hover-bg-grey"
-            onclick="riproduciCanzone(\`${datiCanzoni.data[i].preview}\`, \`${datiCanzoni.data[i].title}\`, \`${datiCanzoni.data[i].artist.name}\`, \`${datiCanzoni.data[i].album.cover_small}\`, \`${datiCanzoni.data[i].album.cover_big}\`, \`${datiCanzoni.data[i].artist.picture_big}\`, \`${datiCanzoni.data[i].artist.id}\`, \`${datiCanzoni.data[i].artist.tracklist}\`)">
-              <div class="col-auto" style="width: 30px">
-                <span class="text-secondary">${i + 1}</span>
-              </div>
-              <div class="col-auto p-0">
-                <img src="${traccia.album.cover_small}" class="rounded" alt="cover" />
-              </div>
-              <div class="col ps-3">
-                <div class="text-white fw-bold d-block">${traccia.title}</div>
-                <small class="text-secondary"><i class="bi bi-play-btn me-1"></i>Video musicale</small>
-              </div>
-              <div class="col-auto d-none d-md-block text-secondary">
-                ${traccia.rank.toLocaleString()}
-              </div>
-              <div class="col-auto text-secondary ps-5">${minuti}:${secondi}</div>
-            </div>
-          `
-          // Aggiungiamo la riga al contenitore
-          contenitore.innerHTML += rigaHTML
-        }
-      })
-      .catch((error) => console.log("Errore connessione server", error))
-  })
+  } catch (e) {
+    console.error("Errore colore", e)
+  }
+}
 
 // RIEMPO LA LIBRERIA
-
 const libreria = () => {
   fetch(urlSearch + "drake")
     .then((response) => {
@@ -125,6 +62,313 @@ const libreria = () => {
     })
 }
 libreria()
+
+// RIEMPO IL MAIN
+const riempiPreferiti = () => {
+  // const spinner = document.querySelectorAll(".contenitore-spinner")
+  // spinner[1].classList.add("d-none")
+
+  const braniPreferiti =
+    JSON.parse(localStorage.getItem("brano-preferito")) || []
+  console.log(braniPreferiti)
+
+  // Sposto questa  variabile fuori dal ciclo così la uso anche dopo per i colori
+  const appendiAlbum = document.getElementById("contenitore-album")
+
+  for (let i = 0; i < braniPreferiti.length; i++) {
+    const isExplicit =
+      braniPreferiti[i].explicit === true ||
+      braniPreferiti[i].explicit === "true"
+    const explicit = isExplicit ? "" : "d-none"
+    const durataCanzone = braniPreferiti[i].durata
+    const minuti = Math.floor(durataCanzone / 60)
+    const secondi = (durataCanzone % 60).toString().padStart(2, "0")
+    appendiAlbum.innerHTML += `
+    <div class="row mt-3 align-items-center px-4 riga">
+                <div class="col-1 cella">
+                  <span class="numero-cella">${i + 1}</span>
+                    <i 
+                     onclick="riproduciCanzone(\`${braniPreferiti[i].audio}\`, \`${braniPreferiti[i].titolo}\`, \`${braniPreferiti[i].artista}\`, \`${braniPreferiti[i].coverSmall}\`, \`${braniPreferiti[i].coverBig}\`, \`${braniPreferiti[i].fotoArtista}\`, \`${braniPreferiti[i].idArtista}\`, \`${braniPreferiti[i].tracklist}\`)"
+                     class="fas fa-play text-light icona fs-4"></i>
+                </div>
+                <div class="col-1 text-end">
+                  <img
+                        width="100%"
+                        src="${braniPreferiti[i].coverSmall}"
+                        alt="foto album"
+                        crossorigin="anonymous"
+                      />
+                </div>
+                <div class="col">
+                  <p class="m-0">${braniPreferiti[i].titolo}</p>
+                  <i class="bi bi-explicit-fill ${explicit}"></i>
+                  <span class="text-secondary small">${braniPreferiti[i].artista}</span>
+                </div>
+                <div class="col-1 text-end">
+                  <i class="bi bi-check-circle-fill text-success icona fs-4"></i>
+                </div>
+                <div class="col-1 text-center">
+                  <p class="m-0">${minuti}:${secondi}</p>
+                </div>
+                <div class="col-1 text-end dropdown">
+                  <a class="btn bg-transparent" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="bi bi-three-dots text-ligth icona fs-4"></i>
+                  </a>
+                  <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#"><i class="bi bi-check-circle-fill text-success  me-2"></i> Rimuovi dai brani che ti piacciono</a></li>
+                    <li><a class="dropdown-item" href="./artistView.html?id=${braniPreferiti[i].idArtista}"><i class="bi bi-person-lines-fill text-secondary  me-2"></i> Vai all'artista</a></li>
+                    <li><a class="dropdown-item" href="./albumView.html?id=${braniPreferiti[i].idAlbum}"><i class="bi bi-vinyl-fill text-secondary  me-2"></i> Vai all'album</a></li>
+                  </ul>
+                </div>
+              </div>
+      `
+  }
+
+  const colorThief = new ColorThief()
+  const immagini = appendiAlbum.querySelectorAll(".img-per-colore")
+
+  immagini.forEach((img) => {
+    if (img.complete) {
+      applicaColore(img, colorThief)
+    } else {
+      img.addEventListener("load", () => applicaColore(img, colorThief))
+    }
+  })
+
+  // --- lancio la funzione ---
+  attivaSensoreSfondo()
+  // --------------------------------
+}
+riempiPreferiti()
+
+// FACCIO PARTIRE LA CANZONE SELEZIONATA
+
+const riproduciCanzone = (
+  audioCanzone,
+  titolo,
+  nomeArtista,
+  copertinaSmall,
+  copertinaBig,
+  fotoArtista,
+  linkArtista,
+  tracklist,
+) => {
+  console.log(
+    audioCanzone,
+    titolo,
+    nomeArtista,
+    copertinaSmall,
+    copertinaBig,
+    fotoArtista,
+    linkArtista,
+    tracklist,
+  )
+  const bottonePlay = document.getElementById("btn-play-canzone")
+  // if (!bottonePlay) return // Se il bottone non esiste, non provare a cambiargli classe
+  const inputAudio = document.getElementById("audio")
+  const playBtn = document.getElementById("playPauseBtn")
+
+  if (inputAudio.src === audioCanzone) {
+    if (inputAudio.paused) {
+      inputAudio.play()
+      bottonePlay.classList.replace("bi-play-fill", "bi-pause-fill")
+      playBtn.classList.replace("bi-play-fill", "bi-pause-fill")
+    } else {
+      inputAudio.pause()
+      bottonePlay.classList.replace("bi-pause-fill", "bi-play-fill")
+      playBtn.classList.replace("bi-pause-fill", "bi-play-fill")
+    }
+  } else {
+    inputAudio.src = audioCanzone
+    inputAudio.play()
+  }
+
+  const placeholder = document.querySelectorAll(".placeholder")
+  console.log(placeholder)
+  for (let i = 0; i < placeholder.length; i++) {
+    placeholder[i].classList.remove("placeholder")
+    console.log(placeholder[i])
+  }
+
+  // RIEMPO BARRA FOOTER CON CNZONE IN RIPRODUZIONE
+  const titoloCanzone = document.querySelectorAll(".titolo-barra-dx")
+  const copertinaPiccola = document.querySelectorAll(
+    ".copertina-small-barra-dx",
+  )
+  const copertinaGrande = document.querySelectorAll(".copertina-big-barra-dx")
+  const nome = document.querySelectorAll(".autore-barra-dx")
+  const fotoProfiloArtista = document.getElementById("foto-artista")
+  const ascoltatoriMensili = document.querySelector(".ascoltatori")
+
+  for (let i = 0; i < nome.length; i++) {
+    nome[i].innerHTML = `${nomeArtista}`
+  }
+  for (let i = 0; i < titoloCanzone.length; i++) {
+    titoloCanzone[i].innerHTML = `${titolo}`
+  }
+  for (let i = 0; i < copertinaPiccola.length; i++) {
+    copertinaPiccola[i].setAttribute("src", copertinaSmall)
+  }
+  for (let i = 0; i < copertinaGrande.length; i++) {
+    copertinaGrande[i].setAttribute("src", copertinaBig)
+  }
+  fotoProfiloArtista.setAttribute("src", fotoArtista)
+
+  fetch(urlArtista + linkArtista)
+    .then((response) => {
+      if (response.ok) {
+        return response.json()
+      } else {
+        throw new Error("errore nella response")
+      }
+    })
+    .then((data) => {
+      ascoltatoriMensili.innerHTML = `${data.nb_fan.toLocaleString()}`
+    })
+    .catch((err) => {
+      console.log("errore nella fetch", err)
+    })
+
+  fetch(
+    "https://striveschool-api.herokuapp.com/api/deezer/artist/" +
+      linkArtista +
+      "/top?limit=50",
+  )
+    .then((response) => {
+      if (response.ok) {
+        return response.json()
+      } else {
+        throw new Error("errore nella response")
+      }
+    })
+    .then((data) => {
+      const caroselloCorrelati = document.querySelector(".carosello-correlati")
+      const placeholder = document.querySelectorAll(".placeholder")
+
+      for (let i = 0; i < placeholder.length; i++) {
+        placeholder[i].classList.remove("placeholder")
+      }
+
+      caroselloCorrelati.innerHTML = `
+      <div class="carousel-inner">
+              <div class="carousel-item active">
+                <!-- PRIMA SLIDE CAROSELLO -->
+                <div class="container-fluid">
+                  <div class="row">
+                    <div class="col-6 ps-0">
+                      <img
+                        width="100%"
+                        src="${data.data[10].album.cover_medium}"
+                        alt="foto album"
+                      />
+                      <!-- TITOLO CANZONE IN ASCOLTO -->
+                      <h6 class="fw-bold m-0">${data.data[10].title}</h6>
+                      <!-- ARTISTA -->
+                      <p class="text-secondary m-0">${data.data[10].artist.name}</p>
+                    </div>
+                    <div class="col-6 pe-0">
+                      <img
+                        width="100%"
+                        src="${data.data[11].album.cover_medium}"
+                        alt="foto album"
+                      />
+                      <!-- TITOLO CANZONE IN ASCOLTO -->
+                      <h6 class="fw-bold m-0">${data.data[11].title}</h6>
+                      <!-- ARTISTA -->
+                      <p class="text-secondary m-0">${data.data[11].artist.name}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <!-- SECONDA SLIDE CAROSELLO -->
+                <div class="container-fluid">
+                  <div class="row">
+                    <div class="col-6 ps-0">
+                      <img
+                        width="100%"
+                        src="${data.data[14].album.cover_medium}"
+                        alt="foto album"
+                      />
+                      <!-- TITOLO CANZONE IN ASCOLTO -->
+                      <h6 class="fw-bold m-0">${data.data[14].title}</h6>
+                      <!-- ARTISTA -->
+                      <p class="text-secondary m-0">${data.data[14].artist.name}</p>
+                    </div>
+                    <div class="col-6 pe-0">
+                      <img
+                        width="100%"
+                        src="${data.data[17].album.cover_medium}"
+                        alt="foto album"
+                      />
+                      <!-- TITOLO CANZONE IN ASCOLTO -->
+                      <h6 class="fw-bold m-0">${data.data[17].title}</h6>
+                      <!-- ARTISTA -->
+                      <p class="text-secondary m-0">${data.data[17].artist.name}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <!-- TERZA SLIDE CAROSELLO -->
+                <div class="container-fluid">
+                  <div class="row">
+                    <div class="col-6 ps-0">
+                      <img
+                        width="100%"
+                        src="${data.data[15].album.cover_medium}"
+                        alt="foto album"
+                      />
+                      <!-- TITOLO CANZONE IN ASCOLTO -->
+                      <h6 class="fw-bold m-0">${data.data[15].title}</h6>
+                      <!-- ARTISTA -->
+                      <p class="text-secondary m-0">${data.data[15].artist.name}</p>
+                    </div>
+                    <div class="col-6 pe-0">
+                      <img
+                        width="100%"
+                        src="${data.data[9].album.cover_medium}"
+                        alt="foto album"
+                      />
+                      <!-- TITOLO CANZONE IN ASCOLTO -->
+                      <h6 class="fw-bold m-0">${data.data[9].title}</h6>
+                      <!-- ARTISTA -->
+                      <p class="text-secondary m-0">${data.data[9].artist.name}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <button
+              class="carousel-custom-prev"
+              type="button"
+              data-bs-target="#carouselExample"
+              data-bs-slide="prev"
+            >
+              <span
+                class="carousel-custom-prev-icon"
+                aria-hidden="true"
+              ></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button
+              class="carousel-custom-next"
+              type="button"
+              data-bs-target="#carouselExample"
+              data-bs-slide="next"
+            >
+              <span
+                class="carousel-custom-next-icon"
+                aria-hidden="true"
+              ></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+      `
+    })
+    .catch((err) => {
+      console.log("errore nella fetch", err)
+    })
+}
 
 // FUNZIONE ricerca
 
@@ -201,237 +445,6 @@ const renderDropdownResult = (songs) => {
   searchResults.appendChild(listContainer)
 }
 
-const riproduciCanzone = (
-  audioCanzone,
-  titolo,
-  nomeArtista,
-  copertinaSmall,
-  copertinaBig,
-  fotoArtista,
-  linkArtista,
-  tracklist,
-) => {
-  console.log("prova")
-  const bottonePlay = document.getElementById("btn-play-canzone")
-  // if (!bottonePlay) return // Se il bottone non esiste, non provare a cambiargli classe
-  const inputAudio = document.getElementById("audio")
-  const playBtn = document.getElementById("playPauseBtn")
-
-  if (inputAudio.src === audioCanzone) {
-    if (inputAudio.paused) {
-      inputAudio.play()
-      bottonePlay.classList.replace("bi-play-fill", "bi-pause-fill")
-      playBtn.classList.replace("bi-play-fill", "bi-pause-fill")
-    } else {
-      inputAudio.pause()
-      bottonePlay.classList.replace("bi-pause-fill", "bi-play-fill")
-      playBtn.classList.replace("bi-pause-fill", "bi-play-fill")
-    }
-  } else {
-    inputAudio.src = audioCanzone
-    inputAudio.play()
-  }
-
-  const placeholder = document.querySelectorAll(".placeholder")
-  console.log(placeholder)
-  for (let i = 0; i < placeholder.length; i++) {
-    placeholder[i].classList.remove("placeholder")
-    console.log(placeholder[i])
-  }
-
-  // RIEMPO BARRA FOOTER CON CNZONE IN RIPRODUZIONE
-  const titoloCanzone = document.querySelectorAll(".titolo-barra-dx")
-  const copertinaPiccola = document.querySelectorAll(
-    ".copertina-small-barra-dx",
-  )
-  const copertinaGrande = document.querySelectorAll(".copertina-big-barra-dx")
-  const nome = document.querySelectorAll(".autore-barra-dx")
-  const fotoProfiloArtista = document.getElementById("foto-artista")
-  const ascoltatoriMensili = document.querySelector(".ascoltatori")
-  console.log(
-    "cdf",
-    titoloCanzone,
-    copertinaPiccola,
-    copertinaGrande,
-    nome,
-    fotoProfiloArtista,
-    ascoltatoriMensili,
-    fotoArtista,
-  )
-
-  for (let i = 0; i < nome.length; i++) {
-    nome[i].innerHTML = `${nomeArtista}`
-  }
-  for (let i = 0; i < titoloCanzone.length; i++) {
-    titoloCanzone[i].innerHTML = `${titolo}`
-  }
-  for (let i = 0; i < copertinaPiccola.length; i++) {
-    copertinaPiccola[i].setAttribute("src", copertinaSmall)
-  }
-  for (let i = 0; i < copertinaGrande.length; i++) {
-    copertinaGrande[i].setAttribute("src", copertinaBig)
-  }
-
-  fetch(urlArtista + linkArtista)
-    .then((response) => {
-      if (response.ok) {
-        return response.json()
-      } else {
-        throw new Error("errore nella response")
-      }
-    })
-    .then((data) => {
-      console.log("22", data)
-      ascoltatoriMensili.innerHTML = `${data.nb_fan.toLocaleString()}`
-      fotoProfiloArtista.setAttribute("src", data.picture_big)
-    })
-    .catch((err) => {
-      console.log("errore nella fetch", err)
-    })
-
-  fetch(
-    "https://striveschool-api.herokuapp.com/api/deezer/artist/" +
-      linkArtista +
-      "/top?limit=50",
-  )
-    .then((response) => {
-      if (response.ok) {
-        return response.json()
-      } else {
-        throw new Error("errore nella response")
-      }
-    })
-    .then((data) => {
-      console.log("prova45", data)
-      const caroselloCorrelati = document.querySelector(".carosello-correlati")
-
-      caroselloCorrelati.innerHTML = `
-      <div class="carousel-inner">
-              <div class="carousel-item active">
-                <!-- PRIMA SLIDE CAROSELLO -->
-                <div class="container-fluid">
-                  <div class="row">
-                    <div class="col-6 ps-0">
-                      <img
-                        width="100%"
-                        src="${data.data[10].album.cover_medium}"
-                        alt="foto album"
-                        crossorigin="anonymous"
-
-                      />
-                      <!-- TITOLO CANZONE IN ASCOLTO -->
-                      <h6 class="fw-bold m-0">${data.data[10].title}</h6>
-                      <!-- ARTISTA -->
-                      <p class="text-secondary m-0">${data.data[10].artist.name}</p>
-                    </div>
-                    <div class="col-6 pe-0">
-                      <img
-                        width="100%"
-                        src="${data.data[11].album.cover_medium}"
-                        alt="foto album"
-                        crossorigin="anonymous"
-                      />
-                      <!-- TITOLO CANZONE IN ASCOLTO -->
-                      <h6 class="fw-bold m-0">${data.data[11].title}</h6>
-                      <!-- ARTISTA -->
-                      <p class="text-secondary m-0">${data.data[11].artist.name}</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="carousel-item">
-                <!-- SECONDA SLIDE CAROSELLO -->
-                <div class="container-fluid">
-                  <div class="row">
-                    <div class="col-6 ps-0">
-                      <img
-                        width="100%"
-                        src="${data.data[14].album.cover_medium}"
-                        alt="foto album"
-                        crossorigin="anonymous"
-                      />
-                      <!-- TITOLO CANZONE IN ASCOLTO -->
-                      <h6 class="fw-bold m-0">${data.data[14].title}</h6>
-                      <!-- ARTISTA -->
-                      <p class="text-secondary m-0">${data.data[14].artist.name}</p>
-                    </div>
-                    <div class="col-6 pe-0">
-                      <img
-                        width="100%"
-                        src="${data.data[17].album.cover_medium}"
-                        alt="foto album"
-                        crossorigin="anonymous"
-                      />
-                      <!-- TITOLO CANZONE IN ASCOLTO -->
-                      <h6 class="fw-bold m-0">${data.data[17].title}</h6>
-                      <!-- ARTISTA -->
-                      <p class="text-secondary m-0">${data.data[17].artist.name}</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="carousel-item">
-                <!-- TERZA SLIDE CAROSELLO -->
-                <div class="container-fluid">
-                  <div class="row">
-                    <div class="col-6 ps-0">
-                      <img
-                        width="100%"
-                        src="${data.data[15].album.cover_medium}"
-                        alt="foto album"
-                        crossorigin="anonymous"
-                      />
-                      <!-- TITOLO CANZONE IN ASCOLTO -->
-                      <h6 class="fw-bold m-0">${data.data[15].title}</h6>
-                      <!-- ARTISTA -->
-                      <p class="text-secondary m-0">${data.data[15].artist.name}</p>
-                    </div>
-                    <div class="col-6 pe-0">
-                      <img
-                        width="100%"
-                        src="${data.data[9].album.cover_medium}"
-                        alt="foto album"
-                        crossorigin="anonymous"
-                      />
-                      <!-- TITOLO CANZONE IN ASCOLTO -->
-                      <h6 class="fw-bold m-0">${data.data[9].title}</h6>
-                      <!-- ARTISTA -->
-                      <p class="text-secondary m-0">${data.data[9].artist.name}</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <button
-              class="carousel-control-prev"
-              type="button"
-              data-bs-target="#carouselExample"
-              data-bs-slide="prev"
-            >
-              <span
-                class="carousel-control-prev-icon"
-                aria-hidden="true"
-              ></span>
-              <span class="visually-hidden">Previous</span>
-            </button>
-            <button
-              class="carousel-control-next"
-              type="button"
-              data-bs-target="#carouselExample"
-              data-bs-slide="next"
-            >
-              <span
-                class="carousel-control-next-icon"
-                aria-hidden="true"
-              ></span>
-              <span class="visually-hidden">Next</span>
-            </button>
-      `
-    })
-    .catch((err) => {
-      console.log("errore nella fetch", err)
-    })
-}
 // const musicaAlClick = function (
 //   elementoCliccato,
 //   preview,
@@ -503,13 +516,13 @@ const riproduciCanzone = (
 //   }
 // }
 
-// Funzione per attivare gli sfondi dinamici
-const attivaSensoreSfondo = function () {
+// funzione per il colorthief
+function attivaSensoreSfondo() {
   const mainSection = document.getElementById("main-section")
   const contenitoreCards = document.getElementById("contenitore-main-prime-4")
 
   if (contenitoreCards && mainSection) {
-    // Rimuoviamo eventuali vecchi ascoltatori per non duplicarli
+    // Rimuovo eventuali vecchi ascoltatori per non duplicarli
     contenitoreCards.onclick = null
 
     contenitoreCards.addEventListener("mouseover", (e) => {
@@ -527,36 +540,6 @@ const attivaSensoreSfondo = function () {
         "linear-gradient(rgba(255, 255, 255, 0.1), #121212 50%)"
     })
   }
-}
-
-//Parte per sfondo dinamico in artistpage
-const coloraSfondoDinamico = function (urlImmagine, selettoreTarget) {
-  const thief = new ColorThief()
-  const img = new Image()
-
-  // Chiediamo il permesso ufficiale
-  img.crossOrigin = "Anonymous"
-
-  // Aggiungiamo un "trucchetto" all'URL per evitare che il browser usi una versione vecchia e bloccata
-  img.src = urlImmagine + "?not-from-cache-please"
-
-  img.addEventListener("load", function () {
-    try {
-      const rgb = thief.getColor(img)
-      const colore = `rgba(${rgb[0]}, ${rgb[1]}, ${rgb[2]}, 0.7)`
-      const target = document.querySelector(selettoreTarget)
-
-      if (target) {
-        // Applico il colore sfumandolo verso il nero
-        target.style.background = `linear-gradient(to bottom, ${colore} 0%, #121212 15%)`
-        console.log("Colore applicato con successo!")
-      }
-    } catch (error) {
-      console.error("Il guardiano ha bloccato questa immagine:", error)
-      // Colore di default nero
-      document.querySelector(selettoreTarget).style.background = "#222"
-    }
-  })
 }
 
 // PARTE audio
@@ -735,6 +718,9 @@ document.addEventListener("fullscreenchange", () => {
 })
 
 // FUNZIONE AGGIUNGI AI PREFERITI
+let braniPreferiti = JSON.parse(localStorage.getItem("brano-preferito")) || []
+
+// FUNZIONE AGGIUNGI AI PREFERITI
 const salvaCanzone = (
   icona,
   audioCanzone,
@@ -772,9 +758,11 @@ const salvaCanzone = (
 
 const contatoreBraniPreferiti = () => {
   const contenitore = document.getElementById("contatore-brani")
+  const contenitore2 = document.getElementById("albumNumberOfSongs")
   const braniPreferiti =
     JSON.parse(localStorage.getItem("brano-preferito")) || []
   console.log(braniPreferiti)
   contenitore.innerText += braniPreferiti.length
+  contenitore2.innerText += braniPreferiti.length
 }
 contatoreBraniPreferiti()
