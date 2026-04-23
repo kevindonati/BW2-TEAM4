@@ -156,6 +156,7 @@ const primoCarosello = () => {
                         />
                         <a
                           class="btn btn-success flex mostra-al-passaggio rounded rounded-circle text-black shadow shadow-lg position-absolute end-0 bottom-0 m-1 px-1 py-0 d-flex"
+                          onclick="riproduciCanzone(this, \`${data.data[i].preview}\`, \`${data.data[i].title}\`, \`${data.data[i].artist.name}\`, \`${data.data[i].album.cover_small}\`, \`${data.data[i].album.cover_big}\`, \`${data.data[i].artist.picture_big}\`, \`${data.data[i].artist.id}\`, \`${data.data[i].artist.tracklist}\`, \`${data.data[i].explicit_lyrics}\`, \`${data.data[i].duration}\`, \`${data.data[i].id}\`, \`${data.data[i].album.id}\`)"
                         >
                           <i
                             class="bi bi-play-fill justify-content-center align-items-center"
@@ -195,6 +196,7 @@ const secondoCarosello = () => {
                         />
                         <a
                           class="btn btn-success flex mostra-al-passaggio rounded rounded-circle text-black shadow shadow-lg position-absolute end-0 bottom-0 m-1 px-1 py-0 d-flex"
+                          onclick="riproduciCanzone(this, \`${data.data[i].preview}\`, \`${data.data[i].title}\`, \`${data.data[i].artist.name}\`, \`${data.data[i].album.cover_small}\`, \`${data.data[i].album.cover_big}\`, \`${data.data[i].artist.picture_big}\`, \`${data.data[i].artist.id}\`, \`${data.data[i].artist.tracklist}\`, \`${data.data[i].explicit_lyrics}\`, \`${data.data[i].duration}\`, \`${data.data[i].id}\`, \`${data.data[i].album.id}\`)"
                         >
                           <i
                             class="bi bi-play-fill justify-content-center align-items-center"
@@ -234,6 +236,7 @@ const terzoCarosello = () => {
                         />
                         <a
                           class="btn btn-success flex mostra-al-passaggio rounded rounded-circle text-black shadow shadow-lg position-absolute end-0 bottom-0 m-1 px-1 py-0 d-flex"
+                          onclick="riproduciCanzone(this, \`${data.data[i].preview}\`, \`${data.data[i].title}\`, \`${data.data[i].artist.name}\`, \`${data.data[i].album.cover_small}\`, \`${data.data[i].album.cover_big}\`, \`${data.data[i].artist.picture_big}\`, \`${data.data[i].artist.id}\`, \`${data.data[i].artist.tracklist}\`, \`${data.data[i].explicit_lyrics}\`, \`${data.data[i].duration}\`, \`${data.data[i].id}\`, \`${data.data[i].album.id}\`)"
                         >
                           <i
                             class="bi bi-play-fill justify-content-center align-items-center"
