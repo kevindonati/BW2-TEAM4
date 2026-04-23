@@ -1025,10 +1025,10 @@ expandSx.addEventListener("click", () => {
 
 // Funzione grid asideSx
 
-const gridAside = () => {
-  const containerLibreria = document.getElementById("appendi-album-libreria");
-  containerLibreria.classList.remove("flex-column");
-  containerLibreria.classList.add("overflow-auto");
-};
+// const gridAside = () => {
+//   const containerLibreria = document.getElementById("appendi-album-libreria");
+//   containerLibreria.classList.remove("flex-column");
+//   containerLibreria.classList.add("overflow-auto");
+// };
 
-gridAside();
+// gridAside();
