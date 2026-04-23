@@ -114,7 +114,6 @@
                 src="https://placecats.com/200/200"
                 class="rounded-circle border-5 border-secondary-subtle mx-3 navbarImage scale"
                 style="height: 35px"
-                alt="foto-profilo"
               />
               <!-- <i class="fas fa-window-minimize ms-4"></i> -->
               <!-- <i class="fas fa-squar mx-2e"></i>
@@ -224,312 +223,85 @@
         <!-- FINE BARRA SX LIBRERIA -->
 
         <section
-          id="main-section"
-          class="col h-100 overflow-auto bg-linear rounded-4"
+          class="col h-100 overflow-auto bg-black rounded-4 d-flex flex-column p-0 container"
         >
-          <!-- PARTE CENTRALE -->
-          <!-- Primo blocco btn+6 piÃ¹ ascoltati -->
-          <div class="my-3">
-            <button type="button" class="btn bg-button text-white rounded-5">
-              Tutto
-            </button>
-            <button type="button" class="btn bg-button text-white rounded-5">
-              Musica
-            </button>
-            <button type="button" class="btn bg-button text-white rounded-5">
-              Podcast
-            </button>
-          </div>
-          <div class="d-flex justify-content-center contenitore-spinner">
-            <div class="spinner-border text-success text-center" role="status">
-              <span class="visually-hidden d-block">Loading...</span>
+          <!-- PARTE SUPERIORE -->
+          <div class="row d-flex align-items-center bg-secondary">
+            <div class="col-3 ms-2">
+              <img
+                src="./assets/imgs/main/liked-songs-300.jpg"
+                id="albumCover"
+                class="w-100 rounded-2 shadow-sm my-3"
+              />
+            </div>
+
+            <div class="col">
+              <h6 class="d-sm-none d-md-inline">Playlist</h6>
+              <h1 id="albumTitle">Brani che ti piacciono</h1>
+              <div class="col-12">
+                <p class="d-inline-block">
+                  <img
+                    id="artistImage"
+                    style="height: 1.3em"
+                    src="https://placecats.com/300/300"
+                    class="rounded-circle"
+                  />
+                  <span class="fw-bold artistName">User</span>
+                  ‧ <span class="albumReleaseDate">2026-04-22</span> ‧
+                  <span id="albumNumberOfSongs"></span> brani,
+                  <span id="albumDuration"></span>
+                </p>
+              </div>
             </div>
           </div>
-          <div id="contenitore-main-prime-4" class="row mb-3 px-2"></div>
-          <!-- Secondo blocco consigliati per te-->
-          <div class="d-flex justify-content-between">
-            <p class="fw-bold" id="selezionati">Album selezionati per te</p>
-            <a href="#" id="mostraTutto1">Mostra tutto</a>
-          </div>
-          <div
-            id="carouselExampleInterval"
-            class="carousel slide"
-            data-bs-ride="carousel"
-          >
-            <div class="carousel-inner">
-              <div class="carousel-item active" data-bs-interval="10000000000">
-                <div class="container-fluid px-0">
-                  <div class="row justify-content-center">
-                    <div
-                      class="col-10 col-md-5 offset-lg-0 col-lg-3 contenitore-card carosello-1"
-                    ></div>
-                    <div
-                      class="col-10 col-md-5 offset-lg-0 col-lg-3 contenitore-card carosello-1"
-                    ></div>
-                    <div
-                      class="col-10 col-md-5 offset-lg-0 col-lg-3 contenitore-card carosello-1"
-                    ></div>
-                    <div
-                      class="col-10 col-md-5 offset-lg-0 col-lg-3 contenitore-card carosello-1"
-                    ></div>
-                  </div>
+
+          <!-- PARTE INFERIORE -->
+          <div class="bg-linear">
+            <!-- PARTE TASTI -->
+            <div
+              class="d-flex flex-row justify-content-between align-items-center"
+            >
+              <div class="m-3 d-flex gap-3 align-items-center">
+                <i class="fas fa-play-circle fa-3x text-success"></i>
+                <div
+                  class="rounded-2 bg-secondary border border-3 border-secondary"
+                >
+                  <img
+                    id="artistStories"
+                    src="https://placecats.com/300/300"
+                    class="rounded-2 border border-2 border-dark object-fit-cover"
+                    style="height: 40px; width: 30px"
+                  />
                 </div>
+                <i class="fas fa-random fa-lg text-secondary"></i>
+                <i class="fas fa-plus-circle fa-lg text-secondary"></i>
+                <i class="fas fa-arrow-circle-down fa-lg text-secondary"></i>
+                <i class="fas fa-ellipsis-h fa-lg text-secondary"></i>
               </div>
-              <div class="carousel-item" data-bs-interval="2000">
-                <div class="container-fluid px-0">
-                  <div class="row justify-content-center">
-                    <div
-                      class="col-10 col-md-5 offset-lg-0 col-lg-3 contenitore-card carosello-1"
-                    ></div>
-                    <div
-                      class="col-10 col-md-5 offset-lg-0 col-lg-3 contenitore-card carosello-1"
-                    ></div>
-                    <div
-                      class="col-10 col-md-5 offset-lg-0 col-lg-3 contenitore-card carosello-1"
-                    ></div>
-                    <div
-                      class="col-10 col-md-5 offset-lg-0 col-lg-3 contenitore-card carosello-1"
-                    ></div>
-                  </div>
-                </div>
-              </div>
-              <div class="carousel-item">
-                <div class="container-fluid px-0">
-                  <div class="row justify-content-center">
-                    <div
-                      class="col-10 col-md-5 offset-lg-0 col-lg-3 contenitore-card carosello-1"
-                    ></div>
-                    <div
-                      class="col-10 col-md-5 offset-lg-0 col-lg-3 contenitore-card carosello-1"
-                    ></div>
-                    <div
-                      class="col-10 col-md-5 offset-lg-0 col-lg-3 contenitore-card carosello-1"
-                    ></div>
-                    <div
-                      class="col-10 col-md-5 offset-lg-0 col-lg-3 contenitore-card carosello-1"
-                    ></div>
-                  </div>
-                </div>
-              </div>
+              <p class="text-secondary d-flex align-items-center mt-3">
+                Elenco<i class="fas fa-list-ul mx-1"></i>
+              </p>
             </div>
-            <button
-              id="prev-button"
-              class="carousel-custom-prev"
-              type="button"
-              data-bs-target="#carouselExampleInterval"
-              data-bs-slide="prev"
+
+            <!-- ALBUM -->
+            <div
+              class="row border-bottom border-1 border-secondary align-items-center mb-2 px-4"
             >
-              <span
-                class="carousel-custom-prev-icon"
-                aria-hidden="true"
-                id="prev-span"
-              ></span>
-              <span class="visually-hidden">Previous</span>
-            </button>
-            <button
-              id="next-button"
-              class="carousel-custom-next"
-              type="button"
-              data-bs-target="#carouselExampleInterval"
-              data-bs-slide="next"
-            >
-              <span
-                class="carousel-custom-next-icon"
-                aria-hidden="true"
-                id="next-span"
-              ></span>
-              <span class="visually-hidden">Next</span>
-            </button>
-          </div>
-          <!-- Terzo blocco continua per te-->
-          <div class="d-flex justify-content-between">
-            <p class="fw-bold" id="recenti2">Recenti</p>
-            <a href="#" id="mostraTutto2">Mostra tutto</a>
-          </div>
-          <div
-            id="carouselExampleInterval1"
-            class="carousel slide"
-            data-bs-ride="carousel"
-          >
-            <div class="carousel-inner">
-              <div class="carousel-item active" data-bs-interval="10000000000">
-                <div class="container-fluid px-0">
-                  <div class="row justify-content-center">
-                    <div
-                      class="col-10 col-md-5 offset-lg-0 col-lg-3 contenitore-card carosello-2"
-                    ></div>
-                    <div
-                      class="col-10 col-md-5 offset-lg-0 col-lg-3 contenitore-card carosello-2"
-                    ></div>
-                    <div
-                      class="col-10 col-md-5 offset-lg-0 col-lg-3 contenitore-card carosello-2"
-                    ></div>
-                    <div
-                      class="col-10 col-md-5 offset-lg-0 col-lg-3 contenitore-card carosello-2"
-                    ></div>
-                  </div>
-                </div>
+              <div class="col-1">
+                <p class="m-0">#</p>
               </div>
-              <div class="carousel-item" data-bs-interval="2000">
-                <div class="container-fluid px-0">
-                  <div class="row justify-content-center">
-                    <div
-                      class="col-10 col-md-5 offset-lg-0 col-lg-3 contenitore-card carosello-2"
-                    ></div>
-                    <div
-                      class="col-10 col-md-5 offset-lg-0 col-lg-3 contenitore-card carosello-2"
-                    ></div>
-                    <div
-                      class="col-10 col-md-5 offset-lg-0 col-lg-3 contenitore-card carosello-2"
-                    ></div>
-                    <div
-                      class="col-10 col-md-5 offset-lg-0 col-lg-3 contenitore-card carosello-2"
-                    ></div>
-                  </div>
-                </div>
+              <div class="col-8">
+                <p class="m-0">Titolo</p>
               </div>
-              <div class="carousel-item">
-                <div class="container-fluid px-0">
-                  <div class="row justify-content-center">
-                    <div
-                      class="col-10 col-md-5 offset-lg-0 col-lg-3 contenitore-card carosello-2"
-                    ></div>
-                    <div
-                      class="col-10 col-md-5 offset-lg-0 col-lg-3 contenitore-card carosello-2"
-                    ></div>
-                    <div
-                      class="col-10 col-md-5 offset-lg-0 col-lg-3 contenitore-card carosello-2"
-                    ></div>
-                    <div
-                      class="col-10 col-md-5 offset-lg-0 col-lg-3 contenitore-card carosello-2"
-                    ></div>
-                  </div>
-                </div>
+              <div class="col-1"></div>
+              <div class="col-1 text-center">
+                <i class="fas fa-clock"></i>
               </div>
+              <div class="col-1"></div>
             </div>
-            <button
-              id="prev-button"
-              class="carousel-custom-prev"
-              type="button"
-              data-bs-target="#carouselExampleInterval1"
-              data-bs-slide="prev"
-            >
-              <span
-                class="carousel-custom-prev-icon"
-                aria-hidden="true"
-                id="prev-span"
-              ></span>
-              <span class="visually-hidden">Previous</span>
-            </button>
-            <button
-              id="next-button"
-              class="carousel-custom-next"
-              type="button"
-              data-bs-target="#carouselExampleInterval1"
-              data-bs-slide="next"
-            >
-              <span
-                class="carousel-custom-next-icon"
-                aria-hidden="true"
-                id="next-span"
-              ></span>
-              <span class="visually-hidden">Next</span>
-            </button>
-          </div>
-          <!-- Quarto blocco continua ad ascoltare-->
-          <div class="d-flex justify-content-between">
-            <p class="fw-bold" id="continua">Continua ad ascoltare</p>
-            <a href="#" id="mostraTutto3">Mostra tutto</a>
-          </div>
-          <div
-            id="carouselExampleInterval2"
-            class="carousel slide"
-            data-bs-ride="carousel"
-          >
-            <div class="carousel-inner">
-              <div class="carousel-item active" data-bs-interval="10000000000">
-                <div class="container-fluid px-0">
-                  <div class="row justify-content-center">
-                    <div
-                      class="col-10 col-md-5 offset-lg-0 col-lg-3 contenitore-card carosello-3"
-                    ></div>
-                    <div
-                      class="col-10 col-md-5 offset-lg-0 col-lg-3 contenitore-card carosello-3"
-                    ></div>
-                    <div
-                      class="col-10 col-md-5 offset-lg-0 col-lg-3 contenitore-card carosello-3"
-                    ></div>
-                    <div
-                      class="col-10 col-md-5 offset-lg-0 col-lg-3 contenitore-card carosello-3"
-                    ></div>
-                  </div>
-                </div>
-              </div>
-              <div class="carousel-item" data-bs-interval="2000">
-                <div class="container-fluid px-0">
-                  <div class="row justify-content-center">
-                    <div
-                      class="col-10 col-md-5 offset-lg-0 col-lg-3 contenitore-card carosello-3"
-                    ></div>
-                    <div
-                      class="col-10 col-md-5 offset-lg-0 col-lg-3 contenitore-card carosello-3"
-                    ></div>
-                    <div
-                      class="col-10 col-md-5 offset-lg-0 col-lg-3 contenitore-card carosello-3"
-                    ></div>
-                    <div
-                      class="col-10 col-md-5 offset-lg-0 col-lg-3 contenitore-card carosello-3"
-                    ></div>
-                  </div>
-                </div>
-              </div>
-              <div class="carousel-item">
-                <div class="container-fluid px-0">
-                  <div class="row justify-content-center">
-                    <div
-                      class="col-10 col-md-5 offset-lg-0 col-lg-3 contenitore-card carosello-3"
-                    ></div>
-                    <div
-                      class="col-10 col-md-5 offset-lg-0 col-lg-3 contenitore-card carosello-3"
-                    ></div>
-                    <div
-                      class="col-10 col-md-5 offset-lg-0 col-lg-3 contenitore-card carosello-3"
-                    ></div>
-                    <div
-                      class="col-10 col-md-5 offset-lg-0 col-lg-3 contenitore-card carosello-3"
-                    ></div>
-                  </div>
-                </div>
-              </div>
+            <div id="contenitore-album">
+              <!-- INSERISCO TRAMITE JS LE CANZONI DELL'ALBUM -->
             </div>
-            <button
-              id="prev-button"
-              class="carousel-custom-prev"
-              type="button"
-              data-bs-target="#carouselExampleInterval2"
-              data-bs-slide="prev"
-            >
-              <span
-                class="carousel-custom-prev-icon"
-                aria-hidden="true"
-                id="prev-span"
-              ></span>
-              <span class="visually-hidden">Previous</span>
-            </button>
-            <button
-              id="next-button"
-              class="carousel-custom-next"
-              type="button"
-              data-bs-target="#carouselExampleInterval2"
-              data-bs-slide="next"
-            >
-              <span
-                class="carousel-custom-next-icon"
-                aria-hidden="true"
-                id="next-span"
-              ></span>
-              <span class="visually-hidden">Next</span>
-            </button>
           </div>
         </section>
 
@@ -713,7 +485,6 @@
               class="d-flex align-items-center justify-content-between text-inattivo fs-2 bi bi-heart"
             ></i>
             <i
-              id="playBtnMobile"
               class="d-flex align-items-center justify-content-between text-inattivo fs-1 bi bi-play-fill"
             ></i>
           </div>
@@ -744,8 +515,6 @@
       integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
       crossorigin="anonymous"
     ></script>
-    <script src="./assets/script/script.js"></script>
-    <script src="./assets/script/player.js"></script>
-    <!-- <script src="./assets/script/search.js"></script> -->
+    <script src="./assets/script/preferiti.js"></script>
   </body>
 </html>

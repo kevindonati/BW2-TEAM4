@@ -11,6 +11,38 @@ const searchResults = document.getElementById("searchResults")
 const parametri = new URLSearchParams(location.search)
 const IDalbum = parametri.get("id")
 
+// Inserisco la funzione per applicare i colori di sfondo
+const applicaColoriAlbum = function (urlImmagine) {
+  const thief = new ColorThief()
+  const img = new Image()
+  img.crossOrigin = "Anonymous"
+  img.src = urlImmagine + "?not-from-cache" // Trucco per il CORS
+
+  img.addEventListener("load", function () {
+    try {
+      const rgb = thief.getColor(img)
+      const coloreBase = `rgba(${rgb[0]}, ${rgb[1]}, ${rgb[2]}, 0.8)`
+      const coloreSfumato = `rgba(${rgb[0]}, ${rgb[1]}, ${rgb[2]}, 0.4)`
+
+      // 1. Coloriamo la parte superiore (solida)
+      const parteAlta = document.querySelector(".bg-secondary")
+      if (parteAlta) {
+        // Rimuoviamo la classe di Bootstrap per non andare in conflitto
+        parteAlta.classList.remove("bg-secondary")
+        parteAlta.style.backgroundColor = coloreBase
+      }
+
+      // 2. Coloriamo la parte inferiore (sfumata)
+      const parteBassa = document.querySelector(".bg-linear")
+      if (parteBassa) {
+        parteBassa.style.background = `linear-gradient(to bottom, ${coloreSfumato} 0%, #121212 20%)`
+      }
+    } catch (e) {
+      console.error("Errore ColorThief:", e)
+    }
+  })
+}
+
 const estrazioneArtista = () => {
   fetch("https://striveschool-api.herokuapp.com/api/deezer/album/" + IDalbum)
     .then((response) => {
@@ -45,6 +77,7 @@ const estrazioneArtista = () => {
       }
 
       fotoAlbum.setAttribute("src", `${response.cover_big}`)
+      applicaColoriAlbum(response.cover_big) // lancio la funzione per il color thief
       titoloAlbum.innerHTML = `${response.title}`
       fotoArtista.setAttribute("src", `${response.artist.picture}`)
       numBraniAlbum.innerText = `${response.nb_tracks}`
@@ -70,24 +103,28 @@ const estrazioneArtista = () => {
         const secondi = (durataCanzone % 60).toString().padStart(2, "0")
 
         const numeroCanzone = x
+        const explicit = response.tracks.data[x].explicit_lyrics ? "" : "d-none"
+
         const contenitore = document.getElementById("contenitore-album")
         contenitore.innerHTML += `
-              <div class="row mt-3 align-items-center px-4">
-                <div class="col-1">
+              <div class="row mt-3 align-items-center px-4 riga">
+                <div class="col-1 cella">
                   <span class="numero-cella">${numeroCanzone}</span>
                     <i 
                      onclick="riproduciCanzone(\`${response.tracks.data[x].preview}\`, \`${response.tracks.data[x].title}\`, \`${response.tracks.data[x].artist.name}\`, \`${response.cover_small}\`, \`${response.cover_big}\`, \`${response.artist.picture_big}\`, \`${response.artist.id}\`, \`${response.artist.tracklist}\`)"
-                     class="fas fa-play-circle text-success icona-play fs-4"></i>
+                     class="fas fa-play text-light icona fs-4"></i>
                 </div>
                 <div class="col-9">
                   <p class="m-0">${titoloCanzone}</p>
-                  <i class="bi bi-explicit-fill"></i>
+                  <i class="bi bi-explicit-fill ${explicit}"></i>
                   <span class="text-secondary small">${artista}</span>
                 </div>
-                <div class="col-1">
-                  <i class="bi bi-plus-circle"></i>
+                <div class="col-1 text-end">
+                  <i class="bi bi-plus-circle icona fs-4"
+                  onclick="salvaCanzone(this, \`${response.tracks.data[x].preview}\`, \`${response.tracks.data[x].title}\`, \`${response.tracks.data[x].artist.name}\`, \`${response.cover_small}\`, \`${response.cover_big}\`, \`${response.artist.picture_big}\`, \`${response.artist.id}\`, \`${response.artist.tracklist}\`, \`${response.tracks.data[x].explicit_lyrics}\`, \`${response.tracks.data[x].duration}\`, \`${response.id}\`)"
+                  ></i>
                 </div>
-                <div class="col-1">
+                <div class="col-1 text-center">
                   <p class="m-0">${minuti}:${secondi}</p>
                 </div>
               </div>
@@ -236,12 +273,12 @@ const riproduciCanzone = (
   if (inputAudio.src === audioCanzone) {
     if (inputAudio.paused) {
       inputAudio.play()
-      bottonePlay.classList.replace("bi-play-fill", "bi-pause-fill")
-      playBtn.classList.replace("bi-play-fill", "bi-pause-fill")
+      // bottonePlay.classList.replace("bi-play-fill", "bi-pause-fill")
+      // playBtn.classList.replace("bi-play-fill", "bi-pause-fill")
     } else {
       inputAudio.pause()
-      bottonePlay.classList.replace("bi-pause-fill", "bi-play-fill")
-      playBtn.classList.replace("bi-pause-fill", "bi-play-fill")
+      // bottonePlay.classList.replace("bi-pause-fill", "bi-play-fill")
+      // playBtn.classList.replace("bi-pause-fill", "bi-play-fill")
     }
   } else {
     inputAudio.src = audioCanzone
@@ -450,7 +487,7 @@ const riproduciCanzone = (
 }
 
 // AGGIUNGI QUESTO IN FONDO AL FILE JS
-function attivaSensoreSfondo() {
+const attivaSensoreSfondo = function () {
   const mainSection = document.getElementById("main-section")
   const contenitoreCards = document.getElementById("contenitore-main-prime-4")
 
@@ -649,3 +686,50 @@ document.addEventListener("fullscreenchange", () => {
     fsBtn.classList.replace("bi-fullscreen-exit", "bi-fullscreen")
   }
 })
+
+// FUNZIONE AGGIUNGI AI PREFERITI
+let braniPreferiti = JSON.parse(localStorage.getItem("brano-preferito")) || []
+
+const salvaCanzone = (
+  icona,
+  audioCanzone,
+  titolo,
+  nomeArtista,
+  copertinaSmall,
+  copertinaBig,
+  fotoArtista,
+  linkArtista,
+  tracklist,
+  explicit,
+  durata,
+  idAlbum,
+) => {
+  const datiCanzone = {
+    audio: audioCanzone,
+    titolo: titolo,
+    artista: nomeArtista,
+    coverSmall: copertinaSmall,
+    coverBig: copertinaBig,
+    fotoArtista: fotoArtista,
+    idArtista: linkArtista,
+    tracklist: tracklist,
+    explicit: explicit,
+    durata: durata,
+    idAlbum: idAlbum,
+  }
+
+  braniPreferiti.push(datiCanzone)
+  localStorage.setItem("brano-preferito", JSON.stringify(braniPreferiti))
+
+  icona.classList.replace("bi-plus-circle", "bi-check-circle-fill")
+  icona.classList.add("text-success")
+}
+
+const contatoreBraniPreferiti = () => {
+  const contenitore = document.getElementById("contatore-brani")
+  const braniPreferiti =
+    JSON.parse(localStorage.getItem("brano-preferito")) || []
+  console.log(braniPreferiti)
+  contenitore.innerText += braniPreferiti.length
+}
+contatoreBraniPreferiti()
