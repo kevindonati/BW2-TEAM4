@@ -253,6 +253,7 @@ terzoCarosello()
 // FACCIO PARTIRE LA CANZONE SELEZIONATA
 
 const riproduciCanzone = (
+  iconaPlay,
   audioCanzone,
   titolo,
   nomeArtista,
