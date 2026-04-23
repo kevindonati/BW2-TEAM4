@@ -9,7 +9,7 @@ const urlPlaylistTheWeeknd =
 const searchInput = document.getElementById("searchInput")
 const searchResults = document.getElementById("searchResults")
 
-function applicaColore(img, thief) {
+const applicaColore = function (img, thief) {
   try {
     const rgb = thief.getColor(img)
     const card = img.closest(".contenitore-card")
@@ -919,3 +919,47 @@ mostratutto3.addEventListener("click", (e) => {
     nextSpan.classList.remove("d-none")
   }
 })
+// FUNZIONE AGGIUNGI AI PREFERITI
+const salvaCanzone = (
+  icona,
+  audioCanzone,
+  titolo,
+  nomeArtista,
+  copertinaSmall,
+  copertinaBig,
+  fotoArtista,
+  linkArtista,
+  tracklist,
+  explicit,
+  durata,
+  idAlbum,
+) => {
+  const datiCanzone = {
+    audio: audioCanzone,
+    titolo: titolo,
+    artista: nomeArtista,
+    coverSmall: copertinaSmall,
+    coverBig: copertinaBig,
+    fotoArtista: fotoArtista,
+    idArtista: linkArtista,
+    tracklist: tracklist,
+    explicit: explicit,
+    durata: durata,
+    idAlbum: idAlbum,
+  }
+
+  braniPreferiti.push(datiCanzone)
+  localStorage.setItem("brano-preferito", JSON.stringify(braniPreferiti))
+
+  icona.classList.replace("bi-plus-circle", "bi-check-circle-fill")
+  icona.classList.add("text-success")
+}
+
+const contatoreBraniPreferiti = () => {
+  const contenitore = document.getElementById("contatore-brani")
+  const braniPreferiti =
+    JSON.parse(localStorage.getItem("brano-preferito")) || []
+  console.log(braniPreferiti)
+  contenitore.innerText += braniPreferiti.length
+}
+contatoreBraniPreferiti()
