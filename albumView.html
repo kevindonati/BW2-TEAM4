@@ -26,7 +26,7 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
     />
-    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="./assets/style/style.css" />
     <link rel="stylesheet" href="./assets/style/footer.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.0/color-thief.umd.js"></script>
   </head>
@@ -352,7 +352,7 @@
         </section>
 
         <aside
-          class="d-none d-lg-block col-2 px-1 rounded-4 px-4 h-100 overflow-auto bg-aside"
+          class="d-none d-lg-block col-3 col-lg-2 px-1 rounded-4 px-4 h-100 overflow-auto bg-aside"
         >
           <!-- BARRA DX ARTISTA -->
           <!-- TITOLO CANZONE IN ASCOLTO -->
@@ -381,7 +381,7 @@
                 </p>
               </div>
               <!-- BOTTONE AGGIUNGI -->
-              <i class="fs-4 bi bi-plus-circle"></i>
+              <i class="bi bi-plus-circle icona-2 fs-4 btn-aggiungi"></i>
             </div>
           </div>
 
@@ -453,7 +453,7 @@
               </h6>
               <span class="autore-barra-dx placeholder">Nome artista</span>
             </div>
-            <i class="bi bi-plus-circle"></i>
+            <i class="bi bi-plus-circle btn-aggiungi"></i>
           </div>
         </article>
         <article
@@ -484,7 +484,7 @@
                 max="100"
                 id="progress-bar"
               />
-              <span id="time-max">1:00</span>
+              <span id="time-max">0:00</span>
             </div>
           </div>
         </article>
@@ -513,10 +513,10 @@
         </article>
       </section>
       <!-- PLAYER E NAV DA LG IN GIù -->
-      <section id="mobile-bottom" class="d-lg-none">
+      <section id="mobile-bottom" class="d-lg-none bg-transparent z-2">
         <article
           id="mobile-player"
-          class="bg-aside d-flex justify-content-between align-items-center mx-2 rounded-2 p-2"
+          class="bg-grigio d-flex justify-content-between align-items-center mx-3 rounded-2 p-2"
         >
           <div class="">
             <audio src=""></audio>
@@ -536,7 +536,10 @@
             ></i>
           </div>
         </article>
-        <article id="mobile-nav" class="d-flex bg-transparent">
+        <article
+          id="mobile-nav"
+          class="d-flex justify-content-around align-items-center bg-transparent py-2"
+        >
           <a
             href="./index.html"
             class="small d-flex flex-column align-items-center justify-content-center text-decoration-none text-inattivo"
