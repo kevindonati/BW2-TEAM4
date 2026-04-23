@@ -93,7 +93,7 @@ const main8 = () => {
                     src="${data.data[i].album.cover_small}"
                     alt=""
                     crossorigin="anonymous"
-                    class="img-fluid rounded-4 img-per-colore"
+                    class="img-fluid rounded-start img-per-colore"
                   />
                   <small >${data.data[i].title}</small>
                 </div>
@@ -103,7 +103,7 @@ const main8 = () => {
                   
                   onclick="riproduciCanzone(this, \`${data.data[i].preview}\`, \`${data.data[i].title}\`, \`${data.data[i].artist.name}\`, \`${data.data[i].album.cover_small}\`, \`${data.data[i].album.cover_big}\`, \`${data.data[i].artist.picture_big}\`, \`${data.data[i].artist.id}\`, \`${data.data[i].artist.tracklist}\`, \`${data.data[i].explicit_lyrics}\`, \`${data.data[i].duration}\`, \`${data.data[i].id}\`, \`${data.data[i].album.id}\`)"
                 >
-                  <i
+                  <i id="btn-play-canzone"
                     class="bi bi-play-fill justify-content-center align-items-center"
                   ></i>
                 </a>
@@ -253,7 +253,6 @@ terzoCarosello()
 // FACCIO PARTIRE LA CANZONE SELEZIONATA
 
 const riproduciCanzone = (
-  iconaPlay,
   audioCanzone,
   titolo,
   nomeArtista,
@@ -267,33 +266,24 @@ const riproduciCanzone = (
   idTraccia,
   idAlbum,
 ) => {
-  console.log(tracklist)
   const bottonePlay = document.getElementById("btn-play-canzone")
-  // if (!bottonePlay) return; // Se il bottone non esiste, non provare a cambiargli classe
+  if (!bottonePlay) return // Se il bottone non esiste, non provare a cambiargli classe
   const inputAudio = document.getElementById("audio")
   const playBtn = document.getElementById("playPauseBtn")
 
   if (inputAudio.src === audioCanzone) {
     if (inputAudio.paused) {
       inputAudio.play()
-      iconaPlay.innerHTML = `<i
-                              class="bi bi-pause-fill justify-content-center align-items-center"
-                            ></i>`
-      playBtn.classList.replace("bi-play-circle-fill", "bi-pause-circle-fill")
+      bottonePlay.classList.replace("bi-play-fill", "bi-pause-fill")
+      playBtn.classList.replace("bi-play-fill", "bi-pause-fill")
     } else {
       inputAudio.pause()
-      iconaPlay.innerHTML = `<i
-                              class="bi bi-play-fill justify-content-center align-items-center"
-                            ></i>`
-      playBtn.classList.replace("bi-pause-circle-fill", "bi-play-circle-fill")
+      bottonePlay.classList.replace("bi-pause-fill", "bi-play-fill")
+      playBtn.classList.replace("bi-pause-fill", "bi-play-fill")
     }
   } else {
     inputAudio.src = audioCanzone
     inputAudio.play()
-    iconaPlay.innerHTML = `<i
-                              class="bi bi-pause-fill justify-content-center align-items-center"
-                            ></i>`
-    playBtn.classList.replace("bi-play-circle-fill", "bi-pause-circle-fill")
   }
 
   // RIEMPO BARRA FOOTER CON CNZONE IN RIPRODUZIONE
@@ -538,7 +528,7 @@ const renderDropdownResult = (songs) => {
       <img src="${song.album.cover_small}" class="img-fluid rounded shadow-sm" alt="${song.title}">
       <div class="mostra-al-passaggio position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center rounded" 
            style="background: rgba(0,0,0,0.5)" 
-           onclick="riproduciCanzone(this, \`${song.preview}\`, \`${song.title}\`, \`${song.artist.name}\`, \`${song.album.cover_small}\`, \`${song.album.cover_big}\`, \`${song.artist.picture_big}\`, \`${song.artist.id}\`, \`${song.artist.tracklist}\`)">
+           onclick="riproduciCanzone(\`${song.preview}\`, \`${song.title}\`, \`${song.artist.name}\`, \`${song.album.cover_small}\`, \`${song.album.cover_big}\`, \`${song.artist.picture_big}\`, \`${song.artist.id}\`, \`${song.artist.tracklist}\`)">
           <i class="fas fa-play text-white fs-6"></i>
       </div>
     </div>
@@ -567,6 +557,18 @@ const renderDropdownResult = (songs) => {
 
   searchResults.appendChild(listContainer)
 }
+
+let searchTimeout
+
+searchInput.addEventListener("input", (e) => {
+  const query = e.target.value
+
+  clearTimeout(searchTimeout)
+
+  searchTimeout = setTimeout(() => {
+    performSearch(query)
+  }, 200)
+})
 
 // const musicaAlClick = function (
 //   elementoCliccato,
@@ -1032,16 +1034,22 @@ const mobileView = window.matchMedia("(max-width: 991px)")
 
 const togliRounded = (e) => {
   const mainSection = document.getElementById("main-section")
+  const carouselPrev = document.querySelectorAll(".carousel-custom-prev-icon")
+  const carouselNext = document.querySelectorAll(".carousel-custom-next-icon")
   if (e.matches) {
     console.log(
       "Dimensione schermo inferiore a 991px tolgo i rounded sul main-section",
     )
     mainSection.classList.remove("rounded-4")
+    carouselPrev.forEach((op) => op.classList.add("opacity-0"))
+    carouselNext.forEach((op) => op.classList.add("opacity-0"))
   } else {
     console.log(
       "Dimensione schermo maggiore a 991px metto i rounded sul main-section",
     )
     mainSection.classList.add("rounded-4")
+    carouselPrev.forEach((op) => op.classList.remove("opacity-0"))
+    carouselNext.forEach((op) => op.classList.remove("opacity-0"))
   }
 }
 document.addEventListener("DOMContentLoaded", () => {
@@ -1070,3 +1078,13 @@ expandSx.addEventListener("click", () => {
     )
   }
 })
+
+// Funzione grid asideSx
+
+const gridAside = () => {
+  const containerLibreria = document.getElementById("appendi-album-libreria")
+  containerLibreria.classList.remove("flex-column")
+  containerLibreria.classList.add("overflow-auto")
+}
+
+gridAside()
