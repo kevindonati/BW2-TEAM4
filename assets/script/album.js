@@ -109,24 +109,22 @@ const estrazioneArtista = () => {
 
         const contenitore = document.getElementById("contenitore-album");
         contenitore.innerHTML += `
-              <div class="row mt-3 align-items-center px-4 riga">
-                <div class="col-1 cella">
+              <div class="row mt-3 align-items-center px-4">
+                <div class="col-1">
                   <span class="numero-cella">${numeroCanzone}</span>
                     <i 
                      onclick="riproduciCanzone(\`${response.tracks.data[x].preview}\`, \`${response.tracks.data[x].title}\`, \`${response.tracks.data[x].artist.name}\`, \`${response.cover_small}\`, \`${response.cover_big}\`, \`${response.artist.picture_big}\`, \`${response.artist.id}\`, \`${response.artist.tracklist}\`)"
-                     class="fas fa-play text-light icona fs-4"></i>
+                     class="fas fa-play-circle text-success icona-play fs-4"></i>
                 </div>
                 <div class="col-9">
                   <p class="m-0">${titoloCanzone}</p>
-                  <i class="bi bi-explicit-fill ${explicit}"></i>
+                  <i class="bi bi-explicit-fill"></i>
                   <span class="text-secondary small">${artista}</span>
                 </div>
-                <div class="col-1 text-end">
-                  <i class="bi bi-plus-circle icona fs-4"
-                  onclick="salvaCanzone(this, \`${response.tracks.data[x].preview}\`, \`${response.tracks.data[x].title}\`, \`${response.tracks.data[x].artist.name}\`, \`${response.cover_small}\`, \`${response.cover_big}\`, \`${response.artist.picture_big}\`, \`${response.artist.id}\`, \`${response.artist.tracklist}\`, \`${response.tracks.data[x].explicit_lyrics}\`, \`${response.tracks.data[x].duration}\`, \`${response.id}\`)"
-                  ></i>
+                <div class="col-1">
+                  <i class="bi bi-plus-circle"></i>
                 </div>
-                <div class="col-1 text-center">
+                <div class="col-1">
                   <p class="m-0">${minuti}:${secondi}</p>
                 </div>
               </div>

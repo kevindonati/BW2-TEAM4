@@ -82,7 +82,7 @@ const main8 = () => {
 
       for (let i = 0; i < 8; i++) {
         appendiAlbum.innerHTML += `
-        <div class="col-6 col-xl-3 g-1">
+        <div class="col-6 col-xl-3 g-2 g-lg-1">
         <a class="text-decoration-none text-light" href="albumView.html?id=${data.data[i].id}">
               <div
                 class="d-flex align-items-center gap-1 bg-button rounded justify-content-between contenitore-card position-relative"
@@ -981,4 +981,26 @@ const togliRounded = (e) => {
 document.addEventListener("DOMContentLoaded", () => {
   togliRounded(mobileView);
   mobileView.addEventListener("change", togliRounded);
+});
+
+// Funzione expand asideSx
+
+const expandSx = document.getElementById("expandSx");
+
+expandSx.addEventListener("click", () => {
+  const asideSx = document.getElementById("asideSx");
+  const mainSection = document.getElementById("main-section");
+  if (asideSx.classList.contains("col-lg-3")) {
+    asideSx.classList.replace("col-lg-3", "col-lg-9");
+    expandSx.classList.replace(
+      "bi-arrows-angle-expand",
+      "bi-arrows-angle-contract",
+    );
+  } else {
+    asideSx.classList.replace("col-lg-9", "col-lg-3");
+    expandSx.classList.replace(
+      "bi-arrows-angle-contract",
+      "bi-arrows-angle-expand",
+    );
+  }
 });
