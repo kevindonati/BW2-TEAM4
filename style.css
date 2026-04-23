@@ -234,3 +234,40 @@ section:hover::-webkit-scrollbar-thumb {
   line-clamp: 2;
   overflow: hidden;
 }
+
+/*MOSTRA TUTTO*/
+/* wrap delle righe */
+.griglia-attiva .carousel-inner {
+  display: flex !important;
+  justify-content: center;
+  flex-wrap: wrap !important;
+  height: auto !important;
+  overflow: visible !important;
+}
+
+/*I 12 album si troveranno nello stesso spazio flex. */
+.griglia-attiva .carousel-item,
+.griglia-attiva .container-fluid,
+.griglia-attiva .row {
+  display: contents !important;
+}
+
+/*Dimensioni delle card */
+.griglia-attiva .col-3.contenitore-card {
+  flex-shrink: 0;
+  flex-basis: 25%;
+  display: block !important;
+}
+
+#mostraTutto1,
+#mostraTutto2,
+#mostraTutto3 {
+  color: white;
+  text-decoration: none;
+}
+
+#mostraTutto1:hover,
+#mostraTutto2:hover,
+#mostraTutto3:hover {
+  text-decoration: underline;
+}
