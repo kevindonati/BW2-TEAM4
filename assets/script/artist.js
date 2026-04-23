@@ -61,7 +61,7 @@ fetch(urlApiArtista)
         // Inizio un ciclo for per inserire le prime canzoni
         for (let i = 0; i < 10 && i < canzoni.length; i++) {
           const traccia = canzoni[i];
-          // Calcolo minuti e secondi (es. 200 secondi -> 3:20)
+          // Calcolo minuti e secondi
           const minuti = Math.floor(traccia.duration / 60);
           const secondi = (traccia.duration % 60).toString().padStart(2, "0");
           const explicit = traccia.explicit_lyrics ? "" : "d-none";
@@ -176,7 +176,7 @@ fetch(urlApiArtista)
         const iconaPlay = document.querySelector(".bi-play-circle-fill");
 
         iconaPlay.onclick = function () {
-          // Eseguiamo la tua funzione originale
+          // Eseguiamo la funzione per far partire le canzoni
           riproduciCanzone(
             this,
             primaCanzone.preview,
@@ -189,7 +189,7 @@ fetch(urlApiArtista)
             primaCanzone.artist.tracklist,
           );
 
-          // Gestiamo il cambio icona dopo un piccolissimo attesa
+          // Gestiamo il cambio icona dopo un delay
           setTimeout(() => {
             if (inputAudio.paused) {
               this.classList.remove("bi-pause-circle-fill");
