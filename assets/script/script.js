@@ -959,3 +959,26 @@ const contatoreBraniPreferiti = () => {
   contenitore.innerText += braniPreferiti.length;
 };
 contatoreBraniPreferiti();
+
+/* Funzione per togliere rounded da lg in giù */
+
+const mobileView = window.matchMedia("(max-width: 991px)");
+
+const togliRounded = (e) => {
+  const mainSection = document.getElementById("main-section");
+  if (e.matches) {
+    console.log(
+      "Dimensione schermo inferiore a 991px tolgo i rounded sul main-section",
+    );
+    mainSection.classList.remove("rounded-4");
+  } else {
+    console.log(
+      "Dimensione schermo maggiore a 991px metto i rounded sul main-section",
+    );
+    mainSection.classList.add("rounded-4");
+  }
+};
+document.addEventListener("DOMContentLoaded", () => {
+  togliRounded(mobileView);
+  mobileView.addEventListener("change", togliRounded);
+});
