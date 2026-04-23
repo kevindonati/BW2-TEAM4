@@ -1,65 +1,65 @@
-const urlGenerale = "https://striveschool-api.herokuapp.com/api/deezer/"
-const urlAlbum = "https://striveschool-api.herokuapp.com/api/deezer/album/"
-const urlArtista = "https://striveschool-api.herokuapp.com/api/deezer/artist/"
-const urlSearch = "https://striveschool-api.herokuapp.com/api/deezer/search?q="
+const urlGenerale = "https://striveschool-api.herokuapp.com/api/deezer/";
+const urlAlbum = "https://striveschool-api.herokuapp.com/api/deezer/album/";
+const urlArtista = "https://striveschool-api.herokuapp.com/api/deezer/artist/";
+const urlSearch = "https://striveschool-api.herokuapp.com/api/deezer/search?q=";
 const urlPlaylistLazza =
-  "https://striveschool-api.herokuapp.com/api/deezer/artist/1288678/top?limit=50"
+  "https://striveschool-api.herokuapp.com/api/deezer/artist/1288678/top?limit=50";
 const urlPlaylistTheWeeknd =
-  "https://striveschool-api.herokuapp.com/api/deezer/artist/4050205/top?limit=50"
-const searchInput = document.getElementById("searchInput")
-const searchResults = document.getElementById("searchResults")
+  "https://striveschool-api.herokuapp.com/api/deezer/artist/4050205/top?limit=50";
+const searchInput = document.getElementById("searchInput");
+const searchResults = document.getElementById("searchResults");
 
 // trovo l'id dall'indirizzo web
-const parametri = new URLSearchParams(location.search)
-const idArtista = parametri.get("id")
+const parametri = new URLSearchParams(location.search);
+const idArtista = parametri.get("id");
 
 // assegno all'api la chiamata utilizzando dinamicamente l'id dell indirizzo
 let urlApiArtista =
-  "https://striveschool-api.herokuapp.com/api/deezer/artist/" + idArtista
+  "https://striveschool-api.herokuapp.com/api/deezer/artist/" + idArtista;
 
 fetch(urlApiArtista)
   .then((response) => {
     if (response.ok) {
-      return response.json()
-    } else throw new Error("errore nella fetch")
+      return response.json();
+    } else throw new Error("errore nella fetch");
   })
   .then((artista) => {
     // cambiamo l'immagine del placeholder
-    const stories = document.querySelector("#artistStories")
+    const stories = document.querySelector("#artistStories");
     if (stories) {
-      stories.setAttribute("src", artista.picture_small)
+      stories.setAttribute("src", artista.picture_small);
     }
     // cambiamo il testo delle sezioni artista e numero ascoltatori
-    document.getElementById("nome-artista").innerText = artista.name
+    document.getElementById("nome-artista").innerText = artista.name;
     document.getElementById("fan-artista").innerText =
-      artista.nb_fan.toLocaleString() // toLocaleString aggiunge i puntini ai numeri grandi
+      artista.nb_fan.toLocaleString(); // toLocaleString aggiunge i puntini ai numeri grandi
     // cambiamo l'immagine del banner
-    const banner = document.getElementById("artist-banner")
-    banner.style.backgroundImage = "url('" + artista.picture_xl + "')"
-    banner.style.backgroundSize = "cover"
-    banner.style.backgroundPosition = "top"
-    banner.style.backgroundRepeat = "no-repeat"
+    const banner = document.getElementById("artist-banner");
+    banner.style.backgroundImage = "url('" + artista.picture_xl + "')";
+    banner.style.backgroundSize = "cover";
+    banner.style.backgroundPosition = "top";
+    banner.style.backgroundRepeat = "no-repeat";
     //Inserisco la parte per il colore dinamico
-    coloraSfondoDinamico(artista.picture_xl, ".bg-linear")
+    coloraSfondoDinamico(artista.picture_xl, ".bg-linear");
     // cambiamo le canzoni (tracklist)
     fetch(artista.tracklist)
       .then((response) => {
         if (response.ok) {
-          return response.json()
-        } else throw new Error("errore nella fetch")
+          return response.json();
+        } else throw new Error("errore nella fetch");
       })
       .then((datiCanzoni) => {
-        console.log("dddd", datiCanzoni)
-        const canzoni = datiCanzoni.data
-        const contenitore = document.getElementById("lista-canzoni")
+        console.log("dddd", datiCanzoni);
+        const canzoni = datiCanzoni.data;
+        const contenitore = document.getElementById("lista-canzoni");
         // Puliamo il contenitore prima di iniziare il ciclo
-        contenitore.innerHTML = ""
+        contenitore.innerHTML = "";
         // Inizio un ciclo for per inserire le prime canzoni
         for (let i = 0; i < 10 && i < canzoni.length; i++) {
-          const traccia = canzoni[i]
+          const traccia = canzoni[i];
           // Calcolo minuti e secondi (es. 200 secondi -> 3:20)
-          const minuti = Math.floor(traccia.duration / 60)
-          const secondi = (traccia.duration % 60).toString().padStart(2, "0")
+          const minuti = Math.floor(traccia.duration / 60);
+          const secondi = (traccia.duration % 60).toString().padStart(2, "0");
           const rigaHTML = `
             <div class="row align-items-center py-2 text-secondary-emphasis hover-bg-grey"
             onclick="riproduciCanzone(\`${datiCanzoni.data[i].preview}\`, \`${datiCanzoni.data[i].title}\`, \`${datiCanzoni.data[i].artist.name}\`, \`${datiCanzoni.data[i].album.cover_small}\`, \`${datiCanzoni.data[i].album.cover_big}\`, \`${datiCanzoni.data[i].artist.picture_big}\`, \`${datiCanzoni.data[i].artist.id}\`, \`${datiCanzoni.data[i].artist.tracklist}\`)">
@@ -78,13 +78,13 @@ fetch(urlApiArtista)
               </div>
               <div class="col-auto text-secondary ps-5">${minuti}:${secondi}</div>
             </div>
-          `
+          `;
           // Aggiungiamo la riga al contenitore
-          contenitore.innerHTML += rigaHTML
+          contenitore.innerHTML += rigaHTML;
         }
       })
-      .catch((error) => console.log("Errore connessione server", error))
-  })
+      .catch((error) => console.log("Errore connessione server", error));
+  });
 
 // RIEMPO LA LIBRERIA
 
@@ -92,16 +92,16 @@ const libreria = () => {
   fetch(urlSearch + "drake")
     .then((response) => {
       if (response.ok) {
-        return response.json()
+        return response.json();
       } else {
-        throw new Error("problema nella response")
+        throw new Error("problema nella response");
       }
     })
     .then((data) => {
-      const spinner = document.querySelectorAll(".contenitore-spinner")
-      spinner[0].classList.add("d-none")
+      const spinner = document.querySelectorAll(".contenitore-spinner");
+      spinner[0].classList.add("d-none");
       for (let i = 0; i < data.data.length; i++) {
-        const appendiAlbum = document.getElementById("appendi-album-libreria")
+        const appendiAlbum = document.getElementById("appendi-album-libreria");
         appendiAlbum.innerHTML += `
         <a class="text-decoration-none text-light" href="albumView.html?id=${data.data[i].album.id}">
             <div class="d-flex my-2 align-items-center">
@@ -117,54 +117,54 @@ const libreria = () => {
               </div>
             </div>
         </a>
-      `
+      `;
       }
     })
     .catch((err) => {
-      console.log("errore durante la fetch", err)
-    })
-}
-libreria()
+      console.log("errore durante la fetch", err);
+    });
+};
+libreria();
 
 // FUNZIONE ricerca
 
 const performSearch = (query) => {
   if (query.length < 2) {
-    searchResults.style.display = "none" // se il risultato ricerca è minore di 2 elementi avrà display none
-    return
+    searchResults.style.display = "none"; // se il risultato ricerca è minore di 2 elementi avrà display none
+    return;
   }
 
   fetch(urlSearch + query)
     .then((response) => {
       if (response.ok) {
-        return response.json()
+        return response.json();
       } else {
-        throw new Error("Errore nella chiamata")
+        throw new Error("Errore nella chiamata");
       }
     })
     .then((data) => {
-      renderDropdownResult(data.data)
+      renderDropdownResult(data.data);
     })
     .catch((error) => {
-      console.log("Errore server", error)
-    })
-}
+      console.log("Errore server", error);
+    });
+};
 
-searchInput.addEventListener("input", (e) => performSearch(e.target.value))
+searchInput.addEventListener("input", (e) => performSearch(e.target.value));
 
 const renderDropdownResult = (songs) => {
-  searchResults.innerHTML = ""
-  searchResults.style.display = "block"
+  searchResults.innerHTML = "";
+  searchResults.style.display = "block";
 
   // Creo una lista verticale
-  const listContainer = document.createElement("div")
-  listContainer.className = "d-flex flex-column"
+  const listContainer = document.createElement("div");
+  listContainer.className = "d-flex flex-column";
 
   songs.slice(0, 10).forEach((song) => {
-    const item = document.createElement("div")
+    const item = document.createElement("div");
     item.className =
-      "d-flex align-items-center p-2 song-card-container border-bottom border-secondary border-opacity-25 item-canzone"
-    item.style.cursor = "pointer"
+      "d-flex align-items-center p-2 song-card-container border-bottom border-secondary border-opacity-25 item-canzone";
+    item.style.cursor = "pointer";
 
     item.innerHTML = `
     <div class="position-relative me-3" style="width: 50px; height: 50px; flex-shrink: 0;">
@@ -187,19 +187,19 @@ const renderDropdownResult = (songs) => {
     <div class="text-secondary small ms-2">
       ${Math.floor(song.duration / 60)}:${(song.duration % 60).toString().padStart(2, "0")}
     </div>
-    `
+    `;
 
     item.addEventListener("click", () => {
       // loadSong(song)
-      searchResults.style.display = "none"
-      searchInput.value = ""
-    })
+      searchResults.style.display = "none";
+      searchInput.value = "";
+    });
 
-    listContainer.appendChild(item)
-  })
+    listContainer.appendChild(item);
+  });
 
-  searchResults.appendChild(listContainer)
-}
+  searchResults.appendChild(listContainer);
+};
 
 const riproduciCanzone = (
   audioCanzone,
@@ -211,43 +211,43 @@ const riproduciCanzone = (
   linkArtista,
   tracklist,
 ) => {
-  console.log("prova")
-  const bottonePlay = document.getElementById("btn-play-canzone")
+  console.log("prova");
+  const bottonePlay = document.getElementById("btn-play-canzone");
   // if (!bottonePlay) return // Se il bottone non esiste, non provare a cambiargli classe
-  const inputAudio = document.getElementById("audio")
-  const playBtn = document.getElementById("playPauseBtn")
+  const inputAudio = document.getElementById("audio");
+  const playBtn = document.getElementById("playPauseBtn");
 
   if (inputAudio.src === audioCanzone) {
     if (inputAudio.paused) {
-      inputAudio.play()
-      bottonePlay.classList.replace("bi-play-fill", "bi-pause-fill")
-      playBtn.classList.replace("bi-play-fill", "bi-pause-fill")
+      inputAudio.play();
+      bottonePlay.classList.replace("bi-play-fill", "bi-pause-fill");
+      playBtn.classList.replace("bi-play-fill", "bi-pause-fill");
     } else {
-      inputAudio.pause()
-      bottonePlay.classList.replace("bi-pause-fill", "bi-play-fill")
-      playBtn.classList.replace("bi-pause-fill", "bi-play-fill")
+      inputAudio.pause();
+      bottonePlay.classList.replace("bi-pause-fill", "bi-play-fill");
+      playBtn.classList.replace("bi-pause-fill", "bi-play-fill");
     }
   } else {
-    inputAudio.src = audioCanzone
-    inputAudio.play()
+    inputAudio.src = audioCanzone;
+    inputAudio.play();
   }
 
-  const placeholder = document.querySelectorAll(".placeholder")
-  console.log(placeholder)
+  const placeholder = document.querySelectorAll(".placeholder");
+  console.log(placeholder);
   for (let i = 0; i < placeholder.length; i++) {
-    placeholder[i].classList.remove("placeholder")
-    console.log(placeholder[i])
+    placeholder[i].classList.remove("placeholder");
+    console.log(placeholder[i]);
   }
 
   // RIEMPO BARRA FOOTER CON CNZONE IN RIPRODUZIONE
-  const titoloCanzone = document.querySelectorAll(".titolo-barra-dx")
+  const titoloCanzone = document.querySelectorAll(".titolo-barra-dx");
   const copertinaPiccola = document.querySelectorAll(
     ".copertina-small-barra-dx",
-  )
-  const copertinaGrande = document.querySelectorAll(".copertina-big-barra-dx")
-  const nome = document.querySelectorAll(".autore-barra-dx")
-  const fotoProfiloArtista = document.getElementById("foto-artista")
-  const ascoltatoriMensili = document.querySelector(".ascoltatori")
+  );
+  const copertinaGrande = document.querySelectorAll(".copertina-big-barra-dx");
+  const nome = document.querySelectorAll(".autore-barra-dx");
+  const fotoProfiloArtista = document.getElementById("foto-artista");
+  const ascoltatoriMensili = document.querySelector(".ascoltatori");
   console.log(
     "cdf",
     titoloCanzone,
@@ -257,37 +257,37 @@ const riproduciCanzone = (
     fotoProfiloArtista,
     ascoltatoriMensili,
     fotoArtista,
-  )
+  );
 
   for (let i = 0; i < nome.length; i++) {
-    nome[i].innerHTML = `${nomeArtista}`
+    nome[i].innerHTML = `${nomeArtista}`;
   }
   for (let i = 0; i < titoloCanzone.length; i++) {
-    titoloCanzone[i].innerHTML = `${titolo}`
+    titoloCanzone[i].innerHTML = `${titolo}`;
   }
   for (let i = 0; i < copertinaPiccola.length; i++) {
-    copertinaPiccola[i].setAttribute("src", copertinaSmall)
+    copertinaPiccola[i].setAttribute("src", copertinaSmall);
   }
   for (let i = 0; i < copertinaGrande.length; i++) {
-    copertinaGrande[i].setAttribute("src", copertinaBig)
+    copertinaGrande[i].setAttribute("src", copertinaBig);
   }
 
   fetch(urlArtista + linkArtista)
     .then((response) => {
       if (response.ok) {
-        return response.json()
+        return response.json();
       } else {
-        throw new Error("errore nella response")
+        throw new Error("errore nella response");
       }
     })
     .then((data) => {
-      console.log("22", data)
-      ascoltatoriMensili.innerHTML = `${data.nb_fan.toLocaleString()}`
-      fotoProfiloArtista.setAttribute("src", data.picture_big)
+      console.log("22", data);
+      ascoltatoriMensili.innerHTML = `${data.nb_fan.toLocaleString()}`;
+      fotoProfiloArtista.setAttribute("src", data.picture_big);
     })
     .catch((err) => {
-      console.log("errore nella fetch", err)
-    })
+      console.log("errore nella fetch", err);
+    });
 
   fetch(
     "https://striveschool-api.herokuapp.com/api/deezer/artist/" +
@@ -296,14 +296,14 @@ const riproduciCanzone = (
   )
     .then((response) => {
       if (response.ok) {
-        return response.json()
+        return response.json();
       } else {
-        throw new Error("errore nella response")
+        throw new Error("errore nella response");
       }
     })
     .then((data) => {
-      console.log("prova45", data)
-      const caroselloCorrelati = document.querySelector(".carosello-correlati")
+      console.log("prova45", data);
+      const caroselloCorrelati = document.querySelector(".carosello-correlati");
 
       caroselloCorrelati.innerHTML = `
       <div class="carousel-inner">
@@ -426,12 +426,12 @@ const riproduciCanzone = (
               ></span>
               <span class="visually-hidden">Next</span>
             </button>
-      `
+      `;
     })
     .catch((err) => {
-      console.log("errore nella fetch", err)
-    })
-}
+      console.log("errore nella fetch", err);
+    });
+};
 // const musicaAlClick = function (
 //   elementoCliccato,
 //   preview,
@@ -505,234 +505,234 @@ const riproduciCanzone = (
 
 // Funzione per attivare gli sfondi dinamici
 const attivaSensoreSfondo = function () {
-  const mainSection = document.getElementById("main-section")
-  const contenitoreCards = document.getElementById("contenitore-main-prime-4")
+  const mainSection = document.getElementById("main-section");
+  const contenitoreCards = document.getElementById("contenitore-main-prime-4");
 
   if (contenitoreCards && mainSection) {
     // Rimuoviamo eventuali vecchi ascoltatori per non duplicarli
-    contenitoreCards.onclick = null
+    contenitoreCards.onclick = null;
 
     contenitoreCards.addEventListener("mouseover", (e) => {
-      const card = e.target.closest(".contenitore-card")
+      const card = e.target.closest(".contenitore-card");
       if (card) {
-        const colore = card.getAttribute("data-color")
+        const colore = card.getAttribute("data-color");
         if (colore) {
-          mainSection.style.background = `linear-gradient(${colore}, #121212 50%)`
+          mainSection.style.background = `linear-gradient(${colore}, #121212 50%)`;
         }
       }
-    })
+    });
 
     contenitoreCards.addEventListener("mouseleave", () => {
       mainSection.style.background =
-        "linear-gradient(rgba(255, 255, 255, 0.1), #121212 50%)"
-    })
+        "linear-gradient(rgba(255, 255, 255, 0.1), #121212 50%)";
+    });
   }
-}
+};
 
 //Parte per sfondo dinamico in artistpage
 const coloraSfondoDinamico = function (urlImmagine, selettoreTarget) {
-  const thief = new ColorThief()
-  const img = new Image()
+  const thief = new ColorThief();
+  const img = new Image();
 
   // Chiediamo il permesso ufficiale
-  img.crossOrigin = "Anonymous"
+  img.crossOrigin = "Anonymous";
 
   // Aggiungiamo un "trucchetto" all'URL per evitare che il browser usi una versione vecchia e bloccata
-  img.src = urlImmagine + "?not-from-cache-please"
+  img.src = urlImmagine + "?not-from-cache-please";
 
   img.addEventListener("load", function () {
     try {
-      const rgb = thief.getColor(img)
-      const colore = `rgba(${rgb[0]}, ${rgb[1]}, ${rgb[2]}, 0.7)`
-      const target = document.querySelector(selettoreTarget)
+      const rgb = thief.getColor(img);
+      const colore = `rgba(${rgb[0]}, ${rgb[1]}, ${rgb[2]}, 0.7)`;
+      const target = document.querySelector(selettoreTarget);
 
       if (target) {
         // Applico il colore sfumandolo verso il nero
-        target.style.background = `linear-gradient(to bottom, ${colore} 0%, #121212 15%)`
-        console.log("Colore applicato con successo!")
+        target.style.background = `linear-gradient(to bottom, ${colore} 0%, #121212 15%)`;
+        console.log("Colore applicato con successo!");
       }
     } catch (error) {
-      console.error("Il guardiano ha bloccato questa immagine:", error)
+      console.error("Il guardiano ha bloccato questa immagine:", error);
       // Colore di default nero
-      document.querySelector(selettoreTarget).style.background = "#222"
+      document.querySelector(selettoreTarget).style.background = "#222";
     }
-  })
-}
+  });
+};
 
 // PARTE audio
 // Progress bar traccia audio----------------------------------------------------------------------------------
 
-const audio = document.getElementById("audio")
-const progressBar = document.getElementById("progress-bar")
-const currentTimeEl = document.getElementById("time-now")
-const durationEl = document.getElementById("time-max")
-const playBtn = document.getElementById("playPauseBtn")
-const mute = document.getElementById("mute")
-const volumeSlider = document.getElementById("volumeSlider")
+const audio = document.getElementById("audio");
+const progressBar = document.getElementById("progress-bar");
+const currentTimeEl = document.getElementById("time-now");
+const durationEl = document.getElementById("time-max");
+const playBtn = document.getElementById("playPauseBtn");
+const mute = document.getElementById("mute");
+const volumeSlider = document.getElementById("volumeSlider");
 
-let lastVolume = 0.2
-let barColore = "#ffffff"
-let volumeBarColor = "#ffffff"
+let lastVolume = 0.2;
+let barColore = "#ffffff";
+let volumeBarColor = "#ffffff";
 
 const coloredBars = (bar, color = "#1db954") => {
-  const value = Number(bar.value)
-  bar.style.background = `linear-gradient(to right, ${color} ${value}%, #4d4d4d ${value}%)`
-}
+  const value = Number(bar.value);
+  bar.style.background = `linear-gradient(to right, ${color} ${value}%, #4d4d4d ${value}%)`;
+};
 
 // Calcolo tempo traccia
 
 audio.addEventListener("timeupdate", () => {
   if (!isNaN(audio.duration)) {
-    const percentage = (audio.currentTime / audio.duration) * 100
-    progressBar.value = percentage
-    currentTimeEl.innerText = formatTime(audio.currentTime)
-    coloredBars(progressBar, barColore)
+    const percentage = (audio.currentTime / audio.duration) * 100;
+    progressBar.value = percentage;
+    currentTimeEl.innerText = formatTime(audio.currentTime);
+    coloredBars(progressBar, barColore);
   }
-})
+});
 
 progressBar.addEventListener("input", () => {
-  audio.currentTime = (progressBar.value / 100) * audio.duration
-  coloredBars(progressBar, barColore)
-})
+  audio.currentTime = (progressBar.value / 100) * audio.duration;
+  coloredBars(progressBar, barColore);
+});
 
 // Hover traccia
 
 progressBar.addEventListener("mouseenter", () => {
-  barColore = "#1db954"
-  coloredBars(progressBar, barColore)
-})
+  barColore = "#1db954";
+  coloredBars(progressBar, barColore);
+});
 
 progressBar.addEventListener("mouseleave", () => {
-  barColore = "#ffffff"
-  coloredBars(progressBar, barColore)
-})
+  barColore = "#ffffff";
+  coloredBars(progressBar, barColore);
+});
 
 const formatTime = (time) => {
-  const min = Math.floor(time / 60)
-  const sec = Math.floor(time % 60)
-  return `${min}:${sec < 10 ? "0" : ""}${sec}`
-}
+  const min = Math.floor(time / 60);
+  const sec = Math.floor(time % 60);
+  return `${min}:${sec < 10 ? "0" : ""}${sec}`;
+};
 
 audio.addEventListener("loadedmetadata", () => {
-  durationEl.innerText = formatTime(audio.duration)
-})
+  durationEl.innerText = formatTime(audio.duration);
+});
 
 // Play e pausa------------------------------------------------------------------------------------------------
 
 const playPause = () => {
   if (audio.paused) {
-    audio.play()
-    playBtn.classList.replace("bi-play-circle-fill", "bi-pause-circle-fill")
+    audio.play();
+    playBtn.classList.replace("bi-play-circle-fill", "bi-pause-circle-fill");
   } else {
-    audio.pause()
-    playBtn.classList.replace("bi-pause-circle-fill", "bi-play-circle-fill")
+    audio.pause();
+    playBtn.classList.replace("bi-pause-circle-fill", "bi-play-circle-fill");
   }
-}
+};
 
-playBtn.addEventListener("click", playPause)
+playBtn.addEventListener("click", playPause);
 
 // Slider musica------------------------------------------------------------------------------------------------
 
 const updateBar = () => {
-  const percentage = (audio.currentTime / audio.duration) * 100
-  progressBar.style.background = `linear-gradient(to right, ${barColore} ${percentage}%, #4d4d4d ${percentage}%)`
-}
+  const percentage = (audio.currentTime / audio.duration) * 100;
+  progressBar.style.background = `linear-gradient(to right, ${barColore} ${percentage}%, #4d4d4d ${percentage}%)`;
+};
 
 audio.addEventListener("timeupdate", () => {
   if (!isNaN(audio.duration)) {
-    const percentage = (audio.currentTime / audio.duration) * 100
-    progressBar.value = percentage
-    currentTimeEl.innerText = formatTime(audio.currentTime)
-    updateBar()
+    const percentage = (audio.currentTime / audio.duration) * 100;
+    progressBar.value = percentage;
+    currentTimeEl.innerText = formatTime(audio.currentTime);
+    updateBar();
   }
-})
+});
 
 // Mute function volume-----------------------------------------------------------------------------------------
 
 const muteIcon = (muted) => {
-  const iconMute = document.getElementById("mute")
+  const iconMute = document.getElementById("mute");
   if (muted) {
-    iconMute.classList.replace("bi-volume-up", "bi-volume-mute")
+    iconMute.classList.replace("bi-volume-up", "bi-volume-mute");
   } else {
-    iconMute.classList.replace("bi-volume-mute", "bi-volume-up")
+    iconMute.classList.replace("bi-volume-mute", "bi-volume-up");
   }
-}
+};
 
 mute.addEventListener("click", () => {
   //funzione per mutare e smutare l'audio tenendo in memoria l'ultimo valore dell'audio
   if (audio.volume > 0) {
-    lastVolume = audio.volume
-    audio.volume = 0
-    volumeSlider.value = 0
-    muteIcon(true)
+    lastVolume = audio.volume;
+    audio.volume = 0;
+    volumeSlider.value = 0;
+    muteIcon(true);
   } else {
-    if (!lastVolume || lastVolume === 0) lastVolume = 0.5
-    audio.volume = lastVolume
-    volumeSlider.value = lastVolume * 100
-    muteIcon(false)
+    if (!lastVolume || lastVolume === 0) lastVolume = 0.5;
+    audio.volume = lastVolume;
+    volumeSlider.value = lastVolume * 100;
+    muteIcon(false);
   }
-  coloredBars(volumeSlider, volumeBarColor)
-})
+  coloredBars(volumeSlider, volumeBarColor);
+});
 
 // Slider volume------------------------------------------------------------------------------------------------
 
 volumeSlider.addEventListener("input", (e) => {
-  const value = e.target.value
-  audio.volume = value / 100
-  coloredBars(volumeSlider, volumeBarColor)
-  muteIcon(audio.volume === 0)
-})
+  const value = e.target.value;
+  audio.volume = value / 100;
+  coloredBars(volumeSlider, volumeBarColor);
+  muteIcon(audio.volume === 0);
+});
 
 // Hover slider volume
 
 volumeSlider.addEventListener("mouseenter", () => {
-  volumeBarColor = "#1db954"
-  coloredBars(volumeSlider, volumeBarColor)
-})
+  volumeBarColor = "#1db954";
+  coloredBars(volumeSlider, volumeBarColor);
+});
 
 volumeSlider.addEventListener("mouseleave", () => {
-  volumeBarColor = "#ffffff"
-  coloredBars(volumeSlider, volumeBarColor)
-})
+  volumeBarColor = "#ffffff";
+  coloredBars(volumeSlider, volumeBarColor);
+});
 
 mute.addEventListener("mouseenter", () => {
-  volumeBarColor = "#1db954"
-  coloredBars(volumeSlider, volumeBarColor)
-})
+  volumeBarColor = "#1db954";
+  coloredBars(volumeSlider, volumeBarColor);
+});
 
 mute.addEventListener("mouseleave", () => {
-  volumeBarColor = "#ffffff"
-  coloredBars(volumeSlider, volumeBarColor)
-})
+  volumeBarColor = "#ffffff";
+  coloredBars(volumeSlider, volumeBarColor);
+});
 
 // Caricamenti iniziali
-coloredBars(volumeSlider, "#ffffff")
-coloredBars(progressBar, "#ffffff")
-muteIcon(false)
-audio.volume = 0.2
-volumeSlider.value = 20
+coloredBars(volumeSlider, "#ffffff");
+coloredBars(progressBar, "#ffffff");
+muteIcon(false);
+audio.volume = 0.2;
+volumeSlider.value = 20;
 
 // Funzione full-screen
 
-const fsBtn = document.querySelector("#screenMode")
+const fsBtn = document.querySelector("#screenMode");
 
 fsBtn.addEventListener("click", () => {
   if (!document.fullscreenElement) {
     document.documentElement.requestFullscreen().catch((err) => {
-      console.error(`Errore: ${err.message}`)
-    })
+      console.error(`Errore: ${err.message}`);
+    });
   } else {
-    document.exitFullscreen()
+    document.exitFullscreen();
   }
-})
+});
 
 document.addEventListener("fullscreenchange", () => {
   if (document.fullscreenElement) {
-    fsBtn.classList.replace("bi-fullscreen", "bi-fullscreen-exit")
+    fsBtn.classList.replace("bi-fullscreen", "bi-fullscreen-exit");
   } else {
-    fsBtn.classList.replace("bi-fullscreen-exit", "bi-fullscreen")
+    fsBtn.classList.replace("bi-fullscreen-exit", "bi-fullscreen");
   }
-})
+});
 
 // FUNZIONE AGGIUNGI AI PREFERITI
 const salvaCanzone = (
@@ -761,20 +761,43 @@ const salvaCanzone = (
     explicit: explicit,
     durata: durata,
     idAlbum: idAlbum,
-  }
+  };
 
-  braniPreferiti.push(datiCanzone)
-  localStorage.setItem("brano-preferito", JSON.stringify(braniPreferiti))
+  braniPreferiti.push(datiCanzone);
+  localStorage.setItem("brano-preferito", JSON.stringify(braniPreferiti));
 
-  icona.classList.replace("bi-plus-circle", "bi-check-circle-fill")
-  icona.classList.add("text-success")
-}
+  icona.classList.replace("bi-plus-circle", "bi-check-circle-fill");
+  icona.classList.add("text-success");
+};
 
 const contatoreBraniPreferiti = () => {
-  const contenitore = document.getElementById("contatore-brani")
+  const contenitore = document.getElementById("contatore-brani");
   const braniPreferiti =
-    JSON.parse(localStorage.getItem("brano-preferito")) || []
-  console.log(braniPreferiti)
-  contenitore.innerText += braniPreferiti.length
-}
-contatoreBraniPreferiti()
+    JSON.parse(localStorage.getItem("brano-preferito")) || [];
+  console.log(braniPreferiti);
+  contenitore.innerText += braniPreferiti.length;
+};
+contatoreBraniPreferiti();
+
+/* Funzione per togliere rounded da lg in giù */
+
+const mobileView = window.matchMedia("(max-width: 991px)");
+
+const togliRounded = (e) => {
+  const mainSection = document.getElementById("main-section");
+  if (e.matches) {
+    console.log(
+      "Dimensione schermo inferiore a 991px tolgo i rounded sul main-section",
+    );
+    mainSection.classList.remove("rounded-4");
+  } else {
+    console.log(
+      "Dimensione schermo maggiore a 991px metto i rounded sul main-section",
+    );
+    mainSection.classList.add("rounded-4");
+  }
+};
+document.addEventListener("DOMContentLoaded", () => {
+  togliRounded(mobileView);
+  mobileView.addEventListener("change", togliRounded);
+});
