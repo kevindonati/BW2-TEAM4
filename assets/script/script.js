@@ -982,3 +982,25 @@ document.addEventListener("DOMContentLoaded", () => {
   togliRounded(mobileView);
   mobileView.addEventListener("change", togliRounded);
 });
+
+// Funzione expand asideSx
+
+const expandSx = document.getElementById("expandSx");
+
+expandSx.addEventListener("click", () => {
+  const asideSx = document.getElementById("asideSx");
+  const mainSection = document.getElementById("main-section");
+  if (asideSx.classList.contains("col-lg-3")) {
+    asideSx.classList.replace("col-lg-3", "col-lg-9");
+    expandSx.classList.replace(
+      "bi-arrows-angle-expand",
+      "bi-arrows-angle-contract",
+    );
+  } else {
+    asideSx.classList.replace("col-lg-9", "col-lg-3");
+    expandSx.classList.replace(
+      "bi-arrows-angle-contract",
+      "bi-arrows-angle-expand",
+    );
+  }
+});
