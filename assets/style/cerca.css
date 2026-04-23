@@ -8,7 +8,6 @@ footer {
     rgba(0, 0, 0, 0) 100%
   );
 }
-
 .bg-grigio {
   background-color: #242424;
 }
@@ -17,12 +16,12 @@ footer {
   background-color: #121212;
 }
 
-#search::placeholder {
+#searchInput::placeholder {
   color: #b3b3b3;
   font-weight: bold;
 }
 
-#search:focus {
+#searchInput:focus {
   outline: none;
 }
 

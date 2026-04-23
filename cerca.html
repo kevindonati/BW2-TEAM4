@@ -34,15 +34,35 @@
   <body class="p-3 text-white bg-grigio-scuro">
     <header>
       <h1 class="my-4 fw-bold">Cerca</h1>
-      <div class="bg-grigio m-1 p-2 rounded-2 d-flex align-items-center my-4">
-        <i class="fas fa-search text-white"></i>
-        <input
-          type="search"
-          name=""
-          id="search"
-          class="bg-transparent text-decoration-none border-0 shadow-none w-100"
-          placeholder="Cosa vuoi ascoltare?"
-        />
+      <div class="position-relative">
+        <form
+          class="bg-grigio m-1 p-2 rounded-2 d-flex align-items-center my-4"
+          role="search"
+          id="seachForm"
+        >
+          <i class="fas fa-search text-white"></i>
+          <input
+            placeholder="Cosa vuoi ascoltare?"
+            id="searchInput"
+            class="form-control me-2 bg-transparent text-decoration-none border-0 shadow-none w-100"
+            type="search"
+            aria-label="Search"
+            autocomplete="off"
+          />
+        </form>
+        <div
+          id="searchResults"
+          class="dropdown-menu bg-dark p-2 w-100 shadow-lg border border-secondary"
+          style="
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            max-height: 400px;
+            overflow-y: auto;
+            z-index: 1000;
+          "
+        ></div>
       </div>
     </header>
     <main>
@@ -102,5 +122,6 @@
       crossorigin="anonymous"
     ></script>
     <script src="./assets/script/searchMobile.js"></script>
+    <script src="./assets/script/script.js"></script>
   </body>
 </html>
