@@ -38,6 +38,26 @@ section::-webkit-scrollbar-thumb {
   pointer-events: none;
 }
 
+.x-small {
+  font-size: 0.75rem;
+}
+
+.text-individual {
+  color: #ffc0cb;
+}
+
+.bg-individual {
+  background-color: #ffc0cb;
+}
+
+.text-student {
+  color: #cebfdc;
+}
+
+.bg-student {
+  background-color: #cebfdc;
+}
+
 /* appare solo quando hover */
 aside:hover::-webkit-scrollbar-thumb,
 section:hover::-webkit-scrollbar-thumb {

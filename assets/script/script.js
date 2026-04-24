@@ -85,7 +85,7 @@ const main8 = () => {
       for (let i = 0; i < 8; i++) {
         appendiAlbum.innerHTML += `
         <div class="col-6 col-xl-3 g-2 g-lg-1">
-        <a class="text-decoration-none text-light" href="albumView.html?id=${data.data[i].id}">
+        <a class="text-decoration-none text-light" href="albumView.html?id=${data.data[i].album.id}">
               <div
                 class="d-flex align-items-center gap-1 bg-button rounded justify-content-between contenitore-card position-relative"
               >
@@ -148,7 +148,7 @@ const primoCarosello = () => {
       for (let i = 0; i < 12; i++) {
         const primoCarosello = document.querySelectorAll(".carosello-1")
         primoCarosello[i].innerHTML = `
-        <a class="text-decoration-none text-light" href="albumView.html?id=${data.data[i].id}">
+        <a class="text-decoration-none text-light" href="albumView.html?id=${data.data[i].album.id}">
         <div class="position-relative">
                         <img
                           src="${data.data[i].album.cover_medium}"
@@ -188,7 +188,7 @@ const secondoCarosello = () => {
       for (let i = 0; i < 12; i++) {
         const secondoCarosello = document.querySelectorAll(".carosello-2")
         secondoCarosello[i].innerHTML = `
-        <a class="text-decoration-none text-light" href="albumView.html?id=${data.data[i].id}">
+        <a class="text-decoration-none text-light" href="albumView.html?id=${data.data[i].album.id}">
         <div class="position-relative">
                         <img
                           src="${data.data[i].album.cover_medium}"
@@ -228,7 +228,7 @@ const terzoCarosello = () => {
       for (let i = 0; i < 12; i++) {
         const terzoCarosello = document.querySelectorAll(".carosello-3")
         terzoCarosello[i].innerHTML = `
-        <a class="text-decoration-none text-light" href="albumView.html?id=${data.data[i].id}">
+        <a class="text-decoration-none text-light" href="albumView.html?id=${data.data[i].album.id}">
         <div class="position-relative">
                         <img
                           src="${data.data[i].album.cover_medium}"

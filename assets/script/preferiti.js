@@ -123,6 +123,40 @@ const riempiPreferiti = () => {
               </div>
       `
   }
+  // Attivo il bottone play grande e gestione cambio icona play pause
+  // Recuperiamo il player e l'icona grande
+  const inputAudio = document.getElementById("audio")
+  const iconaPlayGrande = document.querySelector(".bi-play-circle-fill")
+
+  // Controlliamo se ci sono brani nei preferiti prima di attivare il tasto
+  if (braniPreferiti.length > 0 && iconaPlayGrande) {
+    const primaCanzone = braniPreferiti[0]
+
+    iconaPlayGrande.onclick = function () {
+      riproduciCanzone(
+        this,
+        primaCanzone.audio,
+        primaCanzone.titolo,
+        primaCanzone.artista,
+        primaCanzone.coverSmall,
+        primaCanzone.coverBig,
+        primaCanzone.fotoArtista,
+        primaCanzone.idArtista,
+        primaCanzone.tracklist,
+      )
+
+      // Gestiamo il cambio icona (Play/Pause)
+      setTimeout(() => {
+        if (inputAudio.paused) {
+          this.classList.remove("bi-pause-circle-fill")
+          this.classList.add("bi-play-circle-fill")
+        } else {
+          this.classList.remove("bi-play-circle-fill")
+          this.classList.add("bi-pause-circle-fill")
+        }
+      }, 100)
+    }
+  }
 
   const colorThief = new ColorThief()
   const immagini = appendiAlbum.querySelectorAll(".img-per-colore")

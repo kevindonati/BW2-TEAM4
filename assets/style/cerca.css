@@ -5,6 +5,11 @@ footer {
     rgba(0, 0, 0, 0) 100%
   );
 }
+
+#mobile-nav i {
+  margin-bottom: 4px;
+}
+
 .bg-grigio {
   background-color: #242424;
 }
