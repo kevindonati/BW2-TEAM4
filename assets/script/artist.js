@@ -110,7 +110,7 @@ fetch(urlApiArtista)
                 <div class="col-1 cella">
                   <span class="numero-cella">${i + 1}</span>
                     <i 
-                     onclick="riproduciCanzone(this, \`${datiCanzoni.data[i].preview}\`, \`${datiCanzoni.data[i].title}\`, \`${datiCanzoni.data[i].artist.name}\`, \`${datiCanzoni.data[i].album.cover_small}\`, \`${datiCanzoni.data[i].album.cover_big}\`, \`${datiCanzoni.data[i].artist.picture_big}\`, \`${datiCanzoni.data[i].artist.id}\`, \`${datiCanzoni.data[i].artist.tracklist}\`)"
+                     onclick="riproduciCanzone(this, \`${datiCanzoni.data[i].preview}\`, \`${datiCanzoni.data[i].title}\`, \`${datiCanzoni.data[i].artist.name}\`, \`${datiCanzoni.data[i].album.cover_small}\`, \`${datiCanzoni.data[i].album.cover_big}\`, \`${datiCanzoni.data[i].artist.picture_big}\`, \`${datiCanzoni.data[i].artist.id}\`, \`${datiCanzoni.data[i].artist.tracklist}\` , \`${datiCanzoni.data[i].album.id}\`)"
                      class="fas fa-play text-light icona fs-4"></i>
                 </div>
                 <div class="col-1">
@@ -187,6 +187,7 @@ fetch(urlApiArtista)
             primaCanzone.artist.picture_big,
             primaCanzone.artist.id,
             primaCanzone.artist.tracklist,
+            primaCanzone.album.id,
           );
 
           // Gestiamo il cambio icona dopo un delay
@@ -289,7 +290,7 @@ const renderDropdownResult = (songs) => {
       <img src="${song.album.cover_small}" class="img-fluid rounded shadow-sm" alt="${song.title}">
       <div class="mostra-al-passaggio position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center rounded" 
            style="background: rgba(0,0,0,0.5)" 
-           onclick="riproduciCanzone(this, \`${song.preview}\`, \`${song.title}\`, \`${song.artist.name}\`, \`${song.album.cover_small}\`, \`${song.album.cover_big}\`, \`${song.artist.picture_big}\`, \`${song.artist.id}\`, \`${song.artist.tracklist}\`)">
+           onclick="riproduciCanzone(this, \`${song.preview}\`, \`${song.title}\`, \`${song.artist.name}\`, \`${song.album.cover_small}\`, \`${song.album.cover_big}\`, \`${song.artist.picture_big}\`, \`${song.artist.id}\`, \`${song.artist.tracklist}\` , \`${song.album.id}\`)">
           <i class="fas fa-play text-white fs-6"></i>
       </div>
     </div>
@@ -329,6 +330,7 @@ const riproduciCanzone = (
   fotoArtista,
   linkArtista,
   tracklist,
+  idAlbum,
 ) => {
   const bottonePlay = document.getElementById("btn-play-canzone");
   // if (!bottonePlay) return; // Se il bottone non esiste, non provare a cambiargli classe
@@ -381,18 +383,18 @@ const riproduciCanzone = (
 
   for (let i = 0; i < nome.length; i++) {
     nome[i].innerHTML = `${nomeArtista}`;
-    // const linkPadre = nome[i].closest("a");
-    // // if (linkPadre) {
-    // //   linkPadre.href = `artistView.html?id=${linkArtista}`;
-    // //   console.log("Link generato per artista:", linkPadre.href);
-    // // }
+    const linkPadre = nome[i].closest("a");
+    if (linkPadre) {
+      linkPadre.href = `artistView.html?id=${linkArtista}`;
+      console.log("Link generato per artista:", linkPadre.href);
+    }
   }
   for (let i = 0; i < titoloCanzone.length; i++) {
     titoloCanzone[i].innerHTML = `${titolo}`;
-    // const linkPadre = titoloCanzone[i].closest("a");
-    // if (linkPadre) {
-    //   linkPadre.href = `albumView.html?id=${idAlbum}`;
-    // }
+    const linkPadre = titoloCanzone[i].closest("a");
+    if (linkPadre) {
+      linkPadre.href = `albumView.html?id=${idAlbum}`;
+    }
   }
   for (let i = 0; i < copertinaPiccola.length; i++) {
     copertinaPiccola[i].setAttribute("src", copertinaSmall);
@@ -937,16 +939,16 @@ document.addEventListener("DOMContentLoaded", () => {
 //BOTTONE SEARCH ASIDE JS
 
 document.addEventListener("DOMContentLoaded", () => {
-  const searchBtn = document.getElementById("search-button")
-  const searchForm = document.getElementById("search-form")
-  const recenti = document.getElementById("recenti")
-  const container = document.getElementById("search-container")
+  const searchBtn = document.getElementById("search-button");
+  const searchForm = document.getElementById("search-form");
+  const recenti = document.getElementById("recenti");
+  const container = document.getElementById("search-container");
 
   searchBtn.addEventListener("click", (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
-    recenti.classList.toggle("d-none")
-    searchForm.classList.toggle("active")
-    container.classList.toggle("search-background")
-  })
-})
+    recenti.classList.toggle("d-none");
+    searchForm.classList.toggle("active");
+    container.classList.toggle("search-background");
+  });
+});

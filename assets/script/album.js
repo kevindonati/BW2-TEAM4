@@ -170,6 +170,10 @@ const estrazioneArtista = () => {
           response.artist.picture_big,
           response.artist.id,
           response.artist.tracklist,
+          primaCanzone.explicit_lyrics,
+          primaCanzone.duration,
+          primaCanzone.id,
+          response.id,
         );
 
         // Cambiamo l'icona in base a se l'audio è partito o no
@@ -403,18 +407,18 @@ const riproduciCanzone = (
 
   for (let i = 0; i < nome.length; i++) {
     nome[i].innerHTML = `${nomeArtista}`;
-    // const linkPadre = nome[i].closest("a");
-    // if (linkPadre) {
-    //   linkPadre.href = `artistView.html?id=${linkArtista}`;
-    //   console.log("Link generato per artista:", linkPadre.href);
-    // }
+    const linkPadre = nome[i].closest("a");
+    if (linkPadre) {
+      linkPadre.href = `artistView.html?id=${linkArtista}`;
+      console.log("Link generato per artista:", linkPadre.href);
+    }
   }
   for (let i = 0; i < titoloCanzone.length; i++) {
     titoloCanzone[i].innerHTML = `${titolo}`;
-    // const linkPadre = titoloCanzone[i].closest("a");
-    // if (linkPadre) {
-    //   linkPadre.href = `albumView.html?id=${idAlbum}`;
-    // }
+    const linkPadre = titoloCanzone[i].closest("a");
+    if (linkPadre) {
+      linkPadre.href = `albumView.html?id=${idAlbum}`;
+    }
   }
   for (let i = 0; i < copertinaPiccola.length; i++) {
     copertinaPiccola[i].setAttribute("src", copertinaSmall);
@@ -903,16 +907,16 @@ document.addEventListener("DOMContentLoaded", () => {
 //BOTTONE SEARCH ASIDE JS
 
 document.addEventListener("DOMContentLoaded", () => {
-  const searchBtn = document.getElementById("search-button")
-  const searchForm = document.getElementById("search-form")
-  const recenti = document.getElementById("recenti")
-  const container = document.getElementById("search-container")
+  const searchBtn = document.getElementById("search-button");
+  const searchForm = document.getElementById("search-form");
+  const recenti = document.getElementById("recenti");
+  const container = document.getElementById("search-container");
 
   searchBtn.addEventListener("click", (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
-    recenti.classList.toggle("d-none")
-    searchForm.classList.toggle("active")
-    container.classList.toggle("search-background")
-  })
-})
+    recenti.classList.toggle("d-none");
+    searchForm.classList.toggle("active");
+    container.classList.toggle("search-background");
+  });
+});
