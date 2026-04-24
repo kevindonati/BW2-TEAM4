@@ -9,6 +9,7 @@ const urlPlaylistTheWeeknd =
 const searchInput = document.getElementById("searchInput");
 const searchResults = document.getElementById("searchResults");
 const btnAggiungi = document.querySelectorAll(".btn-aggiungi");
+const playPauseToggle = document.querySelectorAll(".playPauseToggle");
 
 const applicaColore = function (img, thief) {
   try {
@@ -105,7 +106,7 @@ const main8 = () => {
                   onclick="riproduciCanzone(this, \`${data.data[i].preview}\`, \`${data.data[i].title}\`, \`${data.data[i].artist.name}\`, \`${data.data[i].album.cover_small}\`, \`${data.data[i].album.cover_big}\`, \`${data.data[i].artist.picture_big}\`, \`${data.data[i].artist.id}\`, \`${data.data[i].artist.tracklist}\`, \`${data.data[i].explicit_lyrics}\`, \`${data.data[i].duration}\`, \`${data.data[i].id}\`, \`${data.data[i].album.id}\`)"
                 >
                   <i id="btn-play-canzone"
-                    class="bi bi-play-fill justify-content-center align-items-center"
+                    class="cardPlayPause bi bi-play-fill justify-content-center align-items-center"
                   ></i>
                 </a>
               </div>
@@ -159,7 +160,7 @@ const primoCarosello = () => {
                           class="btn btn-success flex mostra-al-passaggio rounded rounded-circle text-black shadow shadow-lg position-absolute end-0 bottom-0 m-1 px-1 py-0 d-flex"
                           onclick="riproduciCanzone(this, \`${data.data[i].preview}\`, \`${data.data[i].title}\`, \`${data.data[i].artist.name}\`, \`${data.data[i].album.cover_small}\`, \`${data.data[i].album.cover_big}\`, \`${data.data[i].artist.picture_big}\`, \`${data.data[i].artist.id}\`, \`${data.data[i].artist.tracklist}\`, \`${data.data[i].explicit_lyrics}\`, \`${data.data[i].duration}\`, \`${data.data[i].id}\`, \`${data.data[i].album.id}\`)"
                         >
-                          <i
+                          <i 
                             class="bi bi-play-fill justify-content-center align-items-center"
                           ></i>
                         </a>
@@ -240,7 +241,7 @@ const terzoCarosello = () => {
                           onclick="riproduciCanzone(this, \`${data.data[i].preview}\`, \`${data.data[i].title}\`, \`${data.data[i].artist.name}\`, \`${data.data[i].album.cover_small}\`, \`${data.data[i].album.cover_big}\`, \`${data.data[i].artist.picture_big}\`, \`${data.data[i].artist.id}\`, \`${data.data[i].artist.tracklist}\`, \`${data.data[i].explicit_lyrics}\`, \`${data.data[i].duration}\`, \`${data.data[i].id}\`, \`${data.data[i].album.id}\`)"
                         >
                           <i
-                            class="bi bi-play-fill justify-content-center align-items-center"
+                            class=" bi bi-play-fill justify-content-center align-items-center"
                           ></i>
                         </a>
                       </div>
@@ -281,7 +282,6 @@ const riproduciCanzone = (
   const bottonePlay = document.getElementById("btn-play-canzone");
   // if (!bottonePlay) return // Se il bottone non esiste, non provare a cambiargli classe
   const inputAudio = document.getElementById("audio");
-  const playBtn = document.getElementById("playPauseBtn");
 
   if (inputAudio.src === audioCanzone) {
     if (inputAudio.paused) {
@@ -289,13 +289,17 @@ const riproduciCanzone = (
       iconaPlay.innerHTML = `<i
                               class="bi bi-pause-fill justify-content-center align-items-center"
                             ></i>`;
-      playBtn.classList.replace("bi-play-circle-fill", "bi-pause-circle-fill");
+      playPauseToggle.forEach((btn) => {
+        btn.classList.replace("bi-play-circle-fill", "bi-pause-circle-fill");
+      });
     } else {
       inputAudio.pause();
       iconaPlay.innerHTML = `<i
                               class="bi bi-play-fill justify-content-center align-items-center"
                             ></i>`;
-      playBtn.classList.replace("bi-pause-circle-fill", "bi-play-circle-fill");
+      playPauseToggle.forEach((btn) => {
+        btn.classList.replace("bi-pause-circle-fill", "bi-play-circle-fill");
+      });
     }
   } else {
     inputAudio.src = audioCanzone;
@@ -303,7 +307,9 @@ const riproduciCanzone = (
     iconaPlay.innerHTML = `<i
                               class="bi bi-pause-fill justify-content-center align-items-center"
                             ></i>`;
-    playBtn.classList.replace("bi-play-circle-fill", "bi-pause-circle-fill");
+    playPauseToggle.forEach((btn) => {
+      btn.classList.replace("bi-play-circle-fill", "bi-pause-circle-fill");
+    });
   }
 
   // RIEMPO BARRA FOOTER CON CNZONE IN RIPRODUZIONE
@@ -661,13 +667,13 @@ searchInput.addEventListener("input", (e) => {
 
 //   if (isPlaying) {
 //     playBtnFooter.classList.replace(
-//       "bi-play-circle-fill",
+//       "bi-play-fill",
 //       "bi-pause-circle-fill",
 //     )
 //   } else {
 //     playBtnFooter.classList.replace(
 //       "bi-pause-circle-fill",
-//       "bi-play-circle-fill",
+//       "bi-play-fill",
 //     )
 //   }
 // }
@@ -757,18 +763,51 @@ audio.addEventListener("loadedmetadata", () => {
 });
 
 // Play e pausa------------------------------------------------------------------------------------------------
+const btnPlayCanzone = document.getElementById("btn-play-canzone");
+const playBtnMobile = document.getElementById("playBtnMobile");
 
 const playPause = () => {
   if (audio.paused) {
     audio.play();
-    playBtn.classList.replace("bi-play-circle-fill", "bi-pause-circle-fill");
+    cambiaPlay(true);
   } else {
     audio.pause();
-    playBtn.classList.replace("bi-pause-circle-fill", "bi-play-circle-fill");
+    cambiaPlay(false);
+  }
+};
+
+const cambiaPlay = (inesecuzione, elementoCliccato = null) => {
+  const noCircle = inesecuzione ? "bi-pause-fill" : "bi-play-fill";
+  const noCircleRemove = inesecuzione ? "bi-play-fill" : "bi-pause-fill";
+
+  const circle = inesecuzione ? "bi-pause-circle-fill" : "bi-play-circle-fill";
+  const circleRemove = inesecuzione
+    ? "bi-play-circle-fill"
+    : "bi-pause-circle-fill";
+
+  playBtnMobile.classList.replace(noCircleRemove, noCircle);
+
+  playBtn.classList.replace(circleRemove, circle);
+
+  // const cardPlayPause = document.querySelectorAll(".cardPlayPause");
+  // cardPlayPause.forEach((btn) => {
+  //   btn.classList.replace(noCircleRemove, noCircle);
+  // });
+
+  btnPlayCanzone.classList.replace(noCircleRemove, noCircle);
+
+  if (inesecuzione && elementoCliccato) {
+    const icon =
+      elementoCliccato.querySelector(".cardPlayPause") || elementoCliccato;
+    icon.classList.replace("bi-play-fill", "bi-pause-fill");
   }
 };
 
 playBtn.addEventListener("click", playPause);
+playBtnMobile.addEventListener("click", playPause);
+
+audio.addEventListener("play", () => cambiaPlay(true));
+audio.addEventListener("pause", () => cambiaPlay(false));
 
 // Slider musica------------------------------------------------------------------------------------------------
 
