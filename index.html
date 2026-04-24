@@ -191,9 +191,8 @@
             <div id="search-container" class="d-flex align-items-center mt-2">
               <button
                 class="btn bg-transparent rounded-circle ms-2 bg-customized-hover"
-                id="search-button"
               >
-                <i class="bi bi-search"></i>
+                <i class="bi bi-search" id="search-icon"></i>
               </button>
               <form id="search-form" class="ms-2">
                 <input
@@ -589,13 +588,7 @@
           <!-- BARRA DX ARTISTA -->
           <!-- TITOLO CANZONE IN ASCOLTO -->
           <div class="placeholder-glow">
-            <a href="#">
-              <h6
-                class="placeholder fw-bold my-3 titolo-barra-dx sottolinea-hover"
-              >
-                NULLA DI
-              </h6>
-            </a>
+            <h6 class="placeholder fw-bold my-3 titolo-barra-dx">NULLA DI</h6>
 
             <!-- IMMAGINE CANZONE IN ASCOLTO -->
             <img
@@ -610,21 +603,13 @@
               <!-- CREDITI ARTISTA -->
               <div>
                 <!-- TITOLO CANZONE IN ASCOLTO -->
-                <a href="#">
-                  <h4
-                    class="placeholder titolo-barra-dx fw-bold m-0 sottolinea-hover d-block"
-                  >
-                    NULLA DI
-                  </h4>
-                </a>
+                <h4 class="placeholder titolo-barra-dx fw-bold m-0">
+                  NULLA DI
+                </h4>
                 <!-- ARTISTA -->
-                <a href="#">
-                  <p
-                    class="placeholder text-secondary m-0 autore-barra-dx sottolinea-hover"
-                  >
-                    Lazza
-                  </p>
-                </a>
+                <p class="placeholder text-secondary m-0 autore-barra-dx">
+                  Lazza
+                </p>
               </div>
               <!-- BOTTONE AGGIUNGI -->
               <i class="bi bi-plus-circle icona-2 fs-4 btn-aggiungi"></i>
@@ -656,13 +641,7 @@
               class="card-body d-flex justify-content-between align-items-center"
             >
               <div class="bg-dark">
-                <a href="#">
-                  <p
-                    class="autore-barra-dx card-text placeholder sottolinea-hover"
-                  >
-                    Lazza
-                  </p>
-                </a>
+                <p class="autore-barra-dx card-text placeholder">Lazza</p>
                 <p class="card-text">
                   Numero Ascoltatori mensili:
                   <span class="placeholder ascoltatori">1515151</span>
@@ -670,7 +649,7 @@
               </div>
               <a
                 href="#"
-                class="placeholder btn btn-dark rounded-5 border-1 border-secondary segui"
+                class="placeholder btn btn-dark rounded-5 border-1 border-secondary"
                 >Segui</a
               >
             </div>
@@ -716,7 +695,7 @@
             <i class="bi bi-shuffle"></i>
             <i class="fas fa-backward"></i>
             <i
-              class="bi bi-play-circle-fill fs-3 text-white"
+              class="playPauseToggle bi bi-play-circle-fill fs-3 text-white"
               id="playPauseBtn"
             ></i>
             <i class="fas fa-forward"></i>
@@ -772,8 +751,12 @@
         >
           <div class="">
             <audio src=""></audio>
-            <img src="https://placecats.com/40/40" alt="" />
-            <span>Testo canzone</span>
+            <img
+              class="copertina-small-barra-dx"
+              src="https://placecats.com/40/40"
+              alt=""
+            />
+            <span class="titolo-barra-dx">Testo canzone</span>
           </div>
           <div class="d-flex align-items-center justify-content-between gap-3">
             <i
@@ -986,7 +969,7 @@
       crossorigin="anonymous"
     ></script>
     <script src="./assets/script/script.js"></script>
-
+    <script src="./assets/script/player.js"></script>
     <!-- <script src="./assets/script/search.js"></script> -->
   </body>
 </html>
