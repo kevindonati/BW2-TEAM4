@@ -123,6 +123,40 @@ const riempiPreferiti = () => {
               </div>
       `
   }
+  // Attivo il bottone play grande e gestione cambio icona play pause
+  // Recuperiamo il player e l'icona grande
+  const inputAudio = document.getElementById("audio")
+  const iconaPlayGrande = document.querySelector(".bi-play-circle-fill")
+
+  // Controlliamo se ci sono brani nei preferiti prima di attivare il tasto
+  if (braniPreferiti.length > 0 && iconaPlayGrande) {
+    const primaCanzone = braniPreferiti[0]
+
+    iconaPlayGrande.onclick = function () {
+      riproduciCanzone(
+        this,
+        primaCanzone.audio,
+        primaCanzone.titolo,
+        primaCanzone.artista,
+        primaCanzone.coverSmall,
+        primaCanzone.coverBig,
+        primaCanzone.fotoArtista,
+        primaCanzone.idArtista,
+        primaCanzone.tracklist,
+      )
+
+      // Gestiamo il cambio icona (Play/Pause)
+      setTimeout(() => {
+        if (inputAudio.paused) {
+          this.classList.remove("bi-pause-circle-fill")
+          this.classList.add("bi-play-circle-fill")
+        } else {
+          this.classList.remove("bi-play-circle-fill")
+          this.classList.add("bi-pause-circle-fill")
+        }
+      }, 100)
+    }
+  }
 
   const colorThief = new ColorThief()
   const immagini = appendiAlbum.querySelectorAll(".img-per-colore")
@@ -194,10 +228,19 @@ const riproduciCanzone = (
   const ascoltatoriMensili = document.querySelector(".ascoltatori")
 
   for (let i = 0; i < nome.length; i++) {
-    nome[i].innerHTML = `${nomeArtista}`
+    nome[i].innerHTML = `${nomeArtista}`;
+    // const linkPadre = nome[i].closest("a");
+    // if (linkPadre) {
+    //   linkPadre.href = `artistView.html?id=${linkArtista}`;
+    //   console.log("Link generato per artista:", linkPadre.href);
+    // }
   }
   for (let i = 0; i < titoloCanzone.length; i++) {
-    titoloCanzone[i].innerHTML = `${titolo}`
+    titoloCanzone[i].innerHTML = `${titolo}`;
+    // const linkPadre = titoloCanzone[i].closest("a");
+    // if (linkPadre) {
+    //   linkPadre.href = `albumView.html?id=${idAlbum}`;
+    // }
   }
   for (let i = 0; i < copertinaPiccola.length; i++) {
     copertinaPiccola[i].setAttribute("src", copertinaSmall)
@@ -763,21 +806,16 @@ contatoreBraniPreferiti()
 //BOTTONE SEARCH ASIDE JS
 
 document.addEventListener("DOMContentLoaded", () => {
-  // Tutto il tuo codice va qui dentro
-  const searchIcon = document.getElementById("search-icon")
+  const searchBtn = document.getElementById("search-button")
   const searchForm = document.getElementById("search-form")
   const recenti = document.getElementById("recenti")
   const container = document.getElementById("search-container")
 
-  if (searchIcon && searchForm && container) {
-    searchIcon.addEventListener("click", (e) => {
-      e.preventDefault()
-      const isSearchActive = searchForm.classList.toggle("active")
-      container.classList.toggle("bg-search", isSearchActive)
+  searchBtn.addEventListener("click", (e) => {
+    e.preventDefault()
 
-      if (recenti) {
-        recenti.classList.toggle("d-none", isSearchActive)
-      }
-    })
-  }
+    recenti.classList.toggle("d-none")
+    searchForm.classList.toggle("active")
+    container.classList.toggle("search-background")
+  })
 })

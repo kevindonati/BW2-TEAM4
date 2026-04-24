@@ -85,7 +85,7 @@ const main8 = () => {
       for (let i = 0; i < 8; i++) {
         appendiAlbum.innerHTML += `
         <div class="col-6 col-xl-3 g-2 g-lg-1">
-        <a class="text-decoration-none text-light" href="albumView.html?id=${data.data[i].id}">
+        <a class="text-decoration-none text-light" href="albumView.html?id=${data.data[i].album.id}">
               <div
                 class="d-flex align-items-center gap-1 bg-button rounded justify-content-between contenitore-card position-relative"
               >
@@ -148,7 +148,7 @@ const primoCarosello = () => {
       for (let i = 0; i < 12; i++) {
         const primoCarosello = document.querySelectorAll(".carosello-1");
         primoCarosello[i].innerHTML = `
-        <a class="text-decoration-none text-light" href="albumView.html?id=${data.data[i].id}">
+        <a class="text-decoration-none text-light" href="albumView.html?id=${data.data[i].album.id}">
         <div class="position-relative">
                         <img
                           src="${data.data[i].album.cover_medium}"
@@ -188,7 +188,7 @@ const secondoCarosello = () => {
       for (let i = 0; i < 12; i++) {
         const secondoCarosello = document.querySelectorAll(".carosello-2");
         secondoCarosello[i].innerHTML = `
-        <a class="text-decoration-none text-light" href="albumView.html?id=${data.data[i].id}">
+        <a class="text-decoration-none text-light" href="albumView.html?id=${data.data[i].album.id}">
         <div class="position-relative">
                         <img
                           src="${data.data[i].album.cover_medium}"
@@ -228,7 +228,7 @@ const terzoCarosello = () => {
       for (let i = 0; i < 12; i++) {
         const terzoCarosello = document.querySelectorAll(".carosello-3");
         terzoCarosello[i].innerHTML = `
-        <a class="text-decoration-none text-light" href="albumView.html?id=${data.data[i].id}">
+        <a class="text-decoration-none text-light" href="albumView.html?id=${data.data[i].album.id}">
         <div class="position-relative">
                         <img
                           src="${data.data[i].album.cover_medium}"
@@ -341,9 +341,18 @@ const riproduciCanzone = (
 
   for (let i = 0; i < nome.length; i++) {
     nome[i].innerHTML = `${nomeArtista}`;
+    const linkPadre = nome[i].closest("a");
+    if (linkPadre) {
+      linkPadre.href = `artistView.html?id=${linkArtista}`;
+      console.log("Link generato per artista:", linkPadre.href);
+    }
   }
   for (let i = 0; i < titoloCanzone.length; i++) {
     titoloCanzone[i].innerHTML = `${titolo}`;
+    const linkPadre = titoloCanzone[i].closest("a");
+    if (linkPadre) {
+      linkPadre.href = `albumView.html?id=${idAlbum}`;
+    }
   }
   for (let i = 0; i < copertinaPiccola.length; i++) {
     copertinaPiccola[i].setAttribute("src", copertinaSmall);
@@ -1125,24 +1134,20 @@ expandSx.addEventListener("click", () => {
 // };
 
 // gridAside();
+
 //BOTTONE SEARCH ASIDE JS
 
 document.addEventListener("DOMContentLoaded", () => {
-  // Tutto il tuo codice va qui dentro
-  const searchIcon = document.getElementById("search-icon");
+  const searchBtn = document.getElementById("search-button");
   const searchForm = document.getElementById("search-form");
   const recenti = document.getElementById("recenti");
   const container = document.getElementById("search-container");
 
-  if (searchIcon && searchForm && container) {
-    searchIcon.addEventListener("click", (e) => {
-      e.preventDefault();
-      const isSearchActive = searchForm.classList.toggle("active");
-      container.classList.toggle("bg-search", isSearchActive);
+  searchBtn.addEventListener("click", (e) => {
+    e.preventDefault();
 
-      if (recenti) {
-        recenti.classList.toggle("d-none", isSearchActive);
-      }
-    });
-  }
+    recenti.classList.toggle("d-none");
+    searchForm.classList.toggle("active");
+    container.classList.toggle("search-background");
+  });
 });
