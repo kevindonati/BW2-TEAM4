@@ -55,7 +55,7 @@ const estrazioneArtista = () => {
     })
     //   ------------------------------------------------------------------------COMPILAZIONE INFO PRINCIPALI
     .then((response) => {
-      console.log(response)
+      console.log("0000", response)
       const fotoAlbum = document.querySelector("#albumCover")
       const titoloAlbum = document.querySelector("#albumTitle")
       const fotoArtista = document.querySelector("#artistImage")
@@ -64,6 +64,35 @@ const estrazioneArtista = () => {
       const numBraniAlbum = document.querySelector("#albumNumberOfSongs")
       const stories = document.querySelector("#artistStories")
       let durataAlbum = document.querySelector("#albumDuration")
+      const btnAggLibreria = document.getElementById("agg-album-libreria")
+      btnAggLibreria.addEventListener("click", () => {
+        aggiungiAlbumLibreria(
+          this,
+          response.title,
+          response.artist.name,
+          response.cover_small,
+          response.type,
+          response.id,
+          response.artist.id,
+        )
+      })
+      const libreria = JSON.parse(localStorage.getItem("libreria")) || []
+
+      const giaPresente = libreria.some((a) => a.idAlbum === response.id)
+
+      if (giaPresente) {
+        btnAggLibreria.classList.replace(
+          "bi-plus-circle",
+          "bi-check-circle-fill",
+        )
+        btnAggLibreria.classList.add("text-success")
+      }
+
+      const linkArtista = document.getElementById("artista-nome-link")
+      linkArtista.setAttribute(
+        "href",
+        `artistView.html?id=${response.artist.id}`,
+      )
 
       if (response.duration >= 3600) {
         const calcolo = Math.round(response.duration / 60)
@@ -94,7 +123,8 @@ const estrazioneArtista = () => {
       }
 
       //   ------------------------------------------------------------------------DISPONGO BRANI
-      for (x = 1; x < response.tracks.data.length; x++) {
+
+      for (x = 0; x < response.tracks.data.length; x++) {
         const titoloCanzone = response.tracks.data[x].title
         const artista = response.tracks.data[x].artist.name
         const riproduzioniCanzone = response.tracks.data[x].rank
@@ -106,11 +136,21 @@ const estrazioneArtista = () => {
         const numeroCanzone = x
         const explicit = response.tracks.data[x].explicit_lyrics ? "" : "d-none"
 
+        const featuring =
+          response.contributors.length > 1
+            ? response.contributors
+                .slice(1)
+                .map((c) => c.name)
+                .join(", ")
+            : ""
+
+        const feat = response.contributors.slice(1)
+
         const contenitore = document.getElementById("contenitore-album")
         contenitore.innerHTML += `
               <div class="row mt-3 align-items-center px-4 riga">
                 <div class="col-1 cella">
-                  <span class="numero-cella">${numeroCanzone}</span>
+                  <span class="numero-cella">${numeroCanzone + 1}</span>
                     <i 
                      onclick="riproduciCanzone(
                       this,
@@ -129,10 +169,10 @@ const estrazioneArtista = () => {
                     )"
                      class="fas fa-play text-light icona fs-4"></i>
                 </div>
-                <div class="col-9">
+                <div class="col">
                   <p class="m-0">${titoloCanzone}</p>
                   <i class="bi bi-explicit-fill ${explicit}"></i>
-                  <span class="text-secondary small">${artista}</span>
+                  <span class="text-secondary small">${artista} ${featuring ? `<span>(feat. ${featuring})</span>` : ""}</span>
                 </div>
                 <div class="col-1 text-end">
                   <i class="bi bi-plus-circle icona fs-4 btn-aggiungi"
@@ -142,6 +182,22 @@ const estrazioneArtista = () => {
                 </div>
                 <div class="col-1 text-center">
                   <p class="m-0">${minuti}:${secondi}</p>
+                </div>
+                <div class="col-1 text-end dropdown">
+                  <a class="btn bg-transparent" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="bi bi-three-dots text-ligth icona fs-4"></i>
+                  </a>
+
+                  <ul class="dropdown-menu">
+
+                    <li onclick="rimuoviDaiPreferiti(${response.tracks.data[x].idBrano})"><a class="dropdown-item" href="#"><i class="bi bi-check-circle-fill text-success  me-2"></i> Rimuovi dai brani che ti piacciono</a></li>
+
+                    
+
+                    
+
+                    <li><a class="dropdown-item" href="./artistView.html?id=${response.artist.id}"><i class="bi bi-person-lines-fill text-secondary  me-2"></i> Vai all'artista</a></li>
+                  </ul>
                 </div>
               </div>
                   `
@@ -189,45 +245,79 @@ const estrazioneArtista = () => {
 estrazioneArtista()
 
 // RIEMPO LA LIBRERIA
+const aggiungiAlbumLibreria = (
+  icona,
+  titolo,
+  nomeArtista,
+  coverSmall,
+  tipo,
+  idAlbum,
+  idArtista,
+) => {
+  const album = {
+    titolo,
+    nomeArtista,
+    coverSmall,
+    tipo,
+    idAlbum,
+    idArtista,
+  }
 
-const libreria = () => {
-  fetch(urlSearch + "drake")
-    .then((response) => {
-      if (response.ok) {
-        return response.json()
-      } else {
-        throw new Error("problema nella response")
-      }
-    })
-    .then((data) => {
-      const spinner = document.querySelectorAll(".contenitore-spinner")
-      spinner[0].classList.add("d-none")
-      for (let i = 0; i < data.data.length; i++) {
-        const appendiAlbum = document.getElementById("appendi-album-libreria")
-        appendiAlbum.innerHTML += `
-        <a class="text-decoration-none text-light" href="albumView.html?id=${data.data[i].album.id}">
-            <div class="d-flex my-2 align-items-center">
-              <img
-                src="${data.data[i].album.cover_small}"
-                class="rounded-1 img-fluid"
-              />
-              <div class="ms-3 d-flex flex-column justify-content-center">
-                <h6 class="mb-1 ">${data.data[i].album.title}</h6>
-                <p class="mb-0">
-                  ${data.data[i].album.type} &bull; <a class="text-decoration-none text-light" href="artistView.html?id=${data.data[i].artist.id}"> ${data.data[i].artist.name}</a>
-                </p>
-              </div>
-            </div>
-        </a>
-      `
-      }
-    })
-    .catch((err) => {
-      console.log("errore durante la fetch", err)
-    })
+  const aggAlbumLibreria = document.getElementById("agg-album-libreria")
+
+  let albumInLibreria = JSON.parse(localStorage.getItem("libreria")) || []
+
+  const index = albumInLibreria.findIndex((a) => a.idAlbum === idAlbum)
+
+  //  se non esiste
+  if (index === -1) {
+    albumInLibreria.push(album)
+
+    aggAlbumLibreria.classList.replace("bi-plus-circle", "bi-check-circle-fill")
+    aggAlbumLibreria.classList.add("text-success")
+  }
+  //se esiste
+  else {
+    albumInLibreria.splice(index, 1)
+
+    aggAlbumLibreria.classList.replace("bi-check-circle-fill", "bi-plus-circle")
+    aggAlbumLibreria.classList.remove("text-success")
+  }
+
+  localStorage.setItem("libreria", JSON.stringify(albumInLibreria))
+
+  const appendiAlbum = document.getElementById("appendi-album-libreria")
+  appendiAlbum.innerHTML = ""
+
+  aggiornaLibreria()
 }
-libreria()
 
+const aggiornaLibreria = () => {
+  const spinner = document.querySelectorAll(".contenitore-spinner")
+  spinner[0].classList.add("d-none")
+  const appendiAlbum = document.getElementById("appendi-album-libreria")
+
+  const libreria = JSON.parse(localStorage.getItem("libreria")) || []
+  libreria.forEach((album) => {
+    appendiAlbum.innerHTML += `
+         <a class="text-decoration-none text-light" href="albumView.html?id=${album.idAlbum}">
+             <div class="d-flex my-2 align-items-center">
+               <img
+                 src="${album.coverSmall}"
+                 class="rounded-1 img-fluid"
+               />
+               <div class="ms-3 d-flex flex-column justify-content-center">
+                 <h6 class="mb-1 ">${album.titolo}</h6>
+                 <p class="mb-0">
+                   ${album.tipo} &bull; <a class="text-decoration-none text-light" href="artistView.html?id=${album.idArtista}"> ${album.nomeArtista}</a>
+                 </p>
+               </div>
+             </div>
+         </a>
+       `
+  })
+}
+aggiornaLibreria()
 // FUNZIONE ricerca
 
 const performSearch = (query) => {
@@ -830,6 +920,8 @@ const salvaCanzone = (
 
 const contatoreBraniPreferiti = () => {
   const contenitore = document.getElementById("contatore-brani")
+
+  if (!contenitore) return
   const braniPreferiti =
     JSON.parse(localStorage.getItem("brano-preferito")) || []
   console.log(braniPreferiti)
@@ -854,9 +946,25 @@ function preferitiEsistenti() {
       icon.classList.replace("bi-check-circle-fill", "bi-plus-circle")
       icon.classList.remove("text-success")
     }
+    contatoreBraniPreferiti()
   })
 }
 
+const rimuoviDaiPreferiti = (idBrano) => {
+  let braniPreferiti = JSON.parse(localStorage.getItem("brano-preferito")) || []
+
+  // elimino il brano
+  braniPreferiti = braniPreferiti.filter(
+    (b) => Number(b.idBrano) !== Number(idBrano),
+  )
+
+  localStorage.setItem("brano-preferito", JSON.stringify(braniPreferiti))
+
+  // ricarico lista
+  document.getElementById("contenitore-album").innerHTML = ""
+
+  contatoreBraniPreferiti()
+}
 /* Funzione per togliere rounded da lg in giù */
 
 const mobileView = window.matchMedia("(max-width: 991px)")
@@ -907,3 +1015,41 @@ document.addEventListener("DOMContentLoaded", () => {
     })
   }
 })
+
+// const libreria = () => {
+//   fetch(urlSearch + "drake")
+//     .then((response) => {
+//       if (response.ok) {
+//         return response.json()
+//       } else {
+//         throw new Error("problema nella response")
+//       }
+//     })
+//     .then((data) => {
+//       const spinner = document.querySelectorAll(".contenitore-spinner")
+//       spinner[0].classList.add("d-none")
+//       for (let i = 0; i < data.data.length; i++) {
+//         const appendiAlbum = document.getElementById("appendi-album-libreria")
+//         appendiAlbum.innerHTML += `
+//         <a class="text-decoration-none text-light" href="albumView.html?id=${data.data[i].album.id}">
+//             <div class="d-flex my-2 align-items-center">
+//               <img
+//                 src="${data.data[i].album.cover_small}"
+//                 class="rounded-1 img-fluid"
+//               />
+//               <div class="ms-3 d-flex flex-column justify-content-center">
+//                 <h6 class="mb-1 ">${data.data[i].album.title}</h6>
+//                 <p class="mb-0">
+//                   ${data.data[i].album.type} &bull; <a class="text-decoration-none text-light" href="artistView.html?id=${data.data[i].artist.id}"> ${data.data[i].artist.name}</a>
+//                 </p>
+//               </div>
+//             </div>
+//         </a>
+//       `
+//       }
+//     })
+//     .catch((err) => {
+//       console.log("errore durante la fetch", err)
+//     })
+// }
+// libreria()

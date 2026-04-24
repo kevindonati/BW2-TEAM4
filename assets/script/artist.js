@@ -110,7 +110,10 @@ fetch(urlApiArtista)
                 <div class="col-1 cella">
                   <span class="numero-cella">${i + 1}</span>
                     <i 
-                     onclick="riproduciCanzone(this, \`${datiCanzoni.data[i].preview}\`, \`${datiCanzoni.data[i].title}\`, \`${datiCanzoni.data[i].artist.name}\`, \`${datiCanzoni.data[i].album.cover_small}\`, \`${datiCanzoni.data[i].album.cover_big}\`, \`${datiCanzoni.data[i].artist.picture_big}\`, \`${datiCanzoni.data[i].artist.id}\`, \`${datiCanzoni.data[i].artist.tracklist}\`)"
+
+
+
+                     onclick="riproduciCanzone(this, \`${datiCanzoni.data[i].preview}\`, \`${datiCanzoni.data[i].title}\`, \`${datiCanzoni.data[i].artist.name}\`, \`${datiCanzoni.data[i].album.cover_small}\`, \`${datiCanzoni.data[i].album.cover_big}\`, \`${datiCanzoni.data[i].artist.picture_big}\`, \`${datiCanzoni.data[i].artist.id}\`, \`${datiCanzoni.data[i].artist.tracklist}\`, \`${datiCanzoni.data[i].explicit_lyrics}\`, \`${datiCanzoni.data[i].duration}\`, \`${datiCanzoni.data[i].id}\`, \`${datiCanzoni.id}\`)"
                      class="fas fa-play text-light icona fs-4"></i>
                 </div>
                 <div class="col-1">
@@ -154,11 +157,10 @@ fetch(urlApiArtista)
 
                   <ul class="dropdown-menu">
 
-                    <li><a class="dropdown-item" href="#"><i class="bi bi-check-circle-fill text-success  me-2"></i> Rimuovi dai brani che ti piacciono</a></li>
+                   
 
                     
 
-                    ${dropdown}
 
                     <li><a class="dropdown-item" href="./albumView.html?id=${traccia.album.id}"><i class="bi bi-vinyl-fill text-secondary  me-2"></i> Vai all'album</a></li>
                   </ul>
@@ -168,6 +170,7 @@ fetch(urlApiArtista)
           // Aggiungiamo la riga al contenitore
           contenitore.innerHTML += rigaHTML
         }
+        preferitiEsistenti()
         // Attivo all'icona Play la riproduzione della prima canzone
         // RECUPERIAMO IL PLAYER AUDIO
         const inputAudio = document.querySelector("audio")
@@ -206,43 +209,34 @@ fetch(urlApiArtista)
 
 // RIEMPO LA LIBRERIA
 
-const libreria = () => {
-  fetch(urlSearch + "drake")
-    .then((response) => {
-      if (response.ok) {
-        return response.json()
-      } else {
-        throw new Error("problema nella response")
-      }
-    })
-    .then((data) => {
-      const spinner = document.querySelectorAll(".contenitore-spinner")
-      spinner[0].classList.add("d-none")
-      for (let i = 0; i < data.data.length; i++) {
-        const appendiAlbum = document.getElementById("appendi-album-libreria")
-        appendiAlbum.innerHTML += `
-        <a class="text-decoration-none text-light" href="albumView.html?id=${data.data[i].album.id}">
-            <div class="d-flex my-2 align-items-center">
-              <img
-                src="${data.data[i].album.cover_small}"
-                class="rounded-1 img-fluid"
-              />
-              <div class="ms-3 d-flex flex-column justify-content-center">
-                <h6 class="mb-1 ">${data.data[i].album.title}</h6>
-                <p class="mb-0">
-                  ${data.data[i].album.type} &bull; <a class="text-decoration-none text-light" href="artistView.html?id=${data.data[i].artist.id}"> ${data.data[i].artist.name}</a>
-                </p>
-              </div>
-            </div>
-        </a>
-      `
-      }
-    })
-    .catch((err) => {
-      console.log("errore durante la fetch", err)
-    })
+// RIEMPO LA LIBRERIA
+
+const aggiornaLibreria = () => {
+  const spinner = document.querySelectorAll(".contenitore-spinner")
+  spinner[0].classList.add("d-none")
+  const appendiAlbum = document.getElementById("appendi-album-libreria")
+
+  const libreria = JSON.parse(localStorage.getItem("libreria")) || []
+  libreria.forEach((album) => {
+    appendiAlbum.innerHTML += `
+         <a class="text-decoration-none text-light" href="albumView.html?id=${album.idAlbum}">
+             <div class="d-flex my-2 align-items-center">
+               <img
+                 src="${album.coverSmall}"
+                 class="rounded-1 img-fluid"
+               />
+               <div class="ms-3 d-flex flex-column justify-content-center">
+                 <h6 class="mb-1 ">${album.titolo}</h6>
+                 <p class="mb-0">
+                   ${album.tipo} &bull; <a class="text-decoration-none text-light" href="artistView.html?id=${album.idArtista}"> ${album.nomeArtista}</a>
+                 </p>
+               </div>
+             </div>
+         </a>
+       `
+  })
 }
-libreria()
+aggiornaLibreria()
 
 // FUNZIONE ricerca
 
@@ -289,7 +283,8 @@ const renderDropdownResult = (songs) => {
       <img src="${song.album.cover_small}" class="img-fluid rounded shadow-sm" alt="${song.title}">
       <div class="mostra-al-passaggio position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center rounded" 
            style="background: rgba(0,0,0,0.5)" 
-           onclick="riproduciCanzone(this, \`${song.preview}\`, \`${song.title}\`, \`${song.artist.name}\`, \`${song.album.cover_small}\`, \`${song.album.cover_big}\`, \`${song.artist.picture_big}\`, \`${song.artist.id}\`, \`${song.artist.tracklist}\`)">
+            onclick="riproduciCanzone(this, \`${song.preview}\`, \`${song.title}\`, \`${song.artist.name}\`, \`${song.album.cover_small}\`, \`${song.album.cover_big}\`, \`${song.artist.picture_big}\`, \`${song.artist.id}\`, \`${song.artist.tracklist}\`, \`${song.explicit_lyrics}\`), \`${song.duration}\`, \`${song.id}\`, \`${song.album.id}\`"
+           data-id="${song.id}">
           <i class="fas fa-play text-white fs-6"></i>
       </div>
     </div>
@@ -901,6 +896,27 @@ const contatoreBraniPreferiti = () => {
   contenitore.innerText += braniPreferiti.length
 }
 contatoreBraniPreferiti()
+
+// ASSEGNO ICONA GIà AGGIUNTO A CANZONI GIà SALVATE
+function preferitiEsistenti() {
+  const braniPreferiti =
+    JSON.parse(localStorage.getItem("brano-preferito")) || []
+
+  document.querySelectorAll("[data-id]").forEach((icon) => {
+    const id = Number(icon.dataset.id)
+
+    const trovato = braniPreferiti.some((b) => Number(b.idBrano) === id)
+
+    if (trovato) {
+      icon.classList.replace("bi-plus-circle", "bi-check-circle-fill")
+      icon.classList.add("text-success")
+    } else {
+      icon.classList.replace("bi-check-circle-fill", "bi-plus-circle")
+      icon.classList.remove("text-success")
+    }
+    contatoreBraniPreferiti()
+  })
+}
 
 /* Funzione per togliere rounded da lg in giù */
 

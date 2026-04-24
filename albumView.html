@@ -291,7 +291,9 @@
                     class="rounded-circle"
                     alt="artist-image"
                   />
-                  <span class="fw-bold artistName"></span>
+                  <a id="artista-nome-link">
+                    <span class="fw-bold artistName"></span>
+                  </a>
                   ‧ <span class="albumReleaseDate"></span> ‧
                   <span id="albumNumberOfSongs"></span>brani
                   <span id="albumDuration"></span>
@@ -320,7 +322,7 @@
                   />
                 </div>
                 <i class="bi bi-shuffle fa-2x"></i>
-                <i class="bi bi-plus-circle fa-2x"></i>
+                <i id="agg-album-libreria" class="bi bi-plus-circle fa-2x"></i>
                 <i class="bi bi-arrow-down-circle fa-2x"></i>
                 <i class="bi bi-three-dots fa-2x"></i>
               </div>
@@ -333,13 +335,14 @@
               <div class="col-1">
                 <p class="m-0">#</p>
               </div>
-              <div class="col-9">
+              <div class="col">
                 <p class="m-0">Titolo</p>
               </div>
               <div class="col-1"></div>
               <div class="col-1 text-center">
                 <i class="fas fa-clock"></i>
               </div>
+              <div class="col-1"></div>
             </div>
             <div id="contenitore-album">
               <!-- INSERISCO TRAMITE JS LE CANZONI DELL'ALBUM -->
