@@ -14,50 +14,6 @@ section::-webkit-scrollbar-thumb {
   transition: background 0.3s;
 }
 
-#mobile-bottom {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-}
-
-#mobile-bottom::before {
-  content: "";
-  position: absolute;
-  top: -50px;
-  left: 0;
-  width: 100%;
-  height: calc(100% + 50px);
-  background: linear-gradient(
-    to top,
-    rgba(0, 0, 0, 1) 0%,
-    rgba(0, 0, 0, 0.8) 50%,
-    rgba(0, 0, 0, 0) 100%
-  ) !important;
-  z-index: -1;
-  pointer-events: none;
-}
-
-.x-small {
-  font-size: 0.75rem;
-}
-
-.text-individual {
-  color: #ffc0cb;
-}
-
-.bg-individual {
-  background-color: #ffc0cb;
-}
-
-.text-student {
-  color: #cebfdc;
-}
-
-.bg-student {
-  background-color: #cebfdc;
-}
-
 /* appare solo quando hover */
 aside:hover::-webkit-scrollbar-thumb,
 section:hover::-webkit-scrollbar-thumb {
@@ -85,14 +41,6 @@ section:hover::-webkit-scrollbar-thumb {
 }
 
 /*COLORI*/
-
-.bg-grigio {
-  background-color: #242424;
-}
-
-.bg-grigio-scuro {
-  background-color: #121212;
-}
 
 /*BOTTONI*/
 .bg-button {
@@ -337,34 +285,26 @@ section:hover::-webkit-scrollbar-thumb {
   display: block;
 }
 
-.text-shadow {
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+/*SEARCH LIBRERIA*/
+
+#search-form {
+  width: 0;
+  opacity: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  transition:
+    width 0.5s ease,
+    opacity 0.3s ease;
+  pointer-events: none;
 }
 
-/* Hover sui link artista */
-.sottolinea-hover {
-  display: inline-block;
-  position: relative;
-  text-decoration: none;
+#search-form.active {
+  width: 250px;
+  opacity: 1;
+  pointer-events: all;
 }
 
-.sottolinea-hover::after {
-  content: "";
-  position: absolute;
-  width: 100%;
-  height: 1px;
-  bottom: 0;
-  left: 0;
-  background-color: #1db954;
-  transform: scaleX(0);
-  transition: transform 0.3s ease;
-}
-
-.sottolinea-hover:hover::after {
-  transform: scaleX(1);
-}
-
-a {
-  text-decoration: none;
-  color: inherit;
+.bg-search {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
 }

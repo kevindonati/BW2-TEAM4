@@ -31,7 +31,7 @@
     <!-- Libreria esterna per cambiare il colore della section centrale -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.0/color-thief.umd.js"></script>
   </head>
-  <body class="d-flex flex-column vh-100 overflow-hidden bg-black">
+  <body class="d-flex flex-column vh-100 overflow-hidden bg-dark">
     <header>
       <div>
         <!-- NAVBAR -->
@@ -188,11 +188,20 @@
           <!--FINE SECONDO BLOCCO ASIDE-->
           <!--INIZIO TERZO BLOCCO ASIDE-->
           <div class="d-flex align-items-center justify-content-between mt-2">
-            <button
-              class="btn bg-trasparent rounded-circle ms-2 bg-customized-hover"
-            >
-              <i class="bi bi-search"></i>
-            </button>
+            <div id="search-container" class="d-flex align-items-center mt-2">
+              <button
+                class="btn bg-transparent rounded-circle ms-2 bg-customized-hover"
+              >
+                <i class="bi bi-search" id="search-icon"></i>
+              </button>
+              <form id="search-form" class="ms-2">
+                <input
+                  type="search"
+                  class="form-control form-control-sm bg-transparent border-0"
+                  placeholder="Cerca in Playlist"
+                />
+              </form>
+            </div>
             <div class="dropdown">
               <button
                 id="recenti"
@@ -237,7 +246,10 @@
           </div>
 
           <!--INIZIO QUARTO BLOCCO ASIDE CONTENUTO-->
-          <section id="appendi-album-libreria" class="d-flex flex-column mt-2">
+          <section
+            id="appendi-album-libreria"
+            class="d-flex flex-column mt-2 overflow-auto"
+          >
             <a class="text-decoration-none text-light" href="preferiti.html">
               <div class="d-flex my-2 align-items-center">
                 <img
@@ -802,7 +814,7 @@
     <!-- Modale abbonamento -->
     <div class="modal fade" id="modalPremium" tabindex="-1" aria-hidden="true">
       <div class="modal-dialog modal-xl modal-dialog-centered">
-        <div class="modal-content bg-dark text-white border-secondary">
+        <div class="modal-content bg-grigio-scuro text-white border-secondary">
           <div class="modal-header border-secondary">
             <h5 class="modal-title">Scegli il tuo piano Abbonamento</h5>
             <button
@@ -816,7 +828,7 @@
             <div class="row g-3 justify-content-center">
               <div class="col-12 col-md-6 col-lg-4 col-xl-3">
                 <div
-                  class="p-3 border border-secondary rounded-4 bg-black h-100 d-flex flex-column"
+                  class="p-3 border border-secondary rounded-4 bg-grigio h-100 d-flex flex-column"
                 >
                   <span
                     class="badge rounded-1 bg-danger-subtle text-danger align-self-start mb-2"
@@ -829,15 +841,15 @@
                     >
                   </div>
 
-                  <h4 class="fw-bold">Individual</h4>
-                  <p class="small text-secondary">Dopo 10,99 € al mese</p>
+                  <h4 class="fw-bold text-individual">Individual</h4>
+                  <p class="small text-white mb-0">0,99 € al mese per 1 mese</p>
+                  <p class="x-small text-secondary">Dopo 11,99 € al mese</p>
                   <ul class="list-unstyled flex-grow-1">
                     <li><i class="bi bi-dot"></i> 1 account Premium</li>
                     <li><i class="bi bi-dot"></i> Annulla quando vuoi</li>
                   </ul>
                   <button
-                    class="btn btn-light rounded-5 w-100 fw-bold py-2"
-                    style="background-color: #ffc0cb"
+                    class="btn btn-light rounded-5 w-100 fw-bold py-2 bg-individual"
                   >
                     Prova gratis per 2 mesi
                   </button>
@@ -849,7 +861,7 @@
 
               <div class="col-12 col-md-6 col-lg-4 col-xl-3">
                 <div
-                  class="p-3 border border-secondary rounded-4 bg-black h-100 d-flex flex-column"
+                  class="p-3 border border-secondary rounded-4 bg-grigio h-100 d-flex flex-column"
                 >
                   <span
                     class="badge rounded-1 bg-info-subtle text-info align-self-start mb-2"
@@ -861,8 +873,8 @@
                       >Premium</span
                     >
                   </div>
-                  <h4 class="fw-bold">Student</h4>
-                  <p class="small text-secondary">Dopo 5,99 € al mese</p>
+                  <h4 class="fw-bold text-student">Student</h4>
+                  <p class="small text-white">Dopo 6,49 € al mese</p>
                   <ul class="list-unstyled flex-grow-1">
                     <li>
                       <i class="bi bi-dot"></i> 1 account Premium verificato
@@ -873,8 +885,7 @@
                     <li><i class="bi bi-dot"></i> Annulla quando vuoi</li>
                   </ul>
                   <button
-                    class="btn btn-light rounded-5 w-100 fw-bold py-2"
-                    style="background-color: #e6e6fa"
+                    class="btn btn-light rounded-5 w-100 fw-bold py-2 bg-student"
                   >
                     Prova gratis per 1 mese
                   </button>
@@ -886,7 +897,7 @@
 
               <div class="col-12 col-md-6 col-lg-4 col-xl-3">
                 <div
-                  class="p-3 border border-secondary rounded-4 bg-black h-100 d-flex flex-column"
+                  class="p-3 border border-secondary rounded-4 bg-grigio h-100 d-flex flex-column"
                 >
                   <div class="d-flex align-items-center mb-1">
                     <i class="bi bi-spotify me-1 fs-5"></i>
@@ -895,7 +906,7 @@
                     >
                   </div>
                   <h4 class="fw-bold text-warning">Duo</h4>
-                  <p class="small text-secondary">14,99 € al mese</p>
+                  <p class="small text-secondary">16,99 € al mese</p>
                   <ul
                     class="list-unstyled flex-grow-1 border-top border-secondary pt-2"
                   >
@@ -908,14 +919,14 @@
                   >
                     Scarica Premium Duo
                   </button>
-                  <p class="text-secondary mt-2" style="font-size: 0.7rem">
+                  <p class="text-secondary mt-2 m-0" style="font-size: 0.7rem">
                     Per le coppie che risiedono allo stesso indirizzo.
                   </p>
                 </div>
               </div>
               <div class="col-12 col-md-6 col-lg-4 col-xl-3">
                 <div
-                  class="p-3 border border-secondary rounded-4 bg-black h-100 d-flex flex-column"
+                  class="p-3 border border-secondary rounded-4 bg-grigio h-100 d-flex flex-column"
                 >
                   <div class="d-flex align-items-center mb-1">
                     <i class="bi bi-spotify me-1 fs-5"></i>
@@ -924,7 +935,7 @@
                     >
                   </div>
                   <h4 class="fw-bold text-info">Family</h4>
-                  <p class="small text-secondary">17,99 € al mese</p>
+                  <p class="small text-secondary">20,99 € al mese</p>
                   <ul class="list-unstyled flex-grow-1">
                     <li><i class="bi bi-dot"></i> Fino a 6 account Premium</li>
                     <li><i class="bi bi-dot"></i> Blocca i brani espliciti</li>
@@ -936,7 +947,7 @@
                   >
                     Scarica Premium Family
                   </button>
-                  <p class="text-secondary mt-2" style="font-size: 0.7rem">
+                  <p class="text-secondary mt-2 m-0" style="font-size: 0.7rem">
                     Per i membri della famiglia allo stesso indirizzo.
                   </p>
                 </div>
@@ -949,7 +960,7 @@
     <!-- Modale Logout -->
     <div class="modal fade" id="modalLogout" tabindex="-1" aria-hidden="true">
       <div class="modal-dialog modal-sm modal-dialog-centered">
-        <div class="modal-content bg-dark text-white border-secondary">
+        <div class="modal-content bg-grigio-scuro text-white border-secondary">
           <div class="modal-body text-center p-4">
             <h5 class="mb-4">Vuoi veramente effettuare il logout?</h5>
             <div class="d-flex justify-content-around">
