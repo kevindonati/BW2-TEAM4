@@ -26,6 +26,45 @@ const applicaColore = function (img, thief) {
   }
 };
 
+// RIEMPO LA LIBRERIA
+const libreria = () => {
+  fetch(urlSearch + "drake")
+    .then((response) => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        throw new Error("problema nella response");
+      }
+    })
+    .then((data) => {
+      const spinner = document.querySelectorAll(".contenitore-spinner");
+      spinner[0].classList.add("d-none");
+      for (let i = 0; i < data.data.length; i++) {
+        const appendiAlbum = document.getElementById("appendi-album-libreria");
+        appendiAlbum.innerHTML += `
+        <a class="text-decoration-none text-light" href="albumView.html?id=${data.data[i].album.id}">
+            <div class="d-flex my-2 align-items-center">
+              <img
+                src="${data.data[i].album.cover_small}"
+                class="rounded-1 img-fluid"
+              />
+              <div class="ms-3 d-flex flex-column justify-content-center">
+                <h6 class="mb-1 ">${data.data[i].album.title}</h6>
+                <p class="mb-0">
+                  ${data.data[i].album.type} &bull; <a class="text-decoration-none text-light" href="artistView.html?id=${data.data[i].artist.id}"> ${data.data[i].artist.name}</a>
+                </p>
+              </div>
+            </div>
+        </a>
+      `;
+      }
+    })
+    .catch((err) => {
+      console.log("errore durante la fetch", err);
+    });
+};
+libreria();
+
 // RIEMPO IL MAIN
 const main8 = () => {
   fetch(urlSearch + "lazza")
@@ -215,35 +254,6 @@ const terzoCarosello = () => {
     });
 };
 terzoCarosello();
-
-// RIEMPO LA LIBRERIA
-
-const aggiornaLibreria = () => {
-  const spinner = document.querySelectorAll(".contenitore-spinner");
-  spinner[0].classList.add("d-none");
-  const appendiAlbum = document.getElementById("appendi-album-libreria");
-
-  const libreria = JSON.parse(localStorage.getItem("libreria")) || [];
-  libreria.forEach((album) => {
-    appendiAlbum.innerHTML += `
-         <a class="text-decoration-none text-light" href="albumView.html?id=${album.idAlbum}">
-             <div class="d-flex my-2 align-items-center">
-               <img
-                 src="${album.coverSmall}"
-                 class="rounded-1 img-fluid"
-               />
-               <div class="ms-3 d-flex flex-column justify-content-center">
-                 <h6 class="mb-1 ">${album.titolo}</h6>
-                 <p class="mb-0">
-                   ${album.tipo} &bull; <a class="text-decoration-none text-light" href="artistView.html?id=${album.idArtista}"> ${album.nomeArtista}</a>
-                 </p>
-               </div>
-             </div>
-         </a>
-       `;
-  });
-};
-aggiornaLibreria();
 
 // FACCIO PARTIRE LA CANZONE SELEZIONATA
 
