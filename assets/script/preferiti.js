@@ -24,45 +24,6 @@ function applicaColore(img, thief) {
   }
 }
 
-// RIEMPO LA LIBRERIA
-const libreria = () => {
-  fetch(urlSearch + "drake")
-    .then((response) => {
-      if (response.ok) {
-        return response.json()
-      } else {
-        throw new Error("problema nella response")
-      }
-    })
-    .then((data) => {
-      const spinner = document.querySelectorAll(".contenitore-spinner")
-      spinner[0].classList.add("d-none")
-      for (let i = 0; i < data.data.length; i++) {
-        const appendiAlbum = document.getElementById("appendi-album-libreria")
-        appendiAlbum.innerHTML += `
-        <a class="text-decoration-none text-light" href="albumView.html?id=${data.data[i].album.id}">
-            <div class="d-flex my-2 align-items-center">
-              <img
-                src="${data.data[i].album.cover_small}"
-                class="rounded-1 img-fluid"
-              />
-              <div class="ms-3 d-flex flex-column justify-content-center">
-                <h6 class="mb-1 ">${data.data[i].album.title}</h6>
-                <p class="mb-0">
-                  ${data.data[i].album.type} &bull; <a class="text-decoration-none text-light" href="artistView.html?id=${data.data[i].artist.id}"> ${data.data[i].artist.name}</a>
-                </p>
-              </div>
-            </div>
-        </a>
-      `
-      }
-    })
-    .catch((err) => {
-      console.log("errore durante la fetch", err)
-    })
-}
-libreria()
-
 // RIEMPO IL MAIN
 const riempiPreferiti = () => {
   // const spinner = document.querySelectorAll(".contenitore-spinner")
@@ -88,7 +49,7 @@ const riempiPreferiti = () => {
                 <div class="col-1 cella">
                   <span class="numero-cella">${i + 1}</span>
                     <i 
-                     onclick="riproduciCanzone(this, \`${braniPreferiti[i].audio}\`, \`${braniPreferiti[i].titolo}\`, \`${braniPreferiti[i].artista}\`, \`${braniPreferiti[i].coverSmall}\`, \`${braniPreferiti[i].coverBig}\`, \`${braniPreferiti[i].fotoArtista}\`, \`${braniPreferiti[i].idArtista}\`, \`${braniPreferiti[i].tracklist}\`)"
+                     onclick="riproduciCanzone(this, \`${braniPreferiti[i].audio}\`, \`${braniPreferiti[i].titolo}\`, \`${braniPreferiti[i].artista}\`, \`${braniPreferiti[i].coverSmall}\`, \`${braniPreferiti[i].coverBig}\`, \`${braniPreferiti[i].fotoArtista}\`, \`${braniPreferiti[i].idArtista}\`, \`${braniPreferiti[i].tracklist}\`, \`${braniPreferiti[i].idAlbum}\`)"
                      class="fas fa-play text-light icona fs-4"></i>
                 </div>
                 <div class="col-1 text-end">
@@ -105,7 +66,7 @@ const riempiPreferiti = () => {
                   <span class="text-secondary small">${braniPreferiti[i].artista}</span>
                 </div>
                 <div class="col-1 text-end">
-                  <i class="bi bi-check-circle-fill text-success icona fs-4"></i>
+                  <i onclick="rimuoviDaiPreferiti(${braniPreferiti[i].idBrano})" class="bi bi-check-circle-fill text-success icona fs-4"></i>
                 </div>
                 <div class="col-1 text-center">
                   <p class="m-0">${minuti}:${secondi}</p>
@@ -115,7 +76,9 @@ const riempiPreferiti = () => {
                     <i class="bi bi-three-dots text-ligth icona fs-4"></i>
                   </a>
                   <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#"><i class="bi bi-check-circle-fill text-success  me-2"></i> Rimuovi dai brani che ti piacciono</a></li>
+                    <li onclick="rimuoviDaiPreferiti(${braniPreferiti[i].idBrano})"><a class="dropdown-item" href="#"><i class="bi bi-check-circle-fill text-success  me-2"
+                    
+                    ></i> Rimuovi dai brani che ti piacciono</a></li>
                     <li><a class="dropdown-item" href="./artistView.html?id=${braniPreferiti[i].idArtista}"><i class="bi bi-person-lines-fill text-secondary  me-2"></i> Vai all'artista</a></li>
                     <li><a class="dropdown-item" href="./albumView.html?id=${braniPreferiti[i].idAlbum}"><i class="bi bi-vinyl-fill text-secondary  me-2"></i> Vai all'album</a></li>
                   </ul>
@@ -176,6 +139,34 @@ const riempiPreferiti = () => {
 riempiPreferiti()
 
 // FACCIO PARTIRE LA CANZONE SELEZIONATA
+// RIEMPO LA LIBRERIA
+
+const aggiornaLibreria = () => {
+  const spinner = document.querySelectorAll(".contenitore-spinner")
+  spinner[0].classList.add("d-none")
+  const appendiAlbum = document.getElementById("appendi-album-libreria")
+
+  const libreria = JSON.parse(localStorage.getItem("libreria")) || []
+  libreria.forEach((album) => {
+    appendiAlbum.innerHTML += `
+         <a class="text-decoration-none text-light" href="albumView.html?id=${album.idAlbum}">
+             <div class="d-flex my-2 align-items-center">
+               <img
+                 src="${album.coverSmall}"
+                 class="rounded-1 img-fluid"
+               />
+               <div class="ms-3 d-flex flex-column justify-content-center">
+                 <h6 class="mb-1 ">${album.titolo}</h6>
+                 <p class="mb-0">
+                   ${album.tipo} &bull; <a class="text-decoration-none text-light" href="artistView.html?id=${album.idArtista}"> ${album.nomeArtista}</a>
+                 </p>
+               </div>
+             </div>
+         </a>
+       `
+  })
+}
+aggiornaLibreria()
 
 const riproduciCanzone = (
   iconaPlay,
@@ -187,6 +178,7 @@ const riproduciCanzone = (
   fotoArtista,
   linkArtista,
   tracklist,
+  idAlbum,
 ) => {
   const bottonePlay = document.getElementById("btn-play-canzone")
   // if (!bottonePlay) return; // Se il bottone non esiste, non provare a cambiargli classe
@@ -228,19 +220,19 @@ const riproduciCanzone = (
   const ascoltatoriMensili = document.querySelector(".ascoltatori")
 
   for (let i = 0; i < nome.length; i++) {
-    nome[i].innerHTML = `${nomeArtista}`;
-    // const linkPadre = nome[i].closest("a");
-    // if (linkPadre) {
-    //   linkPadre.href = `artistView.html?id=${linkArtista}`;
-    //   console.log("Link generato per artista:", linkPadre.href);
-    // }
+    nome[i].innerHTML = `${nomeArtista}`
+    const linkPadre = nome[i].closest("a")
+    if (linkPadre) {
+      linkPadre.href = `artistView.html?id=${linkArtista}`
+      console.log("Link generato per artista:", linkPadre.href)
+    }
   }
   for (let i = 0; i < titoloCanzone.length; i++) {
-    titoloCanzone[i].innerHTML = `${titolo}`;
-    // const linkPadre = titoloCanzone[i].closest("a");
-    // if (linkPadre) {
-    //   linkPadre.href = `albumView.html?id=${idAlbum}`;
-    // }
+    titoloCanzone[i].innerHTML = `${titolo}`
+    const linkPadre = titoloCanzone[i].closest("a")
+    if (linkPadre) {
+      linkPadre.href = `albumView.html?id=${idAlbum}`
+    }
   }
   for (let i = 0; i < copertinaPiccola.length; i++) {
     copertinaPiccola[i].setAttribute("src", copertinaSmall)
@@ -798,10 +790,27 @@ const contatoreBraniPreferiti = () => {
   const braniPreferiti =
     JSON.parse(localStorage.getItem("brano-preferito")) || []
   console.log(braniPreferiti)
-  contenitore.innerText += braniPreferiti.length
-  contenitore2.innerText += braniPreferiti.length
+  contenitore.innerText = braniPreferiti.length
+  contenitore2.innerText = braniPreferiti.length
 }
 contatoreBraniPreferiti()
+
+const rimuoviDaiPreferiti = (idBrano) => {
+  let braniPreferiti = JSON.parse(localStorage.getItem("brano-preferito")) || []
+
+  // elimino il brano
+  braniPreferiti = braniPreferiti.filter(
+    (b) => Number(b.idBrano) !== Number(idBrano),
+  )
+
+  localStorage.setItem("brano-preferito", JSON.stringify(braniPreferiti))
+
+  // ricarico lista
+  document.getElementById("contenitore-album").innerHTML = ""
+  riempiPreferiti()
+
+  contatoreBraniPreferiti()
+}
 
 //BOTTONE SEARCH ASIDE JS
 
