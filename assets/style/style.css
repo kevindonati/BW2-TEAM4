@@ -38,6 +38,10 @@ section::-webkit-scrollbar-thumb {
   pointer-events: none;
 }
 
+.x-small {
+  font-size: 0.75rem;
+}
+
 /* appare solo quando hover */
 aside:hover::-webkit-scrollbar-thumb,
 section:hover::-webkit-scrollbar-thumb {
