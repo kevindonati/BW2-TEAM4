@@ -110,10 +110,7 @@ fetch(urlApiArtista)
                 <div class="col-1 cella">
                   <span class="numero-cella">${i + 1}</span>
                     <i 
-
-
-
-                     onclick="riproduciCanzone(this, \`${datiCanzoni.data[i].preview}\`, \`${datiCanzoni.data[i].title}\`, \`${datiCanzoni.data[i].artist.name}\`, \`${datiCanzoni.data[i].album.cover_small}\`, \`${datiCanzoni.data[i].album.cover_big}\`, \`${datiCanzoni.data[i].artist.picture_big}\`, \`${datiCanzoni.data[i].artist.id}\`, \`${datiCanzoni.data[i].artist.tracklist}\`, \`${datiCanzoni.data[i].explicit_lyrics}\`, \`${datiCanzoni.data[i].duration}\`, \`${datiCanzoni.data[i].id}\`, \`${datiCanzoni.id}\`)"
+                     onclick="riproduciCanzone(this, \`${datiCanzoni.data[i].preview}\`, \`${datiCanzoni.data[i].title}\`, \`${datiCanzoni.data[i].artist.name}\`, \`${datiCanzoni.data[i].album.cover_small}\`, \`${datiCanzoni.data[i].album.cover_big}\`, \`${datiCanzoni.data[i].artist.picture_big}\`, \`${datiCanzoni.data[i].artist.id}\`, \`${datiCanzoni.data[i].artist.tracklist}\` , \`${datiCanzoni.data[i].album.id}\`)"
                      class="fas fa-play text-light icona fs-4"></i>
                 </div>
                 <div class="col-1">
@@ -190,6 +187,7 @@ fetch(urlApiArtista)
             primaCanzone.artist.picture_big,
             primaCanzone.artist.id,
             primaCanzone.artist.tracklist,
+            primaCanzone.album.id,
           )
 
           // Gestiamo il cambio icona dopo un delay
@@ -324,6 +322,7 @@ const riproduciCanzone = (
   fotoArtista,
   linkArtista,
   tracklist,
+  idAlbum,
 ) => {
   const bottonePlay = document.getElementById("btn-play-canzone")
   // if (!bottonePlay) return; // Se il bottone non esiste, non provare a cambiargli classe
@@ -376,9 +375,18 @@ const riproduciCanzone = (
 
   for (let i = 0; i < nome.length; i++) {
     nome[i].innerHTML = `${nomeArtista}`
+    const linkPadre = nome[i].closest("a")
+    if (linkPadre) {
+      linkPadre.href = `artistView.html?id=${linkArtista}`
+      console.log("Link generato per artista:", linkPadre.href)
+    }
   }
   for (let i = 0; i < titoloCanzone.length; i++) {
     titoloCanzone[i].innerHTML = `${titolo}`
+    const linkPadre = titoloCanzone[i].closest("a")
+    if (linkPadre) {
+      linkPadre.href = `albumView.html?id=${idAlbum}`
+    }
   }
   for (let i = 0; i < copertinaPiccola.length; i++) {
     copertinaPiccola[i].setAttribute("src", copertinaSmall)
@@ -944,21 +952,16 @@ document.addEventListener("DOMContentLoaded", () => {
 //BOTTONE SEARCH ASIDE JS
 
 document.addEventListener("DOMContentLoaded", () => {
-  // Tutto il tuo codice va qui dentro
-  const searchIcon = document.getElementById("search-icon")
+  const searchBtn = document.getElementById("search-button")
   const searchForm = document.getElementById("search-form")
   const recenti = document.getElementById("recenti")
   const container = document.getElementById("search-container")
 
-  if (searchIcon && searchForm && container) {
-    searchIcon.addEventListener("click", (e) => {
-      e.preventDefault()
-      const isSearchActive = searchForm.classList.toggle("active")
-      container.classList.toggle("bg-search", isSearchActive)
+  searchBtn.addEventListener("click", (e) => {
+    e.preventDefault()
 
-      if (recenti) {
-        recenti.classList.toggle("d-none", isSearchActive)
-      }
-    })
-  }
+    recenti.classList.toggle("d-none")
+    searchForm.classList.toggle("active")
+    container.classList.toggle("search-background")
+  })
 })

@@ -284,27 +284,3 @@ section:hover::-webkit-scrollbar-thumb {
 .dropdown-submenu:hover .dropdown-menu {
   display: block;
 }
-
-/*SEARCH LIBRERIA*/
-
-#search-form {
-  width: 0;
-  opacity: 0;
-  overflow: hidden;
-  white-space: nowrap;
-  transition:
-    width 0.5s ease,
-    opacity 0.3s ease;
-  pointer-events: none;
-}
-
-#search-form.active {
-  width: 250px;
-  opacity: 1;
-  pointer-events: all;
-}
-
-.bg-search {
-  background-color: rgba(255, 255, 255, 0.2);
-  border-radius: 3px;
-}

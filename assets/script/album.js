@@ -224,6 +224,10 @@ const estrazioneArtista = () => {
           response.artist.picture_big,
           response.artist.id,
           response.artist.tracklist,
+          primaCanzone.explicit_lyrics,
+          primaCanzone.duration,
+          primaCanzone.id,
+          response.id,
         )
 
         // Cambiamo l'icona in base a se l'audio è partito o no
@@ -491,9 +495,18 @@ const riproduciCanzone = (
 
   for (let i = 0; i < nome.length; i++) {
     nome[i].innerHTML = `${nomeArtista}`
+    const linkPadre = nome[i].closest("a")
+    if (linkPadre) {
+      linkPadre.href = `artistView.html?id=${linkArtista}`
+      console.log("Link generato per artista:", linkPadre.href)
+    }
   }
   for (let i = 0; i < titoloCanzone.length; i++) {
     titoloCanzone[i].innerHTML = `${titolo}`
+    const linkPadre = titoloCanzone[i].closest("a")
+    if (linkPadre) {
+      linkPadre.href = `albumView.html?id=${idAlbum}`
+    }
   }
   for (let i = 0; i < copertinaPiccola.length; i++) {
     copertinaPiccola[i].setAttribute("src", copertinaSmall)
@@ -997,59 +1010,16 @@ document.addEventListener("DOMContentLoaded", () => {
 //BOTTONE SEARCH ASIDE JS
 
 document.addEventListener("DOMContentLoaded", () => {
-  // Tutto il tuo codice va qui dentro
-  const searchIcon = document.getElementById("search-icon")
+  const searchBtn = document.getElementById("search-button")
   const searchForm = document.getElementById("search-form")
   const recenti = document.getElementById("recenti")
   const container = document.getElementById("search-container")
 
-  if (searchIcon && searchForm && container) {
-    searchIcon.addEventListener("click", (e) => {
-      e.preventDefault()
-      const isSearchActive = searchForm.classList.toggle("active")
-      container.classList.toggle("bg-search", isSearchActive)
+  searchBtn.addEventListener("click", (e) => {
+    e.preventDefault()
 
-      if (recenti) {
-        recenti.classList.toggle("d-none", isSearchActive)
-      }
-    })
-  }
+    recenti.classList.toggle("d-none")
+    searchForm.classList.toggle("active")
+    container.classList.toggle("search-background")
+  })
 })
-
-// const libreria = () => {
-//   fetch(urlSearch + "drake")
-//     .then((response) => {
-//       if (response.ok) {
-//         return response.json()
-//       } else {
-//         throw new Error("problema nella response")
-//       }
-//     })
-//     .then((data) => {
-//       const spinner = document.querySelectorAll(".contenitore-spinner")
-//       spinner[0].classList.add("d-none")
-//       for (let i = 0; i < data.data.length; i++) {
-//         const appendiAlbum = document.getElementById("appendi-album-libreria")
-//         appendiAlbum.innerHTML += `
-//         <a class="text-decoration-none text-light" href="albumView.html?id=${data.data[i].album.id}">
-//             <div class="d-flex my-2 align-items-center">
-//               <img
-//                 src="${data.data[i].album.cover_small}"
-//                 class="rounded-1 img-fluid"
-//               />
-//               <div class="ms-3 d-flex flex-column justify-content-center">
-//                 <h6 class="mb-1 ">${data.data[i].album.title}</h6>
-//                 <p class="mb-0">
-//                   ${data.data[i].album.type} &bull; <a class="text-decoration-none text-light" href="artistView.html?id=${data.data[i].artist.id}"> ${data.data[i].artist.name}</a>
-//                 </p>
-//               </div>
-//             </div>
-//         </a>
-//       `
-//       }
-//     })
-//     .catch((err) => {
-//       console.log("errore durante la fetch", err)
-//     })
-// }
-// libreria()
