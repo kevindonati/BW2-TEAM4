@@ -1,0 +1,310 @@
+small {
+  font-size: 0.7em;
+}
+
+aside::-webkit-scrollbar,
+section::-webkit-scrollbar {
+  width: 6px;
+}
+
+aside::-webkit-scrollbar-thumb,
+section::-webkit-scrollbar-thumb {
+  background: transparent;
+  border-radius: 10px;
+  transition: background 0.3s;
+}
+
+/* appare solo quando hover */
+aside:hover::-webkit-scrollbar-thumb,
+section:hover::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.mostra-al-passaggio {
+  opacity: 0;
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
+  background-color: #1db954;
+  border: none;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+.contenitore-card:hover .mostra-al-passaggio {
+  opacity: 1;
+}
+
+.mostra-al-passaggio:hover {
+  transform: scale(1.1);
+}
+
+/*COLORI*/
+
+/*BOTTONI*/
+.bg-button {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.bg-button:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.song-card-container {
+  position: relative;
+  transition: backgroun-color 0.3s ease;
+  border-radius: 8px;
+}
+
+.song-card-container:hover {
+  background-color: #282828 !important;
+}
+
+.song-card-container:hover .mostra-al-passaggio {
+  opacity: 1;
+  transform: translateY(0);
+  .bg-customized-hover:hover {
+    background-color: rgba(255, 255, 255, 0.2) !important;
+  }
+}
+
+.scale {
+  transition: transform 0s ease-in;
+}
+.scale:hover {
+  transform: scale(1.1);
+}
+
+/*BACKGROUND ASIDE*/
+.bg-aside {
+  background-color: #121212;
+}
+
+.bg-linear {
+  background: linear-gradient(rgba(255, 255, 255, 0.301), black 30%);
+}
+
+/*BACKGROUND BOTTONI CAROSELLO*/
+/*BOTTONE*/
+
+.carousel-custom-prev,
+.carousel-custom-next {
+  opacity: 0 !important;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 15%;
+  padding: 0;
+  color: #fff;
+  text-align: center;
+  background: none !important;
+  border: 0;
+  transition: opacity 0.2s ease;
+}
+
+.carousel-custom-prev,
+.carousel-custom-next {
+  transition: none;
+}
+
+.carousel-custom-prev:hover,
+.carousel-custom-prev:focus,
+.carousel-custom-next:hover,
+.carousel-custom-next:focus {
+  color: #fff;
+  text-decoration: none;
+  outline: 0;
+  opacity: 1 !important;
+}
+
+.carousel-custom-prev {
+  left: 0;
+}
+
+.carousel-custom-next {
+  right: 0;
+}
+
+/*SPAN*/
+.carousel-custom-next-icon,
+.carousel-custom-prev-icon {
+  display: inline-block;
+  width: 2.5rem;
+  height: 2.5rem;
+  background-color: #2a2a2a;
+  border-radius: 50%;
+  background-repeat: no-repeat;
+  background-position: center !important;
+  background-size: 20px 20px !important;
+}
+
+.carousel-custom-prev-icon {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23fff'%3e%3cpath d='M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0'/%3e%3c/svg%3e")
+    /*rtl:url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23fff'%3e%3cpath d='M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708'/%3e%3c/svg%3e")*/;
+}
+
+.carousel-custom-next-icon {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23fff'%3e%3cpath d='M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708'/%3e%3c/svg%3e")
+    /*rtl:url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23fff'%3e%3cpath d='M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0'/%3e%3c/svg%3e")*/;
+}
+
+/* Stile per il contenitore delle barrette */
+.music-animation {
+  display: none !important;
+  align-items: flex-end;
+  gap: 2px;
+  height: 15px;
+}
+
+.item-canzone.suonando .music-animation {
+  display: flex !important;
+}
+
+.item-canzone.suonando .titolo-canzone {
+  color: #1db954 !important;
+}
+
+/* Stile per ogni singola barretta */
+.bar {
+  width: 3px;
+  height: 100%;
+  background-color: #1db954; /* Verde Spotify */
+  animation: bounce 0.8s ease-in-out infinite;
+}
+
+/* Ritardi per rendere l'effetto reale */
+.bar:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.bar:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+/* Il movimento */
+@keyframes bounce {
+  0%,
+  100% {
+    height: 4px;
+  }
+  50% {
+    height: 15px;
+  }
+}
+
+/* Style per il background della section centrale */
+.bg-linear {
+  transition: background 0.5s ease;
+}
+
+.font-enorme {
+  font-size: 6em;
+  font-weight: bold;
+}
+
+.cella {
+  position: relative;
+}
+
+.riga:hover .numero-cella {
+  display: none;
+}
+
+.riga:hover .icona {
+  display: inline-block;
+}
+
+.numero-cella {
+  display: inline-block;
+}
+
+.icona {
+  display: none;
+}
+
+/*TRUNCATE*/
+.text-truncate-2 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
+}
+
+/*MOSTRA TUTTO*/
+/* wrap delle righe */
+.griglia-attiva .carousel-inner {
+  display: flex !important;
+  justify-content: center;
+  flex-wrap: wrap !important;
+  height: auto !important;
+  overflow: visible !important;
+}
+
+/*I 12 album si troveranno nello stesso spazio flex. */
+.griglia-attiva .carousel-item,
+.griglia-attiva .container-fluid,
+.griglia-attiva .row {
+  display: contents !important;
+}
+
+/*Dimensioni delle card */
+.griglia-attiva .col-3.contenitore-card {
+  flex-shrink: 0;
+  flex-basis: 25%;
+  display: block !important;
+}
+
+#mostraTutto1,
+#mostraTutto2,
+#mostraTutto3 {
+  color: white;
+  text-decoration: none;
+}
+
+#mostraTutto1:hover,
+#mostraTutto2:hover,
+#mostraTutto3:hover {
+  text-decoration: underline;
+}
+
+/* DROPDOWN ARTISTI */
+.dropdown-submenu .dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 0;
+  right: 100%;
+  margin-left: 0.1rem;
+}
+
+.dropdown-submenu:hover .dropdown-menu {
+  display: block;
+}
+
+/*SEARCH LIBRERIA*/
+
+#search-form {
+  width: 0;
+  opacity: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  transition:
+    width 0.5s ease,
+    opacity 0.3s ease;
+  pointer-events: none;
+}
+
+#search-form.active {
+  width: 250px;
+  opacity: 1;
+  pointer-events: all;
+}
+
+.bg-search {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+}
