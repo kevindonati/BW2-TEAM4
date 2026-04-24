@@ -320,3 +320,28 @@ section:hover::-webkit-scrollbar-thumb {
 .text-shadow {
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
 }
+
+/*SEARCH LIBRERIA*/
+
+#search-form {
+  width: 0;
+  opacity: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  transition:
+    width 0.5s ease,
+    opacity 0.3s ease;
+  pointer-events: none;
+}
+
+#search-form.active {
+  width: 250px;
+  opacity: 1;
+  pointer-events: all;
+  border-radius: 3px;
+}
+
+.search-background {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+}
