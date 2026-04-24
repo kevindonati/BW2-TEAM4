@@ -885,3 +885,25 @@ document.addEventListener("DOMContentLoaded", () => {
   togliRounded(mobileView)
   mobileView.addEventListener("change", togliRounded)
 })
+
+//BOTTONE SEARCH ASIDE JS
+
+document.addEventListener("DOMContentLoaded", () => {
+  // Tutto il tuo codice va qui dentro
+  const searchIcon = document.getElementById("search-icon")
+  const searchForm = document.getElementById("search-form")
+  const recenti = document.getElementById("recenti")
+  const container = document.getElementById("search-container")
+
+  if (searchIcon && searchForm && container) {
+    searchIcon.addEventListener("click", (e) => {
+      e.preventDefault()
+      const isSearchActive = searchForm.classList.toggle("active")
+      container.classList.toggle("bg-search", isSearchActive)
+
+      if (recenti) {
+        recenti.classList.toggle("d-none", isSearchActive)
+      }
+    })
+  }
+})

@@ -188,11 +188,20 @@
           <!--FINE SECONDO BLOCCO ASIDE-->
           <!--INIZIO TERZO BLOCCO ASIDE-->
           <div class="d-flex align-items-center justify-content-between mt-2">
-            <button
-              class="btn bg-trasparent rounded-circle ms-2 bg-customized-hover"
-            >
-              <i class="bi bi-search"></i>
-            </button>
+            <div id="search-container" class="d-flex align-items-center mt-2">
+              <button
+                class="btn bg-transparent rounded-circle ms-2 bg-customized-hover"
+              >
+                <i class="bi bi-search" id="search-icon"></i>
+              </button>
+              <form id="search-form" class="ms-2">
+                <input
+                  type="search"
+                  class="form-control form-control-sm bg-transparent border-0"
+                  placeholder="Cerca in Playlist"
+                />
+              </form>
+            </div>
             <div class="dropdown">
               <button
                 id="recenti"
