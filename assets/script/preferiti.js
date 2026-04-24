@@ -229,9 +229,18 @@ const riproduciCanzone = (
 
   for (let i = 0; i < nome.length; i++) {
     nome[i].innerHTML = `${nomeArtista}`;
+    // const linkPadre = nome[i].closest("a");
+    // if (linkPadre) {
+    //   linkPadre.href = `artistView.html?id=${linkArtista}`;
+    //   console.log("Link generato per artista:", linkPadre.href);
+    // }
   }
   for (let i = 0; i < titoloCanzone.length; i++) {
     titoloCanzone[i].innerHTML = `${titolo}`;
+    // const linkPadre = titoloCanzone[i].closest("a");
+    // if (linkPadre) {
+    //   linkPadre.href = `albumView.html?id=${idAlbum}`;
+    // }
   }
   for (let i = 0; i < copertinaPiccola.length; i++) {
     copertinaPiccola[i].setAttribute("src", copertinaSmall);
